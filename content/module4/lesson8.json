@@ -1,0 +1,120 @@
+{
+  "id": "module4_lesson8",
+  "module_id": "module4",
+  "module_title": "Collections",
+  "module_number": 4,
+  "lesson_number": 8,
+  "title": "Nested Collections",
+  "subtitle": "Combining lists, dicts, and more inside each other",
+  "estimated_minutes": 15,
+  "prerequisites": ["module4_lesson7"],
+  "learning_objectives": [
+    "Store a grid of data using a list of lists",
+    "Build a table of records using a list of dictionaries",
+    "Access deeply nested values using chained indexing",
+    "Iterate through nested collections with loops"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "List of Lists (2D Grids)",
+        "content": "You can put lists inside other lists. This creates a <strong>2D structure</strong> — like a grid or table. To access an element, you use two index numbers: the first picks the row, the second picks the column.",
+        "code_example": "# A 3x3 grid\nmatrix = [\n    [1, 2, 3],\n    [4, 5, 6],\n    [7, 8, 9]\n]\n\n# Access row 0, column 1 (= 2)\nprint(matrix[0][1])\n\n# Print all rows\nfor row in matrix:\n    print(row)",
+        "code_output": "2\n[1, 2, 3]\n[4, 5, 6]\n[7, 8, 9]"
+      },
+      {
+        "heading": "List of Dictionaries (Records)",
+        "content": "A very common pattern is a <strong>list of dictionaries</strong>, where each dictionary represents one record (like a row in a spreadsheet). This is how most real-world data is structured.",
+        "code_example": "students = [\n    {\"name\": \"Alice\", \"grade\": 92},\n    {\"name\": \"Bob\",   \"grade\": 85},\n    {\"name\": \"Carol\", \"grade\": 97}\n]\n\n# Access first student's name\nprint(students[0][\"name\"])\n\n# Print all students\nfor student in students:\n    print(student[\"name\"], \"-\", student[\"grade\"])",
+        "code_output": "Alice\nAlice - 92\nBob - 85\nCarol - 97"
+      },
+      {
+        "heading": "Dictionary of Lists",
+        "content": "You can also have a <strong>dictionary whose values are lists</strong>. This is useful for grouping things by category.",
+        "code_example": "inventory = {\n    \"fruits\":  [\"apple\", \"banana\", \"cherry\"],\n    \"veggies\": [\"carrot\", \"broccoli\"],\n    \"grains\":  [\"rice\", \"oats\"]\n}\n\n# Access second fruit\nprint(inventory[\"fruits\"][1])\n\n# Count items in each category\nfor category, items in inventory.items():\n    print(category, \":\", len(items), \"items\")",
+        "code_output": "banana\nfruits : 3 items\nveggies : 2 items\ngrains : 2 items"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Access a Nested Value",
+      "prompt": "You have a list of dictionaries representing books. Print the title of the SECOND book (index 1).",
+      "starter_code": "books = [\n    {\"title\": \"Python Basics\", \"pages\": 200},\n    {\"title\": \"Data Science 101\", \"pages\": 350},\n    {\"title\": \"Web Dev Guide\", \"pages\": 280}\n]\n\n# Print the title of the second book\n",
+      "solution": "books = [\n    {\"title\": \"Python Basics\", \"pages\": 200},\n    {\"title\": \"Data Science 101\", \"pages\": 350},\n    {\"title\": \"Web Dev Guide\", \"pages\": 280}\n]\n\nprint(books[1][\"title\"])",
+      "hints": [
+        "Use books[1] to get the second book (index 1)",
+        "Then use [\"title\"] to get the title key",
+        "print(books[1][\"title\"])"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Data Science 101", "message": "Output contains: Data Science 101"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Loop Through Records",
+      "prompt": "Using the same books list, print each book's title and number of pages on one line, like: Python Basics: 200 pages",
+      "starter_code": "books = [\n    {\"title\": \"Python Basics\", \"pages\": 200},\n    {\"title\": \"Data Science 101\", \"pages\": 350},\n    {\"title\": \"Web Dev Guide\", \"pages\": 280}\n]\n\n# Loop and print each book\n",
+      "solution": "books = [\n    {\"title\": \"Python Basics\", \"pages\": 200},\n    {\"title\": \"Data Science 101\", \"pages\": 350},\n    {\"title\": \"Web Dev Guide\", \"pages\": 280}\n]\n\nfor book in books:\n    print(f\"{book['title']}: {book['pages']} pages\")",
+      "hints": [
+        "Use: for book in books:",
+        "Then access book[\"title\"] and book[\"pages\"]",
+        "Use an f-string: print(f\"{book['title']}: {book['pages']} pages\")"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Python Basics: 200 pages", "message": "Output contains: Python Basics: 200 pages"},
+        {"type": "stdout_contains", "value": "Data Science 101: 350 pages", "message": "Output contains: Data Science 101: 350 pages"}
+      ]
+    },
+    {
+      "id": "ex3",
+      "order": 3,
+      "type": "code_run",
+      "title": "2D Grid Access",
+      "prompt": "Create a 2x2 grid called 'grid' with values [[10, 20], [30, 40]]. Print the sum of all four values.",
+      "starter_code": "# Create the 2x2 grid\ngrid = [[10, 20], [30, 40]]\n\n# Print the sum of all values (should be 100)\n",
+      "solution": "grid = [[10, 20], [30, 40]]\n\ntotal = 0\nfor row in grid:\n    for num in row:\n        total += num\nprint(total)",
+      "hints": [
+        "Use a nested for loop: for row in grid: for num in row:",
+        "Keep a running total variable starting at 0",
+        "Add each number to total, then print(total)"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "100", "message": "Output contains: 100"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "Given: data = [{\"x\": 1}, {\"x\": 2}], how do you get the value 2?",
+      "options": ["data[2][\"x\"]", "data[1][\"x\"]", "data[\"x\"][1]", "data[1, \"x\"]"],
+      "correct_index": 1,
+      "explanation": "data[1] gets the second dictionary, then [\"x\"] gets the value for the key \"x\". So data[1][\"x\"] = 2."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What is a common real-world use of a list of dictionaries?",
+      "options": [
+        "Storing a single string",
+        "Representing rows in a table (like a spreadsheet)",
+        "Doing math calculations",
+        "Reversing strings"
+      ],
+      "correct_index": 1,
+      "explanation": "A list of dictionaries is perfect for table-like data: each dictionary is a row, and each key is a column name. This is how CSV files and database results are often represented in Python."
+    }
+  ],
+  "completion_message": "Excellent! You now understand how to work with nested data structures — a key skill for real-world Python programming!"
+}

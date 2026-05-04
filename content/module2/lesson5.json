@@ -1,0 +1,116 @@
+{
+  "id": "module2_lesson5",
+  "module_id": "module2",
+  "module_title": "Working with Data Types",
+  "module_number": 2,
+  "lesson_number": 5,
+  "title": "Integers and Floats",
+  "subtitle": "Master Python's number types and their arithmetic operators",
+  "estimated_minutes": 15,
+  "prerequisites": ["module2_lesson4"],
+  "learning_objectives": [
+    "Use all seven arithmetic operators: +, -, *, /, //, %, and **",
+    "Understand why regular division always returns a float",
+    "Explain the floating-point precision surprise with 0.1 + 0.2",
+    "Use the built-in functions round(), abs(), min(), and max()"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Integer Arithmetic Operators",
+        "content": "Python has two number types: <strong>integers</strong> (<code>int</code>) are whole numbers with no decimal point; <strong>floats</strong> (<code>float</code>) have a decimal point. Python provides seven arithmetic operators, and several behave differently from what you might expect.<br><br><code><strong>/</strong></code> — <em>regular division</em>: always returns a <code>float</code>, even if the result is a whole number (<code>10 / 2</code> gives <code>5.0</code>, not <code>5</code>).<br><br><code><strong>//</strong></code> — <em>floor division</em>: divides and rounds <em>down</em> to the nearest integer. <code>7 // 2</code> gives <code>3</code>. This is useful when you need a whole-number quotient.<br><br><code><strong>%</strong></code> — <em>modulo</em>: returns the <em>remainder</em> after division. <code>7 % 2</code> gives <code>1</code>. A classic use: <code>number % 2 == 0</code> checks if a number is even.<br><br><code><strong>**</strong></code> — <em>exponentiation</em> (power): <code>2 ** 10</code> gives <code>1024</code>.",
+        "code_example": "# Basic arithmetic\nprint(10 + 3)   # 13\nprint(10 - 3)   # 7\nprint(10 * 3)   # 30\n\n# Division always returns float\nprint(10 / 2)   # 5.0  (not 5!)\nprint(7 / 2)    # 3.5\n\n# Floor division — whole number quotient\nprint(7 // 2)   # 3\nprint(10 // 3)  # 3\n\n# Modulo — remainder\nprint(7 % 2)    # 1\nprint(10 % 3)   # 1\nprint(8 % 2)    # 0  (even number)\n\n# Exponentiation\nprint(2 ** 8)   # 256\nprint(9 ** 0.5) # 3.0  (square root)",
+        "code_output": "13\n7\n30\n5.0\n3.5\n3\n3\n1\n1\n0\n256\n3.0",
+        "note": "/ always returns a float even when the result is a whole number (10 / 2 gives 5.0, not 5). Use // if you need a whole number. Also, % means remainder — not percent. 7 % 2 gives 1 because 7 divided by 2 leaves 1 left over."
+      },
+      {
+        "heading": "Float Precision and the 0.1 + 0.2 Surprise",
+        "content": "Floats are stored in binary (base-2) inside your computer. Most decimal fractions — including <code>0.1</code> and <code>0.2</code> — cannot be represented <em>exactly</em> in binary. This leads to tiny rounding errors that can look surprising.<br><br>The classic example: <code>0.1 + 0.2</code> does <em>not</em> equal exactly <code>0.3</code> in Python. You get <code>0.30000000000000004</code>. This is not a Python bug — it is how floating-point arithmetic works in nearly every programming language.<br><br>For everyday use this is almost never a problem. But if you need exact decimal arithmetic (e.g. for money), use the <code>decimal</code> module from Python's standard library.",
+        "code_example": "# The floating-point surprise\nprint(0.1 + 0.2)          # Not exactly 0.3!\nprint(0.1 + 0.2 == 0.3)   # False!\n\n# round() to fix display issues\nresult = 0.1 + 0.2\nprint(round(result, 2))   # 0.3\n\n# round(x, digits) — rounds to 'digits' decimal places\nprint(round(3.14159, 2))  # 3.14\nprint(round(3.14159, 4))  # 3.1416\nprint(round(2.5))         # 2 (rounds to nearest even)\n\n# abs(), min(), max()\nprint(abs(-42))           # 42\nprint(abs(3.7))           # 3.7\nprint(min(5, 2, 8, 1))    # 1\nprint(max(5, 2, 8, 1))    # 8",
+        "code_output": "0.30000000000000004\nFalse\n0.3\n3.14\n3.1416\n2\n42\n3.7\n1\n8"
+      },
+      {
+        "heading": "Useful Built-in Math Functions",
+        "content": "Python provides several built-in functions that work with numbers — no import required.<br><br><code><strong>round(x)</strong></code> rounds to the nearest integer. <code><strong>round(x, n)</strong></code> rounds to <code>n</code> decimal places. When the value is exactly halfway (e.g. <code>2.5</code>), Python uses <em>banker's rounding</em> (round to even), so <code>round(2.5)</code> gives <code>2</code> and <code>round(3.5)</code> gives <code>4</code>.<br><br><code><strong>abs(x)</strong></code> returns the <em>absolute value</em> — always non-negative. Useful for calculating distances or differences regardless of direction.<br><br><code><strong>min(a, b, ...)</strong></code> returns the smallest value among its arguments. <code><strong>max(a, b, ...)</strong></code> returns the largest. Both accept as many arguments as you like.",
+        "code_example": "# Practical examples\nscore_a = 85\nscore_b = 92\nscore_c = 78\n\nbest = max(score_a, score_b, score_c)\nworst = min(score_a, score_b, score_c)\nprint(f\"Best score: {best}\")\nprint(f\"Worst score: {worst}\")\n\n# abs() for difference\ntemp_morning = 18.5\ntemp_evening = 22.3\ndifference = abs(temp_morning - temp_evening)\nprint(f\"Temperature change: {round(difference, 1)} degrees\")\n\n# Floor division and modulo together\ntotal_seconds = 3661\nhours = total_seconds // 3600\nminutes = (total_seconds % 3600) // 60\nseconds = total_seconds % 60\nprint(f\"{hours}h {minutes}m {seconds}s\")",
+        "code_output": "Best score: 92\nWorst score: 78\nTemperature change: 3.8 degrees\n1h 1m 1s"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Quotient and Remainder",
+      "prompt": "Given `total = 100` cookies and `people = 7`, use floor division (`//`) to find how many whole cookies each person gets, and modulo (`%`) to find how many are left over. Print both results.",
+      "starter_code": "total = 100\npeople = 7\n\n# Calculate and print how many whole cookies each person gets (use //)\n\n# Calculate and print how many cookies are left over (use %)\n",
+      "solution": "total = 100\npeople = 7\neach = total // people\nleft_over = total % people\nprint(each)\nprint(left_over)",
+      "hints": [
+        "Use // for floor division to get whole cookies: total // people",
+        "Use % for the remainder: total % people"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "14", "message": "Output contains the correct quotient: 14"},
+        {"type": "stdout_contains", "value": "2", "message": "Output contains the correct remainder: 2"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Power and Rounding",
+      "prompt": "Calculate `2` to the power of `10` using `**`. Then calculate the square root of `144` (hint: `144 ** 0.5`). Print both results.",
+      "starter_code": "# Calculate and print 2 to the power of 10 (use **)\n\n# Calculate and print the square root of 144 (hint: 144 ** 0.5)\n",
+      "solution": "power = 2 ** 10\nprint(power)\nsqrt = 144 ** 0.5\nprint(sqrt)",
+      "hints": [
+        "Use ** for exponentiation: 2 ** 10",
+        "A square root is the same as raising to the power of 0.5: 144 ** 0.5"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "1024", "message": "Output contains 2^10 = 1024"},
+        {"type": "stdout_contains", "value": "12.0", "message": "Output contains the square root: 12.0"}
+      ]
+    },
+    {
+      "id": "ex3",
+      "order": 3,
+      "type": "code_run",
+      "title": "Min, Max, and Abs",
+      "prompt": "Given three temperatures `t1 = -5`, `t2 = 22`, `t3 = 17`, print the highest temperature, the lowest temperature, and the absolute value of the lowest temperature.",
+      "starter_code": "t1 = -5\nt2 = 22\nt3 = 17\n\n# Highest temperature\n\n# Lowest temperature\n\n# Absolute value of the lowest\n",
+      "solution": "t1 = -5\nt2 = 22\nt3 = 17\nprint(max(t1, t2, t3))\nprint(min(t1, t2, t3))\nprint(abs(min(t1, t2, t3)))",
+      "hints": [
+        "Use max(t1, t2, t3) for the highest and min(t1, t2, t3) for the lowest",
+        "Wrap the min() call in abs() to get its absolute value: abs(min(t1, t2, t3))"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "22", "message": "Output contains the highest temperature: 22"},
+        {"type": "stdout_contains", "value": "-5", "message": "Output contains the lowest temperature: -5"},
+        {"type": "stdout_contains", "value": "5", "message": "Output contains the absolute value: 5"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does `9 / 3` return in Python 3?",
+      "options": ["3", "3.0", "3.33", "Error"],
+      "correct_index": 1,
+      "explanation": "In Python 3, the / operator always returns a float, even when the division is exact. So 9 / 3 returns 3.0, not the integer 3. Use // if you need a whole-number result."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What does `17 % 5` return?",
+      "options": ["3", "2", "3.4", "5"],
+      "correct_index": 1,
+      "explanation": "The % operator returns the remainder after division. 17 divided by 5 is 3 with a remainder of 2, so 17 % 5 equals 2."
+    }
+  ],
+  "completion_message": "Excellent work with numbers! You now understand all seven arithmetic operators, know why 0.1 + 0.2 is not exactly 0.3, and can use round(), abs(), min(), and max() confidently. Numbers are everywhere in programming, so these skills will serve you constantly."
+}

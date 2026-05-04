@@ -1,0 +1,123 @@
+{
+  "id": "module6_lesson3",
+  "module_id": "module6",
+  "module_title": "Strings and Files",
+  "module_number": 6,
+  "lesson_number": 3,
+  "title": "List Comprehensions",
+  "subtitle": "Write concise, readable lists in a single line",
+  "estimated_minutes": 18,
+  "prerequisites": ["module5_lesson8"],
+  "learning_objectives": [
+    "Explain the list comprehension syntax [expression for item in iterable]",
+    "Write a list comprehension that applies an expression to each item",
+    "Add an if condition to filter items in a comprehension",
+    "Compare a list comprehension to its equivalent for loop",
+    "Decide when a comprehension improves readability vs when a for loop is clearer"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "The Basic List Comprehension",
+        "content": "A <strong>list comprehension</strong> is a compact way to build a list from an iterable. Instead of writing a <code>for</code> loop that calls <code>.append()</code>, you write the whole thing inside square brackets in one line.<br><br>The syntax is: <code>[expression for item in iterable]</code><br><br>Python evaluates <em>expression</em> for every item in the iterable and collects the results into a new list.",
+        "code_example": "# Traditional for-loop approach\nsquares_loop = []\nfor x in range(5):\n    squares_loop.append(x ** 2)\nprint(squares_loop)\n\n# Equivalent list comprehension\nsquares = [x ** 2 for x in range(5)]\nprint(squares)\n\n# Works with any iterable\nwords = [\"hello\", \"world\", \"python\"]\nupper = [w.upper() for w in words]\nprint(upper)",
+        "code_output": "[0, 1, 4, 9, 16]\n[0, 1, 4, 9, 16]\n['HELLO', 'WORLD', 'PYTHON']"
+      },
+      {
+        "heading": "Adding a Condition with if",
+        "content": "You can add an <code>if</code> clause to the end of a comprehension to filter which items get included. Only items for which the condition is <code>True</code> will produce a value in the output list.",
+        "code_example": "# All even numbers from 0 to 9\nevens = [x for x in range(10) if x % 2 == 0]\nprint(evens)\n\n# Words longer than 4 characters\nwords = [\"hi\", \"hello\", \"hey\", \"howdy\", \"yo\"]\nlong_words = [w for w in words if len(w) > 4]\nprint(long_words)\n\n# Combine expression and filter\neven_squares = [x ** 2 for x in range(10) if x % 2 == 0]\nprint(even_squares)",
+        "code_output": "[0, 2, 4, 6, 8]\n['hello', 'howdy']\n[0, 4, 16, 36, 64]"
+      },
+      {
+        "heading": "When to Use Comprehensions vs For Loops",
+        "content": "List comprehensions shine when the logic fits on one readable line. They can be <em>faster</em> than equivalent for loops because they are optimised internally by Python.<br><br><strong>Use a comprehension when:</strong> the expression is simple and the intent is obvious at a glance.<br><br><strong>Use a for loop when:</strong> you need multiple statements inside the body, nested logic would make the comprehension hard to read, or you need to do something other than build a list (like print each item).<br><br>Readability always wins. A comprehension that needs a comment to understand is a for loop in disguise.",
+        "code_example": "# Good use of comprehension — clear intent\nlengths = [len(w) for w in [\"cat\", \"elephant\", \"ox\"]]\nprint(lengths)\n\n# For loop is better here — multiple steps per item\nresults = []\nfor num in range(5):\n    if num != 0:\n        results.append(100 // num)\nprint(results)",
+        "code_output": "[3, 8, 2]\n[100, 50, 33, 25]",
+        "note": "Nested list comprehensions (a comprehension inside a comprehension) are possible but quickly become unreadable. Prefer nested for loops when there are two levels of iteration."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Squares List",
+      "prompt": "Use a list comprehension to create a variable called <code>squares</code> that contains the squares of numbers 1 through 8 (inclusive). Print the list.",
+      "starter_code": "# Create a variable called squares using a list comprehension\n# It should contain the squares of numbers 1 through 8\n# Print squares",
+      "solution": "squares = [x ** 2 for x in range(1, 9)]\nprint(squares)",
+      "hints": [
+        "Use range(1, 9) to get numbers 1 through 8.",
+        "The expression for each item is x ** 2."
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Your code should run without errors."},
+        {"type": "stdout_contains", "value": "[1, 4, 9, 16, 25, 36, 49, 64]", "message": "The output should be [1, 4, 9, 16, 25, 36, 49, 64]."}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Filter Odd Numbers",
+      "prompt": "Use a list comprehension with an <code>if</code> condition to create a variable called <code>odds</code> that contains only the odd numbers from 1 to 15 (inclusive). Print the list.",
+      "starter_code": "# Create a variable called odds using a list comprehension with a condition\n# It should contain only odd numbers from 1 to 15\n# Print odds",
+      "solution": "odds = [x for x in range(1, 16) if x % 2 != 0]\nprint(odds)",
+      "hints": [
+        "Use range(1, 16) for numbers 1 through 15.",
+        "The condition for odd numbers is: x % 2 != 0"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Your code should run without errors."},
+        {"type": "stdout_contains", "value": "[1, 3, 5, 7, 9, 11, 13, 15]", "message": "The output should be [1, 3, 5, 7, 9, 11, 13, 15]."}
+      ]
+    },
+    {
+      "id": "ex3",
+      "order": 3,
+      "type": "code_run",
+      "title": "Upper-Case Short Words",
+      "prompt": "Given the list <code>animals = [\"cat\", \"elephant\", \"ox\", \"dog\", \"hippopotamus\"]</code>, use a list comprehension to create a variable called <code>short_upper</code> containing the upper-cased versions of animals whose names are 3 characters or fewer. Print the result.",
+      "starter_code": "animals = [\"cat\", \"elephant\", \"ox\", \"dog\", \"hippopotamus\"]\n# Create a variable called short_upper using a list comprehension\n# Include only animals with names 3 characters or fewer, converted to uppercase\n# Print short_upper",
+      "solution": "animals = [\"cat\", \"elephant\", \"ox\", \"dog\", \"hippopotamus\"]\nshort_upper = [a.upper() for a in animals if len(a) <= 3]\nprint(short_upper)",
+      "hints": [
+        "The condition filters words with len(a) <= 3.",
+        "The expression transforms each kept word with .upper()."
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Your code should run without errors."},
+        {"type": "stdout_contains", "value": "['CAT', 'OX', 'DOG']", "message": "The output should be ['CAT', 'OX', 'DOG']."}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does [x * 2 for x in range(4)] produce?",
+      "options": [
+        "[0, 2, 4, 6]",
+        "[2, 4, 6, 8]",
+        "[0, 1, 2, 3]",
+        "[1, 4, 9, 16]"
+      ],
+      "correct_index": 0,
+      "explanation": "range(4) produces 0, 1, 2, 3. Multiplying each by 2 gives 0, 2, 4, 6."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "In [x for x in range(10) if x % 2 == 0], what does the if clause do?",
+      "options": [
+        "It raises an error if x is odd",
+        "It runs a separate loop for even numbers only",
+        "It filters the iterable so only even values of x are included in the result",
+        "It replaces odd numbers with 0"
+      ],
+      "correct_index": 2,
+      "explanation": "The if clause is a filter. Items for which the condition is False are simply skipped and do not appear in the output list."
+    }
+  ],
+  "completion_message": "Well done! List comprehensions are one of Python's most loved features. With a filter condition and an expression you can replace many multi-line loops with a single clear line."
+}

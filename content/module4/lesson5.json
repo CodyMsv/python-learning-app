@@ -1,0 +1,153 @@
+{
+  "id": "module4_lesson5",
+  "module_id": "module4",
+  "module_title": "Collections",
+  "module_number": 4,
+  "lesson_number": 5,
+  "title": "Dictionaries — Basics",
+  "subtitle": "Store and retrieve data by meaningful keys",
+  "estimated_minutes": 18,
+  "prerequisites": ["module3_lesson8"],
+  "learning_objectives": [
+    "Create a dictionary with string keys and mixed-type values",
+    "Access values using square bracket notation",
+    "Add new key-value pairs and update existing ones",
+    "Understand KeyError and avoid it with .get()",
+    "Check for key existence with the in operator"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Creating and Accessing Dictionaries",
+        "content": "A <strong>dictionary</strong> stores data as <strong>key-value pairs</strong> inside curly braces <code>{}</code>. Keys are usually strings (though any immutable type works) and must be unique. Values can be any type. Access a value with <code>dict[key]</code>. If the key does not exist, Python raises a <code>KeyError</code>.",
+        "code_example": "# Creating a dictionary\nperson = {\"name\": \"Alice\", \"age\": 30, \"city\": \"Paris\"}\n\n# Accessing values\nprint(person[\"name\"])   # Alice\nprint(person[\"age\"])    # 30\n\n# KeyError if key doesn't exist\n# print(person[\"email\"])  # would raise KeyError",
+        "code_output": "Alice\n30"
+      },
+      {
+        "heading": "Adding, Updating, and Safe Access",
+        "content": "Assign to a new key to <strong>add</strong> a pair: <code>dict[\"key\"] = value</code>. Assign to an existing key to <strong>update</strong> it — the old value is replaced. To avoid a <code>KeyError</code> when you are unsure whether a key exists, use <code>dict.get(key, default)</code>. It returns the value if the key exists, or the default (which is <code>None</code> if you omit it).",
+        "code_example": "person = {\"name\": \"Alice\", \"age\": 30}\n\n# Add a new key\nperson[\"email\"] = \"alice@example.com\"\nprint(person[\"email\"])      # alice@example.com\n\n# Update an existing key\nperson[\"age\"] = 31\nprint(person[\"age\"])        # 31\n\n# .get() with a default fallback\nprint(person.get(\"phone\", \"N/A\"))  # N/A\nprint(person.get(\"name\", \"N/A\"))   # Alice",
+        "code_output": "alice@example.com\n31\nN/A\nAlice"
+      },
+      {
+        "heading": "Checking Key Existence",
+        "content": "Use the <code>in</code> operator to test whether a key is present in a dictionary before accessing it. This is a clean, readable way to guard against <code>KeyError</code> in branches of logic. Note that <code>in</code> checks <strong>keys</strong>, not values.",
+        "code_example": "person = {\"name\": \"Alice\", \"age\": 30}\n\n# Check keys with 'in'\nprint(\"name\" in person)    # True\nprint(\"email\" in person)   # False\n\n# Guard before access\nif \"email\" in person:\n    print(person[\"email\"])\nelse:\n    print(\"No email on file\")",
+        "code_output": "True\nFalse\nNo email on file"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Build a Profile",
+      "prompt": "Create a dictionary called <code>profile</code> with keys <code>\"username\"</code>, <code>\"level\"</code>, and <code>\"score\"</code> set to <code>\"coder99\"</code>, <code>5</code>, and <code>1200</code> respectively. Print the value of <code>\"username\"</code>.",
+      "starter_code": "# Create a dictionary called profile with keys \"username\", \"level\", and \"score\" set to \"coder99\", 5, and 1200\n\n# Print the value of \"username\"\n",
+      "solution": "profile = {\"username\": \"coder99\", \"level\": 5, \"score\": 1200}\nprint(profile[\"username\"])",
+      "hints": [
+        "Use curly braces: profile = {\"key\": value, ...}",
+        "Access the value with profile[\"username\"]"
+      ],
+      "tests": [
+        {
+          "type": "runs_without_error",
+          "message": "Your code should run without any errors"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "coder99",
+          "message": "The output should contain 'coder99'"
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Add and Update",
+      "prompt": "Start with <code>car = {\"make\": \"Toyota\", \"year\": 2018}</code>. Add a key <code>\"color\"</code> with value <code>\"blue\"</code>. Then update <code>\"year\"</code> to <code>2022</code>. Print the final dictionary.",
+      "starter_code": "car = {\"make\": \"Toyota\", \"year\": 2018}\n\n# Add \"color\": \"blue\"\n\n# Update \"year\" to 2022\n\nprint(car)",
+      "solution": "car = {\"make\": \"Toyota\", \"year\": 2018}\ncar[\"color\"] = \"blue\"\ncar[\"year\"] = 2022\nprint(car)",
+      "hints": [
+        "car[\"color\"] = \"blue\" adds a new key if it does not exist",
+        "car[\"year\"] = 2022 replaces the existing value for 'year'"
+      ],
+      "tests": [
+        {
+          "type": "runs_without_error",
+          "message": "Your code should run without any errors"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "blue",
+          "message": "The output should contain 'blue'"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "2022",
+          "message": "The output should show the updated year 2022"
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "order": 3,
+      "type": "code_run",
+      "title": "Safe Lookup",
+      "prompt": "Given <code>config = {\"debug\": True, \"timeout\": 30}</code>, use <code>.get()</code> to print the value of <code>\"timeout\"</code> and the value of <code>\"retries\"</code> with a default of <code>3</code>.",
+      "starter_code": "config = {\"debug\": True, \"timeout\": 30}\n\n# Print timeout using .get()\n\n# Print retries using .get() with default 3\n",
+      "solution": "config = {\"debug\": True, \"timeout\": 30}\nprint(config.get(\"timeout\", 0))\nprint(config.get(\"retries\", 3))",
+      "hints": [
+        "config.get(\"timeout\", 0) returns 30 because the key exists",
+        "config.get(\"retries\", 3) returns 3 because 'retries' is not in the dict"
+      ],
+      "tests": [
+        {
+          "type": "runs_without_error",
+          "message": "Your code should run without any errors"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "30",
+          "message": "The output should contain 30 for timeout"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "3",
+          "message": "The output should contain 3 as the default for retries"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What happens when you access a key that does not exist using <code>dict[\"key\"]</code>?",
+      "options": [
+        "It returns None",
+        "It returns an empty string",
+        "It raises a KeyError",
+        "It adds the key with value None"
+      ],
+      "correct_index": 2,
+      "explanation": "Accessing a missing key with square bracket notation raises a KeyError at runtime. Use .get() with a default value to avoid this."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "Which line correctly adds a new key <code>\"score\"</code> with value <code>100</code> to an existing dictionary called <code>player</code>?",
+      "options": [
+        "player.add(\"score\", 100)",
+        "player.append(\"score\": 100)",
+        "player[\"score\"] = 100",
+        "player.insert(\"score\", 100)"
+      ],
+      "correct_index": 2,
+      "explanation": "Dictionary key-value pairs are added or updated with simple assignment: dict[key] = value. Lists have .append() and .insert(), but dictionaries do not."
+    }
+  ],
+  "completion_message": "You now understand dictionary basics! Key-value storage is one of the most powerful patterns in programming. Next you will learn to iterate over and manipulate dictionaries."
+}

@@ -1,0 +1,120 @@
+{
+  "id": "module2_lesson3",
+  "module_id": "module2",
+  "module_title": "Working with Data Types",
+  "module_number": 2,
+  "lesson_number": 3,
+  "title": "String Methods",
+  "subtitle": "Transform, search, and split strings using Python's built-in string methods",
+  "estimated_minutes": 18,
+  "prerequisites": ["module2_lesson2"],
+  "learning_objectives": [
+    "Transform strings using .upper(), .lower(), .strip(), and .replace()",
+    "Split a string into a list of parts using .split()",
+    "Check how a string starts or ends using .startswith() and .endswith()",
+    "Count and locate substrings using .count() and .find()",
+    "Chain multiple methods together in a single expression"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Transforming Strings: upper, lower, strip, replace",
+        "content": "A <strong>method</strong> is a function that belongs to an object. You call it with a dot: <code>my_string.method_name()</code>. String methods never change the original string — they always return a <em>new</em> string.<br><br><code><strong>.upper()</strong></code> converts every letter to uppercase. <code><strong>.lower()</strong></code> converts every letter to lowercase. These are commonly used to make comparisons case-insensitive.<br><br><code><strong>.strip()</strong></code> removes whitespace (spaces, tabs, newlines) from the <em>beginning and end</em> of a string. This is extremely useful when processing user input, which often has accidental leading or trailing spaces.<br><br><code><strong>.replace(old, new)</strong></code> scans the string and replaces every occurrence of the <code>old</code> substring with the <code>new</code> substring. If the old substring is not found, the string is returned unchanged.",
+        "code_example": "text = \"  Hello, World!  \"\n\nprint(text.upper())       # All caps\nprint(text.lower())       # All lowercase\nprint(text.strip())       # No leading/trailing spaces\n\n# replace(old, new)\nsentence = \"I like cats. Cats are cool.\"\nprint(sentence.replace(\"cats\", \"dogs\"))\nprint(sentence.replace(\"Cats\", \"Dogs\"))\n\n# Original string is unchanged\nprint(sentence)",
+        "code_output": "  HELLO, WORLD!  \n  hello, world!  \nHello, World!\nI like dogs. Cats are cool.\nI like cats. Dogs are cool.\nI like cats. Cats are cool."
+      },
+      {
+        "heading": "Splitting, Checking Ends, Counting, and Finding",
+        "content": "<code><strong>.split(sep)</strong></code> breaks a string into a <strong>list</strong> of smaller strings wherever it finds the separator <code>sep</code>. If you call <code>.split()</code> with no argument, it splits on any whitespace and removes empty items.<br><br><code><strong>.startswith(s)</strong></code> returns <code>True</code> if the string begins with <code>s</code>. <code><strong>.endswith(s)</strong></code> returns <code>True</code> if the string ends with <code>s</code>. Both are case-sensitive.<br><br><code><strong>.count(sub)</strong></code> returns how many times the substring <code>sub</code> appears (non-overlapping). <code><strong>.find(sub)</strong></code> returns the index of the <em>first</em> occurrence of <code>sub</code>, or <code>-1</code> if it is not found.",
+        "code_example": "# split()\nsentence = \"the quick brown fox\"\nwords = sentence.split(\" \")\nprint(words)\nprint(len(words))  # 4 words\n\ncsv_line = \"Alice,30,Engineer\"\nparts = csv_line.split(\",\")\nprint(parts)\n\n# startswith / endswith\nfilename = \"report_2024.pdf\"\nprint(filename.startswith(\"report\"))  # True\nprint(filename.endswith(\".pdf\"))      # True\nprint(filename.endswith(\".docx\"))     # False\n\n# count / find\ntext = \"banana\"\nprint(text.count(\"a\"))   # 3 occurrences\nprint(text.find(\"n\"))    # index 2\nprint(text.find(\"z\"))    # -1 (not found)",
+        "code_output": "['the', 'quick', 'brown', 'fox']\n4\n['Alice', '30', 'Engineer']\nTrue\nTrue\nFalse\n3\n2\n-1"
+      },
+      {
+        "heading": "Chaining Methods",
+        "content": "Because each string method returns a new string, you can call another method on that result immediately — this is called <strong>method chaining</strong>. Just keep adding <code>.method()</code> calls one after another.<br><br>Python evaluates them <strong>left to right</strong>: the first method runs on the original string, the second method runs on the result of the first, and so on.<br><br>Chaining is great for cleaning up messy input in one readable line. For example: strip extra spaces, convert to lowercase, and replace characters — all at once.",
+        "code_example": "# Without chaining (verbose)\nstep1 = \"  Hello World  \".strip()\nstep2 = step1.upper()\nstep3 = step2.replace(\"O\", \"0\")\nprint(step3)\n\n# Same result with chaining (concise)\nresult = \"  Hello World  \".strip().upper().replace(\"O\", \"0\")\nprint(result)\n\n# Practical example: clean messy user input\nuser_input = \"  aLiCe   \"\nclean = user_input.strip().lower()\nprint(clean)",
+        "code_output": "HELL0 W0RLD\nHELL0 W0RLD\nalice"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Clean and Transform",
+      "prompt": "Given `raw = \"  python programming  \"`, use chaining to create a `clean` variable that strips whitespace and converts to uppercase. Print it.",
+      "starter_code": "raw = \"  python programming  \"\n\n# Create a variable called clean by stripping whitespace from raw and converting to uppercase\n\n# Print clean\n",
+      "solution": "raw = \"  python programming  \"\nclean = raw.strip().upper()\nprint(clean)",
+      "hints": [
+        "Call .strip() first to remove whitespace, then chain .upper() on the result",
+        "It looks like: raw.strip().upper()"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "PYTHON PROGRAMMING", "message": "Output contains 'PYTHON PROGRAMMING'"},
+        {"type": "variable_equals", "variable": "clean", "value": "PYTHON PROGRAMMING", "message": "Variable clean equals 'PYTHON PROGRAMMING'"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Split a CSV Line",
+      "prompt": "Given `data = \"Bob,25,London\"`, split it by `\",\"` to create a list called `fields`. Then print the list and print how many fields it has.",
+      "starter_code": "data = \"Bob,25,London\"\n\n# Create a variable called fields by splitting data by comma\n\n# Print fields\n# Print how many fields there are\n",
+      "solution": "data = \"Bob,25,London\"\nfields = data.split(\",\")\nprint(fields)\nprint(len(fields))",
+      "hints": [
+        "Use data.split(\",\") to split on commas",
+        "Use len(fields) to count how many items are in the list"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Bob", "message": "Output contains 'Bob'"},
+        {"type": "stdout_contains", "value": "3", "message": "Output contains the correct field count: 3"}
+      ]
+    },
+    {
+      "id": "ex3",
+      "order": 3,
+      "type": "code_run",
+      "title": "Find and Count",
+      "prompt": "Given `sentence = \"she sells seashells by the seashore\"`, print how many times `\"sea\"` appears, then print the index of the first occurrence of `\"sea\"` using `.find()`.",
+      "starter_code": "sentence = \"she sells seashells by the seashore\"\n\n# Count occurrences of \"sea\"\n\n# Find the index of the first \"sea\"\n",
+      "solution": "sentence = \"she sells seashells by the seashore\"\nprint(sentence.count(\"sea\"))\nprint(sentence.find(\"sea\"))",
+      "hints": [
+        "Use sentence.count(\"sea\") to count occurrences",
+        "Use sentence.find(\"sea\") to get the index of the first match"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "2", "message": "Output contains the correct count: 2"},
+        {"type": "stdout_contains", "value": "10", "message": "Output contains the correct start index: 10"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does `\"hello world\".split(\" \")` return?",
+      "options": [
+        "\"hello\" and \"world\" as two separate strings",
+        "['hello', 'world']",
+        "('hello', 'world')",
+        "{'hello', 'world'}"
+      ],
+      "correct_index": 1,
+      "explanation": ".split() returns a list. Splitting \"hello world\" on a space produces the list ['hello', 'world']."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What does `\"banana\".find(\"z\")` return?",
+      "options": ["0", "None", "-1", "Error"],
+      "correct_index": 2,
+      "explanation": ".find() returns -1 when the substring is not found in the string. It only raises an error if you use .index() instead of .find()."
+    }
+  ],
+  "completion_message": "Fantastic! String methods are some of the most useful tools in Python. You can now clean text with .strip(), change case with .upper() and .lower(), swap content with .replace(), break strings apart with .split(), and search with .find() and .count(). Chaining these together makes your code concise and readable."
+}

@@ -1,0 +1,124 @@
+{
+  "id": "module6_lesson5",
+  "module_id": "module6",
+  "module_title": "Strings and Files",
+  "module_number": 6,
+  "lesson_number": 5,
+  "title": "Reading and Writing Files",
+  "subtitle": "Open, read, write, and close files with Python",
+  "estimated_minutes": 18,
+  "prerequisites": ["module5_lesson8"],
+  "learning_objectives": [
+    "Open a file for reading with open() and the 'r' mode",
+    "Read an entire file with .read() and line by line with .readlines()",
+    "Open a file for writing with the 'w' mode and write text with .write()",
+    "Understand that 'w' mode creates the file if it does not exist and overwrites it if it does",
+    "Close a file properly with .close() to free system resources"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Opening and Reading Files",
+        "content": "Python's built-in <code>open()</code> function opens a file and returns a <em>file object</em>. The first argument is the file path and the second is the <em>mode</em>. Use <code>\"r\"</code> for reading (the default).<br><br>Two main methods read content:<br><ul><li><code>.read()</code> — returns the entire file as one big string</li><li><code>.readlines()</code> — returns a list where each element is one line (including the newline character <code>\\n</code> at the end)</li></ul><br><strong>Note for this browser environment:</strong> In this app, files exist in a special virtual folder. The files <code>sample.txt</code>, <code>numbers.txt</code>, and <code>names.txt</code> are already there for you — just use their names without a path.",
+        "code_example": "# Read the entire file at once\nf = open(\"sample.txt\", \"r\")\ncontent = f.read()\nf.close()\nprint(content)\n\n# Read line by line into a list\nf = open(\"sample.txt\", \"r\")\nlines = f.readlines()\nf.close()\nprint(lines)",
+        "code_output": "Hello from sample.txt!\nThis is line two.\nThis is line three.\n\n['Hello from sample.txt!\\n', 'This is line two.\\n', 'This is line three.\\n']"
+      },
+      {
+        "heading": "Writing to Files",
+        "content": "Open a file with mode <code>\"w\"</code> to write. If the file does not exist Python creates it; if it does exist the old content is completely <strong>overwritten</strong>.<br><br>Use <code>.write(string)</code> to write text. Unlike <code>print()</code>, <code>.write()</code> does not add a newline automatically — you must include <code>\\n</code> yourself when you want line breaks.<br><br>Always call <code>.close()</code> when you are finished. Failing to close a file can cause written data to be lost (not flushed to disk) and prevents other programs from accessing the file.",
+        "code_example": "# Write a new file\nf = open(\"output.txt\", \"w\")\nf.write(\"First line\\n\")\nf.write(\"Second line\\n\")\nf.close()\n\n# Now read it back to confirm\nf = open(\"output.txt\", \"r\")\nprint(f.read())\nf.close()",
+        "code_output": "First line\nSecond line\n",
+        "note": "Mode 'a' (append) adds to the end of an existing file instead of overwriting it. You will see this in the next lesson."
+      },
+      {
+        "heading": "Counting Lines in a File",
+        "content": "Because <code>.readlines()</code> returns a list, you can use <code>len()</code> to count how many lines are in a file. You can also loop over the list to process each line individually.",
+        "code_example": "f = open(\"names.txt\", \"r\")\nlines = f.readlines()\nf.close()\n\nprint(\"Number of lines:\", len(lines))\n\nfor line in lines:\n    # .strip() removes the trailing \\n\n    print(line.strip())",
+        "code_output": "Number of lines: 3\nAlice\nBob\nCarol"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Read sample.txt",
+      "prompt": "Open <code>sample.txt</code> in read mode, read its entire contents into a variable called <code>text</code>, close the file, and print <code>text</code>.",
+      "starter_code": "# Open sample.txt in read mode, read all its contents, close the file, and print\n",
+      "solution": "f = open(\"sample.txt\", \"r\")\ntext = f.read()\nf.close()\nprint(text)",
+      "hints": [
+        "Use f.read() to read the whole file at once.",
+        "Remember to call f.close() after reading."
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Your code should run without errors."},
+        {"type": "stdout_contains", "value": "Hello", "message": "The file contents should be printed."}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Count the Lines",
+      "prompt": "Open <code>names.txt</code>, read its lines into a list called <code>lines</code>, close the file, then print the number of lines using <code>len()</code>.",
+      "starter_code": "# Open names.txt, read its lines into a list, close the file\n# Print the number of lines using len()\n",
+      "solution": "f = open(\"names.txt\", \"r\")\nlines = f.readlines()\nf.close()\nprint(\"Lines:\", len(lines))",
+      "hints": [
+        "Use f.readlines() to get a list of lines.",
+        "Then use len(lines) to count them."
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Your code should run without errors."},
+        {"type": "stdout_contains", "value": "Lines:", "message": "Output should start with 'Lines:'."}
+      ]
+    },
+    {
+      "id": "ex3",
+      "order": 3,
+      "type": "code_run",
+      "title": "Write Your Own File",
+      "prompt": "Create a new file called <code>my_output.txt</code> and write two lines to it: <code>\"Hello, file!\"</code> and <code>\"Python is great.\"</code>. Close the file, then open it again, read its contents, and print them.",
+      "starter_code": "# Write \"Hello, file!\" and \"Python is great.\" to my_output.txt\n# Then read and print the file contents\n",
+      "solution": "f = open(\"my_output.txt\", \"w\")\nf.write(\"Hello, file!\\n\")\nf.write(\"Python is great.\\n\")\nf.close()\n\nf = open(\"my_output.txt\", \"r\")\nprint(f.read())\nf.close()",
+      "hints": [
+        "Include \\n at the end of each string you write to create a line break.",
+        "Use open(\"my_output.txt\", \"w\") for writing and open(\"my_output.txt\", \"r\") for reading."
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Your code should run without errors."},
+        {"type": "stdout_contains", "value": "Hello, file!", "message": "The first line should be printed."},
+        {"type": "stdout_contains", "value": "Python is great.", "message": "The second line should be printed."}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What is the difference between .read() and .readlines()?",
+      "options": [
+        ".read() returns a list of lines; .readlines() returns one string",
+        ".read() returns the entire file as one string; .readlines() returns a list where each element is one line",
+        ".read() only works on binary files; .readlines() works on text files",
+        "They are identical"
+      ],
+      "correct_index": 1,
+      "explanation": ".read() gives you one big string. .readlines() gives you a list of strings, one per line, with \\n characters preserved."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What happens to an existing file when you open it with mode 'w'?",
+      "options": [
+        "New content is appended after the existing content",
+        "Python raises a FileExistsError",
+        "The existing content is completely overwritten",
+        "The file is locked and cannot be written to"
+      ],
+      "correct_index": 2,
+      "explanation": "Opening a file in 'w' mode always starts fresh. If the file already exists its contents are erased before writing begins. Use 'a' mode to append instead."
+    }
+  ],
+  "completion_message": "Fantastic! You can now read data from files and write results back to disk. File I/O is a fundamental skill that unlocks a huge range of real-world programs."
+}

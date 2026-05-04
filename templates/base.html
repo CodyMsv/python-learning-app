@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Learn Python{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- CodeMirror 5 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css">
+  <!-- Highlight.js for theory code blocks -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <!-- App styles -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <span class="logo-icon">🐍</span>
+        <span class="logo-text">Learn Python</span>
+      </a>
+      <div class="header-center">
+        <div class="global-progress-bar" title="{{ overall_pct|default(0) }}% complete">
+          <div class="global-progress-fill" style="width: {{ overall_pct|default(0) }}%"></div>
+        </div>
+        <span class="global-progress-label">{{ overall_pct|default(0) }}% complete</span>
+      </div>
+      <nav class="header-nav">
+        <a href="/dashboard" class="nav-btn {% if request.path == '/dashboard' %}active{% endif %}">
+          📊 Dashboard
+        </a>
+        <a href="/" class="nav-btn {% if request.path == '/' %}active{% endif %}">
+          🏠 Home
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="app-main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Toast container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+  {% block extra_scripts %}{% endblock %}
+  <script src="{{ url_for('static', filename='js/progress.js') }}"></script>
+  <script>
+    // Init syntax highlighting for theory blocks
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('pre code.language-python').forEach(el => hljs.highlightElement(el));
+    });
+  </script>
+</body>
+</html>

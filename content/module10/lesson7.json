@@ -1,0 +1,104 @@
+{
+  "id": "module10_lesson7",
+  "module_id": "module10",
+  "module_title": "Practical Projects",
+  "module_number": 10,
+  "lesson_number": 7,
+  "title": "FizzBuzz and Classic Algorithms",
+  "subtitle": "Solve famous programming challenges to sharpen your skills",
+  "estimated_minutes": 20,
+  "prerequisites": ["module10_lesson6"],
+  "learning_objectives": [
+    "Solve the classic FizzBuzz problem",
+    "Write a prime number checker",
+    "Implement binary search",
+    "Solve the Two-Sum problem"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "FizzBuzz and is_prime",
+        "content": "<strong>FizzBuzz</strong> is the most famous beginner programming challenge: for numbers 1-20, print 'Fizz' if divisible by 3, 'Buzz' if by 5, 'FizzBuzz' if both, or the number otherwise.<br><br>The <strong>prime check</strong> tests divisibility up to the square root of n — a simple but clever optimisation.",
+        "code_example": "# FizzBuzz\nfor n in range(1, 21):\n    if n % 3 == 0 and n % 5 == 0:\n        print(\"FizzBuzz\")\n    elif n % 3 == 0:\n        print(\"Fizz\")\n    elif n % 5 == 0:\n        print(\"Buzz\")\n    else:\n        print(n)\n\n# Prime checker\ndef is_prime(n):\n    if n < 2: return False\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            return False\n    return True\n\nprimes = [n for n in range(2, 20) if is_prime(n)]\nprint(primes)",
+        "code_output": "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz\n16\n17\nFizz\n19\nBuzz\n[2, 3, 5, 7, 11, 13, 17, 19]"
+      },
+      {
+        "heading": "Binary Search",
+        "content": "<strong>Binary search</strong> finds an item in a <em>sorted</em> list very efficiently. Instead of checking every item, it repeatedly halves the search space — finding any item in a million-item list in at most 20 steps!",
+        "code_example": "def binary_search(sorted_list, target):\n    low, high = 0, len(sorted_list) - 1\n    while low <= high:\n        mid = (low + high) // 2\n        if sorted_list[mid] == target:\n            return mid       # found at index mid\n        elif sorted_list[mid] < target:\n            low = mid + 1    # search right half\n        else:\n            high = mid - 1   # search left half\n    return -1  # not found\n\nnums = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]\nprint(binary_search(nums, 7))   # 3 (index)\nprint(binary_search(nums, 10))  # -1 (not found)",
+        "code_output": "3\n-1"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "FizzBuzz",
+      "prompt": "Write the FizzBuzz solution for numbers 1 to 15. For multiples of 3 print 'Fizz', multiples of 5 print 'Buzz', multiples of both print 'FizzBuzz', otherwise print the number.",
+      "starter_code": "for n in range(1, 16):\n    # FizzBuzz logic here\n    pass\n",
+      "solution": "for n in range(1, 16):\n    if n % 3 == 0 and n % 5 == 0:\n        print(\"FizzBuzz\")\n    elif n % 3 == 0:\n        print(\"Fizz\")\n    elif n % 5 == 0:\n        print(\"Buzz\")\n    else:\n        print(n)",
+      "hints": [
+        "Check for FizzBuzz (both 3 and 5) FIRST",
+        "Then check for Fizz (3), then Buzz (5)",
+        "Use n % 3 == 0 to check divisibility"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "FizzBuzz", "message": "Output contains FizzBuzz (for 15)"},
+        {"type": "stdout_contains", "value": "Fizz", "message": "Output contains Fizz (for 3, 6, 9, 12)"},
+        {"type": "stdout_contains", "value": "Buzz", "message": "Output contains Buzz (for 5, 10)"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Find All Primes Up to 50",
+      "prompt": "Write is_prime(n) that returns True if n is prime. Then use a list comprehension to create a list of all primes from 2 to 50. Print the list.",
+      "starter_code": "def is_prime(n):\n    # Return False for n < 2\n    # Check divisibility from 2 to sqrt(n)\n    pass\n\nprimes = [n for n in range(2, 51) if is_prime(n)]\nprint(primes)\n",
+      "solution": "def is_prime(n):\n    if n < 2:\n        return False\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            return False\n    return True\n\nprimes = [n for n in range(2, 51) if is_prime(n)]\nprint(primes)",
+      "hints": [
+        "Loop i from 2 to int(n**0.5) + 1",
+        "If n % i == 0, it is not prime — return False",
+        "If the loop finishes without finding a divisor, return True"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "2", "message": "2 is prime"},
+        {"type": "stdout_contains", "value": "47", "message": "47 is the largest prime under 50"},
+        {"type": "function_exists", "function_name": "is_prime", "message": "is_prime function is defined"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "In FizzBuzz, why must you check for FizzBuzz (divisible by both 3 AND 5) BEFORE checking for Fizz or Buzz alone?",
+      "options": [
+        "It is just a convention",
+        "If you check 3 first, 15 would print Fizz instead of FizzBuzz",
+        "Python evaluates conditions in reverse order",
+        "The and operator is faster than or"
+      ],
+      "correct_index": 1,
+      "explanation": "If you check 'n % 3 == 0' first, the number 15 matches that condition and prints 'Fizz' — then execution moves on. You never get to check if it is also divisible by 5. Checking the most specific condition (both) first avoids this."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "Why does is_prime check divisors only up to sqrt(n)?",
+      "options": [
+        "It is faster to start from the middle",
+        "If n has a factor larger than sqrt(n), it must also have one smaller than sqrt(n)",
+        "sqrt(n) is always an integer",
+        "To avoid infinite loops"
+      ],
+      "correct_index": 1,
+      "explanation": "If n = a * b and a > sqrt(n), then b must be < sqrt(n). So if n has any factors at all, at least one must be <= sqrt(n). This means checking up to sqrt(n) is sufficient to prove primality."
+    }
+  ],
+  "completion_message": "Excellent! These classic algorithms appear in coding interviews everywhere. You are ready!"
+}

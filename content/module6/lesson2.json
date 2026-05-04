@@ -1,0 +1,102 @@
+{
+  "id": "module6_lesson2",
+  "module_id": "module6",
+  "module_title": "Strings and Files",
+  "module_number": 6,
+  "lesson_number": 2,
+  "title": "String Slicing Deep Dive",
+  "subtitle": "Reverse, skip, and extract with the full power of slice notation",
+  "estimated_minutes": 15,
+  "prerequisites": ["module5_lesson8"],
+  "learning_objectives": [
+    "Use the full string[start:stop:step] slice syntax",
+    "Reverse a string using [::-1]",
+    "Extract every other character using [::2]",
+    "Explain why strings are immutable and what that means",
+    "Convert a string to a list of characters and join it back"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "The Full Slice Syntax: start, stop, step",
+        "content": "You already know you can grab part of a string with <code>word[start:stop]</code>. Python slicing has a third parameter — <strong>step</strong> — making the full syntax <code>word[start:stop:step]</code>.<br><br>The step controls how many characters to jump after each one you take. A step of <code>2</code> takes every other character. A step of <code>-1</code> walks <em>backwards</em> through the string, which is how you reverse it.<br><br>Any part of the slice can be left blank. A blank start defaults to the beginning, a blank stop defaults to the end, and a blank step defaults to 1.",
+        "code_example": "word = \"abcdefgh\"\n\n# Every other character starting from index 0\nprint(word[::2])\n\n# Characters at index 1, 3, 5\nprint(word[1::2])\n\n# Reverse the whole string\nprint(word[::-1])\n\n# Reverse a slice (chars 2-5, reversed)\nprint(word[2:6][::-1])",
+        "code_output": "aceg\nbdfh\nhgfedcba\nfedc",
+        "note": "word[::-1] is the idiomatic Python way to reverse a string. It is fast and concise."
+      },
+      {
+        "heading": "Strings Are Immutable — Working Around It",
+        "content": "Unlike lists, strings in Python <strong>cannot be changed in place</strong>. Trying to assign to an index raises a <code>TypeError</code>.<br><br>To \"change\" a string you must create a new one. A common pattern is to convert the string into a list of characters (using <code>list()</code>), modify the list, and then join the characters back with <code>\"\".join()</code>.",
+        "code_example": "word = \"hello\"\n\n# This will cause a TypeError:\n# word[0] = \"H\"\n\n# Correct approach: list -> modify -> join\nchars = list(word)\nprint(chars)\n\nchars[0] = \"H\"\nresult = \"\".join(chars)\nprint(result)\n\n# You can also build a new string with slicing\nresult2 = \"H\" + word[1:]\nprint(result2)",
+        "code_output": "['h', 'e', 'l', 'l', 'o']\nHello\nHello",
+        "note": "list(word) splits a string into individual characters. \"\".join(chars) glues them back together with no separator."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Reverse and Sample",
+      "prompt": "The variable <code>text</code> is set to <code>\"racecar\"</code>. Print the string reversed using slice notation, then print every other character of the original string (starting from index 0).",
+      "starter_code": "text = \"racecar\"\n# Print the string reversed using slice notation\n\n# Print every other character of the string\n",
+      "solution": "text = \"racecar\"\nprint(text[::-1])\nprint(text[::2])",
+      "hints": [
+        "Use [::-1] to reverse.",
+        "Use [::2] to get every other character."
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Your code should run without errors."},
+        {"type": "stdout_contains", "value": "racecar", "message": "The reversed string should be printed (racecar is a palindrome, so it looks the same)."},
+        {"type": "stdout_contains", "value": "rcea", "message": "Every other character of 'racecar' starting at 0 is 'rcea'."}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Fix a Character",
+      "prompt": "The variable <code>word</code> is set to <code>\"python\"</code>. Convert it to a list of characters, change the first character to <code>\"P\"</code> (uppercase), then join the list back into a string called <code>fixed</code> and print it.",
+      "starter_code": "word = \"python\"\n# Convert to list\nchars = list(word)\n# Change the first character to \"P\"\n\n# Create a variable called fixed by joining chars back into a string\n# Print fixed",
+      "solution": "word = \"python\"\nchars = list(word)\nchars[0] = \"P\"\nfixed = \"\".join(chars)\nprint(fixed)",
+      "hints": [
+        "After list(word), use chars[0] = \"P\" to change the first item.",
+        "Use \"\".join(chars) to convert the list back to a string."
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Your code should run without errors."},
+        {"type": "stdout_contains", "value": "Python", "message": "The output should be 'Python' with a capital P."}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does \"hello\"[::2] evaluate to?",
+      "options": [
+        "\"hlo\"",
+        "\"el\"",
+        "\"olleh\"",
+        "\"hello\""
+      ],
+      "correct_index": 0,
+      "explanation": "A step of 2 picks characters at indices 0, 2, 4 — which are 'h', 'l', 'o' — giving \"hlo\"."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "Why does word[0] = \"H\" raise a TypeError when word is a string?",
+      "options": [
+        "Because index 0 does not exist",
+        "Because strings are immutable and cannot be changed in place",
+        "Because you must use single quotes, not double quotes",
+        "Because assignment requires the += operator"
+      ],
+      "correct_index": 1,
+      "explanation": "Strings are immutable in Python. Once created, individual characters cannot be reassigned. You must build a new string instead."
+    }
+  ],
+  "completion_message": "Great job! Slicing with a step is one of Python's most expressive tricks. Remember: [::-1] reverses any sequence and strings are immutable — work around that with list(), modify, then join()."
+}

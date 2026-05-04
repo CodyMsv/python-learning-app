@@ -1,0 +1,98 @@
+{
+  "id": "module10_lesson4",
+  "module_id": "module10",
+  "module_title": "Practical Projects",
+  "module_number": 10,
+  "lesson_number": 4,
+  "title": "Password Generator",
+  "subtitle": "Generate strong, random passwords using the random module",
+  "estimated_minutes": 20,
+  "prerequisites": ["module10_lesson3"],
+  "learning_objectives": [
+    "Use string module constants for character sets",
+    "Generate random passwords with random.choices()",
+    "Build options (uppercase, digits, symbols) as parameters",
+    "Check password strength"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Character Sets with the string Module",
+        "content": "Python's <code>string</code> module provides ready-made strings of characters you can use as pools for password generation.",
+        "code_example": "import string\n\nprint(string.ascii_lowercase)  # abcdefghijklmnopqrstuvwxyz\nprint(string.ascii_uppercase)  # ABCDEFGHIJKLMNOPQRSTUVWXYZ\nprint(string.digits)           # 0123456789\nprint(string.punctuation)      # !\"#$%&'()*+,...",
+        "code_output": "abcdefghijklmnopqrstuvwxyz\nABCDEFGHIJKLMNOPQRSTUVWXYZ\n0123456789\n!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
+      },
+      {
+        "heading": "Generating a Password",
+        "content": "Build a character pool from the desired character sets, then use <code>random.choices()</code> to pick characters, and join them into a string.",
+        "code_example": "import random\nimport string\n\ndef generate_password(length=12, use_upper=True,\n                      use_digits=True, use_symbols=True):\n    pool = string.ascii_lowercase\n    if use_upper:   pool += string.ascii_uppercase\n    if use_digits:  pool += string.digits\n    if use_symbols: pool += string.punctuation\n\n    chars = random.choices(pool, k=length)\n    return ''.join(chars)\n\nprint(generate_password(12))\nprint(generate_password(8, use_symbols=False))\nprint(generate_password(6, use_upper=False, use_symbols=False))",
+        "code_output": "aK#9mZ!pQ2vL (varies)\nBrT7xNqP (varies)\na7m2k9 (varies)"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Basic Password Generator",
+      "prompt": "Write a function generate_password(length) that creates a random password using lowercase letters and digits only (no symbols). Generate and print a password of length 10.",
+      "starter_code": "import random\nimport string\n\ndef generate_password(length):\n    # Pool: lowercase letters + digits\n    # Use random.choices(pool, k=length)\n    # Return ''.join(chars)\n    pass\n\npassword = generate_password(10)\nprint(password)\nprint(len(password))\n",
+      "solution": "import random\nimport string\n\ndef generate_password(length):\n    pool = string.ascii_lowercase + string.digits\n    chars = random.choices(pool, k=length)\n    return ''.join(chars)\n\npassword = generate_password(10)\nprint(password)\nprint(len(password))",
+      "hints": [
+        "pool = string.ascii_lowercase + string.digits",
+        "chars = random.choices(pool, k=length)",
+        "return ''.join(chars)"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "10", "message": "Password length is 10"},
+        {"type": "function_exists", "function_name": "generate_password", "message": "generate_password function exists"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Password Strength Checker",
+      "prompt": "Write check_strength(password) that returns 'Weak' if len < 8, 'Medium' if len 8-11, 'Strong' if len >= 12. Test with passwords of length 5, 9, and 14.",
+      "starter_code": "def check_strength(password):\n    # Return 'Weak', 'Medium', or 'Strong'\n    pass\n\nprint(check_strength(\"abc12\"))         # Weak (5 chars)\nprint(check_strength(\"abc12345\"))      # Medium (8 chars)\nprint(check_strength(\"abc12345!@#XY\")) # Strong (13 chars)\n",
+      "solution": "def check_strength(password):\n    if len(password) < 8:\n        return \"Weak\"\n    elif len(password) < 12:\n        return \"Medium\"\n    else:\n        return \"Strong\"\n\nprint(check_strength(\"abc12\"))\nprint(check_strength(\"abc12345\"))\nprint(check_strength(\"abc12345!@#XY\"))",
+      "hints": [
+        "if len(password) < 8: return 'Weak'",
+        "elif len(password) < 12: return 'Medium'",
+        "else: return 'Strong'"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Weak", "message": "Short password is Weak"},
+        {"type": "stdout_contains", "value": "Medium", "message": "Medium-length password is Medium"},
+        {"type": "stdout_contains", "value": "Strong", "message": "Long password is Strong"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does ''.join(['a', 'b', 'c']) return?",
+      "options": ["['a', 'b', 'c']", "a b c", "abc", "a,b,c"],
+      "correct_index": 2,
+      "explanation": "''.join(list) combines a list of strings into a single string with no separator. It is the standard way to convert a list of characters back into a string."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What does random.choices(pool, k=8) return?",
+      "options": [
+        "One random character",
+        "8 unique characters (no repeats)",
+        "A list of 8 random characters (repeats allowed)",
+        "The first 8 characters of pool"
+      ],
+      "correct_index": 2,
+      "explanation": "random.choices() picks WITH replacement — the same character can appear multiple times. It returns a list of k items. For passwords without repeated characters, you'd use random.sample() instead."
+    }
+  ],
+  "completion_message": "You built a password generator! This is a genuinely useful security tool."
+}

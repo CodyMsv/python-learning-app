@@ -1,0 +1,97 @@
+{
+  "id": "module9_lesson6",
+  "module_id": "module9",
+  "module_title": "Modules and Libraries",
+  "module_number": 9,
+  "lesson_number": 6,
+  "title": "Creating Your Own Modules",
+  "subtitle": "Organise your code into reusable files",
+  "estimated_minutes": 15,
+  "prerequisites": ["module9_lesson5"],
+  "learning_objectives": [
+    "Understand that any Python file is a module",
+    "Know how import finds modules",
+    "Use __name__ == '__main__' to make a file runnable and importable",
+    "Understand the concept of packages (__init__.py)"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Any Python File is a Module",
+        "content": "When you have a file called <code>mytools.py</code>, it is already a module. You can import it from another file with <code>import mytools</code> or <code>from mytools import function_name</code>. The importing file must be in the same directory (or on the Python path).",
+        "code_example": "# Imagine you have a file: calculator.py\n# with this content:\n#\n#   def add(a, b):\n#       return a + b\n#\n#   def multiply(a, b):\n#       return a * b\n#\n# In another file you would write:\n#   import calculator\n#   print(calculator.add(3, 4))    # 7\n#   print(calculator.multiply(3, 4)) # 12\n\n# Let's simulate this inline:\ndef add(a, b):\n    return a + b\n\nprint(add(3, 4))\nprint(add(10, 20))",
+        "code_output": "7\n30"
+      },
+      {
+        "heading": "The __name__ == '__main__' Pattern",
+        "content": "When Python runs a file directly, it sets <code>__name__</code> to <code>'__main__'</code>. When a file is imported, <code>__name__</code> is set to the file's name. The pattern <code>if __name__ == '__main__':</code> lets you include test code that only runs when the file is run directly — NOT when it is imported.",
+        "code_example": "# In your module file (mytools.py):\n\ndef greet(name):\n    return f\"Hello, {name}!\"\n\n# This only runs when you execute this file directly,\n# not when another file imports it:\nif __name__ == '__main__':\n    print(greet(\"World\"))\n\n# Test it here:\nprint(__name__)  # When run directly: shows '__main__'\nresult = greet(\"Alice\")\nprint(result)",
+        "code_output": "__main__\nHello, Alice!",
+        "note": "Using if __name__ == '__main__': is considered best practice in Python. It makes your code both importable and directly runnable."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Simulate a Module",
+      "prompt": "Define two functions in one code block (simulating a module): celsius_to_fahrenheit(c) that returns c * 9/5 + 32, and fahrenheit_to_celsius(f) that returns (f - 32) * 5/9. Test both and print the results.",
+      "starter_code": "# Module functions\ndef celsius_to_fahrenheit(c):\n    pass\n\ndef fahrenheit_to_celsius(f):\n    pass\n\n# Test the functions\nprint(celsius_to_fahrenheit(100))  # Should be 212.0\nprint(fahrenheit_to_celsius(32))   # Should be 0.0\n",
+      "solution": "def celsius_to_fahrenheit(c):\n    return c * 9/5 + 32\n\ndef fahrenheit_to_celsius(f):\n    return (f - 32) * 5/9\n\nprint(celsius_to_fahrenheit(100))\nprint(fahrenheit_to_celsius(32))",
+      "hints": [
+        "celsius_to_fahrenheit: return c * 9/5 + 32",
+        "fahrenheit_to_celsius: return (f - 32) * 5/9",
+        "100°C = 212°F, 32°F = 0°C"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "212.0", "message": "100°C = 212.0°F"},
+        {"type": "stdout_contains", "value": "0.0", "message": "32°F = 0.0°C"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Check __name__",
+      "prompt": "Print the value of __name__ and then print 'This code runs directly!' if __name__ == '__main__'.",
+      "starter_code": "# Print the value of __name__\n\n# Check if __name__ == '__main__' and print \"This code runs directly!\" if so\n",
+      "solution": "print(__name__)\n\nif __name__ == '__main__':\n    print(\"This code runs directly!\")",
+      "hints": [
+        "The starter code is already correct — just run it!",
+        "__name__ will show '__main__' when run directly"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "__main__", "message": "Output shows __main__"},
+        {"type": "stdout_contains", "value": "This code runs directly!", "message": "The if block executes"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What is __name__ equal to when a Python file is run directly?",
+      "options": ["the file's name", "__main__", "None", "main"],
+      "correct_index": 1,
+      "explanation": "When you run a file directly with 'python3 myfile.py', Python sets __name__ to '__main__'. When another file imports it, __name__ is set to the module name (e.g. 'myfile')."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "Why use 'if __name__ == \"__main__\":' in a module file?",
+      "options": [
+        "To make the code run faster",
+        "So test/demo code only runs when the file is executed directly, not when imported",
+        "To prevent the file from being imported",
+        "To define the main function"
+      ],
+      "correct_index": 1,
+      "explanation": "Code inside 'if __name__ == \"__main__\":' only runs when the file is executed directly. This lets you include test code or a demo that won't accidentally run when the file is imported as a module by someone else's code."
+    }
+  ],
+  "completion_message": "You now understand how Python's module system works — a crucial skill for larger projects!"
+}

@@ -1,0 +1,131 @@
+{
+  "id": "module5_lesson8",
+  "module_id": "module5",
+  "module_title": "Functions",
+  "module_number": 5,
+  "lesson_number": 8,
+  "title": "Recursion Basics",
+  "subtitle": "Solve problems by having a function call itself",
+  "estimated_minutes": 18,
+  "prerequisites": ["module4_lesson8"],
+  "learning_objectives": [
+    "Define recursion and explain how a function can call itself",
+    "Identify the base case that stops a recursive function",
+    "Trace the recursive steps of a factorial calculation",
+    "Implement a recursive Fibonacci function",
+    "Decide when recursion is clearer than an iterative loop"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "What Is Recursion?",
+        "content": "A <strong>recursive</strong> function is one that calls itself as part of its own definition. Every recursive function needs two things:<br><ol><li>A <strong>base case</strong> — a condition that stops the recursion and returns a value directly without another recursive call.</li><li>A <strong>recursive case</strong> — the function calling itself with a simpler or smaller input, moving closer to the base case.</li></ol>Without a base case the function calls itself forever, eventually causing a <code>RecursionError</code>.",
+        "code_example": "def countdown(n):\n    if n <= 0:          # base case\n        print(\"Go!\")\n    else:\n        print(n)\n        countdown(n - 1)  # recursive case\n\ncountdown(3)",
+        "code_output": "3\n2\n1\nGo!"
+      },
+      {
+        "heading": "Factorial — A Classic Recursive Example",
+        "content": "The <strong>factorial</strong> of a non-negative integer <em>n</em> (written <em>n!</em>) is defined as:<br><ul><li>0! = 1 (base case)</li><li>n! = n × (n−1)! for n &gt; 0 (recursive case)</li></ul>So <code>factorial(5)</code> computes: 5 × 4 × 3 × 2 × 1 = 120.<br><br>Each call reduces <em>n</em> by 1, so eventually <em>n</em> reaches 0 and the recursion stops.",
+        "code_example": "def factorial(n):\n    if n == 0:               # base case\n        return 1\n    return n * factorial(n - 1)  # recursive case\n\nprint(factorial(5))   # 120\nprint(factorial(0))   # 1",
+        "code_output": "120\n1"
+      },
+      {
+        "heading": "Fibonacci and When to Use Recursion",
+        "content": "The <strong>Fibonacci</strong> sequence is another classic: each number is the sum of the two before it (1, 1, 2, 3, 5, 8, 13 …). It has two base cases: <code>fib(1) = 1</code> and <code>fib(2) = 1</code>.<br><br>Recursion is elegant for problems that are naturally defined in terms of smaller versions of themselves (trees, fractals, mathematical sequences). However, simple recursive Fibonacci is slow for large inputs because it recalculates the same values many times — an iterative loop or memoisation is more efficient in production code.",
+        "code_example": "def fibonacci(n):\n    if n <= 2:              # base cases\n        return 1\n    return fibonacci(n - 1) + fibonacci(n - 2)\n\nfor i in range(1, 8):\n    print(fibonacci(i), end=\" \")",
+        "code_output": "1 1 2 3 5 8 13 "
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Implement Factorial",
+      "prompt": "Write a recursive function called <code>factorial</code> that takes a non-negative integer <code>n</code> and returns its factorial. Base case: <code>factorial(0)</code> returns <code>1</code>. Print <code>factorial(6)</code>.",
+      "starter_code": "# Write a recursive factorial function\n# factorial(0) should return 1\n# Print factorial(6)\n",
+      "solution": "def factorial(n):\n    if n == 0:\n        return 1\n    return n * factorial(n - 1)\n\nprint(factorial(6))",
+      "hints": [
+        "Start with the base case: if n == 0: return 1",
+        "Recursive case: return n * factorial(n - 1)",
+        "factorial(6) should output 720"
+      ],
+      "tests": [
+        {
+          "type": "function_returns",
+          "function_name": "factorial",
+          "args": [5],
+          "expected": 120,
+          "message": "factorial(5) should return 120"
+        },
+        {
+          "type": "function_returns",
+          "function_name": "factorial",
+          "args": [0],
+          "expected": 1,
+          "message": "factorial(0) should return 1 (base case)"
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Implement Fibonacci",
+      "prompt": "Write a recursive function called <code>fibonacci</code> that returns the <em>n</em>-th Fibonacci number. Base cases: <code>fibonacci(1)</code> and <code>fibonacci(2)</code> both return <code>1</code>. Print <code>fibonacci(7)</code>.",
+      "starter_code": "# Write a recursive fibonacci function\n# fibonacci(1) and fibonacci(2) return 1\n# Print fibonacci(7)\n",
+      "solution": "def fibonacci(n):\n    if n <= 2:\n        return 1\n    return fibonacci(n - 1) + fibonacci(n - 2)\n\nprint(fibonacci(7))",
+      "hints": [
+        "Base case: if n <= 2: return 1",
+        "Recursive case: return fibonacci(n - 1) + fibonacci(n - 2)",
+        "fibonacci(7) should output 13"
+      ],
+      "tests": [
+        {
+          "type": "function_returns",
+          "function_name": "fibonacci",
+          "args": [7],
+          "expected": 13,
+          "message": "fibonacci(7) should return 13"
+        },
+        {
+          "type": "function_returns",
+          "function_name": "fibonacci",
+          "args": [1],
+          "expected": 1,
+          "message": "fibonacci(1) should return 1 (base case)"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "Why does every recursive function need a base case?",
+      "options": [
+        "Without one, the function calls itself forever and causes a RecursionError",
+        "Python requires a base case by syntax rules",
+        "The base case makes the function run faster",
+        "The base case allows the function to accept more arguments"
+      ],
+      "correct_index": 0,
+      "explanation": "A base case is the stopping condition. Without it, the function keeps calling itself indefinitely, eventually exhausting the call stack and raising a RecursionError."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What does factorial(4) return?",
+      "options": [
+        "24",
+        "12",
+        "16",
+        "4"
+      ],
+      "correct_index": 0,
+      "explanation": "4! = 4 × 3 × 2 × 1 = 24. The recursion unfolds as: factorial(4) = 4 * factorial(3) = 4 * 3 * factorial(2) = 4 * 3 * 2 * factorial(1) = 4 * 3 * 2 * 1 = 24."
+    }
+  ],
+  "completion_message": "Outstanding! You have completed Module 5. You now understand recursion — a powerful technique for problems that decompose naturally into smaller sub-problems. Always define your base case first, and think carefully about whether recursion or a loop is the clearer solution."
+}

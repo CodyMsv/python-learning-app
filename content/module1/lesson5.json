@@ -1,0 +1,106 @@
+{
+  "id": "module1_lesson5",
+  "module_id": "module1",
+  "module_title": "Getting Started with Python",
+  "module_number": 1,
+  "lesson_number": 5,
+  "title": "Data Types Overview",
+  "subtitle": "Discover the four basic types of data Python works with",
+  "estimated_minutes": 12,
+  "prerequisites": ["module1_lesson1", "module1_lesson2", "module1_lesson3", "module1_lesson4"],
+  "learning_objectives": [
+    "Name and describe the four basic Python data types: str, int, float, and bool",
+    "Use the type() function to check the type of any value or variable",
+    "Explain why data types matter and what happens when you mix them incorrectly",
+    "Understand what None represents in Python"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "The Four Basic Data Types",
+        "content": "Every value in Python has a <strong>type</strong> — it tells Python what kind of data it is and what operations make sense for it. There are four basic types you will use constantly:<br><br><strong>str (string)</strong> — Text. Any sequence of characters wrapped in quotes. Examples: <code>\"Hello\"</code>, <code>\"Python\"</code>, <code>\"123 Main Street\"</code>. Even if a number is inside quotes like <code>\"42\"</code>, it is still a string, not a number.<br><br><strong>int (integer)</strong> — Whole numbers, positive or negative, with no decimal point. Examples: <code>7</code>, <code>-3</code>, <code>1000</code>, <code>0</code>.<br><br><strong>float (floating-point number)</strong> — Numbers that have a decimal point. Examples: <code>3.14</code>, <code>-0.5</code>, <code>100.0</code>. Even <code>100.0</code> is a float, not an int, because of the decimal point.<br><br><strong>bool (boolean)</strong> — A value that is either <code>True</code> or <code>False</code> — nothing else. Booleans are used to represent yes/no or on/off situations. Note that <code>True</code> and <code>False</code> must be capitalized in Python.<br><br>You can use the built-in <code>type()</code> function to ask Python what type any value or variable is.",
+        "code_example": "name = \"Alice\"       # str\nage = 30             # int\nheight = 1.75        # float\nis_student = True    # bool\n\nprint(type(name))\nprint(type(age))\nprint(type(height))\nprint(type(is_student))",
+        "code_output": "<class 'str'>\n<class 'int'>\n<class 'float'>\n<class 'bool'>",
+        "note": "The type() function is extremely handy for debugging. When you are not sure what type a value is, just print(type(value)) to find out."
+      },
+      {
+        "heading": "Why Types Matter — and What None Means",
+        "content": "Data types are not just labels — they determine what you can <em>do</em> with a value. Python keeps types separate to avoid nonsensical operations. For example, you cannot add a number directly to a string because Python doesn't know if you want math or text joining. You would need to convert first.<br><br>This is actually a helpful protection — Python tells you immediately when you accidentally mix types, rather than silently producing a wrong answer.<br><br>There is also a fifth special value worth knowing: <strong>None</strong>. None represents the <em>absence of a value</em> — it means \"nothing\" or \"empty.\" It is its own type (<code>NoneType</code>) and is different from zero, False, or an empty string. You will often see None used as a default value when something hasn't been set yet.",
+        "code_example": "# Why types matter: mixing them carelessly causes errors\nnumber = 5\nword = \"hello\"\n\n# This works -- adding two ints:\nprint(3 + 4)\n\n# This works -- joining two strings:\nprint(\"hello\" + \" world\")\n\n# Converting a number to string to combine them safely:\nprint(\"I have \" + str(number) + \" apples\")\n\n# None represents no value\nresult = None\nprint(result)\nprint(type(result))",
+        "code_output": "7\nhello world\nI have 5 apples\nNone\n<class 'NoneType'>",
+        "warning": "If you try to run print(\"I have \" + 5 + \" apples\") without converting 5 to a string first, Python will raise a TypeError. Always convert values to the right type before combining them."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Check the Types",
+      "prompt": "Create four variables, one of each basic type:\n- A string variable called my_name\n- An integer variable called my_age\n- A float variable called my_height (use a decimal like 1.70)\n- A boolean variable called am_learning (set it to True)\n\nThen use print(type(...)) to print the type of each one.",
+      "starter_code": "# Create a string variable called my_name and assign your name to it\n# Create an integer variable called my_age and assign a number to it\n# Create a float variable called my_height and assign a decimal number to it\n# Create a boolean variable called am_learning and set it to True\n\n# Print the type of each variable\n",
+      "solution": "my_name = \"Taylor\"\nmy_age = 22\nmy_height = 1.70\nam_learning = True\nprint(type(my_name))\nprint(type(my_age))\nprint(type(my_height))\nprint(type(am_learning))",
+      "hints": [
+        "A string needs quotes: my_name = \"YourName\"",
+        "An integer is a whole number: my_age = 22",
+        "A float has a decimal: my_height = 1.70",
+        "Use print(type(variable_name)) to check each type"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "<class 'str'>", "message": "Output contains a str type"},
+        {"type": "stdout_contains", "value": "<class 'int'>", "message": "Output contains an int type"},
+        {"type": "stdout_contains", "value": "<class 'float'>", "message": "Output contains a float type"},
+        {"type": "stdout_contains", "value": "<class 'bool'>", "message": "Output contains a bool type"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Safe Type Conversion",
+      "prompt": "You have a number stored in a variable. Combine it with text safely by converting it to a string first.\n\n1. Create a variable called num_languages and set it to 3\n2. Print the sentence: I am learning 3 programming languages!\n\nUse str() to convert the number to a string so you can join it with text using +.",
+      "starter_code": "# Create a variable called num_languages and set it to 3\n\n# Print the sentence using str() to convert the number\n",
+      "solution": "num_languages = 3\nprint(\"I am learning \" + str(num_languages) + \" programming languages!\")",
+      "hints": [
+        "You cannot directly add a number to a string with + — you must convert first.",
+        "Use str() to turn the number into a string: str(num_languages)",
+        "Then join the strings with +: \"I am learning \" + str(num_languages) + \" programming languages!\""
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "I am learning 3 programming languages!", "message": "Output contains: I am learning 3 programming languages!"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What is the data type of the value: \"99\"  (with the quotes)?",
+      "options": [
+        "int, because it is a number",
+        "float, because it could be a decimal",
+        "str, because it is inside quotes",
+        "bool, because it can be true or false"
+      ],
+      "correct_index": 2,
+      "explanation": "Even though 99 looks like a number, the quotes around it make it a string (str). In Python, anything inside quotes is treated as text, not a number. If you want the number 99, write it without quotes: 99"
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What does None represent in Python?",
+      "options": [
+        "The number zero",
+        "An empty string with no characters",
+        "The boolean value False",
+        "The absence of any value — nothing at all"
+      ],
+      "correct_index": 3,
+      "explanation": "None is Python's way of saying \"no value here.\" It is not the same as 0, False, or an empty string (\"\"). None is its own special type (NoneType) and represents the complete absence of a value."
+    }
+  ],
+  "completion_message": "You have completed Module 1! You now understand the four basic data types that are the building blocks of all Python programs. Knowing the difference between strings, integers, floats, and booleans — and how to check and convert them — will serve you incredibly well as you continue. You should be very proud of how far you have come!"
+}

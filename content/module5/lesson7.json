@@ -1,0 +1,116 @@
+{
+  "id": "module5_lesson7",
+  "module_id": "module5",
+  "module_title": "Functions",
+  "module_number": 5,
+  "lesson_number": 7,
+  "title": "Lambda Functions",
+  "subtitle": "Write concise anonymous functions for simple one-line operations",
+  "estimated_minutes": 12,
+  "prerequisites": ["module4_lesson8"],
+  "learning_objectives": [
+    "Write a lambda expression for a simple one-line operation",
+    "Assign a lambda to a variable and call it",
+    "Use a lambda as a sorting key with sorted()",
+    "Apply a lambda with map() to transform a list",
+    "Identify when a lambda is appropriate versus a regular def function"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "What Is a Lambda Function?",
+        "content": "A <strong>lambda</strong> is a small, anonymous (unnamed) function defined in a single expression using the <code>lambda</code> keyword. The syntax is:<br><br><code>lambda parameters: expression</code><br><br>The result of the expression is automatically returned — no <code>return</code> keyword needed. Lambdas are best for short, simple operations; use a regular <code>def</code> for anything more complex.",
+        "code_example": "# Regular function\ndef double(x):\n    return x * 2\n\n# Equivalent lambda assigned to a variable\ndouble_lambda = lambda x: x * 2\n\nprint(double(5))        # 10\nprint(double_lambda(5)) # 10",
+        "code_output": "10\n10"
+      },
+      {
+        "heading": "Lambdas as Sorting Keys and with map()",
+        "content": "Lambdas shine when you need to pass a small function as an argument — for example as the <code>key</code> in <code>sorted()</code>, or as the function in <code>map()</code>.<br><br><code>sorted()</code> with a lambda lets you sort by any attribute or computed value. <code>map()</code> applies a function to every item in an iterable and returns an iterator.",
+        "code_example": "# Sort a list of (name, score) tuples by score\nplayers = [(\"Alice\", 90), (\"Bob\", 75), (\"Carol\", 95)]\nranked = sorted(players, key=lambda player: player[1])\nprint(ranked)\n\n# Square every number in a list with map()\nsquares = list(map(lambda x: x ** 2, [1, 2, 3, 4, 5]))\nprint(squares)",
+        "code_output": "[('Bob', 75), ('Alice', 90), ('Carol', 95)]\n[1, 4, 9, 16, 25]"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Lambda to Triple a Number",
+      "prompt": "Create a lambda function assigned to a variable called <code>triple</code> that multiplies its argument by 3. Print <code>triple(7)</code>.",
+      "starter_code": "# Create a lambda called triple that multiplies by 3\n# Print triple(7)\n",
+      "solution": "triple = lambda x: x * 3\nprint(triple(7))",
+      "hints": [
+        "triple = lambda x: x * 3",
+        "Then print(triple(7)) should output 21"
+      ],
+      "tests": [
+        {
+          "type": "variable_exists",
+          "variable_name": "triple",
+          "message": "Variable triple is defined"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "21",
+          "message": "Output contains 21"
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Sort Words by Length",
+      "prompt": "Given the list <code>words = [\"banana\", \"fig\", \"apple\", \"kiwi\"]</code>, use <code>sorted()</code> with a lambda key to sort the words by their length (shortest first). Store the result in <code>sorted_words</code> and print it.",
+      "starter_code": "words = [\"banana\", \"fig\", \"apple\", \"kiwi\"]\n# Sort by length using a lambda key\n",
+      "solution": "words = [\"banana\", \"fig\", \"apple\", \"kiwi\"]\nsorted_words = sorted(words, key=lambda w: len(w))\nprint(sorted_words)",
+      "hints": [
+        "Use sorted(words, key=lambda w: len(w))",
+        "Store the result: sorted_words = sorted(...)",
+        "The expected output is: ['fig', 'kiwi', 'apple', 'banana']"
+      ],
+      "tests": [
+        {
+          "type": "variable_exists",
+          "variable_name": "sorted_words",
+          "message": "Variable sorted_words is defined"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "fig",
+          "message": "Output contains fig (the shortest word appears first)"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "Which correctly defines a lambda that adds two numbers?",
+      "options": [
+        "lambda a, b: a + b",
+        "lambda a, b: return a + b",
+        "def lambda(a, b): a + b",
+        "lambda: a + b"
+      ],
+      "correct_index": 0,
+      "explanation": "A lambda uses the syntax: lambda parameters: expression. There is no return keyword, and the parameters come before the colon. Option A is the only correct form."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What does list(map(lambda x: x * 2, [1, 2, 3])) produce?",
+      "options": [
+        "[2, 4, 6]",
+        "[1, 2, 3]",
+        "2, 4, 6",
+        "[3, 6, 9]"
+      ],
+      "correct_index": 0,
+      "explanation": "map() applies the lambda to every element: 1*2=2, 2*2=4, 3*2=6. Wrapping in list() materialises the result as [2, 4, 6]."
+    }
+  ],
+  "completion_message": "Nicely done! Lambda functions let you express simple operations concisely, especially when passing functions as arguments to sorted(), map(), or filter(). Remember to use a regular def when the logic gets complex."
+}

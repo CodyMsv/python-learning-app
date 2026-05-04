@@ -1,0 +1,95 @@
+{
+  "id": "module2_lesson4",
+  "module_id": "module2",
+  "module_title": "Working with Data Types",
+  "module_number": 2,
+  "lesson_number": 4,
+  "title": "F-Strings and Formatting",
+  "subtitle": "Embed variables and expressions directly inside strings the modern Python way",
+  "estimated_minutes": 15,
+  "prerequisites": ["module2_lesson3"],
+  "learning_objectives": [
+    "Create f-strings using the f\"...\" syntax to embed variables in text",
+    "Place any valid Python expression inside the curly braces of an f-string",
+    "Format numbers to a fixed number of decimal places using f\"{value:.2f}\"",
+    "Use the !r and !s conversion flags to control how values are displayed"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "F-String Basics and Expressions",
+        "content": "An <strong>f-string</strong> (formatted string literal) lets you embed variables and expressions directly inside a string. Just put an <code>f</code> (or <code>F</code>) immediately before the opening quote, then place anything you want evaluated inside <strong>curly braces <code>{}</code></strong>.<br><br>Before f-strings were added in Python 3.6, developers had to use <code>%</code> formatting or <code>.format()</code>, which were harder to read. F-strings are now the recommended approach because the variable name sits right where it appears in the output.<br><br>You can put <em>any valid Python expression</em> inside the braces — not just variable names. Arithmetic, method calls, comparisons, function calls — all are fair game. Python evaluates the expression first and then converts the result to a string.",
+        "code_example": "# Basic variable embedding\nname = \"Alice\"\nage = 30\nprint(f\"Hello, {name}! You are {age} years old.\")\n\n# Expressions inside {}\nprint(f\"2 + 2 = {2 + 2}\")\nprint(f\"Name in uppercase: {name.upper()}\")\nprint(f\"Age in 10 years: {age + 10}\")\n\n# Multi-variable expression\nwidth = 5\nheight = 3\nprint(f\"A {width} by {height} rectangle has area {width * height}.\")",
+        "code_output": "Hello, Alice! You are 30 years old.\n2 + 2 = 4\nName in uppercase: ALICE\nAge in 10 years: 40\nA 5 by 3 rectangle has area 15."
+      },
+      {
+        "heading": "Number Formatting and Conversion Flags",
+        "content": "Inside the curly braces, you can add a <strong>format spec</strong> after a colon (<code>:</code>) to control exactly how a value is displayed — without changing the underlying variable.<br><br><code><strong>:.2f</strong></code> formats a number as a float with exactly 2 decimal places. The <code>f</code> stands for fixed-point. You can change <code>2</code> to any number of decimal places you need.<br><br><code><strong>:,</strong></code> adds a thousands separator (a comma) to large numbers, making them easier to read.<br><br>The <strong>conversion flags</strong> <code>!r</code> and <code>!s</code> go before the colon (or replace it). <code><strong>!r</strong></code> calls <code>repr()</code> on the value, which shows the programmer-facing representation — strings get their quote marks, escape characters are shown literally. <code><strong>!s</strong></code> calls <code>str()</code>, which is what you normally see. <code>!r</code> is especially useful for debugging because it makes invisible characters visible.",
+        "code_example": "price = 19.5\nprint(f\"Price: ${price:.2f}\")\nprint(f\"Pi is approximately {3.14159:.4f}\")\n\nbig_number = 1000000\nprint(f\"Population: {big_number:,}\")\n\n# !s and !r conversion flags\nvalue = \"hello\\nworld\"\nprint(f\"With !s: {value!s}\")   # normal str() — newline is printed\nprint(f\"With !r: {value!r}\")   # repr() — shows \\n literally\n\n# Useful for debugging\nuser_input = \"  Alice  \"\nprint(f\"Raw input is: {user_input!r}\")",
+        "code_output": "Price: $19.50\nPi is approximately 3.1416\nPopulation: 1,000,000\nWith !s: hello\nworld\nWith !r: 'hello\\nworld'\nRaw input is: '  Alice  '"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Personal Introduction",
+      "prompt": "Create variables `name = \"Sam\"` and `year = 2024`. Use an f-string to print the sentence: `My name is Sam and it is 2024.`",
+      "starter_code": "name = \"Sam\"\nyear = 2024\n\n# Use an f-string to print: My name is Sam and it is 2024.\n",
+      "solution": "name = \"Sam\"\nyear = 2024\nprint(f\"My name is {name} and it is {year}.\")",
+      "hints": [
+        "Put f before the opening quote: f\"...\"",
+        "Place variables inside curly braces where they should appear: {name} and {year}"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "My name is Sam", "message": "Output contains 'My name is Sam'"},
+        {"type": "stdout_contains", "value": "2024", "message": "Output contains '2024'"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Format a Price",
+      "prompt": "Given `price = 7.5` and `item = \"coffee\"`, use an f-string to print: `A coffee costs $7.50` — with the price formatted to exactly 2 decimal places.",
+      "starter_code": "price = 7.5\nitem = \"coffee\"\n\n# Use an f-string to print: A coffee costs $7.50 (format price to 2 decimal places)\n",
+      "solution": "price = 7.5\nitem = \"coffee\"\nprint(f\"A {item} costs ${price:.2f}\")",
+      "hints": [
+        "Use {item} to insert the item name",
+        "Use {price:.2f} to format the price to 2 decimal places"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "coffee", "message": "Output contains 'coffee'"},
+        {"type": "stdout_contains", "value": "$7.50", "message": "Output contains the correctly formatted price '$7.50'"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does `f\"{3 * 4} items\"` produce?",
+      "options": ["\"3 * 4 items\"", "\"12 items\"", "\"7 items\"", "An error"],
+      "correct_index": 1,
+      "explanation": "Python evaluates the expression 3 * 4 = 12 inside the curly braces, then places the result into the string, giving \"12 items\"."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What does the format spec `.2f` do in an f-string?",
+      "options": [
+        "Rounds the number to 2 significant figures",
+        "Displays the number with exactly 2 digits before the decimal point",
+        "Displays the number with exactly 2 digits after the decimal point",
+        "Converts the number to a 2-character string"
+      ],
+      "correct_index": 2,
+      "explanation": "The .2f format spec stands for fixed-point with 2 decimal places. It always shows exactly 2 digits after the decimal point, padding with zeros if needed (e.g. 7.5 becomes 7.50)."
+    }
+  ],
+  "completion_message": "Well done! F-strings are the cleanest way to build strings in Python. You can now embed variables, compute expressions on the fly, and format numbers beautifully — all inside a single readable string. You will use f-strings constantly in real Python code."
+}

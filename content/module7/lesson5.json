@@ -1,0 +1,98 @@
+{
+  "id": "module7_lesson5",
+  "module_id": "module7",
+  "module_title": "Error Handling",
+  "module_number": 7,
+  "lesson_number": 5,
+  "title": "Raising Exceptions",
+  "subtitle": "Signal errors from your own functions intentionally",
+  "estimated_minutes": 12,
+  "prerequisites": ["module7_lesson4"],
+  "learning_objectives": [
+    "Use raise to trigger an exception intentionally",
+    "Validate function inputs and raise errors for invalid data",
+    "Choose the right built-in exception type to raise",
+    "Understand when to raise vs when to return a special value"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "The raise Statement",
+        "content": "You can <strong>raise an exception yourself</strong> using the <code>raise</code> keyword. This is useful when your function receives invalid input and you want to signal that clearly. Choose the exception type that best describes the problem.",
+        "code_example": "def set_age(age):\n    if age < 0:\n        raise ValueError(\"Age cannot be negative\")\n    if age > 150:\n        raise ValueError(\"Age seems too large\")\n    print(\"Age set to\", age)\n\nset_age(25)   # works fine\nset_age(-5)   # raises ValueError",
+        "code_output": "Age set to 25\nValueError: Age cannot be negative"
+      },
+      {
+        "heading": "Raising Inside Functions for Validation",
+        "content": "A common pattern is to <strong>validate inputs at the top of a function</strong> and raise early if something is wrong. This is called a <em>guard clause</em>. It keeps the rest of the function clean and simple.",
+        "code_example": "def calculate_square_root(n):\n    if not isinstance(n, (int, float)):\n        raise TypeError(\"Input must be a number\")\n    if n < 0:\n        raise ValueError(\"Cannot take square root of negative number\")\n    return n ** 0.5\n\nprint(calculate_square_root(16))   # 4.0\nprint(calculate_square_root(-4))   # raises ValueError",
+        "code_output": "4.0\nValueError: Cannot take square root of negative number",
+        "note": "Common choices: raise ValueError for bad values, raise TypeError for wrong types, raise KeyError for missing keys."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Validate a Username",
+      "prompt": "Write a function validate_username(name) that raises ValueError if the name is shorter than 3 characters or longer than 20 characters. If valid, print 'Username accepted: ' followed by the name. Test with validate_username(\"Al\"), validate_username(\"Alice\").",
+      "starter_code": "def validate_username(name):\n    # Raise ValueError for names that are too short or too long\n    pass\n\ntry:\n    validate_username(\"Al\")\nexcept ValueError as e:\n    print(\"Error:\", e)\n\nvalidate_username(\"Alice\")\n",
+      "solution": "def validate_username(name):\n    if len(name) < 3:\n        raise ValueError(\"Username too short (min 3 characters)\")\n    if len(name) > 20:\n        raise ValueError(\"Username too long (max 20 characters)\")\n    print(\"Username accepted:\", name)\n\ntry:\n    validate_username(\"Al\")\nexcept ValueError as e:\n    print(\"Error:\", e)\n\nvalidate_username(\"Alice\")",
+      "hints": [
+        "Check len(name) < 3 and raise ValueError",
+        "Check len(name) > 20 and raise ValueError",
+        "If no exception, print 'Username accepted: ' + name"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Error:", "message": "Error is caught and printed"},
+        {"type": "stdout_contains", "value": "Username accepted: Alice", "message": "Output contains: Username accepted: Alice"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Guard Clause in a Function",
+      "prompt": "Write a function divide(a, b). If b is 0, raise ZeroDivisionError with message 'Divider cannot be zero'. Otherwise return a / b. Print the result of divide(20, 4) and catch the error for divide(10, 0).",
+      "starter_code": "def divide(a, b):\n    # Raise ZeroDivisionError if b is 0\n    pass\n\nprint(divide(20, 4))\n\ntry:\n    divide(10, 0)\nexcept ZeroDivisionError as e:\n    print(\"Caught:\", e)\n",
+      "solution": "def divide(a, b):\n    if b == 0:\n        raise ZeroDivisionError(\"Divider cannot be zero\")\n    return a / b\n\nprint(divide(20, 4))\n\ntry:\n    divide(10, 0)\nexcept ZeroDivisionError as e:\n    print(\"Caught:\", e)",
+      "hints": [
+        "Check if b == 0 and raise ZeroDivisionError",
+        "Otherwise return a / b",
+        "The except block will catch the error you raised"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "5.0", "message": "divide(20, 4) returns 5.0"},
+        {"type": "stdout_contains", "value": "Caught:", "message": "Output contains: Caught:"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What is the main reason to raise exceptions in your own functions?",
+      "options": [
+        "To make the program crash on purpose",
+        "To signal invalid input or impossible operations to the caller",
+        "To speed up the program",
+        "To print error messages"
+      ],
+      "correct_index": 1,
+      "explanation": "Raising exceptions is how functions communicate to their callers that something is wrong. The caller can then catch and handle the error. This is much cleaner than returning special values like -1 or None and hoping the caller checks them."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "Which exception should you raise for an invalid value (like a negative age)?",
+      "options": ["TypeError", "NameError", "ValueError", "RuntimeError"],
+      "correct_index": 2,
+      "explanation": "ValueError is the right choice when the type is correct (it is a number) but the value is invalid (negative). TypeError is for when the type itself is wrong (e.g. received a string instead of a number)."
+    }
+  ],
+  "completion_message": "Well done! You now know how to raise exceptions to signal problems clearly from your own functions."
+}

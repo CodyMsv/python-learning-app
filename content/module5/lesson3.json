@@ -1,0 +1,125 @@
+{
+  "id": "module5_lesson3",
+  "module_id": "module5",
+  "module_title": "Functions",
+  "module_number": 5,
+  "lesson_number": 3,
+  "title": "Return Values",
+  "subtitle": "Send data back from a function to the place that called it",
+  "estimated_minutes": 15,
+  "prerequisites": ["module4_lesson8"],
+  "learning_objectives": [
+    "Use the return statement to send a value back from a function",
+    "Understand that a function without return gives back None",
+    "Store a function's return value in a variable",
+    "Explain that return immediately ends the function",
+    "Return multiple values as a tuple"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "The return Statement",
+        "content": "So far our functions have printed results, but printing is not the same as <em>returning</em> a value. The <code>return</code> statement sends a value back to the caller, so it can be stored, used in calculations, or passed to another function.<br><br>A function that has no <code>return</code> statement (or just <code>return</code> with no value) automatically returns <code>None</code>.",
+        "code_example": "def add(a, b):\n    return a + b\n\nresult = add(3, 4)\nprint(result)        # 7\nprint(add(10, 5))    # 15 — used directly",
+        "code_output": "7\n15"
+      },
+      {
+        "heading": "return Ends the Function Immediately",
+        "content": "When Python reaches a <code>return</code> statement it exits the function right away — any code after <code>return</code> inside that function is never executed. This is called an <strong>early return</strong> and is often used to handle special cases at the top of a function.",
+        "code_example": "def check_positive(n):\n    if n <= 0:\n        return \"Not positive\"\n    return \"Positive\"\n\nprint(check_positive(-3))\nprint(check_positive(10))",
+        "code_output": "Not positive\nPositive"
+      },
+      {
+        "heading": "Returning Multiple Values",
+        "content": "Python lets you return more than one value by separating them with commas. Python packs them into a <strong>tuple</strong> automatically. You can unpack the tuple into separate variables on the calling side.",
+        "code_example": "def min_max(numbers):\n    return min(numbers), max(numbers)\n\nlo, hi = min_max([4, 1, 9, 2, 7])\nprint(lo)   # 1\nprint(hi)   # 9",
+        "code_output": "1\n9"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Return the Sum",
+      "prompt": "Define a function called <code>add</code> that takes two parameters <code>a</code> and <code>b</code> and <strong>returns</strong> their sum. Then print the result of calling <code>add(3, 4)</code>.",
+      "starter_code": "# Define add(a, b) that returns a + b\n# Print add(3, 4)\n",
+      "solution": "def add(a, b):\n    return a + b\n\nprint(add(3, 4))",
+      "hints": [
+        "Use return a + b inside the function — not print",
+        "After the definition, call print(add(3, 4))"
+      ],
+      "tests": [
+        {
+          "type": "function_returns",
+          "function_name": "add",
+          "args": [3, 4],
+          "expected": 7,
+          "message": "add(3, 4) should return 7"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "7",
+          "message": "Output contains 7"
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Square a Number",
+      "prompt": "Define a function called <code>square</code> that takes one parameter <code>n</code> and returns <code>n</code> squared. Print the result of <code>square(5)</code>.",
+      "starter_code": "# Define square(n) that returns n squared\n# Print square(5)\n",
+      "solution": "def square(n):\n    return n ** 2\n\nprint(square(5))",
+      "hints": [
+        "Use the ** operator: n ** 2",
+        "Remember to use return, not print, inside the function"
+      ],
+      "tests": [
+        {
+          "type": "function_returns",
+          "function_name": "square",
+          "args": [5],
+          "expected": 25,
+          "message": "square(5) should return 25"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "25",
+          "message": "Output contains 25"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does a function return if it has no return statement?",
+      "options": [
+        "None",
+        "0",
+        "An empty string",
+        "It causes an error"
+      ],
+      "correct_index": 0,
+      "explanation": "In Python, every function returns a value. If you do not write a return statement, Python automatically returns None — a special object meaning 'no value'."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What happens to code written after a return statement inside the same function?",
+      "options": [
+        "It is never executed",
+        "It runs after the function is called again",
+        "It runs normally",
+        "It causes a SyntaxError"
+      ],
+      "correct_index": 0,
+      "explanation": "return immediately exits the function. Any lines that come after it inside the same function body are unreachable and will never run."
+    }
+  ],
+  "completion_message": "Well done! Your functions can now produce values that the rest of your program can use. The return statement is one of the most important tools in a Python programmer's toolkit."
+}

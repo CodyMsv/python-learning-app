@@ -1,0 +1,102 @@
+{
+  "id": "module8_lesson8",
+  "module_id": "module8",
+  "module_title": "Object-Oriented Programming",
+  "module_number": 8,
+  "lesson_number": 8,
+  "title": "Class vs Instance Variables",
+  "subtitle": "Understand what is shared vs what belongs to each object",
+  "estimated_minutes": 15,
+  "prerequisites": ["module8_lesson7"],
+  "learning_objectives": [
+    "Distinguish between class variables (shared) and instance variables (per object)",
+    "Use a class variable as a counter across all instances",
+    "Understand @classmethod and @staticmethod decorators",
+    "Know when to use each type of variable"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Class Variables vs Instance Variables",
+        "content": "<strong>Instance variables</strong> (set with <code>self.x = ...</code>) belong to one specific object — each object has its own copy.<br><br><strong>Class variables</strong> are defined directly in the class body (not in a method). They are <strong>shared by all instances</strong> of that class.",
+        "code_example": "class Dog:\n    species = \"Canis lupus familiaris\"  # class variable\n\n    def __init__(self, name):\n        self.name = name  # instance variable\n\nrex = Dog(\"Rex\")\nbella = Dog(\"Bella\")\n\n# Both share the same species\nprint(rex.species)    # Canis lupus familiaris\nprint(bella.species)  # Canis lupus familiaris\n\n# But each has their own name\nprint(rex.name)    # Rex\nprint(bella.name)  # Bella",
+        "code_output": "Canis lupus familiaris\nCanis lupus familiaris\nRex\nBella"
+      },
+      {
+        "heading": "Using a Class Variable as a Counter",
+        "content": "A common use of class variables is to count how many objects have been created.",
+        "code_example": "class Car:\n    count = 0  # shared by all Car objects\n\n    def __init__(self, make):\n        self.make = make\n        Car.count += 1  # increment the shared counter\n\nc1 = Car(\"Toyota\")\nc2 = Car(\"Honda\")\nc3 = Car(\"BMW\")\n\nprint(\"Cars created:\", Car.count)",
+        "code_output": "Cars created: 3"
+      },
+      {
+        "heading": "@classmethod and @staticmethod",
+        "content": "<code>@classmethod</code> methods receive the class (<code>cls</code>) instead of an instance. <code>@staticmethod</code> methods receive neither — they are just regular functions placed inside the class for organisational purposes.",
+        "code_example": "class MathHelper:\n    pi = 3.14159\n\n    @classmethod\n    def circle_area(cls, r):\n        return cls.pi * r * r\n\n    @staticmethod\n    def add(a, b):\n        return a + b\n\nprint(MathHelper.circle_area(5))\nprint(MathHelper.add(3, 4))",
+        "code_output": "78.53975\n7"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Count Instances",
+      "prompt": "Define a Student class with a class variable 'count = 0'. In __init__, take a name parameter and increment Student.count. Create 3 Student objects then print Student.count.",
+      "starter_code": "class Student:\n    count = 0\n\n    def __init__(self, name):\n        self.name = name\n        # Increment Student.count here\n\ns1 = Student(\"Alice\")\ns2 = Student(\"Bob\")\ns3 = Student(\"Carol\")\nprint(Student.count)\n",
+      "solution": "class Student:\n    count = 0\n\n    def __init__(self, name):\n        self.name = name\n        Student.count += 1\n\ns1 = Student(\"Alice\")\ns2 = Student(\"Bob\")\ns3 = Student(\"Carol\")\nprint(Student.count)",
+      "hints": [
+        "Inside __init__: Student.count += 1",
+        "Use the class name (Student.count), not self.count, to modify the class variable",
+        "After 3 students are created, Student.count should be 3"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "3", "message": "Student.count is 3 after creating 3 students"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Static Method",
+      "prompt": "Add a @staticmethod called is_valid_score(score) to the Grader class that returns True if score is between 0 and 100 (inclusive), otherwise False. Print the results of is_valid_score(85) and is_valid_score(110).",
+      "starter_code": "class Grader:\n    @staticmethod\n    def is_valid_score(score):\n        # Return True if 0 <= score <= 100\n        pass\n\nprint(Grader.is_valid_score(85))\nprint(Grader.is_valid_score(110))\n",
+      "solution": "class Grader:\n    @staticmethod\n    def is_valid_score(score):\n        return 0 <= score <= 100\n\nprint(Grader.is_valid_score(85))\nprint(Grader.is_valid_score(110))",
+      "hints": [
+        "return 0 <= score <= 100",
+        "Python allows chained comparisons like 0 <= score <= 100",
+        "No self or cls needed — it is a @staticmethod"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "True", "message": "is_valid_score(85) returns True"},
+        {"type": "stdout_contains", "value": "False", "message": "is_valid_score(110) returns False"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What is the difference between a class variable and an instance variable?",
+      "options": [
+        "There is no difference",
+        "Class variables are shared by all instances; instance variables belong to one specific object",
+        "Instance variables are faster",
+        "Class variables can only hold numbers"
+      ],
+      "correct_index": 1,
+      "explanation": "A class variable is defined in the class body and is shared by all objects created from that class. An instance variable is set with self.x = ... inside a method and belongs only to that specific object."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "How do you access a class variable called 'count' from inside an instance method?",
+      "options": ["count", "self.class.count", "ClassName.count", "classvar.count"],
+      "correct_index": 2,
+      "explanation": "Use ClassName.count (e.g. Car.count). While you can also use self.count to read it, using the class name makes it clear you are modifying the shared class variable, not creating a new instance variable."
+    }
+  ],
+  "completion_message": "You have completed the OOP module! You now understand classes, objects, inheritance, and more — that is a huge milestone!"
+}

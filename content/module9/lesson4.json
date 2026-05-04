@@ -1,0 +1,100 @@
+{
+  "id": "module9_lesson4",
+  "module_id": "module9",
+  "module_title": "Modules and Libraries",
+  "module_number": 9,
+  "lesson_number": 4,
+  "title": "The datetime Module",
+  "subtitle": "Work with dates, times, and time differences",
+  "estimated_minutes": 15,
+  "prerequisites": ["module9_lesson3"],
+  "learning_objectives": [
+    "Get today's date and the current time",
+    "Create specific date and datetime objects",
+    "Calculate the difference between two dates",
+    "Format dates as readable strings with strftime"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Getting Today's Date and Time",
+        "content": "The <code>datetime</code> module has a <code>datetime</code> class and a <code>date</code> class. Use <code>date.today()</code> for today's date, and <code>datetime.now()</code> for the full current date and time.",
+        "code_example": "from datetime import date, datetime\n\n# Today's date\ntoday = date.today()\nprint(today)\nprint(type(today))\n\n# Current date and time\nnow = datetime.now()\nprint(now)\nprint(now.year, now.month, now.day)\nprint(now.hour, now.minute, now.second)",
+        "code_output": "2026-05-03 (or your current date)\n<class 'datetime.date'>\n2026-05-03 14:30:15.123456 (varies)\n2026 5 3\n14 30 15"
+      },
+      {
+        "heading": "Date Arithmetic and Formatting",
+        "content": "Subtract two dates to get a <code>timedelta</code> object that tells you how many days apart they are. Use <code>strftime()</code> to format a date as a readable string.",
+        "code_example": "from datetime import date, timedelta\n\n# Date arithmetic\nbirthday = date(2000, 6, 15)\ntoday = date.today()\nage_days = (today - birthday).days\nprint(f\"Days since birthday: {age_days}\")\n\n# Add days to a date\nfuture = today + timedelta(days=30)\nprint(\"30 days from today:\", future)\n\n# Format as readable string\nformatted = today.strftime(\"%B %d, %Y\")\nprint(formatted)  # e.g. May 03, 2026",
+        "code_output": "Days since birthday: 9454 (varies)\n30 days from today: 2026-06-02 (varies)\nMay 03, 2026 (varies)"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Days Until New Year",
+      "prompt": "Calculate how many days until January 1st, 2027. Print: 'Days until 2027: X'. (Note: this will vary depending on today's date.)",
+      "starter_code": "from datetime import date\n\ntoday = date.today()\nnew_year = date(2027, 1, 1)\n\n# Calculate the difference and print\n",
+      "solution": "from datetime import date\n\ntoday = date.today()\nnew_year = date(2027, 1, 1)\n\ndays_left = (new_year - today).days\nprint(\"Days until 2027:\", days_left)",
+      "hints": [
+        "Subtract two dates: (new_year - today).days",
+        "The .days attribute gives you the number of days",
+        "Print with f'Days until 2027: {days_left}'"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Days until 2027:", "message": "Output contains: Days until 2027:"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Format Today's Date",
+      "prompt": "Print today's date in the format: 'Today is: Weekday, Month DD YYYY' — for example: 'Today is: Saturday, May 03 2026'. Use strftime with %A for weekday, %B for month name, %d for day, %Y for year.",
+      "starter_code": "from datetime import date\n\ntoday = date.today()\n# Format and print the date\n",
+      "solution": "from datetime import date\n\ntoday = date.today()\nformatted = today.strftime(\"%A, %B %d %Y\")\nprint(\"Today is:\", formatted)",
+      "hints": [
+        "today.strftime(format_string) formats the date",
+        "%A = full weekday, %B = full month name, %d = day, %Y = year",
+        "print('Today is:', today.strftime('%A, %B %d %Y'))"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Today is:", "message": "Output contains: Today is:"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does (date2 - date1).days give you?",
+      "options": [
+        "The number of months between the dates",
+        "The number of days between the two dates",
+        "The year of date2",
+        "A TypeError"
+      ],
+      "correct_index": 1,
+      "explanation": "Subtracting two date objects gives a timedelta object. Accessing .days on the timedelta gives you the difference in days between the two dates."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What does strftime() do?",
+      "options": [
+        "Parses a string into a date",
+        "Formats a date object as a readable string",
+        "Adds days to a date",
+        "Returns the current time"
+      ],
+      "correct_index": 1,
+      "explanation": "strftime (string format time) converts a date or datetime object into a formatted string. You pass a format pattern like '%B %d, %Y' and get back a string like 'May 03, 2026'."
+    }
+  ],
+  "completion_message": "You can now work with dates and times — very useful for real applications!"
+}

@@ -1,0 +1,100 @@
+{
+  "id": "module10_lesson2",
+  "module_id": "module10",
+  "module_title": "Practical Projects",
+  "module_number": 10,
+  "lesson_number": 2,
+  "title": "Simple Calculator",
+  "subtitle": "Build a calculator using functions and error handling",
+  "estimated_minutes": 25,
+  "prerequisites": ["module10_lesson1"],
+  "learning_objectives": [
+    "Write a function for each arithmetic operation",
+    "Use a dictionary to map operator symbols to functions",
+    "Handle division by zero and invalid input with try/except",
+    "Build a program that loops until the user exits"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Individual Operation Functions",
+        "content": "Start by writing a separate function for each operation. This keeps each piece small, easy to understand, and easy to test. Each function takes two numbers and returns the result.",
+        "code_example": "def add(a, b):       return a + b\ndef subtract(a, b):  return a - b\ndef multiply(a, b):  return a * b\n\ndef divide(a, b):\n    if b == 0:\n        raise ValueError(\"Cannot divide by zero\")\n    return a / b\n\nprint(add(10, 5))       # 15\nprint(subtract(10, 5))  # 5\nprint(multiply(3, 7))   # 21\nprint(divide(20, 4))    # 5.0",
+        "code_output": "15\n5\n21\n5.0"
+      },
+      {
+        "heading": "Using a Dictionary to Select Operations",
+        "content": "Instead of a long if/elif chain, store the functions in a dictionary keyed by the operator symbol. This is cleaner and easier to extend.",
+        "code_example": "def add(a, b):      return a + b\ndef subtract(a, b): return a - b\ndef multiply(a, b): return a * b\ndef divide(a, b):\n    if b == 0: raise ValueError(\"Cannot divide by zero\")\n    return a / b\n\noperations = {\n    '+': add,\n    '-': subtract,\n    '*': multiply,\n    '/': divide\n}\n\n# Look up and call the function\nop = '+'\nresult = operations[op](8, 3)\nprint(f\"8 {op} 3 = {result}\")\n\nop = '*'\nresult = operations[op](4, 7)\nprint(f\"4 {op} 7 = {result}\")",
+        "code_output": "8 + 3 = 11\n4 * 7 = 28"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Calculator Functions",
+      "prompt": "Write all four calculator functions: add, subtract, multiply, divide. For divide, raise ValueError if b is 0. Test: add(10,5), subtract(10,5), multiply(4,6), divide(20,5) and print each result.",
+      "starter_code": "def add(a, b):\n    pass\n\ndef subtract(a, b):\n    pass\n\ndef multiply(a, b):\n    pass\n\ndef divide(a, b):\n    pass\n\nprint(add(10, 5))\nprint(subtract(10, 5))\nprint(multiply(4, 6))\nprint(divide(20, 5))\n",
+      "solution": "def add(a, b):\n    return a + b\n\ndef subtract(a, b):\n    return a - b\n\ndef multiply(a, b):\n    return a * b\n\ndef divide(a, b):\n    if b == 0:\n        raise ValueError(\"Cannot divide by zero\")\n    return a / b\n\nprint(add(10, 5))\nprint(subtract(10, 5))\nprint(multiply(4, 6))\nprint(divide(20, 5))",
+      "hints": [
+        "add: return a + b",
+        "subtract: return a - b",
+        "multiply: return a * b",
+        "divide: check if b == 0 first, then return a / b"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "15", "message": "add(10, 5) = 15"},
+        {"type": "stdout_contains", "value": "24", "message": "multiply(4, 6) = 24"},
+        {"type": "stdout_contains", "value": "4.0", "message": "divide(20, 5) = 4.0"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Dict-Based Calculation",
+      "prompt": "Create an operations dict mapping '+', '-', '*', '/' to the four functions. Write a calculate(a, op, b) function that looks up op in the dict and calls the function. Handle missing operators with KeyError. Print calculate(15, '+', 3), calculate(15, '/', 3), calculate(15, '%', 3) (catches KeyError).",
+      "starter_code": "def add(a, b): return a + b\ndef subtract(a, b): return a - b\ndef multiply(a, b): return a * b\ndef divide(a, b):\n    if b == 0: raise ValueError(\"Cannot divide by zero\")\n    return a / b\n\noperations = {'+': add, '-': subtract, '*': multiply, '/': divide}\n\ndef calculate(a, op, b):\n    # Look up op in operations, call it, handle KeyError\n    pass\n\nprint(calculate(15, '+', 3))\nprint(calculate(15, '/', 3))\nprint(calculate(15, '%', 3))\n",
+      "solution": "def add(a, b): return a + b\ndef subtract(a, b): return a - b\ndef multiply(a, b): return a * b\ndef divide(a, b):\n    if b == 0: raise ValueError(\"Cannot divide by zero\")\n    return a / b\n\noperations = {'+': add, '-': subtract, '*': multiply, '/': divide}\n\ndef calculate(a, op, b):\n    try:\n        return operations[op](a, b)\n    except KeyError:\n        return f\"Unknown operator: {op}\"\n\nprint(calculate(15, '+', 3))\nprint(calculate(15, '/', 3))\nprint(calculate(15, '%', 3))",
+      "hints": [
+        "try: return operations[op](a, b)",
+        "except KeyError: return f'Unknown operator: {op}'",
+        "The dict lookup will raise KeyError for unknown operators"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "18", "message": "15 + 3 = 18"},
+        {"type": "stdout_contains", "value": "5.0", "message": "15 / 3 = 5.0"},
+        {"type": "stdout_contains", "value": "Unknown operator", "message": "Unknown operator handled"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "Why store functions as dictionary values instead of using a long if/elif chain?",
+      "options": [
+        "Dictionaries are faster",
+        "It is cleaner, shorter, and easier to add new operations later",
+        "if/elif cannot handle math operations",
+        "Functions cannot be stored in lists or dicts"
+      ],
+      "correct_index": 1,
+      "explanation": "Storing functions in a dict is a common Python pattern called a 'dispatch table'. It makes the code cleaner (no 8-line if/elif chain), and adding a new operation is just adding one line to the dict."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What exception should you raise when someone tries to divide by zero?",
+      "options": ["ValueError", "ZeroDivisionError", "TypeError", "ArithmeticError"],
+      "correct_index": 1,
+      "explanation": "ZeroDivisionError is the standard Python exception for division by zero. You could also raise ValueError, but ZeroDivisionError is more descriptive and is what Python itself raises naturally."
+    }
+  ],
+  "completion_message": "You built a real calculator! Notice how using functions made each piece simple and testable."
+}

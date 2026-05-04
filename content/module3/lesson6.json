@@ -1,0 +1,124 @@
+{
+  "id": "module3_lesson6",
+  "module_id": "module3",
+  "module_title": "Control Flow",
+  "module_number": 3,
+  "lesson_number": 6,
+  "title": "for Loops",
+  "subtitle": "Iterate over sequences one item at a time",
+  "estimated_minutes": 18,
+  "prerequisites": ["module3_lesson5"],
+  "learning_objectives": [
+    "Write a for loop that iterates over a string or list",
+    "Use enumerate() to access both the index and value",
+    "Explain the difference between for and while loops"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "for Loop Syntax: Iterating Over a Sequence",
+        "content": "A <code>for</code> loop visits each item in a sequence one at a time. You choose a variable name (commonly <code>item</code>, <code>char</code>, or <code>num</code>), and Python assigns each element to it in turn. Unlike a <code>while</code> loop, you don't need to manage a counter — Python handles it automatically.<br><br>You can iterate over any <strong>iterable</strong>: strings, lists, tuples, and more.",
+        "code_example": "# Iterating over a string\nfor char in \"hello\":\n    print(char)\n\nprint(\"---\")\n\n# Iterating over a list\nfor item in [10, 20, 30]:\n    print(item)",
+        "code_output": "h\ne\nl\nl\no\n---\n10\n20\n30",
+        "warning": "Infinite loops will freeze your browser! Always make sure your loop condition will eventually become False."
+      },
+      {
+        "heading": "Iterating Over Lists",
+        "content": "Lists are the most common thing to iterate with a <code>for</code> loop. Each element is visited once, in order. You'll learn much more about lists in Module 4 — for now, just notice how naturally <code>for</code> handles them.",
+        "code_example": "fruits = [\"apple\", \"banana\", \"cherry\"]\n\nfor fruit in fruits:\n    print(\"I like\", fruit)\n\nprint(\"Total fruits:\", len(fruits))",
+        "code_output": "I like apple\nI like banana\nI like cherry\nTotal fruits: 3"
+      },
+      {
+        "heading": "enumerate(): Index and Value Together",
+        "content": "<code>enumerate()</code> wraps an iterable and yields both the <strong>index</strong> (position, starting at 0) and the <strong>value</strong> at each step. Use it when you need to know where you are in the sequence as well as what the current item is.<br><br>The syntax unpacks two values: <code>for i, value in enumerate(iterable):</code>",
+        "code_example": "word = \"Python\"\n\nfor i, char in enumerate(word):\n    print(i, \"->\", char)\n\n# You can start the index at 1 if you prefer\nfor i, char in enumerate(word, start=1):\n    print(i, char)",
+        "code_output": "0 -> P\n1 -> y\n2 -> t\n3 -> h\n4 -> o\n5 -> n\n1 P\n2 y\n3 t\n4 h\n5 o\n6 n"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Character Printer",
+      "prompt": "Use a <code>for</code> loop to print each character of the string <code>\"code\"</code> on its own line.",
+      "starter_code": "# Write your for loop below\n",
+      "solution": "for char in \"code\":\n    print(char)",
+      "hints": [
+        "Use: for char in \"code\":",
+        "Inside the loop, just print(char)"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "c", "message": "Output should contain 'c'"},
+        {"type": "stdout_contains", "value": "e", "message": "Output should contain 'e'"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Shopping List",
+      "prompt": "Given <code>items = [\"milk\", \"eggs\", \"bread\"]</code>, use a <code>for</code> loop to print each item prefixed with <code>\"- \"</code>. For example: <code>- milk</code>\n\nNote: print(\"-\", item) adds a space, giving '- milk'. That is the expected output here.",
+      "starter_code": "items = [\"milk\", \"eggs\", \"bread\"]\n\n# Write your for loop below\n",
+      "solution": "items = [\"milk\", \"eggs\", \"bread\"]\n\nfor item in items:\n    print(\"-\", item)",
+      "hints": [
+        "Use: for item in items:",
+        "print(\"-\", item) will print a dash followed by the item"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "milk", "message": "Output should contain 'milk'"},
+        {"type": "stdout_contains", "value": "bread", "message": "Output should contain 'bread'"}
+      ]
+    },
+    {
+      "id": "ex3",
+      "order": 3,
+      "type": "code_run",
+      "title": "Numbered List with enumerate",
+      "prompt": "Use <code>enumerate()</code> to print each item in <code>[\"red\", \"green\", \"blue\"]</code> with its position starting at 1. Output should look like:<br><code>1. red</code><br><code>2. green</code><br><code>3. blue</code>\n\nNote: This exercise uses str() and + to format the output (e.g. str(i) + \". \" + color). These are covered in Module 2 — the hint will show you exactly how to write it if you need it.",
+      "starter_code": "colors = [\"red\", \"green\", \"blue\"]\n\n# Use enumerate with start=1\n",
+      "solution": "colors = [\"red\", \"green\", \"blue\"]\n\nfor i, color in enumerate(colors, start=1):\n    print(str(i) + \". \" + color)",
+      "hints": [
+        "Use: for i, color in enumerate(colors, start=1):",
+        "You can combine the index and color with: str(i) + \". \" + color"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "1.", "message": "Output should start numbering at 1"},
+        {"type": "stdout_contains", "value": "green", "message": "Output should contain 'green'"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does the for loop variable (e.g. 'char' in 'for char in word') represent?",
+      "options": [
+        "The length of the sequence",
+        "The current item from the sequence on each iteration",
+        "The index position of the current item",
+        "A copy of the entire sequence"
+      ],
+      "correct_index": 1,
+      "explanation": "On each iteration, Python assigns the next item from the sequence to the loop variable. So 'char' holds one character at a time when iterating over a string."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What does enumerate() add to a regular for loop?",
+      "options": [
+        "It makes the loop run faster",
+        "It provides both the index and the value on each iteration",
+        "It converts every item to a string",
+        "It prevents infinite loops"
+      ],
+      "correct_index": 1,
+      "explanation": "enumerate() wraps an iterable and yields a (index, value) pair on each iteration. This lets you access both the position and the item without maintaining a separate counter variable."
+    }
+  ],
+  "completion_message": "Great job! for loops are one of the most-used features in Python. You can iterate over strings, lists, and almost anything else. Next, you'll learn about range() — the perfect companion for for loops."
+}

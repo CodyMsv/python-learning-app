@@ -1,0 +1,118 @@
+{
+  "id": "module5_lesson4",
+  "module_id": "module5",
+  "module_title": "Functions",
+  "module_number": 5,
+  "lesson_number": 4,
+  "title": "Default Parameters and Keyword Arguments",
+  "subtitle": "Make function calls more flexible with defaults and named arguments",
+  "estimated_minutes": 15,
+  "prerequisites": ["module4_lesson8"],
+  "learning_objectives": [
+    "Define a function with a default parameter value",
+    "Call a function omitting an argument to use its default",
+    "Override a default value by providing an argument",
+    "Use keyword arguments to pass values by name in any order",
+    "Explain why default parameters must come after non-default parameters"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Default Parameter Values",
+        "content": "You can give a parameter a <strong>default value</strong> by writing <code>parameter=value</code> in the function definition. If the caller does not supply that argument, Python uses the default. If the caller does supply a value, the supplied value overrides the default.<br><br>A key rule: parameters with defaults must appear <em>after</em> all parameters without defaults.",
+        "code_example": "def greet(name, greeting=\"Hello\"):\n    print(greeting + \", \" + name + \"!\")\n\ngreet(\"Alice\")            # uses default greeting\ngreet(\"Alice\", \"Hi\")     # overrides default\ngreet(\"Bob\", \"Hey\")      # another override",
+        "code_output": "Hello, Alice!\nHi, Alice!\nHey, Bob!",
+        "warning": "Never use a mutable value (like a list or dict) as a default parameter — Python creates it once and reuses the same object across all calls. Use None as the default and create the list inside the function instead."
+      },
+      {
+        "heading": "Keyword Arguments",
+        "content": "Normally arguments are matched to parameters by <em>position</em>. With <strong>keyword arguments</strong>, you use the parameter name explicitly when calling the function: <code>func(param=value)</code>. This lets you pass arguments in any order and makes calls easier to read.",
+        "code_example": "def describe(name, age, city):\n    print(name + \" is \" + str(age) + \" from \" + city)\n\n# Positional call — order matters\ndescribe(\"Alice\", 30, \"Paris\")\n\n# Keyword call — order doesn't matter\ndescribe(city=\"Tokyo\", name=\"Bob\", age=25)",
+        "code_output": "Alice is 30 from Paris\nBob is 25 from Tokyo"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Power Function with Default Exponent",
+      "prompt": "Define a function called <code>power</code> that takes a parameter <code>base</code> and a parameter <code>exp</code> with a default value of <code>2</code>. It should return <code>base ** exp</code>.<br>Call it as <code>power(3)</code> (uses default) and <code>power(2, 10)</code> (overrides default). Print both results.",
+      "starter_code": "# Define power(base, exp=2) and call it twice\n",
+      "solution": "def power(base, exp=2):\n    return base ** exp\n\nprint(power(3))\nprint(power(2, 10))",
+      "hints": [
+        "def power(base, exp=2): — exp has a default of 2",
+        "return base ** exp",
+        "power(3) should print 9; power(2, 10) should print 1024"
+      ],
+      "tests": [
+        {
+          "type": "function_exists",
+          "function_name": "power",
+          "message": "Function power is defined"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "9",
+          "message": "Output contains 9 (power(3) with default exp=2)"
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Order a Drink",
+      "prompt": "Define a function called <code>order_drink</code> with parameters <code>drink</code> and <code>size</code> (default <code>\"medium\"</code>). It should print: <code>Ordering a [size] [drink].</code><br>Call it once using a keyword argument for <code>size</code> and once using the default.",
+      "starter_code": "# Define order_drink(drink, size=\"medium\") and call it twice\n",
+      "solution": "def order_drink(drink, size=\"medium\"):\n    print(\"Ordering a \" + size + \" \" + drink + \".\")\n\norder_drink(\"coffee\", size=\"large\")\norder_drink(\"tea\")",
+      "hints": [
+        "def order_drink(drink, size=\"medium\"):",
+        "Use a keyword argument for the first call: order_drink(\"coffee\", size=\"large\")",
+        "Second call omits size so the default is used: order_drink(\"tea\")"
+      ],
+      "tests": [
+        {
+          "type": "function_exists",
+          "function_name": "order_drink",
+          "message": "Function order_drink is defined"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "Ordering a",
+          "message": "Output contains Ordering a"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "Which function definition is valid Python?",
+      "options": [
+        "def connect(host, port=80):",
+        "def connect(host=80, port):",
+        "def connect(=80, port):",
+        "def connect(host, port default 80):"
+      ],
+      "correct_index": 0,
+      "explanation": "Parameters with default values must come after parameters without defaults. Option A is correct. Option B would cause a SyntaxError because a non-default parameter (port) follows a default parameter (host=80)."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What is printed by: def show(a, b=5): print(a + b)\nshow(b=3, a=10)",
+      "options": [
+        "13",
+        "15",
+        "8",
+        "Error"
+      ],
+      "correct_index": 0,
+      "explanation": "Keyword arguments let you pass values by name in any order. a=10 and b=3, so a + b = 13."
+    }
+  ],
+  "completion_message": "Fantastic! Default parameters and keyword arguments give callers the flexibility to use your functions with sensible defaults while still being able to customize behavior when needed."
+}

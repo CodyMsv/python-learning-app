@@ -1,0 +1,123 @@
+{
+  "id": "module5_lesson5",
+  "module_id": "module5",
+  "module_title": "Functions",
+  "module_number": 5,
+  "lesson_number": 5,
+  "title": "*args and **kwargs",
+  "subtitle": "Write functions that accept any number of arguments",
+  "estimated_minutes": 15,
+  "prerequisites": ["module4_lesson8"],
+  "learning_objectives": [
+    "Use *args to collect an arbitrary number of positional arguments as a tuple",
+    "Iterate over *args inside a function",
+    "Use **kwargs to collect an arbitrary number of keyword arguments as a dictionary",
+    "Iterate over **kwargs using .items()",
+    "Define a function that uses both *args and **kwargs together"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "*args — Variable Positional Arguments",
+        "content": "Prefixing a parameter name with <code>*</code> tells Python to collect all extra positional arguments into a <strong>tuple</strong> and assign it to that parameter. By convention the parameter is named <code>args</code>, but any name works.<br><br>This is useful when you don't know in advance how many arguments a caller will supply.",
+        "code_example": "def add_all(*numbers):\n    total = 0\n    for n in numbers:\n        total += n\n    return total\n\nprint(add_all(1, 2, 3))        # 6\nprint(add_all(10, 20, 30, 40)) # 100",
+        "code_output": "6\n100"
+      },
+      {
+        "heading": "**kwargs — Variable Keyword Arguments",
+        "content": "Prefixing a parameter name with <code>**</code> collects all extra keyword arguments into a <strong>dictionary</strong>. The keys are the argument names and the values are the supplied values. By convention the parameter is named <code>kwargs</code>.<br><br>Use <code>.items()</code> to loop over both key and value.",
+        "code_example": "def show_info(**details):\n    for key, value in details.items():\n        print(key + \": \" + str(value))\n\nshow_info(name=\"Alice\", age=30, city=\"London\")",
+        "code_output": "name: Alice\nage: 30\ncity: London"
+      },
+      {
+        "heading": "Using *args and **kwargs Together",
+        "content": "You can combine both in one function. The order must be: regular parameters, then <code>*args</code>, then keyword-only parameters, then <code>**kwargs</code>.",
+        "code_example": "def log_event(event, *tags, **metadata):\n    print(\"Event:\", event)\n    print(\"Tags:\", tags)\n    print(\"Metadata:\", metadata)\n\nlog_event(\"login\", \"auth\", \"user\", user=\"alice\", ip=\"127.0.0.1\")",
+        "code_output": "Event: login\nTags: ('auth', 'user')\nMetadata: {'user': 'alice', 'ip': '127.0.0.1'}"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Sum Any Numbers",
+      "prompt": "Define a function called <code>total</code> that uses <code>*args</code> to accept any number of numbers and <strong>returns</strong> their sum. Print <code>total(1, 2, 3, 4, 5)</code>.",
+      "starter_code": "# Define total(*args) that returns the sum of all arguments\n# Print total(1, 2, 3, 4, 5)\n",
+      "solution": "def total(*args):\n    result = 0\n    for n in args:\n        result += n\n    return result\n\nprint(total(1, 2, 3, 4, 5))",
+      "hints": [
+        "def total(*args): — the * collects all positional arguments into a tuple",
+        "Use a for loop: for n in args: result += n",
+        "Return result at the end"
+      ],
+      "tests": [
+        {
+          "type": "function_exists",
+          "function_name": "total",
+          "message": "Function total is defined"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "15",
+          "message": "Output contains 15"
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Print a Profile",
+      "prompt": "Define a function called <code>profile</code> that uses <code>**kwargs</code> to accept any keyword arguments and prints each key-value pair as <code>key: value</code>. Call it with at least three keyword arguments such as <code>name</code>, <code>age</code>, and <code>city</code>.",
+      "starter_code": "# Define profile(**kwargs) and call it with name, age, and city\n",
+      "solution": "def profile(**kwargs):\n    for key, value in kwargs.items():\n        print(key + \": \" + str(value))\n\nprofile(name=\"Alice\", age=28, city=\"Paris\")",
+      "hints": [
+        "def profile(**kwargs): — ** collects all keyword arguments into a dict",
+        "Use: for key, value in kwargs.items():",
+        "Print with: print(key + \": \" + str(value))"
+      ],
+      "tests": [
+        {
+          "type": "function_exists",
+          "function_name": "profile",
+          "message": "Function profile is defined"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "name:",
+          "message": "Output contains name:"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What type does *args produce inside the function?",
+      "options": [
+        "A tuple",
+        "A list",
+        "A dictionary",
+        "A set"
+      ],
+      "correct_index": 0,
+      "explanation": "*args collects extra positional arguments into a tuple, not a list. You can iterate over it but you cannot append to it."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What type does **kwargs produce inside the function?",
+      "options": [
+        "A dictionary",
+        "A tuple",
+        "A list of tuples",
+        "A set"
+      ],
+      "correct_index": 0,
+      "explanation": "**kwargs collects extra keyword arguments into a dictionary where each argument name is a key and the supplied value is the corresponding value."
+    }
+  ],
+  "completion_message": "Great job! *args and **kwargs make your functions extremely flexible. You can now write functions that adapt to however many arguments a caller decides to pass."
+}

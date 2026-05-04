@@ -1,0 +1,101 @@
+{
+  "id": "module6_lesson4",
+  "module_id": "module6",
+  "module_title": "Strings and Files",
+  "module_number": 6,
+  "lesson_number": 4,
+  "title": "Dictionary Comprehensions",
+  "subtitle": "Build dictionaries in one expressive line",
+  "estimated_minutes": 15,
+  "prerequisites": ["module5_lesson8"],
+  "learning_objectives": [
+    "Write a dictionary comprehension using {key: value for item in iterable}",
+    "Build a word-length dictionary from a list of strings",
+    "Filter a dictionary with an if condition inside a comprehension",
+    "Use zip() to pair two lists and build a dictionary from them"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Dictionary Comprehension Syntax",
+        "content": "Just as list comprehensions create lists, <strong>dictionary comprehensions</strong> create dictionaries. The syntax is similar but uses curly braces and requires both a key and a value separated by a colon:<br><br><code>{key_expr: value_expr for item in iterable}</code><br><br>You can also add an <code>if</code> condition at the end to keep only certain items.",
+        "code_example": "# Map each word to its length\nwords = [\"cat\", \"elephant\", \"ox\"]\nlengths = {word: len(word) for word in words}\nprint(lengths)\n\n# Square each number (number -> square)\nsquares = {n: n ** 2 for n in range(1, 6)}\nprint(squares)\n\n# Filter: keep only entries where value > 3\nlong_words = {word: len(word) for word in words if len(word) > 3}\nprint(long_words)",
+        "code_output": "{'cat': 3, 'elephant': 8, 'ox': 2}\n{1: 1, 2: 4, 3: 9, 4: 16, 5: 25}\n{'elephant': 8}"
+      },
+      {
+        "heading": "Iterating Existing Dicts and Using zip()",
+        "content": "When you already have a dictionary, you can iterate its <code>.items()</code> method (which yields <code>(key, value)</code> tuples) to transform or filter it in a comprehension.<br><br><code>zip()</code> lets you pair two separate lists together element by element. It returns an iterator of tuples, which you can unpack directly in a comprehension to build a dictionary from two lists.",
+        "code_example": "# Filter an existing dict — keep only positive values\nscores = {\"Alice\": 95, \"Bob\": -5, \"Carol\": 82, \"Dan\": -12}\npassing = {k: v for k, v in scores.items() if v > 0}\nprint(passing)\n\n# zip() two lists into a dict\nkeys = [\"name\", \"age\", \"city\"]\nvalues = [\"Alice\", 30, \"Paris\"]\nperson = {k: v for k, v in zip(keys, values)}\nprint(person)",
+        "code_output": "{'Alice': 95, 'Carol': 82}\n{'name': 'Alice', 'age': 30, 'city': 'Paris'}",
+        "note": "zip() stops when the shorter list runs out, so always make sure your two lists are the same length when building a dictionary this way."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Word Lengths Dictionary",
+      "prompt": "Given <code>fruits = [\"apple\", \"fig\", \"banana\", \"kiwi\"]</code>, use a dictionary comprehension to create a variable called <code>word_lengths</code> that maps each fruit name to its character length. Print the result.",
+      "starter_code": "fruits = [\"apple\", \"fig\", \"banana\", \"kiwi\"]\n# Create a variable called word_lengths using a dictionary comprehension\n# It should map each fruit name to its character length\n# Print word_lengths",
+      "solution": "fruits = [\"apple\", \"fig\", \"banana\", \"kiwi\"]\nword_lengths = {fruit: len(fruit) for fruit in fruits}\nprint(word_lengths)",
+      "hints": [
+        "The key is the fruit name and the value is len(fruit).",
+        "Syntax: {fruit: len(fruit) for fruit in fruits}"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Your code should run without errors."},
+        {"type": "stdout_contains", "value": "'apple': 5", "message": "apple should map to 5."},
+        {"type": "stdout_contains", "value": "'banana': 6", "message": "banana should map to 6."}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Pair Two Lists with zip()",
+      "prompt": "You have two lists: <code>countries = [\"France\", \"Japan\", \"Brazil\"]</code> and <code>capitals = [\"Paris\", \"Tokyo\", \"Brasilia\"]</code>. Use <code>zip()</code> inside a dictionary comprehension to create a variable called <code>capital_map</code> that maps each country to its capital. Print it.",
+      "starter_code": "countries = [\"France\", \"Japan\", \"Brazil\"]\ncapitals = [\"Paris\", \"Tokyo\", \"Brasilia\"]\n# Create a variable called capital_map using a dictionary comprehension with zip()\n# It should map each country to its capital\n# Print capital_map",
+      "solution": "countries = [\"France\", \"Japan\", \"Brazil\"]\ncapitals = [\"Paris\", \"Tokyo\", \"Brasilia\"]\ncapital_map = {country: capital for country, capital in zip(countries, capitals)}\nprint(capital_map)",
+      "hints": [
+        "Use zip(countries, capitals) to pair them up.",
+        "Unpack each pair as: for country, capital in zip(...)"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Your code should run without errors."},
+        {"type": "stdout_contains", "value": "'France': 'Paris'", "message": "France should map to Paris."},
+        {"type": "stdout_contains", "value": "'Japan': 'Tokyo'", "message": "Japan should map to Tokyo."}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does {k: v for k, v in d.items() if v > 0} do when applied to a dictionary d?",
+      "options": [
+        "It removes all keys from d that have negative values in place",
+        "It creates a new dictionary containing only the key-value pairs where the value is greater than 0",
+        "It raises a ValueError if any value is negative",
+        "It creates a list of keys whose values are positive"
+      ],
+      "correct_index": 1,
+      "explanation": "The comprehension iterates over d.items() and the if clause filters out pairs where v is not greater than 0, producing a brand new dictionary."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What does zip([1, 2, 3], [\"a\", \"b\", \"c\"]) produce when iterated?",
+      "options": [
+        "[(1, \"a\"), (2, \"b\"), (3, \"c\")]",
+        "[1, \"a\", 2, \"b\", 3, \"c\"]",
+        "{1: \"a\", 2: \"b\", 3: \"c\"}",
+        "[[1, 2, 3], [\"a\", \"b\", \"c\"]]"
+      ],
+      "correct_index": 0,
+      "explanation": "zip() pairs elements at the same position together, producing tuples (1, 'a'), (2, 'b'), (3, 'c')."
+    }
+  ],
+  "completion_message": "Superb! Dictionary comprehensions make data transformation elegant. Combined with zip(), you can build lookup tables from two lists in a single readable line."
+}

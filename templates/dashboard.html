@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% block title %}Your Progress — Learn Python{% endblock %}
+
+{% block content %}
+<div class="dashboard-page">
+  <div class="dashboard-header">
+    <h1>📊 Your Progress</h1>
+    <p class="dashboard-subtitle">Track your Python learning journey</p>
+  </div>
+
+  <!-- Stats cards -->
+  <div class="stats-grid">
+    <div class="stat-card stat-card--xp">
+      <div class="stat-card-icon">⭐</div>
+      <div class="stat-card-value">{{ total_xp }}</div>
+      <div class="stat-card-label">Total XP</div>
+    </div>
+    <div class="stat-card stat-card--level">
+      <div class="stat-card-icon">🏆</div>
+      <div class="stat-card-value">{{ level }}</div>
+      <div class="stat-card-label">Level</div>
+    </div>
+    <div class="stat-card stat-card--lessons">
+      <div class="stat-card-icon">✅</div>
+      <div class="stat-card-value">{{ total_done }}</div>
+      <div class="stat-card-label">Lessons Done</div>
+    </div>
+    <div class="stat-card stat-card--streak">
+      <div class="stat-card-icon">🔥</div>
+      <div class="stat-card-value">{{ streak }}</div>
+      <div class="stat-card-label">Day Streak</div>
+    </div>
+  </div>
+
+  <div class="dashboard-body">
+    <!-- Left column -->
+    <div class="dashboard-left">
+      <!-- Module progress -->
+      <div class="dashboard-card">
+        <h2 class="dashboard-card-title">Module Progress</h2>
+        {% for mod in curriculum.modules %}
+        <div class="module-progress-row">
+          <div class="module-progress-info">
+            <span class="module-progress-icon">{{ mod.icon }}</span>
+            <span class="module-progress-name">{{ mod.number }}. {{ mod.title }}</span>
+            <span class="module-progress-count">{{ mod.lessons_done }}/{{ mod.lessons|length }}</span>
+          </div>
+          <div class="module-progress-bar-wrap">
+            <div class="module-progress-bar">
+              <div class="module-progress-fill" style="width: {{ mod.progress_pct }}%"></div>
+            </div>
+            <span class="module-progress-pct">{{ mod.progress_pct }}%</span>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Recent activity -->
+      <div class="dashboard-card">
+        <h2 class="dashboard-card-title">Recent Activity</h2>
+        {% if recent %}
+        <div class="recent-list">
+          {% for row in recent %}
+          <div class="recent-item">
+            <span class="recent-icon">✅</span>
+            <span class="recent-lesson">{{ row.lesson_id | replace('_', ' ') | title }}</span>
+            <span class="recent-time">{{ row.completed_at[:10] if row.completed_at else '' }}</span>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <p class="empty-state">No completed lessons yet. <a href="/">Start learning!</a></p>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Right column -->
+    <div class="dashboard-right">
+      <!-- Badges -->
+      {% set all_badge_defs = {
+        'first_lesson': {'name': 'First Steps', 'icon': '🎯', 'desc': 'Complete your first lesson'},
+        'module1_complete': {'name': 'Python Starter', 'icon': '🐍', 'desc': 'Complete Module 1'},
+        'module2_complete': {'name': 'Data Wrangler', 'icon': '📦', 'desc': 'Complete Module 2'},
+        'module3_complete': {'name': 'Flow Master', 'icon': '🔀', 'desc': 'Complete Module 3'},
+        'module4_complete': {'name': 'Collector', 'icon': '🗂️', 'desc': 'Complete Module 4'},
+        'module5_complete': {'name': 'Functionista', 'icon': '⚙️', 'desc': 'Complete Module 5'},
+        'module6_complete': {'name': 'String Wizard', 'icon': '✍️', 'desc': 'Complete Module 6'},
+        'module7_complete': {'name': 'Error Handler', 'icon': '🛡️', 'desc': 'Complete Module 7'},
+        'module8_complete': {'name': 'Object Master', 'icon': '🏗️', 'desc': 'Complete Module 8'},
+        'module9_complete': {'name': 'Library Pro', 'icon': '📚', 'desc': 'Complete Module 9'},
+        'graduate': {'name': 'Python Graduate', 'icon': '🎓', 'desc': 'Complete all modules'},
+        'xp_500': {'name': 'XP Hunter', 'icon': '⭐', 'desc': 'Earn 500 XP'},
+        'xp_1000': {'name': 'XP Champion', 'icon': '🌟', 'desc': 'Earn 1000 XP'}
+      } %}
+      <div class="dashboard-card">
+        <h2 class="dashboard-card-title">Badges</h2>
+        <div class="badges-grid">
+          {% for badge_id, bdef in all_badge_defs.items() %}
+          <div class="badge-item {% if badge_id in badges %}badge-item--earned{% else %}badge-item--locked{% endif %}"
+               title="{{ bdef.name }}: {{ bdef.desc }}">
+            <span class="badge-icon">{{ bdef.icon }}</span>
+            <span class="badge-name">{{ bdef.name }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Continue learning -->
+      <div class="dashboard-card">
+        <h2 class="dashboard-card-title">Continue Learning</h2>
+        {% if total_done < total_lessons %}
+        <p class="continue-text">You've completed <strong>{{ total_done }}</strong> of <strong>{{ total_lessons }}</strong> lessons.</p>
+        <a href="/" class="btn btn-primary btn-block">Go to Course →</a>
+        {% else %}
+        <div class="course-complete">
+          <div class="course-complete-icon">🎓</div>
+          <p>You've completed the entire course! Congratulations!</p>
+          <a href="/" class="btn btn-secondary btn-block">Review Course</a>
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Reset -->
+      <div class="dashboard-card dashboard-card--danger">
+        <h2 class="dashboard-card-title">Reset Progress</h2>
+        <p class="danger-text">This will delete all your progress, XP, and badges. This cannot be undone.</p>
+        <button class="btn btn-danger" onclick="confirmReset()">Reset All Progress</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+async function confirmReset() {
+  if (!confirm('Are you sure you want to reset ALL progress? This cannot be undone.')) return;
+  const res = await fetch('/api/reset', { method: 'POST', headers: {'Content-Type':'application/json'}, body: '{}' });
+  if (res.ok) { window.location.reload(); }
+}
+</script>
+{% endblock %}

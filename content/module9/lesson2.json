@@ -1,0 +1,92 @@
+{
+  "id": "module9_lesson2",
+  "module_id": "module9",
+  "module_title": "Modules and Libraries",
+  "module_number": 9,
+  "lesson_number": 2,
+  "title": "The math Module",
+  "subtitle": "Powers, roots, rounding, and mathematical constants",
+  "estimated_minutes": 12,
+  "prerequisites": ["module9_lesson1"],
+  "learning_objectives": [
+    "Use math.pi and math.e constants",
+    "Calculate square roots, powers, and logarithms",
+    "Round numbers with ceil, floor, and round",
+    "Use math.factorial and math.gcd"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Constants and Basic Functions",
+        "content": "The <code>math</code> module provides mathematical constants and functions. The most used constants are <code>math.pi</code> (π = 3.14159...) and <code>math.e</code> (Euler's number = 2.71828...).",
+        "code_example": "import math\n\n# Constants\nprint(math.pi)   # 3.141592653589793\nprint(math.e)    # 2.718281828459045\n\n# Powers and roots\nprint(math.sqrt(25))   # 5.0  (square root)\nprint(math.pow(2, 8))  # 256.0 (2^8)\n\n# Absolute value\nprint(math.fabs(-7.5)) # 7.5",
+        "code_output": "3.141592653589793\n2.718281828459045\n5.0\n256.0\n7.5",
+        "note": "math.pow() and math.sqrt() always return a float (e.g. math.pow(2, 8) gives 256.0, not 256). If you need a whole number, wrap it with int(): int(math.pow(2, 8)) gives 256."
+      },
+      {
+        "heading": "Rounding and Combinatorics",
+        "content": "<code>math.ceil(x)</code> rounds UP to the nearest integer. <code>math.floor(x)</code> rounds DOWN. <code>math.factorial(n)</code> computes n! (n factorial). <code>math.gcd(a, b)</code> finds the greatest common divisor.",
+        "code_example": "import math\n\n# Rounding\nprint(math.ceil(3.1))   # 4 (rounds UP)\nprint(math.floor(3.9))  # 3 (rounds DOWN)\nprint(round(3.567, 2))  # 3.57 (built-in round)\n\n# Factorial: n! = n * (n-1) * ... * 1\nprint(math.factorial(5))  # 120\n\n# GCD: largest number that divides both\nprint(math.gcd(12, 18))  # 6",
+        "code_output": "4\n3\n3.57\n120\n6"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Circle Calculations",
+      "prompt": "Calculate the area and circumference of a circle with radius 7. Area = pi * r^2. Circumference = 2 * pi * r. Print both rounded to 2 decimal places.",
+      "starter_code": "import math\n\nradius = 7\n# Calculate and print area and circumference\n",
+      "solution": "import math\n\nradius = 7\narea = math.pi * radius ** 2\ncircumference = 2 * math.pi * radius\nprint(round(area, 2))\nprint(round(circumference, 2))",
+      "hints": [
+        "area = math.pi * radius ** 2",
+        "circumference = 2 * math.pi * radius",
+        "Use round(value, 2) to round to 2 decimal places"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "153.94", "message": "Area is approximately 153.94"},
+        {"type": "stdout_contains", "value": "43.98", "message": "Circumference is approximately 43.98"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Factorial and GCD",
+      "prompt": "Print the factorial of 7 and the GCD of 48 and 18.",
+      "starter_code": "import math\n\n# Print factorial(7)\n# Print gcd(48, 18)\n",
+      "solution": "import math\n\nprint(math.factorial(7))\nprint(math.gcd(48, 18))",
+      "hints": [
+        "math.factorial(7) calculates 7!",
+        "math.gcd(48, 18) finds the greatest common divisor"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "5040", "message": "factorial(7) = 5040"},
+        {"type": "stdout_contains", "value": "6", "message": "gcd(48, 18) = 6"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does math.ceil(4.1) return?",
+      "options": ["4", "5", "4.1", "4.0"],
+      "correct_index": 1,
+      "explanation": "ceil() rounds UP to the nearest integer. 4.1 rounds up to 5. Even 4.0001 would round up to 5 with ceil()."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What does math.factorial(4) equal?",
+      "options": ["8", "12", "16", "24"],
+      "correct_index": 3,
+      "explanation": "4! = 4 × 3 × 2 × 1 = 24. Factorial multiplies all integers from 1 up to n."
+    }
+  ],
+  "completion_message": "You can now solve maths problems with Python's math module!"
+}

@@ -1,0 +1,157 @@
+{
+  "id": "module4_lesson2",
+  "module_id": "module4",
+  "module_title": "Collections",
+  "module_number": 4,
+  "lesson_number": 2,
+  "title": "List Operations",
+  "subtitle": "Add, remove, and combine list elements",
+  "estimated_minutes": 18,
+  "prerequisites": ["module3_lesson8"],
+  "learning_objectives": [
+    "Add items to a list with .append() and .insert()",
+    "Remove items using .remove(), .pop(), and del",
+    "Concatenate two lists with the + operator",
+    "Use len() to track list size after modifications"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Adding Elements",
+        "content": "<code>.append(item)</code> adds a single item to the <strong>end</strong> of the list. <code>.insert(index, item)</code> inserts an item at any position, shifting existing elements to the right. Both methods modify the list in place and return <code>None</code>.",
+        "code_example": "fruits = [\"apple\", \"banana\"]\n\n# append adds to the end\nfruits.append(\"cherry\")\nprint(fruits)          # ['apple', 'banana', 'cherry']\n\n# insert at a specific position\nfruits.insert(1, \"mango\")\nprint(fruits)          # ['apple', 'mango', 'banana', 'cherry']",
+        "code_output": "['apple', 'banana', 'cherry']\n['apple', 'mango', 'banana', 'cherry']"
+      },
+      {
+        "heading": "Removing Elements",
+        "content": "Python gives you three ways to remove items. <code>.remove(item)</code> finds and removes the <strong>first</strong> occurrence of the given value. <code>.pop()</code> removes and <strong>returns</strong> the last item; <code>.pop(i)</code> removes and returns the item at index <code>i</code>. <code>del list[i]</code> deletes the item at index <code>i</code> without returning it.",
+        "code_example": "nums = [10, 20, 30, 20, 40]\n\n# remove first occurrence of 20\nnums.remove(20)\nprint(nums)       # [10, 30, 20, 40]\n\n# pop returns and removes last item\nlast = nums.pop()\nprint(last)       # 40\nprint(nums)       # [10, 30, 20]\n\n# del removes by index\ndel nums[0]\nprint(nums)       # [30, 20]",
+        "code_output": "[10, 30, 20, 40]\n40\n[10, 30, 20]\n[30, 20]"
+      },
+      {
+        "heading": "Length and Concatenation",
+        "content": "<code>len(list)</code> returns the current number of elements — useful after modifications. The <code>+</code> operator <strong>concatenates</strong> two lists into a new list without changing the originals. You can also use <code>+=</code> to extend a list in place.",
+        "code_example": "a = [1, 2, 3]\nb = [4, 5, 6]\n\n# Concatenation produces a new list\nc = a + b\nprint(c)         # [1, 2, 3, 4, 5, 6]\n\n# Original lists unchanged\nprint(a)         # [1, 2, 3]\n\n# len after modifications\na.append(99)\nprint(len(a))    # 4",
+        "code_output": "[1, 2, 3, 4, 5, 6]\n[1, 2, 3]\n4"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Grow a List",
+      "prompt": "Start with <code>tasks = [\"write code\", \"test code\"]</code>. Append <code>\"deploy code\"</code> to the end, then insert <code>\"review code\"</code> at index <code>1</code>. Print the final list.",
+      "starter_code": "tasks = [\"write code\", \"test code\"]\n\n# Append \"deploy code\"\n\n# Insert \"review code\" at index 1\n\nprint(tasks)",
+      "solution": "tasks = [\"write code\", \"test code\"]\ntasks.append(\"deploy code\")\ntasks.insert(1, \"review code\")\nprint(tasks)",
+      "hints": [
+        "tasks.append(\"deploy code\") adds to the end",
+        "tasks.insert(1, \"review code\") places the item at position 1"
+      ],
+      "tests": [
+        {
+          "type": "runs_without_error",
+          "message": "Your code should run without any errors"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "deploy code",
+          "message": "The output should contain 'deploy code'"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "review code",
+          "message": "The output should contain 'review code'"
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Remove and Pop",
+      "prompt": "Given <code>colors = [\"red\", \"blue\", \"green\", \"blue\"]</code>, remove the first occurrence of <code>\"blue\"</code> using <code>.remove()</code>, then pop the last element and print the popped value. Finally, print the remaining list.",
+      "starter_code": "colors = [\"red\", \"blue\", \"green\", \"blue\"]\n\n# Remove first occurrence of \"blue\"\n\n# Pop the last element and print it\n\n# Print the remaining list\n",
+      "solution": "colors = [\"red\", \"blue\", \"green\", \"blue\"]\ncolors.remove(\"blue\")\npopped = colors.pop()\nprint(popped)\nprint(colors)",
+      "hints": [
+        "colors.remove(\"blue\") removes only the first 'blue'",
+        "colors.pop() removes the last item and returns it — store it in a variable and print it"
+      ],
+      "tests": [
+        {
+          "type": "runs_without_error",
+          "message": "Your code should run without any errors"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "blue",
+          "message": "The popped value 'blue' should be printed"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "red",
+          "message": "The remaining list should still contain 'red'"
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "order": 3,
+      "type": "code_run",
+      "title": "Combine Lists",
+      "prompt": "Create two lists: <code>evens = [2, 4, 6]</code> and <code>odds = [1, 3, 5]</code>. Concatenate them into a new list called <code>numbers</code> and print it. Then print the length of <code>numbers</code>.",
+      "starter_code": "evens = [2, 4, 6]\nodds = [1, 3, 5]\n\n# Concatenate into numbers\n\n# Print numbers\n\n# Print the length of numbers\n",
+      "solution": "evens = [2, 4, 6]\nodds = [1, 3, 5]\nnumbers = evens + odds\nprint(numbers)\nprint(len(numbers))",
+      "hints": [
+        "Use the + operator: numbers = evens + odds",
+        "len(numbers) returns the total count of elements"
+      ],
+      "tests": [
+        {
+          "type": "runs_without_error",
+          "message": "Your code should run without any errors"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "6",
+          "message": "The output should contain 6 (the length of the combined list)"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "2",
+          "message": "The combined list should contain the value 2"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does <code>my_list.pop(0)</code> do?",
+      "options": [
+        "Removes the last element and returns it",
+        "Removes the first element and returns it",
+        "Removes the element with value 0",
+        "Returns the first element without removing it"
+      ],
+      "correct_index": 1,
+      "explanation": ".pop(i) removes and returns the element at the given index. pop(0) therefore removes and returns the element at index 0 — the first element."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "After running <code>a = [1, 2]; b = [3, 4]; c = a + b</code>, what is the value of <code>a</code>?",
+      "options": [
+        "[1, 2, 3, 4]",
+        "[1, 2]",
+        "[3, 4]",
+        "None"
+      ],
+      "correct_index": 1,
+      "explanation": "The + operator creates a new list and assigns it to c. The original lists a and b are not modified, so a remains [1, 2]."
+    }
+  ],
+  "completion_message": "Excellent! You can now add, remove, and combine list elements. These mutation methods are some of the most frequently used tools in Python programming."
+}

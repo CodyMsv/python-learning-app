@@ -1,0 +1,101 @@
+{
+  "id": "module10_lesson3",
+  "module_id": "module10",
+  "module_title": "Practical Projects",
+  "module_number": 10,
+  "lesson_number": 3,
+  "title": "To-Do List App",
+  "subtitle": "Build a task manager using a list of dictionaries",
+  "estimated_minutes": 25,
+  "prerequisites": ["module10_lesson2"],
+  "learning_objectives": [
+    "Store tasks as a list of dictionaries",
+    "Add, complete, and remove tasks with functions",
+    "Filter and display tasks by status",
+    "Build a working command-driven app"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Representing Tasks as Dictionaries",
+        "content": "Each task is a dictionary with text (the task description) and done (a boolean). A to-do list is a list of these dicts. This structure is easy to extend — you could add priority, due date, etc.",
+        "code_example": "# A to-do list: list of task dicts\ntasks = [\n    {\"text\": \"Buy groceries\",  \"done\": False},\n    {\"text\": \"Read a book\",     \"done\": True},\n    {\"text\": \"Write some code\", \"done\": False}\n]\n\n# Display all tasks\nfor i, task in enumerate(tasks):\n    status = \"✓\" if task[\"done\"] else \"○\"\n    print(f\"{i+1}. [{status}] {task['text']}\")",
+        "code_output": "1. [○] Buy groceries\n2. [✓] Read a book\n3. [○] Write some code"
+      },
+      {
+        "heading": "Add, Complete, and Remove Functions",
+        "content": "Build the core operations as functions that take the task list and modify it. This keeps the code clean and testable.",
+        "code_example": "tasks = []\n\ndef add_task(tasks, text):\n    tasks.append({\"text\": text, \"done\": False})\n\ndef complete_task(tasks, index):\n    if 0 <= index < len(tasks):\n        tasks[index][\"done\"] = True\n    else:\n        print(\"Invalid task number\")\n\ndef remove_task(tasks, index):\n    if 0 <= index < len(tasks):\n        removed = tasks.pop(index)\n        print(f'Removed: {removed[\"text\"]}')\n\nadd_task(tasks, \"Learn Python\")\nadd_task(tasks, \"Build a project\")\ncomplete_task(tasks, 0)\n\nfor i, t in enumerate(tasks):\n    status = \"✓\" if t[\"done\"] else \"○\"\n    print(f\"{i+1}. [{status}] {t['text']}\")",
+        "code_output": "1. [✓] Learn Python\n2. [○] Build a project"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Build the Core Functions",
+      "prompt": "Write add_task(tasks, text) and show_tasks(tasks). add_task appends {\"text\": text, \"done\": False}. show_tasks prints each task as '1. [○] text' or '1. [✓] text'. Add 3 tasks and show them.",
+      "starter_code": "tasks = []\n\ndef add_task(tasks, text):\n    pass\n\ndef show_tasks(tasks):\n    pass\n\nadd_task(tasks, \"Learn Python\")\nadd_task(tasks, \"Build a project\")\nadd_task(tasks, \"Share your code\")\nshow_tasks(tasks)\n",
+      "solution": "tasks = []\n\ndef add_task(tasks, text):\n    tasks.append({\"text\": text, \"done\": False})\n\ndef show_tasks(tasks):\n    for i, task in enumerate(tasks):\n        status = \"✓\" if task[\"done\"] else \"○\"\n        print(f\"{i+1}. [{status}] {task['text']}\")\n\nadd_task(tasks, \"Learn Python\")\nadd_task(tasks, \"Build a project\")\nadd_task(tasks, \"Share your code\")\nshow_tasks(tasks)",
+      "hints": [
+        "add_task: tasks.append({\"text\": text, \"done\": False})",
+        "show_tasks: use enumerate and check task[\"done\"]",
+        "status = '✓' if task['done'] else '○'"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Learn Python", "message": "Output contains: Learn Python"},
+        {"type": "stdout_contains", "value": "[○]", "message": "Tasks show as not done [○]"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Complete and Count",
+      "prompt": "Add a complete_task(tasks, index) function that marks tasks[index][\"done\"] = True. Add count_done(tasks) that returns the number of completed tasks. Add 3 tasks, complete index 0 and 2, print count_done result.",
+      "starter_code": "tasks = []\n\ndef add_task(tasks, text):\n    tasks.append({\"text\": text, \"done\": False})\n\ndef complete_task(tasks, index):\n    pass\n\ndef count_done(tasks):\n    pass\n\nadd_task(tasks, \"Task A\")\nadd_task(tasks, \"Task B\")\nadd_task(tasks, \"Task C\")\ncomplete_task(tasks, 0)\ncomplete_task(tasks, 2)\nprint(count_done(tasks))\n",
+      "solution": "tasks = []\n\ndef add_task(tasks, text):\n    tasks.append({\"text\": text, \"done\": False})\n\ndef complete_task(tasks, index):\n    if 0 <= index < len(tasks):\n        tasks[index][\"done\"] = True\n\ndef count_done(tasks):\n    return sum(1 for t in tasks if t[\"done\"])\n\nadd_task(tasks, \"Task A\")\nadd_task(tasks, \"Task B\")\nadd_task(tasks, \"Task C\")\ncomplete_task(tasks, 0)\ncomplete_task(tasks, 2)\nprint(count_done(tasks))",
+      "hints": [
+        "complete_task: tasks[index]['done'] = True (check bounds first)",
+        "count_done: use sum() with a generator: sum(1 for t in tasks if t['done'])",
+        "Or: return len([t for t in tasks if t['done']])"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "2", "message": "count_done returns 2 (tasks 0 and 2 are done)"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "Why use a list of dictionaries (instead of two separate lists) to store tasks?",
+      "options": [
+        "Lists of dicts use less memory",
+        "It keeps all data for one task together, making it easier to manage",
+        "Dictionaries are faster to iterate",
+        "Python requires it"
+      ],
+      "correct_index": 1,
+      "explanation": "Keeping task text and done status together in one dict means they always stay in sync. With separate lists, you'd have to be careful to update both at the same index — easy to make mistakes."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What does sum(1 for t in tasks if t['done']) count?",
+      "options": [
+        "The total number of tasks",
+        "The number of completed tasks (where done is True)",
+        "The length of all task text combined",
+        "The number of undone tasks"
+      ],
+      "correct_index": 1,
+      "explanation": "This is a generator expression with a condition. For each task t where t['done'] is True, it yields 1. sum() adds those 1s together, giving the count of completed tasks."
+    }
+  ],
+  "completion_message": "Excellent! You built a functional to-do list app. This is the kind of real program people use every day!"
+}

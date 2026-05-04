@@ -1,0 +1,103 @@
+{
+  "id": "module8_lesson4",
+  "module_id": "module8",
+  "module_title": "Object-Oriented Programming",
+  "module_number": 8,
+  "lesson_number": 4,
+  "title": "Instance Methods",
+  "subtitle": "Give your objects the ability to do things",
+  "estimated_minutes": 18,
+  "prerequisites": ["module8_lesson3"],
+  "learning_objectives": [
+    "Define instance methods inside a class",
+    "Call methods on an object using dot notation",
+    "Use self inside methods to access the object's attributes",
+    "Write methods that modify attributes and return values"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Defining and Calling Instance Methods",
+        "content": "A <strong>method</strong> is a function defined inside a class. Like <code>__init__</code>, every method takes <code>self</code> as its first parameter. You call a method using dot notation: <code>object.method()</code>.",
+        "code_example": "class Dog:\n    def __init__(self, name):\n        self.name = name\n\n    def bark(self):\n        print(self.name, \"says: Woof!\")\n\n    def sit(self):\n        print(self.name, \"sits down.\")\n\nrex = Dog(\"Rex\")\nrex.bark()  # Rex says: Woof!\nrex.sit()   # Rex sits down.",
+        "code_output": "Rex says: Woof!\nRex sits down."
+      },
+      {
+        "heading": "Methods That Take Arguments",
+        "content": "Methods can take extra arguments just like regular functions. <code>self</code> is always the first parameter, but you can add as many more as you need.",
+        "code_example": "class BankAccount:\n    def __init__(self, owner, balance=0):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        print(f\"Deposited ${amount}. Balance: ${self.balance}\")\n\n    def withdraw(self, amount):\n        if amount > self.balance:\n            print(\"Insufficient funds!\")\n        else:\n            self.balance -= amount\n            print(f\"Withdrew ${amount}. Balance: ${self.balance}\")\n\nacc = BankAccount(\"Alice\", 100)\nacc.deposit(50)\nacc.withdraw(30)\nacc.withdraw(200)",
+        "code_output": "Deposited $50. Balance: $150\nWithdrew $30. Balance: $120\nInsufficient funds!"
+      },
+      {
+        "heading": "Methods That Return Values",
+        "content": "Methods can <code>return</code> values just like regular functions.",
+        "code_example": "class Rectangle:\n    def __init__(self, width, height):\n        self.width = width\n        self.height = height\n\n    def area(self):\n        return self.width * self.height\n\n    def perimeter(self):\n        return 2 * (self.width + self.height)\n\nrect = Rectangle(5, 3)\nprint(\"Area:\", rect.area())\nprint(\"Perimeter:\", rect.perimeter())",
+        "code_output": "Area: 15\nPerimeter: 16"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Add Methods to a Car",
+      "prompt": "Define a Car class with __init__(make, model) and two methods: describe() that prints 'Make: X, Model: Y', and honk() that prints 'Beep beep!'. Create a car and call both methods.",
+      "starter_code": "class Car:\n    def __init__(self, make, model):\n        self.make = make\n        self.model = model\n\n    def describe(self):\n        # Print: Make: X, Model: Y\n        pass\n\n    def honk(self):\n        # Print: Beep beep!\n        pass\n\nmy_car = Car(\"Honda\", \"Civic\")\nmy_car.describe()\nmy_car.honk()\n",
+      "solution": "class Car:\n    def __init__(self, make, model):\n        self.make = make\n        self.model = model\n\n    def describe(self):\n        print(f\"Make: {self.make}, Model: {self.model}\")\n\n    def honk(self):\n        print(\"Beep beep!\")\n\nmy_car = Car(\"Honda\", \"Civic\")\nmy_car.describe()\nmy_car.honk()",
+      "hints": [
+        "In describe(): print(f'Make: {self.make}, Model: {self.model}')",
+        "In honk(): print('Beep beep!')",
+        "Call with my_car.describe() and my_car.honk()"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Make: Honda, Model: Civic", "message": "Output contains: Make: Honda, Model: Civic"},
+        {"type": "stdout_contains", "value": "Beep beep!", "message": "Output contains: Beep beep!"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Counter Class",
+      "prompt": "Write a Counter class with __init__ (sets self.count = 0), increment() (adds 1), reset() (sets to 0), and get_count() that returns self.count. Create c = Counter(), increment 3 times, print count, reset, print count again.",
+      "starter_code": "class Counter:\n    def __init__(self):\n        self.count = 0\n\n    def increment(self):\n        pass\n\n    def reset(self):\n        pass\n\n    def get_count(self):\n        pass\n\nc = Counter()\nc.increment()\nc.increment()\nc.increment()\nprint(c.get_count())\nc.reset()\nprint(c.get_count())\n",
+      "solution": "class Counter:\n    def __init__(self):\n        self.count = 0\n\n    def increment(self):\n        self.count += 1\n\n    def reset(self):\n        self.count = 0\n\n    def get_count(self):\n        return self.count\n\nc = Counter()\nc.increment()\nc.increment()\nc.increment()\nprint(c.get_count())\nc.reset()\nprint(c.get_count())",
+      "hints": [
+        "increment: self.count += 1",
+        "reset: self.count = 0",
+        "get_count: return self.count"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "3", "message": "Count after 3 increments is 3"},
+        {"type": "stdout_contains", "value": "0", "message": "Count after reset is 0"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "Why does every instance method have 'self' as its first parameter?",
+      "options": [
+        "It is just a tradition with no meaning",
+        "It lets the method access and modify the object's own attributes",
+        "It speeds up the program",
+        "Python requires it for syntax but ignores it"
+      ],
+      "correct_index": 1,
+      "explanation": "self is a reference to the specific object the method is being called on. Without self, the method would have no way to access the object's data like self.name or self.balance."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "How do you call a method called 'bark' on a Dog object called 'rex'?",
+      "options": ["Dog.bark(rex)", "bark(rex)", "rex.bark()", "rex->bark()"],
+      "correct_index": 2,
+      "explanation": "Use dot notation: rex.bark(). Python automatically passes rex as the 'self' argument, so you don't need to pass anything."
+    }
+  ],
+  "completion_message": "Brilliant! Your objects now have behaviour. This is the real power of OOP!"
+}

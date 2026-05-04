@@ -1,0 +1,97 @@
+{
+  "id": "module10_lesson6",
+  "module_id": "module10",
+  "module_title": "Practical Projects",
+  "module_number": 10,
+  "lesson_number": 6,
+  "title": "Simple Contact Book",
+  "subtitle": "Build a searchable contact manager using a dictionary",
+  "estimated_minutes": 20,
+  "prerequisites": ["module10_lesson5"],
+  "learning_objectives": [
+    "Store contacts in a dictionary keyed by name",
+    "Add, search, update, and delete contacts",
+    "Search case-insensitively for partial matches",
+    "Display contacts in a formatted way"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Designing the Contact Book",
+        "content": "Use a dictionary where each key is a contact name and each value is a nested dict with the contact's details. This makes lookups by name instant.",
+        "code_example": "contacts = {\n    \"Alice\": {\"phone\": \"555-0100\", \"email\": \"alice@example.com\"},\n    \"Bob\":   {\"phone\": \"555-0200\", \"email\": \"bob@example.com\"}\n}\n\n# Look up Alice\nprint(contacts[\"Alice\"][\"phone\"])\n\n# Add a new contact\ncontacts[\"Carol\"] = {\"phone\": \"555-0300\", \"email\": \"carol@example.com\"}\n\nprint(len(contacts), \"contacts\")",
+        "code_output": "555-0100\n3 contacts"
+      },
+      {
+        "heading": "Search and Display Functions",
+        "content": "A good contact book lets you search by partial name, case-insensitively. Use list comprehension to filter matching names.",
+        "code_example": "contacts = {\n    \"Alice Smith\":  {\"phone\": \"555-0100\"},\n    \"Alice Johnson\": {\"phone\": \"555-0200\"},\n    \"Bob Brown\":    {\"phone\": \"555-0300\"}\n}\n\ndef search(contacts, query):\n    query = query.lower()\n    results = {name: info for name, info in contacts.items()\n               if query in name.lower()}\n    return results\n\nfound = search(contacts, \"alice\")\nfor name, info in found.items():\n    print(f\"{name}: {info['phone']}\")",
+        "code_output": "Alice Smith: 555-0100\nAlice Johnson: 555-0200"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Add and Display Contacts",
+      "prompt": "Write add_contact(book, name, phone, email) that adds to the book dict, and show_all(book) that prints each contact's name, phone, and email. Add 3 contacts and show them all.",
+      "starter_code": "contacts = {}\n\ndef add_contact(book, name, phone, email):\n    pass\n\ndef show_all(book):\n    pass\n\nadd_contact(contacts, \"Alice\", \"555-0100\", \"alice@example.com\")\nadd_contact(contacts, \"Bob\", \"555-0200\", \"bob@example.com\")\nadd_contact(contacts, \"Carol\", \"555-0300\", \"carol@example.com\")\nshow_all(contacts)\n",
+      "solution": "contacts = {}\n\ndef add_contact(book, name, phone, email):\n    book[name] = {\"phone\": phone, \"email\": email}\n\ndef show_all(book):\n    for name, info in book.items():\n        print(f\"{name}: {info['phone']} | {info['email']}\")\n\nadd_contact(contacts, \"Alice\", \"555-0100\", \"alice@example.com\")\nadd_contact(contacts, \"Bob\", \"555-0200\", \"bob@example.com\")\nadd_contact(contacts, \"Carol\", \"555-0300\", \"carol@example.com\")\nshow_all(contacts)",
+      "hints": [
+        "add_contact: book[name] = {\"phone\": phone, \"email\": email}",
+        "show_all: for name, info in book.items():",
+        "print(f\"{name}: {info['phone']} | {info['email']}\")"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Alice", "message": "Output contains: Alice"},
+        {"type": "stdout_contains", "value": "555-0100", "message": "Output contains phone number"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Search Contacts",
+      "prompt": "Write search_contacts(book, query) that returns a list of names containing the query string (case-insensitive). Test searching 'al' in a book with Alice, Albert, Bob. Print the results.",
+      "starter_code": "def search_contacts(book, query):\n    # Return list of names matching query (case-insensitive)\n    pass\n\ncontacts = {\n    \"Alice\": {\"phone\": \"555-0100\"},\n    \"Albert\": {\"phone\": \"555-0150\"},\n    \"Bob\": {\"phone\": \"555-0200\"}\n}\n\nresults = search_contacts(contacts, \"al\")\nprint(results)\n",
+      "solution": "def search_contacts(book, query):\n    query = query.lower()\n    return [name for name in book if query in name.lower()]\n\ncontacts = {\n    \"Alice\": {\"phone\": \"555-0100\"},\n    \"Albert\": {\"phone\": \"555-0150\"},\n    \"Bob\": {\"phone\": \"555-0200\"}\n}\n\nresults = search_contacts(contacts, \"al\")\nprint(results)",
+      "hints": [
+        "Convert query to lowercase: query = query.lower()",
+        "Use a list comprehension to filter",
+        "[name for name in book if query in name.lower()]"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Alice", "message": "Alice matches 'al'"},
+        {"type": "stdout_contains", "value": "Albert", "message": "Albert matches 'al'"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "Why use names as dictionary keys in a contact book?",
+      "options": [
+        "Dictionaries are always faster than lists",
+        "It allows instant lookup by name without looping through all contacts",
+        "List keys are not allowed",
+        "To avoid duplicate entries"
+      ],
+      "correct_index": 1,
+      "explanation": "Dictionary lookups by key are O(1) — instant, regardless of how many contacts there are. A list would require looping through all contacts to find a match, which gets slower as the list grows."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What does 'al' in 'Albert'.lower() evaluate to?",
+      "options": ["False", "True", "Error", "None"],
+      "correct_index": 1,
+      "explanation": "'Albert'.lower() returns 'albert'. 'al' in 'albert' is True because 'al' appears at the beginning of 'albert'. This case-insensitive substring check is a common search pattern."
+    }
+  ],
+  "completion_message": "Great work! A contact book is a real-world application combining many Python concepts."
+}

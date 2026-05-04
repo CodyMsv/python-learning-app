@@ -1,0 +1,95 @@
+{
+  "id": "module9_lesson7",
+  "module_id": "module9",
+  "module_title": "Modules and Libraries",
+  "module_number": 9,
+  "lesson_number": 7,
+  "title": "pip and Third-Party Packages",
+  "subtitle": "Discover Python's enormous ecosystem of ready-made libraries",
+  "estimated_minutes": 12,
+  "prerequisites": ["module9_lesson6"],
+  "learning_objectives": [
+    "Understand what PyPI is and what pip does",
+    "Know how to install a package with pip",
+    "Recognise the most popular Python packages and what they do",
+    "Understand virtual environments conceptually"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "What is pip and PyPI?",
+        "content": "<strong>PyPI</strong> (Python Package Index) is the official online repository for Python packages — over 500,000 free libraries created by the Python community. <strong>pip</strong> is Python's package manager — it downloads and installs packages from PyPI.<br><br>In a terminal, you install a package like this:<br><code>pip install requests</code><br><br>Then in your code: <code>import requests</code>",
+        "code_example": "# After 'pip install requests', you would write:\n# import requests\n# response = requests.get('https://api.github.com')\n# print(response.status_code)  # 200 means OK\n\n# After 'pip install pandas', you would write:\n# import pandas as pd\n# data = pd.read_csv('data.csv')\n# print(data.head())\n\n# We can't use these in the browser, but you'll use them\n# when writing Python on your own computer!\nprint(\"pip makes Python infinitely powerful!\")",
+        "code_output": "pip makes Python infinitely powerful!",
+        "note": "In this browser environment, most third-party packages are not available. But on a real computer, pip install gives you access to hundreds of thousands of tools."
+      },
+      {
+        "heading": "Essential Python Packages to Know",
+        "content": "Here are the most important third-party packages every Python developer should know about:<br><br><strong>requests</strong> — make HTTP web requests (fetch web pages, call APIs)<br><strong>numpy</strong> — fast number crunching and arrays (used in science/ML)<br><strong>pandas</strong> — data analysis with tables (like Excel in Python)<br><strong>matplotlib</strong> — create charts and graphs<br><strong>flask</strong> / <strong>django</strong> — build websites and web APIs<br><strong>pillow</strong> — edit images (resize, crop, filters)<br><strong>pytest</strong> — test your code automatically<br><strong>black</strong> — automatically format your code",
+        "code_example": "# Virtual environments keep project dependencies separate\n# Create one: python3 -m venv myenv\n# Activate it: source myenv/bin/activate (Linux/Mac)\n#              myenv\\Scripts\\activate (Windows)\n# Install packages: pip install requests pandas\n# Save requirements: pip freeze > requirements.txt\n# Install from file: pip install -r requirements.txt\n\nprint(\"Python's ecosystem is enormous!\")\nprint(\"There is almost certainly a package for what you need.\")",
+        "code_output": "Python's ecosystem is enormous!\nThere is almost certainly a package for what you need."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "What You Would Install",
+      "prompt": "Print a list of 4 packages and what they do. Use print() for each one. (This exercises what you learned, not actual pip usage.)",
+      "starter_code": "# Print 4 Python packages and what they do\n# Format: \"package_name: what it does\"\n",
+      "solution": "print(\"requests: makes HTTP web requests\")\nprint(\"pandas: data analysis with tables\")\nprint(\"flask: build web applications\")\nprint(\"pillow: edit and process images\")",
+      "hints": [
+        "The starter code is already correct — just run it!"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "requests", "message": "Output mentions requests"},
+        {"type": "stdout_contains", "value": "pandas", "message": "Output mentions pandas"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Use the Standard Library Instead",
+      "prompt": "Without any pip installs, use the json module (standard library) to convert a Python dict to a JSON string and back. Print both.",
+      "starter_code": "import json\n\nperson = {\"name\": \"Alice\", \"age\": 30, \"city\": \"London\"}\n\n# Convert the person dict to a JSON string and print it\n\n# Parse the JSON string back to a dict and print the \"name\" value\n",
+      "solution": "import json\n\nperson = {\"name\": \"Alice\", \"age\": 30, \"city\": \"London\"}\n\njson_string = json.dumps(person)\nprint(json_string)\n\nparsed = json.loads(json_string)\nprint(parsed[\"name\"])",
+      "hints": [
+        "The starter code is complete — just run it!",
+        "json.dumps() converts dict to string",
+        "json.loads() parses string back to dict"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Alice", "message": "Output contains: Alice"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What is PyPI?",
+      "options": [
+        "A Python IDE",
+        "The official online repository of Python packages",
+        "A Python testing framework",
+        "Python's built-in standard library"
+      ],
+      "correct_index": 1,
+      "explanation": "PyPI (Python Package Index) at pypi.org is the official repository where Python developers publish free, reusable packages. pip downloads packages from PyPI."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "Which package would you use for data analysis with tables (like Excel in Python)?",
+      "options": ["requests", "flask", "pandas", "pillow"],
+      "correct_index": 2,
+      "explanation": "pandas is the go-to package for data analysis. It provides a DataFrame structure (like a spreadsheet table) and tools to read CSV/Excel files, filter data, compute statistics, and much more."
+    }
+  ],
+  "completion_message": "You have completed the Modules and Libraries module! You are ready to use the entire Python ecosystem!"
+}

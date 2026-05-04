@@ -1,0 +1,121 @@
+{
+  "id": "module3_lesson4",
+  "module_id": "module3",
+  "module_title": "Control Flow",
+  "module_number": 3,
+  "lesson_number": 4,
+  "title": "Logical Operators",
+  "subtitle": "Combine conditions with and, or, and not",
+  "estimated_minutes": 15,
+  "prerequisites": ["module3_lesson3"],
+  "learning_objectives": [
+    "Use and to require that both conditions are True",
+    "Use or to require that at least one condition is True",
+    "Use not to reverse a boolean value",
+    "Explain short-circuit evaluation for and and or"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "and: Both Must Be True",
+        "content": "The <code>and</code> operator combines two conditions and returns <code>True</code> only when <strong>both</strong> conditions are <code>True</code>. If the first condition is <code>False</code>, Python immediately returns <code>False</code> without checking the second — this is called <strong>short-circuit evaluation</strong>.",
+        "code_example": "age = 20\nhas_id = True\n\nif age >= 18 and has_id:\n    print(\"Entry allowed.\")\nelse:\n    print(\"Entry denied.\")\n\n# Truth table for 'and'\n# True  and True  -> True\n# True  and False -> False\n# False and True  -> False\n# False and False -> False",
+        "code_output": "Entry allowed."
+      },
+      {
+        "heading": "or: At Least One Must Be True",
+        "content": "The <code>or</code> operator returns <code>True</code> when <strong>at least one</strong> of the conditions is <code>True</code>. It only returns <code>False</code> when both conditions are <code>False</code>. Because of short-circuit evaluation, if the first condition is already <code>True</code>, Python skips the second.",
+        "code_example": "is_member = False\nhas_coupon = True\n\nif is_member or has_coupon:\n    print(\"Discount applied!\")\nelse:\n    print(\"Full price.\")\n\n# Truth table for 'or'\n# True  or True  -> True\n# True  or False -> True\n# False or True  -> True\n# False or False -> False",
+        "code_output": "Discount applied!"
+      },
+      {
+        "heading": "not: Flipping the Boolean",
+        "content": "The <code>not</code> operator reverses a boolean value: <code>not True</code> becomes <code>False</code>, and <code>not False</code> becomes <code>True</code>. It is often used to make conditions read more naturally in English.<br><br>You can also combine all three operators: <code>and</code>, <code>or</code>, and <code>not</code>. Python evaluates <code>not</code> first, then <code>and</code>, then <code>or</code>. Use parentheses to make complex expressions clear.",
+        "code_example": "is_raining = False\n\nif not is_raining:\n    print(\"Leave your umbrella at home.\")\n\n# Combining operators\nage = 25\nhas_license = True\nhas_car = False\n\nif age >= 16 and has_license and (has_car or age >= 21):\n    print(\"You can probably get a ride sorted.\")",
+        "code_output": "Leave your umbrella at home.\nYou can probably get a ride sorted."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Amusement Park Entry",
+      "prompt": "Set <code>height_cm = 140</code> and <code>has_consent = True</code>. Print <code>\"Enjoy the ride!\"</code> if height is at least 120 cm AND the person has consent. Otherwise print <code>\"Sorry, not eligible.\"</code>",
+      "starter_code": "height_cm = 140\nhas_consent = True\n\n# Write your if/else using 'and'\n",
+      "solution": "height_cm = 140\nhas_consent = True\n\nif height_cm >= 120 and has_consent:\n    print(\"Enjoy the ride!\")\nelse:\n    print(\"Sorry, not eligible.\")",
+      "hints": [
+        "Use the 'and' keyword between your two conditions",
+        "has_consent is already a boolean, no need for == True"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Enjoy the ride!", "message": "Both conditions met should print 'Enjoy the ride!'"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Free Shipping Check",
+      "prompt": "Set <code>order_total = 45</code> and <code>is_prime_member = True</code>. Print <code>\"Free shipping!\"</code> if the order total is at least 50 OR the customer is a prime member. Otherwise print <code>\"Shipping fee applies.\"</code>",
+      "starter_code": "order_total = 45\nis_prime_member = True\n\n# Write your if/else using 'or'\n",
+      "solution": "order_total = 45\nis_prime_member = True\n\nif order_total >= 50 or is_prime_member:\n    print(\"Free shipping!\")\nelse:\n    print(\"Shipping fee applies.\")",
+      "hints": [
+        "Use the 'or' keyword between your two conditions",
+        "The order total is 45, which is less than 50 — but the other condition might save it"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Free shipping!", "message": "A prime member should get free shipping regardless of order total"}
+      ]
+    },
+    {
+      "id": "ex3",
+      "order": 3,
+      "type": "code_run",
+      "title": "Umbrella Reminder",
+      "prompt": "Set <code>is_sunny = True</code>. Use <code>not</code> to print <code>\"Take your umbrella!\"</code> if it is NOT sunny. Otherwise print <code>\"No umbrella needed.\"</code>",
+      "starter_code": "is_sunny = True\n\n# Use 'not' in your condition\n",
+      "solution": "is_sunny = True\n\nif not is_sunny:\n    print(\"Take your umbrella!\")\nelse:\n    print(\"No umbrella needed.\")",
+      "hints": [
+        "Place the 'not' keyword directly before the variable: if not is_sunny:",
+        "Since is_sunny is True, 'not is_sunny' is False"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "No umbrella needed.", "message": "When is_sunny is True, output should be 'No umbrella needed.'"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does True and False evaluate to?",
+      "options": [
+        "True",
+        "False",
+        "None",
+        "Error"
+      ],
+      "correct_index": 1,
+      "explanation": "The 'and' operator requires both operands to be True. Since one of them is False, the result is False."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What is short-circuit evaluation for the 'and' operator?",
+      "options": [
+        "Python evaluates both sides no matter what",
+        "If the first condition is False, Python skips checking the second condition",
+        "If the second condition is True, Python ignores the first",
+        "Short-circuit means the code runs faster by skipping all conditions"
+      ],
+      "correct_index": 1,
+      "explanation": "With 'and', if the first condition is already False, the overall result must be False regardless of the second condition — so Python skips evaluating it. This is called short-circuit evaluation."
+    }
+  ],
+  "completion_message": "Excellent! You can now combine conditions using and, or, and not. These operators dramatically reduce the need for deeply nested conditionals. Up next: repeating code automatically with while loops!"
+}

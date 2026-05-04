@@ -1,0 +1,117 @@
+{
+  "id": "module5_lesson1",
+  "module_id": "module5",
+  "module_title": "Functions",
+  "module_number": 5,
+  "lesson_number": 1,
+  "title": "Defining and Calling Functions",
+  "subtitle": "Learn how to create reusable blocks of code with the def keyword",
+  "estimated_minutes": 15,
+  "prerequisites": ["module4_lesson8"],
+  "learning_objectives": [
+    "Use the def keyword to define a function",
+    "Understand the role of parentheses and the colon in a function definition",
+    "Write a properly indented function body",
+    "Understand that functions only run when called",
+    "Explain why functions help avoid repetition and organize code"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "What Is a Function?",
+        "content": "A function is a named, reusable block of code. You define it once and can run it as many times as you like. This avoids copying the same code in multiple places and makes programs easier to read and maintain.<br><br>To define a function in Python you use the <code>def</code> keyword, followed by the function name, a pair of parentheses <code>()</code>, and a colon <code>:</code>. The body of the function must be indented — Python uses indentation to know which lines belong to the function.",
+        "code_example": "def greet():\n    print(\"Hello, World!\")\n\n# The function is now defined but has NOT run yet.\n# Call it by using its name followed by ():\ngreet()",
+        "code_output": "Hello, World!"
+      },
+      {
+        "heading": "Functions Run Only When Called",
+        "content": "Defining a function with <code>def</code> does <em>not</em> execute its body. The code inside only runs when you <strong>call</strong> the function by writing its name with parentheses. You can call the same function many times, which is one of the main benefits — write the logic once, use it everywhere.",
+        "code_example": "def say_goodbye():\n    print(\"Goodbye!\")\n\n# Nothing printed yet — function is defined but not called.\n\nsay_goodbye()   # First call\nsay_goodbye()   # Second call",
+        "code_output": "Goodbye!\nGoodbye!"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Define and Call greet()",
+      "prompt": "Define a function called <code>greet</code> that prints <code>Hello</code>. Then call it.",
+      "starter_code": "# Define a function called greet that prints Hello\n# Then call the function\n",
+      "solution": "def greet():\n    print(\"Hello\")\n\ngreet()",
+      "hints": [
+        "Start with: def greet():",
+        "Indent the print statement inside the function",
+        "After the function definition, call it with greet()"
+      ],
+      "tests": [
+        {
+          "type": "function_exists",
+          "function_name": "greet",
+          "message": "Function greet is defined"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "Hello",
+          "message": "Output contains Hello"
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Define and Call welcome()",
+      "prompt": "Define a function called <code>welcome</code> that prints <code>Welcome to Python!</code>. Call it twice to see the benefit of reuse.",
+      "starter_code": "# Define a function called welcome\n# It should print: Welcome to Python!\n# Call it twice\n",
+      "solution": "def welcome():\n    print(\"Welcome to Python!\")\n\nwelcome()\nwelcome()",
+      "hints": [
+        "Use def welcome(): to start the function",
+        "Put print(\"Welcome to Python!\") inside, indented",
+        "Write welcome() twice after the definition to call it two times"
+      ],
+      "tests": [
+        {
+          "type": "function_exists",
+          "function_name": "welcome",
+          "message": "Function welcome is defined"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "Welcome to Python!",
+          "message": "Output contains Welcome to Python!"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "Which of the following correctly starts a Python function definition?",
+      "options": [
+        "def my_function():",
+        "function my_function():",
+        "define my_function():",
+        "func my_function():"
+      ],
+      "correct_index": 0,
+      "explanation": "Python uses the def keyword, followed by the function name, parentheses, and a colon. The other options use keywords from different languages."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "When does the body of a function execute?",
+      "options": [
+        "Only when the function is called",
+        "As soon as Python reads the def statement",
+        "Only once, when the script starts",
+        "Every time Python encounters a print statement"
+      ],
+      "correct_index": 0,
+      "explanation": "Defining a function with def simply stores the code for later. The body runs only when you explicitly call the function using its name followed by ()."
+    }
+  ],
+  "completion_message": "Great work! You have defined and called your first Python functions. Remember: def creates the function, but parentheses () are what make it run."
+}

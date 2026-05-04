@@ -1,0 +1,117 @@
+{
+  "id": "module2_lesson1",
+  "module_id": "module2",
+  "module_title": "Working with Data Types",
+  "module_number": 2,
+  "lesson_number": 1,
+  "title": "Strings In Depth",
+  "subtitle": "Learn how to create, measure, and access individual characters in strings",
+  "estimated_minutes": 18,
+  "prerequisites": ["module1_lesson5"],
+  "learning_objectives": [
+    "Create strings using single quotes, double quotes, and triple quotes",
+    "Write multiline strings using triple quotes and the \\n escape character",
+    "Measure the length of a string using the len() function",
+    "Access individual characters in a string using positive and negative indexing"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Creating Strings",
+        "content": "A <strong>string</strong> is a sequence of characters wrapped in quotes. Python gives you three ways to create strings.<br><br>Use <strong>single quotes</strong> or <strong>double quotes</strong> for short, one-line strings — they work exactly the same. The only reason to pick one over the other is when your text itself contains a quote character.<br><br>Use <strong>triple quotes</strong> (<code>\"\"\"</code> or <code>'''</code>) when you want a string that spans multiple lines. Everything between the opening and closing triple quotes is included in the string, including line breaks.",
+        "code_example": "# Single and double quotes — identical behavior\ngreeting = 'Hello, world!'\nalso_greeting = \"Hello, world!\"\n\n# Use double quotes when text has an apostrophe\nmessage = \"It's a great day!\"\n\n# Use single quotes when text has double quotes\nquote = 'She said \"wow\"'\n\n# Triple quotes for multiline strings\npoem = \"\"\"Roses are red,\nViolets are blue,\nPython is great,\nAnd so are you!\"\"\"\n\nprint(greeting)\nprint(message)\nprint(poem)",
+        "code_output": "Hello, world!\nIt's a great day!\nRoses are red,\nViolets are blue,\nPython is great,\nAnd so are you!"
+      },
+      {
+        "heading": "String Length and the \\n Escape Character",
+        "content": "The <code>len()</code> function tells you how many characters are in a string. Every character counts — letters, spaces, punctuation, even invisible ones.<br><br>The <strong>newline escape character</strong> <code>\\n</code> is a special two-character sequence that Python treats as a single line-break character. When Python prints <code>\\n</code>, it moves to the next line. You can use <code>\\n</code> inside regular (non-triple-quoted) strings to create multiline output.<br><br>Because <code>\\n</code> counts as <em>one</em> character, <code>len(\"Hi\\nBye\")</code> returns <code>6</code>, not <code>7</code>.",
+        "code_example": "word = \"Python\"\nprint(len(word))       # 6 characters\n\nsentence = \"Hi there!\"\nprint(len(sentence))   # 9 characters (space counts!)\n\n# \\n inside a regular string creates a line break\ntwo_lines = \"Line one\\nLine two\"\nprint(two_lines)\n\n# \\n counts as one character\nprint(len(two_lines))  # 'Line one' (8) + '\\n' (1) + 'Line two' (8) = 17",
+        "code_output": "6\n9\nLine one\nLine two\n17"
+      },
+      {
+        "heading": "Indexing: Accessing Individual Characters",
+        "content": "You can pick out any single character from a string using <strong>indexing</strong>. Write the variable name followed by a number inside square brackets: <code>word[0]</code>.<br><br><strong>Positive indexes</strong> start at <code>0</code> from the left. The first character is always at index <code>0</code>, the second at <code>1</code>, and so on.<br><br><strong>Negative indexes</strong> count from the right. Index <code>-1</code> is always the last character, <code>-2</code> is the second-to-last, and so on. Negative indexing is handy when you want the end of a string without knowing its exact length.<br><br>If you try to use an index that is out of range (e.g. index <code>10</code> on a 6-character string), Python raises an <code>IndexError</code>.",
+        "code_example": "name = \"Python\"\n#        P  y  t  h  o  n\n# index: 0  1  2  3  4  5\n# neg:  -6 -5 -4 -3 -2 -1\n\nprint(name[0])   # First character\nprint(name[1])   # Second character\nprint(name[5])   # Last character (positive index)\nprint(name[-1])  # Last character (negative index)\nprint(name[-2])  # Second-to-last character\nprint(name[-6])  # Same as name[0]",
+        "code_output": "P\ny\nn\nn\no\nP"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Create and Measure a String",
+      "prompt": "Create a variable called `city` and assign it the string `\"New York\"`. Then print the length of the string using `len()`.",
+      "starter_code": "# Create a variable called city and assign the string \"New York\" to it\n\n# Print its length\n",
+      "solution": "city = \"New York\"\nprint(len(city))",
+      "hints": [
+        "Assign the string like this: city = \"New York\"",
+        "Pass the variable to len() and then to print(): print(len(city))"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "8", "message": "Output contains the correct length: 8"},
+        {"type": "variable_equals", "variable": "city", "value": "New York", "message": "Variable city equals 'New York'"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Multiline String with \\n",
+      "prompt": "Create a variable called `address` that contains three lines using `\\n`: `\"123 Main St\"`, `\"Springfield\"`, and `\"USA\"`. Print the variable.",
+      "starter_code": "# Create a variable called address using \\n to separate \"123 Main St\", \"Springfield\", and \"USA\"\n\n# Print the address\n",
+      "solution": "address = \"123 Main St\\nSpringfield\\nUSA\"\nprint(address)",
+      "hints": [
+        "Put \\n between each line inside the string: \"line1\\nline2\\nline3\"",
+        "Make sure all three parts are in one string separated by \\n"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "123 Main St", "message": "Output contains '123 Main St'"},
+        {"type": "stdout_contains", "value": "Springfield", "message": "Output contains 'Springfield'"},
+        {"type": "stdout_contains", "value": "USA", "message": "Output contains 'USA'"}
+      ]
+    },
+    {
+      "id": "ex3",
+      "order": 3,
+      "type": "code_run",
+      "title": "Character Indexing",
+      "prompt": "Given the string `word = \"banana\"`, print the first character, the last character using a negative index, and the third character (index 2).",
+      "starter_code": "word = \"banana\"\n\n# Print the first character\n\n# Print the last character (use a negative index)\n\n# Print the third character (index 2)\n",
+      "solution": "word = \"banana\"\nprint(word[0])\nprint(word[-1])\nprint(word[2])",
+      "hints": [
+        "The first character is at index 0: word[0]",
+        "The last character uses index -1: word[-1]",
+        "The third character is at index 2: word[2]"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "b", "message": "Output contains first character 'b'"},
+        {"type": "stdout_contains", "value": "a", "message": "Output contains last character 'a'"},
+        {"type": "stdout_contains", "value": "n", "message": "Output contains third character 'n'"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does `len(\"hello\\n\")` return?",
+      "options": ["5", "6", "7", "8"],
+      "correct_index": 1,
+      "explanation": "The string contains 5 letters ('h','e','l','l','o') plus the newline character '\\n', which counts as a single character. So the total length is 6."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "Given `s = \"Python\"`, what does `s[-2]` return?",
+      "options": ["P", "t", "o", "n"],
+      "correct_index": 2,
+      "explanation": "Negative indexing counts from the right. Index -1 is 'n', so index -2 is the character before it, which is 'o'."
+    }
+  ],
+  "completion_message": "Great work! You now know how to create strings with different quote styles, use \\n for line breaks, measure strings with len(), and access any character by its index. These skills are the foundation for everything else you will do with text in Python."
+}

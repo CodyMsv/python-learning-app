@@ -1,0 +1,158 @@
+{
+  "id": "module4_lesson6",
+  "module_id": "module4",
+  "module_title": "Collections",
+  "module_number": 4,
+  "lesson_number": 6,
+  "title": "Dictionary Operations",
+  "subtitle": "Iterate, merge, remove, and nest dictionaries",
+  "estimated_minutes": 18,
+  "prerequisites": ["module3_lesson8"],
+  "learning_objectives": [
+    "Access all keys, values, or pairs with .keys(), .values(), and .items()",
+    "Iterate over a dictionary using for loops",
+    "Merge dictionaries with .update()",
+    "Remove a key-value pair with .pop()",
+    "Work with nested dictionaries"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Dictionary Views: keys, values, and items",
+        "content": "<code>dict.keys()</code> returns a view of all keys, <code>dict.values()</code> returns all values, and <code>dict.items()</code> returns all key-value pairs as tuples. These views stay in sync with the dictionary — if you modify the dict, the view reflects the change. You can iterate over any of them directly in a <code>for</code> loop.",
+        "code_example": "person = {\"name\": \"Alice\", \"age\": 30, \"city\": \"Paris\"}\n\nprint(person.keys())\nprint(person.values())\nprint(person.items())\n\n# Iterating keys\nfor key in person.keys():\n    print(key)\n\n# Iterating key-value pairs\nfor k, v in person.items():\n    print(k, \":\", v)",
+        "code_output": "dict_keys(['name', 'age', 'city'])\ndict_values(['Alice', 30, 'Paris'])\ndict_items([('name', 'Alice'), ('age', 30), ('city', 'Paris')])\nname\nage\ncity\nname : Alice\nage : 30\ncity : Paris"
+      },
+      {
+        "heading": "Updating and Removing Entries",
+        "content": "<code>dict.update(other)</code> merges all key-value pairs from <code>other</code> into <code>dict</code>. If a key already exists it is overwritten; new keys are added. <code>dict.pop(key)</code> removes the specified key and returns its value. You can provide a default so no <code>KeyError</code> is raised if the key is absent: <code>dict.pop(key, default)</code>.",
+        "code_example": "settings = {\"theme\": \"dark\", \"font\": \"mono\"}\n\n# update merges another dict in\nsettings.update({\"font\": \"serif\", \"size\": 14})\nprint(settings)\n# 'font' is overwritten, 'size' is new\n\n# pop removes a key and returns its value\nremoved = settings.pop(\"theme\")\nprint(removed)     # dark\nprint(settings)",
+        "code_output": "{'theme': 'dark', 'font': 'serif', 'size': 14}\ndark\n{'font': 'serif', 'size': 14}"
+      },
+      {
+        "heading": "Nested Dictionaries",
+        "content": "A dictionary value can itself be a dictionary, creating <strong>nested</strong> (hierarchical) data structures. This is common for representing real-world objects with sub-properties. Access nested values by chaining square brackets: <code>data[\"outer_key\"][\"inner_key\"]</code>.",
+        "code_example": "company = {\n    \"name\": \"Acme\",\n    \"address\": {\n        \"city\": \"Springfield\",\n        \"zip\": \"12345\"\n    }\n}\n\n# Accessing nested values\nprint(company[\"name\"])                   # Acme\nprint(company[\"address\"][\"city\"])        # Springfield\n\n# Updating a nested value\ncompany[\"address\"][\"zip\"] = \"99999\"\nprint(company[\"address\"][\"zip\"])",
+        "code_output": "Acme\nSpringfield\n99999"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Iterate with items()",
+      "prompt": "Given <code>prices = {\"apple\": 0.5, \"banana\": 0.25, \"cherry\": 1.0}</code>, use a <code>for</code> loop and <code>.items()</code> to print each fruit and its price in the format: <code>apple: 0.5</code>",
+      "starter_code": "prices = {\"apple\": 0.5, \"banana\": 0.25, \"cherry\": 1.0}\n\n# Iterate and print each fruit: price\n",
+      "solution": "prices = {\"apple\": 0.5, \"banana\": 0.25, \"cherry\": 1.0}\nfor fruit, price in prices.items():\n    print(fruit + \": \" + str(price))",
+      "hints": [
+        "for fruit, price in prices.items(): unpacks each tuple automatically",
+        "Use str(price) to convert the float to a string for concatenation, or use an f-string"
+      ],
+      "tests": [
+        {
+          "type": "runs_without_error",
+          "message": "Your code should run without any errors"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "apple",
+          "message": "The output should contain 'apple'"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "banana",
+          "message": "The output should contain 'banana'"
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Merge and Remove",
+      "prompt": "Start with <code>user = {\"name\": \"Bob\", \"role\": \"viewer\"}</code>. Use <code>.update()</code> to merge in <code>{\"role\": \"admin\", \"active\": True}</code>. Then use <code>.pop()</code> to remove <code>\"active\"</code> and print the removed value. Finally, print the dict.",
+      "starter_code": "user = {\"name\": \"Bob\", \"role\": \"viewer\"}\n\n# Merge the new data\n\n# Pop 'active' and print the removed value\n\n# Print the final dict\n",
+      "solution": "user = {\"name\": \"Bob\", \"role\": \"viewer\"}\nuser.update({\"role\": \"admin\", \"active\": True})\nremoved = user.pop(\"active\")\nprint(removed)\nprint(user)",
+      "hints": [
+        "user.update({...}) merges in place",
+        "user.pop(\"active\") removes the key and returns its value"
+      ],
+      "tests": [
+        {
+          "type": "runs_without_error",
+          "message": "Your code should run without any errors"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "True",
+          "message": "The popped value True should be printed"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "admin",
+          "message": "The role should have been updated to admin"
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "order": 3,
+      "type": "code_run",
+      "title": "Nested Dictionary Access",
+      "prompt": "Given the nested dictionary below, print the employee's <code>department</code> and their <code>salary</code> from inside the <code>\"details\"</code> key.\n\n<code>employee = {\"name\": \"Carol\", \"details\": {\"department\": \"Engineering\", \"salary\": 95000}}</code>",
+      "starter_code": "employee = {\"name\": \"Carol\", \"details\": {\"department\": \"Engineering\", \"salary\": 95000}}\n\n# Print department\n\n# Print salary\n",
+      "solution": "employee = {\"name\": \"Carol\", \"details\": {\"department\": \"Engineering\", \"salary\": 95000}}\nprint(employee[\"details\"][\"department\"])\nprint(employee[\"details\"][\"salary\"])",
+      "hints": [
+        "First access the inner dict: employee[\"details\"]",
+        "Then chain another bracket: employee[\"details\"][\"department\"]"
+      ],
+      "tests": [
+        {
+          "type": "runs_without_error",
+          "message": "Your code should run without any errors"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "Engineering",
+          "message": "The output should contain 'Engineering'"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "95000",
+          "message": "The output should contain '95000'"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does <code>dict.items()</code> return?",
+      "options": [
+        "A list of all keys",
+        "A list of all values",
+        "A view of (key, value) tuple pairs",
+        "The number of entries in the dictionary"
+      ],
+      "correct_index": 2,
+      "explanation": ".items() returns a view object containing all (key, value) pairs as tuples. It is most useful for iterating over both keys and values simultaneously."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "After <code>d = {\"a\": 1}; d.update({\"a\": 99, \"b\": 2})</code>, what is <code>d</code>?",
+      "options": [
+        "{\"a\": 1}",
+        "{\"a\": 99}",
+        "{\"a\": 99, \"b\": 2}",
+        "{\"a\": 1, \"b\": 2}"
+      ],
+      "correct_index": 2,
+      "explanation": ".update() merges the given dictionary into d. The existing key 'a' is overwritten with 99, and the new key 'b' is added, giving {'a': 99, 'b': 2}."
+    }
+  ],
+  "completion_message": "Great job mastering dictionary operations! You can now iterate, merge, remove, and navigate nested structures — skills that are essential for working with real-world data like JSON and APIs."
+}

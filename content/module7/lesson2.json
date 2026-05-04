@@ -1,0 +1,128 @@
+{
+  "id": "module7_lesson2",
+  "module_id": "module7",
+  "module_title": "Error Handling",
+  "module_number": 7,
+  "lesson_number": 2,
+  "title": "try and except",
+  "subtitle": "Handle errors gracefully so your program keeps running",
+  "estimated_minutes": 18,
+  "prerequisites": ["module7_lesson1"],
+  "learning_objectives": [
+    "Use try/except to prevent programs from crashing",
+    "Catch specific exception types",
+    "Use 'as e' to get the error message",
+    "Write a safe number-conversion function"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "The try/except Block",
+        "content": "Instead of letting your program crash, you can <strong>catch</strong> errors and handle them. The <code>try</code> block contains code that might fail. The <code>except</code> block runs if an error occurs. If no error occurs, the <code>except</code> block is skipped.",
+        "code_example": "try:\n    result = 10 / 0\nexcept:\n    print(\"Something went wrong!\")\n\nprint(\"Program continues...\")",
+        "code_output": "Something went wrong!\nProgram continues..."
+      },
+      {
+        "heading": "Catching Specific Exceptions",
+        "content": "It is better to catch a <strong>specific</strong> exception type rather than catching everything. This way, unexpected errors are not accidentally hidden. Use <code>except ExceptionType:</code> to be specific.",
+        "code_example": "try:\n    number = int(\"hello\")\nexcept ValueError:\n    print(\"That is not a valid number!\")\n\ntry:\n    x = 10 / 0\nexcept ZeroDivisionError:\n    print(\"Cannot divide by zero!\")",
+        "code_output": "That is not a valid number!\nCannot divide by zero!"
+      },
+      {
+        "heading": "Capturing the Error Message with 'as e'",
+        "content": "Add <code>as e</code> after the exception type to capture the error object. You can then print <code>e</code> to see the error message. This is very useful for understanding exactly what went wrong.",
+        "code_example": "try:\n    result = int(\"abc\")\nexcept ValueError as e:\n    print(\"Error caught:\", e)\n\n# Practical: safe input conversion\ndef safe_int(text):\n    try:\n        return int(text)\n    except ValueError:\n        return None\n\nprint(safe_int(\"42\"))    # 42\nprint(safe_int(\"hello\")) # None",
+        "code_output": "Error caught: invalid literal for int() with base 10: 'abc'\n42\nNone",
+        "note": "Avoid using a bare 'except:' with no exception type. It catches everything, including keyboard interrupts, making your program hard to stop."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Safe Division",
+      "prompt": "Write a function called safe_divide(a, b) that returns a divided by b. If b is 0, it should print 'Cannot divide by zero' and return None. Test it with safe_divide(10, 2) and safe_divide(5, 0).",
+      "starter_code": "def safe_divide(a, b):\n    # Use try/except to handle ZeroDivisionError\n    pass\n\nprint(safe_divide(10, 2))\nprint(safe_divide(5, 0))\n",
+      "solution": "def safe_divide(a, b):\n    try:\n        return a / b\n    except ZeroDivisionError:\n        print(\"Cannot divide by zero\")\n        return None\n\nprint(safe_divide(10, 2))\nprint(safe_divide(5, 0))",
+      "hints": [
+        "Put the division a / b inside the try block",
+        "Catch ZeroDivisionError in the except block",
+        "In the except block, print the message and return None"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "5.0", "message": "safe_divide(10, 2) outputs 5.0"},
+        {"type": "stdout_contains", "value": "Cannot divide by zero", "message": "Output contains: Cannot divide by zero"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Safe List Access",
+      "prompt": "Write a function get_item(my_list, index) that returns the item at that index. If the index is out of range, print 'Index out of range' and return None. Test with get_item([1,2,3], 1) and get_item([1,2,3], 10).",
+      "starter_code": "def get_item(my_list, index):\n    # Use try/except for IndexError\n    pass\n\nprint(get_item([1, 2, 3], 1))\nprint(get_item([1, 2, 3], 10))\n",
+      "solution": "def get_item(my_list, index):\n    try:\n        return my_list[index]\n    except IndexError:\n        print(\"Index out of range\")\n        return None\n\nprint(get_item([1, 2, 3], 1))\nprint(get_item([1, 2, 3], 10))",
+      "hints": [
+        "Put my_list[index] inside the try block",
+        "Catch IndexError in the except block",
+        "Print the message and return None in the except block"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "2", "message": "get_item([1,2,3], 1) returns 2"},
+        {"type": "stdout_contains", "value": "Index out of range", "message": "Output contains: Index out of range"}
+      ]
+    },
+    {
+      "id": "ex3",
+      "order": 3,
+      "type": "code_run",
+      "title": "Validate User Input",
+      "prompt": "Write a function parse_age(text) that converts text to an integer. If the conversion fails, print 'Please enter a valid number' and return None. Test: parse_age(\"25\") should return 25, parse_age(\"old\") should print the error and return None.",
+      "starter_code": "def parse_age(text):\n    # Convert text to int, handle ValueError\n    pass\n\nresult1 = parse_age(\"25\")\nprint(result1)\n\nresult2 = parse_age(\"old\")\nprint(result2)\n",
+      "solution": "def parse_age(text):\n    try:\n        return int(text)\n    except ValueError:\n        print(\"Please enter a valid number\")\n        return None\n\nresult1 = parse_age(\"25\")\nprint(result1)\n\nresult2 = parse_age(\"old\")\nprint(result2)",
+      "hints": [
+        "Use int(text) inside the try block",
+        "Catch ValueError in the except block",
+        "Return int(text) on success, return None on failure"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "25", "message": "parse_age(\"25\") outputs 25"},
+        {"type": "stdout_contains", "value": "Please enter a valid number", "message": "Output contains: Please enter a valid number"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What happens to the code AFTER a try/except block if an exception is caught?",
+      "options": [
+        "The program crashes anyway",
+        "The program continues running normally",
+        "Python restarts from the beginning",
+        "The try block runs again"
+      ],
+      "correct_index": 1,
+      "explanation": "That is the whole point of try/except — catching an exception prevents the crash and allows the program to continue running. The except block handles the error, and then execution continues with whatever comes after the try/except structure."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What does 'except ValueError as e:' do differently from 'except ValueError:'?",
+      "options": [
+        "It catches a different type of error",
+        "It stores the error details in variable e so you can inspect or print it",
+        "It makes the error disappear silently",
+        "It raises the error again automatically"
+      ],
+      "correct_index": 1,
+      "explanation": "The 'as e' part assigns the exception object to the variable e. You can then print(e) to see the error message, which is very helpful for debugging or showing users meaningful error information."
+    }
+  ],
+  "completion_message": "Well done! You can now write programs that handle errors gracefully instead of crashing!"
+}

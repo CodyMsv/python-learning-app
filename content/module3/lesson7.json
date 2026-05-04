@@ -1,0 +1,125 @@
+{
+  "id": "module3_lesson7",
+  "module_id": "module3",
+  "module_title": "Control Flow",
+  "module_number": 3,
+  "lesson_number": 7,
+  "title": "range() Function",
+  "subtitle": "Generate sequences of numbers for your loops",
+  "estimated_minutes": 15,
+  "prerequisites": ["module3_lesson6"],
+  "learning_objectives": [
+    "Use range(stop) to generate numbers from 0 to stop-1",
+    "Use range(start, stop) to control the starting point",
+    "Use range(start, stop, step) to skip numbers or count backwards",
+    "Convert a range to a list to inspect its values"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "range(stop): Zero to Stop-1",
+        "content": "<code>range(stop)</code> generates a sequence of integers starting at <code>0</code> and going up to — but <strong>not including</strong> — <code>stop</code>. This is the simplest form and is perfect for repeating something a fixed number of times.<br><br>Use <code>list(range(n))</code> to see all the numbers at once. On its own, <code>range</code> is a lazy object — it generates numbers one at a time rather than storing them all in memory.",
+        "code_example": "# Print numbers 0 through 4\nfor i in range(5):\n    print(i)\n\n# See all values with list()\nprint(list(range(5)))\nprint(list(range(8)))",
+        "code_output": "0\n1\n2\n3\n4\n[0, 1, 2, 3, 4]\n[0, 1, 2, 3, 4, 5, 6, 7]"
+      },
+      {
+        "heading": "range(start, stop): Custom Starting Point",
+        "content": "Providing two arguments sets both the <strong>start</strong> (inclusive) and the <strong>stop</strong> (exclusive). This is useful when you want to loop over a sub-range of numbers without adjusting inside the loop.",
+        "code_example": "# Numbers from 1 to 5 (not 0)\nfor i in range(1, 6):\n    print(i)\n\nprint(\"---\")\n\n# Numbers from 10 to 14\nprint(list(range(10, 15)))\n\n# Useful: loop a numbered list starting at 1\nfor n in range(1, 4):\n    print(\"Question\", n)",
+        "code_output": "1\n2\n3\n4\n5\n---\n[10, 11, 12, 13, 14]\nQuestion 1\nQuestion 2\nQuestion 3"
+      },
+      {
+        "heading": "range(start, stop, step): Step and Negative Step",
+        "content": "A third argument sets the <strong>step</strong> — how much to add to the current number on each iteration. A step of <code>2</code> gives you every other number. A <strong>negative step</strong> counts downward, letting you use <code>range</code> for a countdown without a while loop.",
+        "code_example": "# Every other number: 0, 2, 4, 6, 8\nprint(list(range(0, 10, 2)))\n\n# Every third number starting at 1\nprint(list(range(1, 16, 3)))\n\n# Countdown: 5 down to 1\nfor i in range(5, 0, -1):\n    print(i)\nprint(\"Go!\")",
+        "code_output": "[0, 2, 4, 6, 8]\n[1, 4, 7, 10, 13]\n5\n4\n3\n2\n1\nGo!"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Times Table",
+      "prompt": "Use <code>range(1, 11)</code> and a <code>for</code> loop to print the 3 times table from 3x1 to 3x10. Each line should look like: <code>3 x 1 = 3</code>\n\nNote: print() with commas adds spaces between values, so print(\"3 x\", i, \"=\", 3 * i) will produce '3 x 1 = 3' exactly.",
+      "starter_code": "# Write your for loop using range(1, 11)\n",
+      "solution": "for i in range(1, 11):\n    print(\"3 x\", i, \"=\", 3 * i)",
+      "hints": [
+        "Use: for i in range(1, 11):",
+        "Inside the loop: print(\"3 x\", i, \"=\", 3 * i)"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "3 x 1 = 3", "message": "Output should contain '3 x 1 = 3'"},
+        {"type": "stdout_contains", "value": "3 x 10 = 30", "message": "Output should contain '3 x 10 = 30'"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Even Numbers",
+      "prompt": "Use <code>range()</code> with a step to print all even numbers from 2 to 20 (inclusive).\n\nNote: range() stops before the end value, so to include 20 you need to write range(2, 21, 2).",
+      "starter_code": "# Use range with start=2, stop=21, step=2\n",
+      "solution": "for i in range(2, 21, 2):\n    print(i)",
+      "hints": [
+        "range(2, 21, 2) starts at 2 and steps by 2",
+        "Why stop at 21? Because range excludes the stop value, so range(2, 21, 2) includes 20"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "2", "message": "Output should contain 2"},
+        {"type": "stdout_contains", "value": "20", "message": "Output should contain 20"}
+      ]
+    },
+    {
+      "id": "ex3",
+      "order": 3,
+      "type": "code_run",
+      "title": "Countdown with range",
+      "prompt": "Use <code>range()</code> with a negative step to count down from 10 to 1, then print <code>\"Happy New Year!\"</code>",
+      "starter_code": "# Use range with a negative step\n",
+      "solution": "for i in range(10, 0, -1):\n    print(i)\nprint(\"Happy New Year!\")",
+      "hints": [
+        "range(10, 0, -1) counts from 10 down to 1 (stop is 0, which is excluded)",
+        "Print the Happy New Year message after the loop, not inside it"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "10", "message": "Output should start at 10"},
+        {"type": "stdout_contains", "value": "1", "message": "Output should include 1"},
+        {"type": "stdout_contains", "value": "Happy New Year!", "message": "Output should end with 'Happy New Year!'"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does range(5) generate?",
+      "options": [
+        "1, 2, 3, 4, 5",
+        "0, 1, 2, 3, 4",
+        "0, 1, 2, 3, 4, 5",
+        "1, 2, 3, 4"
+      ],
+      "correct_index": 1,
+      "explanation": "range(5) starts at 0 by default and goes up to — but not including — 5. So it generates 0, 1, 2, 3, 4 (five numbers total)."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "Which range() call generates [2, 4, 6, 8, 10]?",
+      "options": [
+        "range(2, 10, 2)",
+        "range(2, 11, 2)",
+        "range(0, 10, 2)",
+        "range(2, 12, 2)"
+      ],
+      "correct_index": 1,
+      "explanation": "range(2, 11, 2) starts at 2, steps by 2, and stops before 11 — giving 2, 4, 6, 8, 10. range(2, 10, 2) would stop at 8 because 10 is excluded."
+    }
+  ],
+  "completion_message": "Excellent! range() is one of the most useful built-in functions in Python. Combined with for loops, it gives you precise control over how many times your code repeats and in what order. One more lesson to go: loop control with break, continue, and pass!"
+}

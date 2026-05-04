@@ -1,0 +1,287 @@
+{% extends "base.html" %}
+{% block title %}{{ lesson.title }} — Learn Python{% endblock %}
+
+{% block extra_head %}{% endblock %}
+
+{% block content %}
+<div id="py-loading-overlay" class="py-loading-overlay" style="display:none"></div>
+
+<div class="lesson-layout">
+  <!-- LEFT: Sidebar -->
+  <aside class="lesson-sidebar" id="lesson-sidebar">
+    <div class="sidebar-header">
+      <span class="sidebar-title">Course Modules</span>
+      <button class="sidebar-close" onclick="toggleSidebar()" title="Close sidebar">✕</button>
+    </div>
+    <div class="sidebar-content">
+      {% for mod in curriculum.modules %}
+      <div class="sidebar-module" id="sidebar-mod-{{ mod.id }}">
+        <button class="sidebar-module-header" onclick="toggleSidebarModule('{{ mod.id }}')">
+          <span>{{ mod.number }}. {{ mod.title }}</span>
+          <span class="sidebar-module-arrow" id="arrow-{{ mod.id }}">▶</span>
+        </button>
+        <div class="sidebar-lessons" id="sidebar-lessons-{{ mod.id }}" style="display:none">
+          {% for l in mod.lessons %}
+          <a href="/lesson/{{ l.id }}"
+             class="sidebar-lesson {% if l.id == lesson_id %}sidebar-lesson--active{% endif %} sidebar-lesson--{{ l.status }}">
+            <span class="sidebar-lesson-icon">
+              {% if l.status == 'completed' %}✅
+              {% elif l.status == 'in_progress' %}▶️
+              {% else %}○{% endif %}
+            </span>
+            <span class="sidebar-lesson-text">{{ l.title }}</span>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </aside>
+
+  <!-- Sidebar toggle button (visible when sidebar is hidden) -->
+  <button class="sidebar-open-btn" id="sidebar-open-btn" onclick="toggleSidebar()" style="display:none" title="Show course menu">☰</button>
+
+  <!-- CENTER: Main content -->
+  <div class="lesson-main">
+    <!-- Breadcrumb + header -->
+    <div class="lesson-header">
+      <div class="breadcrumb">
+        <a href="/">Home</a> › <span>{{ current_module_title }}</span> › <span>{{ lesson.title }}</span>
+      </div>
+      <h1 class="lesson-title">{{ lesson.title }}</h1>
+      <div class="lesson-meta">
+        <span class="lesson-subtitle">{{ lesson.subtitle }}</span>
+        <span class="lesson-time">⏱ {{ lesson.estimated_minutes }} min</span>
+        <span class="lesson-status-badge lesson-status--{{ current_status }}" id="lesson-status-badge">
+          {% if current_status == 'completed' %}✅ Completed
+          {% elif current_status == 'in_progress' %}▶️ In Progress
+          {% else %}○ Not Started{% endif %}
+        </span>
+      </div>
+      <div class="learning-objectives" id="objectives-panel">
+        <strong>🎯 What you'll learn:</strong>
+        <ul>{% for obj in lesson.learning_objectives %}<li>{{ obj }}</li>{% endfor %}</ul>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="lesson-tabs">
+      <button class="tab-btn tab-btn--active" data-tab="theory" onclick="switchTab('theory')">📖 Theory</button>
+      <button class="tab-btn" data-tab="exercises" onclick="switchTab('exercises')">💻 Exercises</button>
+      <button class="tab-btn" data-tab="quiz" onclick="switchTab('quiz')">🧪 Quiz</button>
+      <button class="tab-btn" data-tab="playground" onclick="switchTab('playground')">🛝 Playground</button>
+    </div>
+
+    <!-- Theory tab -->
+    <div class="tab-content" id="tab-theory">
+      {% for section in lesson.theory.sections %}
+      <div class="theory-section">
+        <h2 class="theory-heading">{{ section.heading }}</h2>
+        <div class="theory-text">{{ section.content | safe }}</div>
+        {% if section.code_example %}
+        <div class="code-block-wrap">
+          <div class="code-block-header">
+            <span>Python</span>
+            <div class="code-block-actions">
+              <button class="code-action-btn" onclick="copyCode(this)" title="Copy code">📋</button>
+              <button class="code-action-btn try-btn" onclick="tryInEditor(this)" title="Try in editor">▶ Try it</button>
+            </div>
+          </div>
+          <pre><code class="language-python">{{ section.code_example }}</code></pre>
+          {% if section.code_output %}
+          <div class="code-output-preview">
+            <span class="code-output-label">Output:</span>
+            <pre class="code-output-text">{{ section.code_output }}</pre>
+          </div>
+          {% endif %}
+        </div>
+        {% endif %}
+        {% if section.note %}
+        <div class="theory-note">💡 <strong>Note:</strong> {{ section.note }}</div>
+        {% endif %}
+        {% if section.warning %}
+        <div class="theory-warning">⚠️ <strong>Warning:</strong> {{ section.warning }}</div>
+        {% endif %}
+      </div>
+      {% endfor %}
+
+      <div class="tab-nav-row">
+        <button class="btn btn-secondary" onclick="switchTab('exercises')">💻 Go to Exercises →</button>
+      </div>
+    </div>
+
+    <!-- Exercises tab -->
+    <div class="tab-content" id="tab-exercises" style="display:none">
+      {% for ex in lesson.exercises %}
+      <div class="exercise-card" id="ex-card-{{ ex.id }}" data-exercise-id="{{ ex.id }}">
+        <div class="exercise-header">
+          <span class="exercise-number">Exercise {{ loop.index }}</span>
+          <h3 class="exercise-title">{{ ex.title }}</h3>
+          <span class="exercise-badge {% if passed_exercises.get(ex.id) %}exercise-badge--passed{% endif %}"
+                id="ex-badge-{{ ex.id }}">
+            {% if passed_exercises.get(ex.id) %}✅ Passed{% else %}⬜ Not done{% endif %}
+          </span>
+        </div>
+        <p class="exercise-prompt">{{ ex.prompt }}</p>
+        <div class="exercise-hints" id="hints-{{ ex.id }}">
+          <button class="hint-btn" onclick="showHintById('{{ ex.id }}')">💡 Show Hint</button>
+          <div class="hint-text" id="hint-text-{{ ex.id }}" style="display:none"></div>
+        </div>
+        <div class="exercise-tests" id="tests-{{ ex.id }}">
+          {% for t in ex.tests %}
+          <div class="test-item test-item--pending" id="test-{{ ex.id }}-{{ loop.index0 }}">
+            <span class="test-icon">○</span>
+            <span class="test-message">{{ t.message }}</span>
+          </div>
+          {% endfor %}
+        </div>
+        <button class="btn btn-load-exercise" onclick="loadExerciseById('{{ ex.id }}')">
+          Load this exercise into editor
+        </button>
+      </div>
+      {% endfor %}
+
+      <div class="tab-nav-row">
+        <button class="btn btn-secondary" onclick="switchTab('quiz')">🧪 Go to Quiz →</button>
+      </div>
+    </div>
+
+    <!-- Quiz tab -->
+    <div class="tab-content" id="tab-quiz" style="display:none">
+      <div class="quiz-container">
+        {% for q in lesson.quiz %}
+        <div class="quiz-question" id="quiz-q-{{ q.id }}" data-question-id="{{ q.id }}" data-correct="{{ q.correct_index }}">
+          <p class="quiz-question-text"><strong>Q{{ loop.index }}.</strong> {{ q.question }}</p>
+          <div class="quiz-options">
+            {% for opt in q.options %}
+            <button class="quiz-option {% if answered_quiz.get(q.id) is not none %}
+                {% if answered_quiz.get(q.id, {}).get('selected') == loop.index0 %}
+                  {% if answered_quiz.get(q.id, {}).get('correct') %}quiz-option--correct{% else %}quiz-option--wrong{% endif %}
+                {% endif %}
+                {% if answered_quiz.get(q.id) is not none and loop.index0 == q.correct_index %}quiz-option--correct{% endif %}
+              {% endif %}"
+              onclick="submitQuiz('{{ q.id }}', {{ loop.index0 }}, {{ q.correct_index }}, '{{ q.explanation | replace("'", "\\'") }}')"
+              {% if answered_quiz.get(q.id) is not none %}disabled{% endif %}>
+              <span class="option-letter">{{ ['A','B','C','D'][loop.index0] }}</span>
+              {{ opt }}
+            </button>
+            {% endfor %}
+          </div>
+          {% if answered_quiz.get(q.id) is not none %}
+          <div class="quiz-explanation">
+            💡 {{ q.explanation }}
+          </div>
+          {% else %}
+          <div class="quiz-explanation" id="quiz-exp-{{ q.id }}" style="display:none">
+            💡 {{ q.explanation }}
+          </div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      <div class="tab-nav-row" id="quiz-complete-row" style="display:none">
+        <div class="quiz-complete-msg">🎉 All questions answered!</div>
+        <button class="btn btn-primary" onclick="checkLessonComplete()">Check Completion</button>
+      </div>
+    </div>
+
+    <!-- Playground tab -->
+    <div class="tab-content" id="tab-playground" style="display:none">
+      <div class="playground-header">
+        <h2>🛝 Python Playground</h2>
+        <p>Free-form Python sandbox. Write anything and run it. Nothing is graded here.</p>
+      </div>
+    </div>
+
+    <!-- Prev/Next navigation -->
+    <div class="lesson-nav-row">
+      {% if prev_id %}
+      <a href="/lesson/{{ prev_id }}" class="btn btn-secondary">← Previous Lesson</a>
+      {% else %}
+      <span></span>
+      {% endif %}
+      {% if next_id %}
+      <a href="/lesson/{{ next_id }}" class="btn btn-primary">Next Lesson →</a>
+      {% else %}
+      <a href="/dashboard" class="btn btn-success">View Dashboard 📊</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- RIGHT: Code panel -->
+  <div class="code-panel" id="code-panel">
+    <div class="code-panel-header">
+      <span class="code-panel-title">Code Editor</span>
+      <div class="code-panel-actions">
+        <span class="pyodide-status" id="pyodide-status" title="Python engine status">
+          <span class="status-dot status-dot--loading" id="status-dot"></span>
+          <span id="status-label">Loading...</span>
+        </span>
+        <button class="icon-btn" onclick="resetEditor()" title="Reset to starter code">↺</button>
+        <button class="icon-btn" onclick="copyEditorCode()" title="Copy code">📋</button>
+      </div>
+    </div>
+
+    <div id="editor-wrapper" class="editor-wrapper">
+      <!-- CodeMirror mounts here -->
+    </div>
+
+    <div class="run-bar">
+      <button class="run-btn" id="run-btn" onclick="runCode()" disabled>
+        ▶ Run Code <kbd>Ctrl+Enter</kbd>
+      </button>
+      <button class="hint-reveal-btn" id="show-solution-btn" onclick="showSolution()" style="display:none" title="Show solution">Show Solution</button>
+    </div>
+
+    <div class="output-panel">
+      <div class="output-header">
+        <span>Output</span>
+        <button class="icon-btn" onclick="clearOutput()" title="Clear output">✕</button>
+      </div>
+      <div id="output" class="output-content">
+        <span class="output-placeholder">Run your code to see output here...</span>
+      </div>
+    </div>
+
+    <!-- Exercise mode indicator -->
+    <div id="exercise-mode-bar" class="exercise-mode-bar" style="display:none">
+      <span id="exercise-mode-label">💻 Exercise mode</span>
+      <button class="icon-btn" onclick="clearExerciseMode()">✕ Exit exercise</button>
+    </div>
+  </div>
+</div>
+
+<!-- Lesson complete modal -->
+<div id="completion-modal" class="modal-overlay" style="display:none">
+  <div class="modal-card">
+    <div class="modal-icon">🎉</div>
+    <h2 class="modal-title">Lesson Complete!</h2>
+    <p class="modal-lesson-name">{{ lesson.title }}</p>
+    <div class="modal-xp" id="modal-xp">+50 XP</div>
+    <p class="modal-completion-msg">{{ lesson.completion_message }}</p>
+    <div class="modal-actions">
+      {% if next_id %}
+      <a href="/lesson/{{ next_id }}" class="btn btn-primary btn-lg">Next Lesson →</a>
+      {% else %}
+      <a href="/dashboard" class="btn btn-success btn-lg">View Dashboard 🎓</a>
+      {% endif %}
+      <button class="btn btn-secondary" onclick="closeModal()">Stay Here</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Pass lesson data to JavaScript
+const LESSON_DATA = {{ lesson | tojson }};
+const LESSON_ID = {{ lesson_id | tojson }};
+const PASSED_EXERCISES = {{ passed_exercises | tojson }};
+const ANSWERED_QUIZ = {{ answered_quiz | tojson }};
+const CURRENT_STATUS = {{ current_status | tojson }};
+</script>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/editor.js') }}"></script>
+<script src="{{ url_for('static', filename='js/pyodide-runner.js') }}"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% endblock %}

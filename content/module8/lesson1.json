@@ -1,0 +1,101 @@
+{
+  "id": "module8_lesson1",
+  "module_id": "module8",
+  "module_title": "Object-Oriented Programming",
+  "module_number": 8,
+  "lesson_number": 1,
+  "title": "Introduction to OOP",
+  "subtitle": "Model the real world with objects that have data and behaviour",
+  "estimated_minutes": 15,
+  "prerequisites": ["module7_lesson6"],
+  "learning_objectives": [
+    "Understand what Object-Oriented Programming (OOP) means",
+    "Explain the difference between a class and an object",
+    "Understand what attributes (data) and methods (behaviour) are",
+    "Recognise real-world examples that map to classes and objects"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "What is Object-Oriented Programming?",
+        "content": "<strong>Object-Oriented Programming (OOP)</strong> is a way of organising code by grouping together related data and functions. Instead of having lots of loose variables and functions, you bundle them into <strong>objects</strong>.<br><br>Think of a real-world dog. A dog has:<br><ul><li><strong>Attributes</strong> (data): name, breed, age, weight</li><li><strong>Behaviours</strong> (actions): bark, eat, run, sit</li></ul><br>In Python, a <strong>class</strong> is the blueprint, and an <strong>object</strong> is one specific instance made from that blueprint. You can have many dogs, all made from the same Dog blueprint.",
+        "code_example": "# Procedural approach (old way)\ndog_name = \"Rex\"\ndog_breed = \"Labrador\"\n\ndef dog_bark(name):\n    print(name, \"says: Woof!\")\n\ndog_bark(dog_name)\n\n# OOP approach (organised)\nclass Dog:\n    pass  # we will fill this in next lesson\n\n# Create two dogs from the same blueprint\nrex = Dog()\nbella = Dog()",
+        "code_output": "Rex says: Woof!"
+      },
+      {
+        "heading": "Classes, Objects, Attributes, and Methods",
+        "content": "Here are the four key OOP terms:<br><br><strong>Class</strong> — the blueprint or template (e.g. <code>Dog</code>, <code>Car</code>, <code>BankAccount</code>)<br><strong>Object</strong> — one specific thing made from the class (e.g. <em>my</em> dog, <em>your</em> car)<br><strong>Attribute</strong> — data stored on an object (e.g. dog's name, car's colour)<br><strong>Method</strong> — a function that belongs to the class (e.g. dog.bark(), car.start())<br><br>OOP is used in almost every large Python program because it keeps related code together and makes it much easier to manage.",
+        "code_example": "# Real-world mappings:\n# Class: BankAccount\n# Objects: my_account, your_account\n# Attributes: owner, balance\n# Methods: deposit(), withdraw(), get_balance()\n\n# Class: Car\n# Objects: my_tesla, dads_honda\n# Attributes: make, model, colour, speed\n# Methods: start(), accelerate(), brake()\n\nprint(\"OOP groups data and behaviour together!\")",
+        "code_output": "OOP groups data and behaviour together!"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Identify Attributes and Methods",
+      "prompt": "Print the attributes and methods of a hypothetical Student class. Print 3 attributes on one line separated by commas, then 3 methods on the next line.",
+      "starter_code": "# Think about a Student class\n# What data (attributes) would it have?\n# What can it do (methods)?\n\n# Print 3 attributes a Student class might have (comma-separated on one line)\n# Print 3 methods a Student class might have (comma-separated on one line)\n",
+      "solution": "print(\"Attributes: name, grade, student_id\")\nprint(\"Methods: study, take_exam, get_grade\")",
+      "hints": [
+        "Attributes are things a student HAS: name, grade, etc.",
+        "Methods are things a student DOES: study(), submit_assignment()",
+        "Just run the starter code as-is — it is already correct!"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Attributes:", "message": "Output contains: Attributes:"},
+        {"type": "stdout_contains", "value": "Methods:", "message": "Output contains: Methods:"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Create a Simple Class",
+      "prompt": "Define a class called Car (just use 'pass' for the body). Create two Car objects called car1 and car2. Print the type of car1 using type().",
+      "starter_code": "# Define a Car class\n\n\n# Create two Car objects\n\n\n# Print the type of car1\n",
+      "solution": "class Car:\n    pass\n\ncar1 = Car()\ncar2 = Car()\n\nprint(type(car1))",
+      "hints": [
+        "class Car: followed by pass on the next indented line",
+        "Create objects: car1 = Car()",
+        "print(type(car1))"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Car", "message": "Output shows the Car class type"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "In OOP, what is the difference between a class and an object?",
+      "options": [
+        "They are the same thing",
+        "A class is the blueprint; an object is one specific instance made from it",
+        "A class holds data; an object holds functions",
+        "An object is bigger than a class"
+      ],
+      "correct_index": 1,
+      "explanation": "A class is like a cookie cutter — the blueprint. An object is like a cookie — a specific thing made using that blueprint. You can make many objects from one class."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What are the two kinds of things a class bundles together?",
+      "options": [
+        "Numbers and strings",
+        "Functions and imports",
+        "Attributes (data) and methods (behaviour/functions)",
+        "Variables and loops"
+      ],
+      "correct_index": 2,
+      "explanation": "A class bundles together attributes (the data an object holds) and methods (the functions an object can perform). For example, a Dog class might have a 'name' attribute and a bark() method."
+    }
+  ],
+  "completion_message": "Great start! You understand the core idea of OOP — now let us build real classes!"
+}

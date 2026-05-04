@@ -1,0 +1,3 @@
+# Install with: sudo apt-get install python3-flask
+# (pip is not available on this system)
+flask>=3.0

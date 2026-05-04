@@ -1,0 +1,91 @@
+{
+  "id": "module7_lesson1",
+  "module_id": "module7",
+  "module_title": "Error Handling",
+  "module_number": 7,
+  "lesson_number": 1,
+  "title": "Understanding Errors and Exceptions",
+  "subtitle": "Learn to read error messages and understand what went wrong",
+  "estimated_minutes": 15,
+  "prerequisites": ["module6_lesson6"],
+  "learning_objectives": [
+    "Understand the difference between SyntaxError and runtime errors",
+    "Recognise and understand the six most common Python exceptions",
+    "Read an error message and identify the line that caused it",
+    "Fix common errors by understanding what they mean"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Two Kinds of Errors",
+        "content": "Python errors fall into two categories:<br><br><strong>1. SyntaxError</strong> — Python refuses to even start running your code because the code itself is written incorrectly. It is like a grammar mistake in a sentence.<br><br><strong>2. Exceptions (runtime errors)</strong> — The code starts running but hits a problem while executing. Python stops and shows you what went wrong and on which line.",
+        "code_example": "# SyntaxError — Python won't run this at all\n# print(\"hello\"   # missing closing parenthesis\n\n# Runtime error — runs, then crashes on line 2\nx = 10\nprint(x + \"world\")  # TypeError: can't add int and str",
+        "code_output": "TypeError: unsupported operand type(s) for +: 'int' and 'str'",
+        "note": "When you see an error, read it from the BOTTOM up: the last line tells you the error type and message, the lines above show you where in the code it happened."
+      },
+      {
+        "heading": "The Six Most Common Exceptions",
+        "content": "Here are the exceptions you will encounter most often as a beginner:<br><br><strong>NameError</strong> — You used a variable that doesn't exist yet.<br><strong>TypeError</strong> — You used the wrong type (e.g. adding a number and a string).<br><strong>ValueError</strong> — Right type, but wrong value (e.g. <code>int(\"hello\")</code>).<br><strong>IndexError</strong> — You tried to access a list position that doesn't exist.<br><strong>KeyError</strong> — You tried to access a dictionary key that doesn't exist.<br><strong>ZeroDivisionError</strong> — You tried to divide a number by zero.",
+        "code_example": "# NameError\nprint(age)          # age was never defined\n\n# TypeError\nprint(5 + \"hello\")  # can't add int and str\n\n# ValueError\nint(\"abc\")          # \"abc\" is not a number\n\n# IndexError\nmy_list = [1, 2, 3]\nprint(my_list[10])  # index 10 doesn't exist\n\n# KeyError\nd = {\"name\": \"Alice\"}\nprint(d[\"age\"])     # key \"age\" doesn't exist\n\n# ZeroDivisionError\nprint(10 / 0)       # can't divide by zero",
+        "code_output": "Each of these lines would raise a different exception if run."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Trigger and Fix a TypeError",
+      "prompt": "The code below has a TypeError. Fix it so it prints: My age is 25",
+      "starter_code": "age = 25\nprint(\"My age is \" + age)  # This will cause a TypeError!\n",
+      "solution": "age = 25\nprint(\"My age is \" + str(age))",
+      "hints": [
+        "You can't concatenate a string and an integer with +",
+        "Convert age to a string first using str()",
+        "print(\"My age is \" + str(age))"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "My age is 25", "message": "Output contains: My age is 25"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Fix an IndexError",
+      "prompt": "The code below crashes with an IndexError. Fix it to print the LAST item in the list (which is 'cherry').",
+      "starter_code": "fruits = [\"apple\", \"banana\", \"cherry\"]\nprint(fruits[3])  # This causes an IndexError!\n",
+      "solution": "fruits = [\"apple\", \"banana\", \"cherry\"]\nprint(fruits[2])  # or fruits[-1]",
+      "hints": [
+        "The list has 3 items, so valid indexes are 0, 1, 2",
+        "Index 3 doesn't exist — the last valid index is 2",
+        "You can also use fruits[-1] to get the last item"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "cherry", "message": "Output contains: cherry"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "Which type of error prevents Python from running your code at all?",
+      "options": ["ValueError", "SyntaxError", "NameError", "IndexError"],
+      "correct_index": 1,
+      "explanation": "SyntaxError means your code is written incorrectly (like a grammar error). Python checks the syntax before running anything, so the program never starts. All other exceptions happen while the code is running."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What exception does Python raise when you do: my_list = [1, 2, 3]; print(my_list[5])?",
+      "options": ["KeyError", "ValueError", "TypeError", "IndexError"],
+      "correct_index": 3,
+      "explanation": "IndexError is raised when you try to access a list index that doesn't exist. The list [1, 2, 3] has valid indexes 0, 1, 2 — index 5 is out of range."
+    }
+  ],
+  "completion_message": "Great — you now understand what common Python errors mean and how to read them!"
+}

@@ -1,0 +1,97 @@
+{
+  "id": "module3_lesson3",
+  "module_id": "module3",
+  "module_title": "Control Flow",
+  "module_number": 3,
+  "lesson_number": 3,
+  "title": "Nested Conditionals",
+  "subtitle": "Place if statements inside other if statements",
+  "estimated_minutes": 12,
+  "prerequisites": ["module3_lesson2"],
+  "learning_objectives": [
+    "Write an if statement nested inside another if statement",
+    "Choose between nested conditionals and the and operator",
+    "Keep nested code readable by limiting nesting depth"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "if Inside an if: Nested Conditionals",
+        "content": "A <strong>nested conditional</strong> is an <code>if</code> statement placed inside the block of another <code>if</code> statement. The inner <code>if</code> only runs when the outer condition is <code>True</code>. Each level of nesting adds another 4 spaces of indentation.<br><br>Use nested conditionals when the second check only makes sense <em>after</em> the first check has already passed.",
+        "code_example": "age = 20\nhas_ticket = True\n\nif age >= 18:\n    print(\"Age check passed.\")\n    if has_ticket:\n        print(\"Welcome to the event!\")\n    else:\n        print(\"You need a ticket.\")\nelse:\n    print(\"Sorry, you must be 18 or older.\")",
+        "code_output": "Age check passed.\nWelcome to the event!"
+      },
+      {
+        "heading": "Nested vs the and Operator",
+        "content": "When both conditions must be <code>True</code> to run the same action, you can often simplify a nested conditional into a single <code>if</code> using <code>and</code>. Nested conditionals are better when you need <strong>different messages</strong> depending on which condition failed.<br><br>As a general rule: if your nesting goes deeper than two levels, look for ways to simplify — deeply nested code is hard to read and maintain.",
+        "code_example": "# Nested approach — tells you WHICH check failed\nage = 17\nhas_ticket = True\n\nif age >= 18:\n    if has_ticket:\n        print(\"Welcome!\")\n    else:\n        print(\"Need a ticket.\")\nelse:\n    print(\"Must be 18+.\")\n\n# Simplified with 'and' — same pass/fail, shorter code\nif age >= 18 and has_ticket:\n    print(\"Welcome!\")\nelse:\n    print(\"Entry denied.\")",
+        "code_output": "Must be 18+.\nEntry denied."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Event Entry Check",
+      "prompt": "Set <code>age = 21</code> and <code>has_ticket = False</code>. Write a nested conditional: if age is 18 or above, check whether they have a ticket. Print the appropriate message for each case. Also handle the under-18 case.\n\nNote: The inner if/else lives inside the outer if block, so it needs 8 spaces of indentation (4 for the outer block + 4 more for the inner block).",
+      "starter_code": "age = 21\nhas_ticket = False\n\n# Write your nested if/else below\n",
+      "solution": "age = 21\nhas_ticket = False\n\nif age >= 18:\n    if has_ticket:\n        print(\"Welcome to the event!\")\n    else:\n        print(\"You need a ticket.\")\nelse:\n    print(\"Sorry, you must be 18 or older.\")",
+      "hints": [
+        "The inner if/else should be indented 4 more spaces than the outer if",
+        "has_ticket is already a boolean — you can write: if has_ticket:"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "You need a ticket.", "message": "Age 21 without a ticket should print 'You need a ticket.'"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Login Validator",
+      "prompt": "Set <code>username = \"alice\"</code> and <code>password = \"secret\"</code>. First check if the username is correct (equals <code>\"alice\"</code>). If so, check if the password is correct (equals <code>\"secret\"</code>). Print <code>\"Login successful\"</code>, <code>\"Wrong password\"</code>, or <code>\"Unknown user\"</code> as appropriate.",
+      "starter_code": "username = \"alice\"\npassword = \"secret\"\n\n# Write your nested conditional below\n",
+      "solution": "username = \"alice\"\npassword = \"secret\"\n\nif username == \"alice\":\n    if password == \"secret\":\n        print(\"Login successful\")\n    else:\n        print(\"Wrong password\")\nelse:\n    print(\"Unknown user\")",
+      "hints": [
+        "Use == to compare strings",
+        "The password check is nested inside the username check"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Login successful", "message": "Correct username and password should print 'Login successful'"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What indentation does the inner if block use if the outer if block is at 4 spaces?",
+      "options": [
+        "4 spaces (same as the outer block)",
+        "8 spaces",
+        "2 spaces",
+        "No indentation is needed"
+      ],
+      "correct_index": 1,
+      "explanation": "Each level of nesting adds 4 more spaces. If the outer if block uses 4-space indentation, the inner if block uses 8 spaces (4 + 4)."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "When is a nested conditional better than using the 'and' operator?",
+      "options": [
+        "When you need to show different messages for each failing condition",
+        "When you want shorter code",
+        "When both conditions must be True",
+        "Nested conditionals are never better than and"
+      ],
+      "correct_index": 0,
+      "explanation": "Nested conditionals let you provide specific feedback about which condition failed. If you just need both conditions to be True and the response is the same either way, the 'and' operator is simpler."
+    }
+  ],
+  "completion_message": "Great work! Nested conditionals give you fine-grained control over complex decisions. Remember to keep nesting shallow — two levels is usually the maximum before you should look for a simpler approach. Next lesson: combining conditions with logical operators."
+}

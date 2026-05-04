@@ -1,0 +1,102 @@
+{
+  "id": "module9_lesson3",
+  "module_id": "module9",
+  "module_title": "Modules and Libraries",
+  "module_number": 9,
+  "lesson_number": 3,
+  "title": "The random Module",
+  "subtitle": "Generate random numbers, make random choices, shuffle data",
+  "estimated_minutes": 15,
+  "prerequisites": ["module9_lesson2"],
+  "learning_objectives": [
+    "Generate random integers with randint()",
+    "Pick a random item from a list with choice()",
+    "Shuffle a list in-place with shuffle()",
+    "Use random.seed() for reproducible results"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Generating Random Numbers",
+        "content": "The <code>random</code> module generates pseudo-random numbers. The most used functions are:<br><ul><li><code>random.random()</code> — a float between 0.0 and 1.0</li><li><code>random.randint(a, b)</code> — a random integer between a and b (inclusive)</li><li><code>random.uniform(a, b)</code> — a random float between a and b</li></ul>",
+        "code_example": "import random\n\n# Float between 0.0 and 1.0\nprint(random.random())\n\n# Integer between 1 and 6 (like a dice roll)\nprint(random.randint(1, 6))\n\n# Float between 1.0 and 10.0\nprint(random.uniform(1, 10))",
+        "code_output": "0.374... (varies each run)\n4 (varies each run)\n7.82... (varies each run)",
+        "note": "Your output will be different each time you run the code — that's what 'random' means!"
+      },
+      {
+        "heading": "Choosing and Shuffling",
+        "content": "<code>random.choice(seq)</code> picks one random item from a list. <code>random.choices(seq, k=n)</code> picks n items (with replacement). <code>random.shuffle(list)</code> rearranges the list in-place. <code>random.sample(seq, k)</code> picks k unique items.",
+        "code_example": "import random\n\nfruits = [\"apple\", \"banana\", \"cherry\", \"date\"]\n\n# Pick one\nprint(random.choice(fruits))\n\n# Pick 2 (with replacement — same item can appear twice)\nprint(random.choices(fruits, k=2))\n\n# Shuffle in-place\nrandom.shuffle(fruits)\nprint(fruits)\n\n# Pick 2 unique items\nprint(random.sample(fruits, 2))",
+        "code_output": "cherry (varies)\n['apple', 'apple'] (varies)\n['date', 'apple', 'cherry', 'banana'] (varies)\n['banana', 'date'] (varies)"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Simulate a Dice Roll",
+      "prompt": "Write a function roll_dice() that returns a random integer between 1 and 6. Call it 3 times and print each result.",
+      "starter_code": "import random\n\ndef roll_dice():\n    # Return a random int between 1 and 6\n    pass\n\nprint(roll_dice())\nprint(roll_dice())\nprint(roll_dice())\n",
+      "solution": "import random\n\ndef roll_dice():\n    return random.randint(1, 6)\n\nprint(roll_dice())\nprint(roll_dice())\nprint(roll_dice())",
+      "hints": [
+        "Use random.randint(1, 6)",
+        "Return the result from the function",
+        "Call roll_dice() three times"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "function_exists", "function_name": "roll_dice", "message": "Function roll_dice is defined"},
+        {"type": "stdout_lines_gte", "value": 3, "message": "Three dice values are printed"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Random Name Picker",
+      "prompt": "You have a list of names: ['Alice', 'Bob', 'Carol', 'Dave', 'Eve']. Pick and print one random name. Then shuffle the list and print the first 3 names.",
+      "starter_code": "import random\n\nnames = [\"Alice\", \"Bob\", \"Carol\", \"Dave\", \"Eve\"]\n\n# Print one random name\n\n# Shuffle names and print first 3\n",
+      "solution": "import random\n\nnames = [\"Alice\", \"Bob\", \"Carol\", \"Dave\", \"Eve\"]\n\nprint(random.choice(names))\n\nrandom.shuffle(names)\nprint(names[:3])",
+      "hints": [
+        "random.choice(names) picks one random name",
+        "random.shuffle(names) shuffles in-place",
+        "names[:3] gets the first 3 after shuffling"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_lines_gte", "value": 2, "message": "At least 2 lines of output"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does random.randint(1, 10) return?",
+      "options": [
+        "A float between 1.0 and 10.0",
+        "A random integer from 1 to 9 (not including 10)",
+        "A random integer from 1 to 10 (including both 1 and 10)",
+        "Always the number 5"
+      ],
+      "correct_index": 2,
+      "explanation": "random.randint(a, b) returns a random integer where BOTH a and b are possible results. So randint(1, 10) can return any of 1, 2, 3, 4, 5, 6, 7, 8, 9, or 10."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What is the difference between random.choice() and random.sample()?",
+      "options": [
+        "No difference",
+        "choice picks one item; sample picks multiple unique items",
+        "choice is for lists; sample is for strings",
+        "sample is faster than choice"
+      ],
+      "correct_index": 1,
+      "explanation": "random.choice(seq) picks exactly one item. random.sample(seq, k) picks k items without repetition (unique). random.choices(seq, k=n) picks n items WITH possible repetition."
+    }
+  ],
+  "completion_message": "The random module opens up a world of games, simulations, and randomised programs!"
+}

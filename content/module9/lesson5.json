@@ -1,0 +1,91 @@
+{
+  "id": "module9_lesson5",
+  "module_id": "module9",
+  "module_title": "Modules and Libraries",
+  "module_number": 9,
+  "lesson_number": 5,
+  "title": "os and sys Modules",
+  "subtitle": "Interact with the operating system and Python runtime",
+  "estimated_minutes": 12,
+  "prerequisites": ["module9_lesson4"],
+  "learning_objectives": [
+    "Use os.getcwd() to get the current directory",
+    "List files with os.listdir()",
+    "Build file paths safely with os.path.join()",
+    "Check if a file or folder exists with os.path.exists()"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "The os Module",
+        "content": "The <code>os</code> module lets you interact with the operating system — check paths, list files, and navigate directories. Note: in this browser-based environment, the filesystem is virtual, but the functions all work.",
+        "code_example": "import os\n\n# Current working directory\nprint(os.getcwd())\n\n# List files in current directory\nprint(os.listdir('.'))\n\n# Build a path safely (works on Windows AND Linux)\npath = os.path.join('folder', 'subfolder', 'file.txt')\nprint(path)\n\n# Check if something exists\nprint(os.path.exists('sample.txt'))\nprint(os.path.isfile('sample.txt'))",
+        "code_output": "/home/pyodide\n['sample.txt', 'numbers.txt', 'names.txt']\nfolder/subfolder/file.txt\nTrue\nTrue"
+      },
+      {
+        "heading": "The sys Module",
+        "content": "The <code>sys</code> module gives information about the Python runtime itself — things like the Python version, the list of paths Python searches for modules, and the ability to exit the program.",
+        "code_example": "import sys\n\n# Python version\nprint(sys.version)\n\n# List of paths Python searches for modules\nprint(\"Num paths:\", len(sys.path))\n\n# Platform (operating system)\nprint(sys.platform)",
+        "code_output": "3.12.3 (main, ...) [Clang ...]\nNum paths: 8 (varies)\nlinux"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Explore the Virtual Filesystem",
+      "prompt": "Use os to print the current directory and list all files in it.",
+      "starter_code": "import os\n\n# Print current working directory\n# Print list of files\n",
+      "solution": "import os\n\nprint(os.getcwd())\nprint(os.listdir('.'))",
+      "hints": [
+        "os.getcwd() returns the current directory",
+        "os.listdir('.') lists files in the current directory",
+        "Print both"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "pyodide", "message": "Output shows the virtual directory path"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Check File Existence",
+      "prompt": "Check if 'sample.txt' exists and print 'sample.txt exists: True or False'. Then check if 'missing.txt' exists.",
+      "starter_code": "import os\n\n# Check if sample.txt exists\n# Check if missing.txt exists\n",
+      "solution": "import os\n\nprint(\"sample.txt exists:\", os.path.exists(\"sample.txt\"))\nprint(\"missing.txt exists:\", os.path.exists(\"missing.txt\"))",
+      "hints": [
+        "os.path.exists(filename) returns True or False",
+        "Print 'sample.txt exists:' + the result",
+        "Do the same for missing.txt"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "True", "message": "sample.txt exists (True)"},
+        {"type": "stdout_contains", "value": "False", "message": "missing.txt does not exist (False)"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does os.path.join('data', 'users', 'alice.txt') return on Linux?",
+      "options": ["data\\users\\alice.txt", "data/users/alice.txt", "data + users + alice.txt", "data users alice.txt"],
+      "correct_index": 1,
+      "explanation": "os.path.join() builds a path using the correct separator for the operating system. On Linux/Mac it uses '/', on Windows it uses '\\'. Using os.path.join means your code works on all platforms."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "Which function tells you the current working directory?",
+      "options": ["os.path.current()", "os.getcwd()", "os.directory()", "sys.path[0]"],
+      "correct_index": 1,
+      "explanation": "os.getcwd() (get current working directory) returns the path of the directory where your Python script is currently running."
+    }
+  ],
+  "completion_message": "You can now interact with the filesystem and Python runtime — very useful for scripting!"
+}

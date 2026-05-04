@@ -1,0 +1,177 @@
+{
+  "title": "Learn Python from Zero",
+  "total_lessons": 71,
+  "modules": [
+    {
+      "id": "module1",
+      "number": 1,
+      "title": "Getting Started with Python",
+      "description": "Write your first Python program and understand how Python works",
+      "icon": "🚀",
+      "color": "#22c55e",
+      "lessons": [
+        {"id": "module1_lesson1", "number": 1, "title": "What is Python?", "estimated_minutes": 10},
+        {"id": "module1_lesson2", "number": 2, "title": "Your First Python Program", "estimated_minutes": 15},
+        {"id": "module1_lesson3", "number": 3, "title": "How Python Runs Code", "estimated_minutes": 12},
+        {"id": "module1_lesson4", "number": 4, "title": "Variables — Storing Information", "estimated_minutes": 15},
+        {"id": "module1_lesson5", "number": 5, "title": "Data Types Overview", "estimated_minutes": 12}
+      ]
+    },
+    {
+      "id": "module2",
+      "number": 2,
+      "title": "Working with Data Types",
+      "description": "Master strings, numbers, booleans, and type conversions",
+      "icon": "📦",
+      "color": "#3b82f6",
+      "lessons": [
+        {"id": "module2_lesson1", "number": 1, "title": "Strings In Depth", "estimated_minutes": 18},
+        {"id": "module2_lesson2", "number": 2, "title": "String Operations", "estimated_minutes": 15},
+        {"id": "module2_lesson3", "number": 3, "title": "String Methods", "estimated_minutes": 18},
+        {"id": "module2_lesson4", "number": 4, "title": "F-Strings and Formatting", "estimated_minutes": 15},
+        {"id": "module2_lesson5", "number": 5, "title": "Integers and Floats", "estimated_minutes": 15},
+        {"id": "module2_lesson6", "number": 6, "title": "Booleans and Comparisons", "estimated_minutes": 12},
+        {"id": "module2_lesson7", "number": 7, "title": "Type Conversion", "estimated_minutes": 12}
+      ]
+    },
+    {
+      "id": "module3",
+      "number": 3,
+      "title": "Control Flow",
+      "description": "Make decisions and repeat actions with if statements and loops",
+      "icon": "🔀",
+      "color": "#f59e0b",
+      "lessons": [
+        {"id": "module3_lesson1", "number": 1, "title": "if Statements", "estimated_minutes": 15},
+        {"id": "module3_lesson2", "number": 2, "title": "else and elif", "estimated_minutes": 15},
+        {"id": "module3_lesson3", "number": 3, "title": "Nested Conditionals", "estimated_minutes": 12},
+        {"id": "module3_lesson4", "number": 4, "title": "Logical Operators", "estimated_minutes": 15},
+        {"id": "module3_lesson5", "number": 5, "title": "while Loops", "estimated_minutes": 18},
+        {"id": "module3_lesson6", "number": 6, "title": "for Loops", "estimated_minutes": 18},
+        {"id": "module3_lesson7", "number": 7, "title": "range() Function", "estimated_minutes": 15},
+        {"id": "module3_lesson8", "number": 8, "title": "Loop Control: break and continue", "estimated_minutes": 15}
+      ]
+    },
+    {
+      "id": "module4",
+      "number": 4,
+      "title": "Collections",
+      "description": "Store and work with multiple values using lists, dicts, tuples, and sets",
+      "icon": "🗂️",
+      "color": "#8b5cf6",
+      "lessons": [
+        {"id": "module4_lesson1", "number": 1, "title": "Lists — Creating and Accessing", "estimated_minutes": 18},
+        {"id": "module4_lesson2", "number": 2, "title": "List Operations", "estimated_minutes": 18},
+        {"id": "module4_lesson3", "number": 3, "title": "List Slicing and Iteration", "estimated_minutes": 18},
+        {"id": "module4_lesson4", "number": 4, "title": "Tuples", "estimated_minutes": 12},
+        {"id": "module4_lesson5", "number": 5, "title": "Dictionaries — Basics", "estimated_minutes": 18},
+        {"id": "module4_lesson6", "number": 6, "title": "Dictionary Operations", "estimated_minutes": 18},
+        {"id": "module4_lesson7", "number": 7, "title": "Sets", "estimated_minutes": 12},
+        {"id": "module4_lesson8", "number": 8, "title": "Nested Collections", "estimated_minutes": 15}
+      ]
+    },
+    {
+      "id": "module5",
+      "number": 5,
+      "title": "Functions",
+      "description": "Write reusable code blocks with parameters, return values, and scope",
+      "icon": "⚙️",
+      "color": "#ec4899",
+      "lessons": [
+        {"id": "module5_lesson1", "number": 1, "title": "Defining and Calling Functions", "estimated_minutes": 15},
+        {"id": "module5_lesson2", "number": 2, "title": "Parameters and Arguments", "estimated_minutes": 15},
+        {"id": "module5_lesson3", "number": 3, "title": "Return Values", "estimated_minutes": 15},
+        {"id": "module5_lesson4", "number": 4, "title": "Default Parameters and Keyword Arguments", "estimated_minutes": 15},
+        {"id": "module5_lesson5", "number": 5, "title": "*args and **kwargs", "estimated_minutes": 15},
+        {"id": "module5_lesson6", "number": 6, "title": "Variable Scope", "estimated_minutes": 15},
+        {"id": "module5_lesson7", "number": 7, "title": "Lambda Functions", "estimated_minutes": 12},
+        {"id": "module5_lesson8", "number": 8, "title": "Recursion Basics", "estimated_minutes": 18}
+      ]
+    },
+    {
+      "id": "module6",
+      "number": 6,
+      "title": "Strings and Files",
+      "description": "Advanced string techniques, list comprehensions, and file I/O",
+      "icon": "✍️",
+      "color": "#06b6d4",
+      "lessons": [
+        {"id": "module6_lesson1", "number": 1, "title": "Advanced String Methods", "estimated_minutes": 18},
+        {"id": "module6_lesson2", "number": 2, "title": "String Slicing Deep Dive", "estimated_minutes": 15},
+        {"id": "module6_lesson3", "number": 3, "title": "List Comprehensions", "estimated_minutes": 18},
+        {"id": "module6_lesson4", "number": 4, "title": "Dictionary Comprehensions", "estimated_minutes": 15},
+        {"id": "module6_lesson5", "number": 5, "title": "Reading and Writing Files", "estimated_minutes": 18},
+        {"id": "module6_lesson6", "number": 6, "title": "File Context Managers and JSON", "estimated_minutes": 18}
+      ]
+    },
+    {
+      "id": "module7",
+      "number": 7,
+      "title": "Error Handling",
+      "description": "Handle errors gracefully so your programs never crash unexpectedly",
+      "icon": "🛡️",
+      "color": "#ef4444",
+      "lessons": [
+        {"id": "module7_lesson1", "number": 1, "title": "Understanding Errors and Exceptions", "estimated_minutes": 15},
+        {"id": "module7_lesson2", "number": 2, "title": "try and except", "estimated_minutes": 18},
+        {"id": "module7_lesson3", "number": 3, "title": "Multiple Exception Types", "estimated_minutes": 15},
+        {"id": "module7_lesson4", "number": 4, "title": "else and finally", "estimated_minutes": 12},
+        {"id": "module7_lesson5", "number": 5, "title": "Raising Exceptions", "estimated_minutes": 12},
+        {"id": "module7_lesson6", "number": 6, "title": "Custom Exceptions", "estimated_minutes": 12}
+      ]
+    },
+    {
+      "id": "module8",
+      "number": 8,
+      "title": "Object-Oriented Programming",
+      "description": "Model real-world things with classes, objects, and inheritance",
+      "icon": "🏗️",
+      "color": "#f97316",
+      "lessons": [
+        {"id": "module8_lesson1", "number": 1, "title": "Introduction to OOP", "estimated_minutes": 15},
+        {"id": "module8_lesson2", "number": 2, "title": "Classes and Objects", "estimated_minutes": 15},
+        {"id": "module8_lesson3", "number": 3, "title": "__init__ and Attributes", "estimated_minutes": 18},
+        {"id": "module8_lesson4", "number": 4, "title": "Instance Methods", "estimated_minutes": 18},
+        {"id": "module8_lesson5", "number": 5, "title": "Inheritance Basics", "estimated_minutes": 18},
+        {"id": "module8_lesson6", "number": 6, "title": "Method Overriding", "estimated_minutes": 15},
+        {"id": "module8_lesson7", "number": 7, "title": "Special Dunder Methods", "estimated_minutes": 15},
+        {"id": "module8_lesson8", "number": 8, "title": "Class vs Instance Variables", "estimated_minutes": 15}
+      ]
+    },
+    {
+      "id": "module9",
+      "number": 9,
+      "title": "Modules and Libraries",
+      "description": "Use Python's built-in modules and discover the wider ecosystem",
+      "icon": "📚",
+      "color": "#10b981",
+      "lessons": [
+        {"id": "module9_lesson1", "number": 1, "title": "The import Statement", "estimated_minutes": 15},
+        {"id": "module9_lesson2", "number": 2, "title": "The math Module", "estimated_minutes": 12},
+        {"id": "module9_lesson3", "number": 3, "title": "The random Module", "estimated_minutes": 15},
+        {"id": "module9_lesson4", "number": 4, "title": "The datetime Module", "estimated_minutes": 15},
+        {"id": "module9_lesson5", "number": 5, "title": "os and sys Modules", "estimated_minutes": 12},
+        {"id": "module9_lesson6", "number": 6, "title": "Creating Your Own Modules", "estimated_minutes": 15},
+        {"id": "module9_lesson7", "number": 7, "title": "pip and Third-Party Packages", "estimated_minutes": 12}
+      ]
+    },
+    {
+      "id": "module10",
+      "number": 10,
+      "title": "Practical Projects",
+      "description": "Build real programs combining everything you have learned",
+      "icon": "🏆",
+      "color": "#ffd343",
+      "lessons": [
+        {"id": "module10_lesson1", "number": 1, "title": "Number Guessing Game", "estimated_minutes": 25},
+        {"id": "module10_lesson2", "number": 2, "title": "Simple Calculator", "estimated_minutes": 25},
+        {"id": "module10_lesson3", "number": 3, "title": "To-Do List App", "estimated_minutes": 25},
+        {"id": "module10_lesson4", "number": 4, "title": "Password Generator", "estimated_minutes": 20},
+        {"id": "module10_lesson5", "number": 5, "title": "Word Counter and Text Analyzer", "estimated_minutes": 20},
+        {"id": "module10_lesson6", "number": 6, "title": "Simple Contact Book", "estimated_minutes": 20},
+        {"id": "module10_lesson7", "number": 7, "title": "FizzBuzz and Classic Algorithms", "estimated_minutes": 20},
+        {"id": "module10_lesson8", "number": 8, "title": "Review and Next Steps", "estimated_minutes": 20}
+      ]
+    }
+  ]
+}

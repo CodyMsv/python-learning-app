@@ -1,0 +1,107 @@
+{
+  "id": "module8_lesson3",
+  "module_id": "module8",
+  "module_title": "Object-Oriented Programming",
+  "module_number": 8,
+  "lesson_number": 3,
+  "title": "__init__ and Attributes",
+  "subtitle": "Automatically set up every object the right way",
+  "estimated_minutes": 18,
+  "prerequisites": ["module8_lesson2"],
+  "learning_objectives": [
+    "Define __init__ to automatically set attributes when an object is created",
+    "Understand what 'self' refers to",
+    "Set multiple attributes in __init__",
+    "Create well-structured classes that require initial values"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "The __init__ Method",
+        "content": "Setting attributes manually after creating an object is error-prone. The <code>__init__</code> method solves this — it runs <strong>automatically</strong> every time you create a new object. You can require initial values and set them all in one place.",
+        "code_example": "class Dog:\n    def __init__(self, name, breed, age):\n        self.name = name\n        self.breed = breed\n        self.age = age\n\n# Now creating a Dog REQUIRES the three values\nrex = Dog(\"Rex\", \"Labrador\", 3)\nprint(rex.name)   # Rex\nprint(rex.breed)  # Labrador\nprint(rex.age)    # 3",
+        "code_output": "Rex\nLabrador\n3"
+      },
+      {
+        "heading": "What is 'self'?",
+        "content": "<code>self</code> is a reference to <strong>the specific object being created or used</strong>. When you write <code>self.name = name</code>, you are saying: <em>store this value on THIS particular object</em>. Python passes <code>self</code> automatically — you never need to pass it yourself when calling a method. The name <code>self</code> is just a convention; it could technically be any name, but always use <code>self</code>.",
+        "code_example": "class Person:\n    def __init__(self, name, age):\n        self.name = name   # stored ON this object\n        self.age = age\n\nalice = Person(\"Alice\", 30)\nbob = Person(\"Bob\", 25)\n\n# Each object remembers its own values\nprint(alice.name, alice.age)  # Alice 30\nprint(bob.name, bob.age)      # Bob 25",
+        "code_output": "Alice 30\nBob 25"
+      },
+      {
+        "heading": "More Attribute Patterns",
+        "content": "You can set default values, compute attributes, or do other setup in <code>__init__</code>.",
+        "code_example": "class BankAccount:\n    def __init__(self, owner, initial_balance=0):\n        self.owner = owner\n        self.balance = initial_balance\n        self.transactions = []  # starts as empty list\n\naccount = BankAccount(\"Alice\", 1000)\nprint(account.owner)\nprint(account.balance)\nprint(account.transactions)",
+        "code_output": "Alice\n1000\n[]"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Add __init__ to a Car",
+      "prompt": "Define a Car class with __init__(self, make, model, year). Create a car object: my_car = Car('Toyota', 'Corolla', 2022). Print: '2022 Toyota Corolla'.",
+      "starter_code": "class Car:\n    def __init__(self, make, model, year):\n        # Store make, model, year on self\n        pass\n\nmy_car = Car(\"Toyota\", \"Corolla\", 2022)\nprint(f\"{my_car.year} {my_car.make} {my_car.model}\")\n",
+      "solution": "class Car:\n    def __init__(self, make, model, year):\n        self.make = make\n        self.model = model\n        self.year = year\n\nmy_car = Car(\"Toyota\", \"Corolla\", 2022)\nprint(f\"{my_car.year} {my_car.make} {my_car.model}\")",
+      "hints": [
+        "In __init__: self.make = make",
+        "Also: self.model = model and self.year = year",
+        "Then my_car.year, my_car.make, my_car.model will all work"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "2022 Toyota Corolla", "message": "Output: 2022 Toyota Corolla"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Class with Default Attribute",
+      "prompt": "Define a Player class with __init__(self, name) that sets self.name = name and self.score = 0. Create player1 = Player('Alice'). Print player1.name and player1.score.",
+      "starter_code": "class Player:\n    def __init__(self, name):\n        # Set name from parameter, score starts at 0\n        pass\n\nplayer1 = Player(\"Alice\")\nprint(player1.name)\nprint(player1.score)\n",
+      "solution": "class Player:\n    def __init__(self, name):\n        self.name = name\n        self.score = 0\n\nplayer1 = Player(\"Alice\")\nprint(player1.name)\nprint(player1.score)",
+      "hints": [
+        "self.name = name (from parameter)",
+        "self.score = 0 (hardcoded default)",
+        "No need to pass score when creating the object"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Alice", "message": "Output contains: Alice"},
+        {"type": "stdout_contains", "value": "0", "message": "Output contains: 0"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "When does __init__ run?",
+      "options": [
+        "When you import the class",
+        "When you define the class",
+        "Automatically every time you create a new object",
+        "Only when you call it manually"
+      ],
+      "correct_index": 2,
+      "explanation": "__init__ is called automatically by Python every time you create a new object using ClassName(). You never call __init__ yourself — Python calls it for you."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What does 'self.name = name' inside __init__ do?",
+      "options": [
+        "Creates a global variable called name",
+        "Stores the value of 'name' as an attribute on this specific object",
+        "Defines a new function called name",
+        "Deletes the name parameter"
+      ],
+      "correct_index": 1,
+      "explanation": "self.name = name stores the value of the parameter 'name' as an attribute on the specific object being created. After this, you can access it later as object.name."
+    }
+  ],
+  "completion_message": "Well done! __init__ is one of the most important concepts in OOP — you're mastering it!"
+}

@@ -1,0 +1,97 @@
+{
+  "id": "module8_lesson2",
+  "module_id": "module8",
+  "module_title": "Object-Oriented Programming",
+  "module_number": 8,
+  "lesson_number": 2,
+  "title": "Classes and Objects",
+  "subtitle": "Define classes and create objects in Python",
+  "estimated_minutes": 15,
+  "prerequisites": ["module8_lesson1"],
+  "learning_objectives": [
+    "Define a class using the 'class' keyword",
+    "Create (instantiate) objects from a class",
+    "Set and read attributes directly on an object",
+    "Understand that each object is independent"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Defining a Class",
+        "content": "Define a class with the <code>class</code> keyword, followed by the class name in <strong>PascalCase</strong> (each word starts with a capital), a colon, and an indented body. The simplest class body is <code>pass</code>.",
+        "code_example": "class Dog:\n    pass\n\n# Create (instantiate) two Dog objects\nrex = Dog()\nbella = Dog()\n\nprint(type(rex))    # shows the class\nprint(rex == bella) # different objects, even though same class",
+        "code_output": "<class '__main__.Dog'>\nFalse"
+      },
+      {
+        "heading": "Setting Attributes on Objects",
+        "content": "You can attach data to an object using dot notation: <code>object.attribute = value</code>. Each object stores its own copy of the data — changing one object does not affect another.",
+        "code_example": "class Dog:\n    pass\n\nrex = Dog()\nrex.name = \"Rex\"\nrex.breed = \"Labrador\"\nrex.age = 3\n\nbella = Dog()\nbella.name = \"Bella\"\nbella.breed = \"Poodle\"\nbella.age = 5\n\nprint(rex.name, \"is a\", rex.breed)\nprint(bella.name, \"is\", bella.age, \"years old\")",
+        "code_output": "Rex is a Labrador\nBella is 5 years old"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Create and Describe a Book",
+      "prompt": "Define a class called Book (just pass). Create an object called book1, set its title to 'Python Basics', its author to 'Jane Smith', and its pages to 300. Print: 'Python Basics by Jane Smith, 300 pages'.",
+      "starter_code": "# Define the Book class\n\n\n# Create book1 and set its attributes\n\n\n# Print the details\n",
+      "solution": "class Book:\n    pass\n\nbook1 = Book()\nbook1.title = \"Python Basics\"\nbook1.author = \"Jane Smith\"\nbook1.pages = 300\n\nprint(f\"{book1.title} by {book1.author}, {book1.pages} pages\")",
+      "hints": [
+        "class Book: then pass",
+        "book1 = Book() to create the object",
+        "Set attributes: book1.title = 'Python Basics'",
+        "Use an f-string to print all three values"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Python Basics by Jane Smith, 300 pages", "message": "Output: Python Basics by Jane Smith, 300 pages"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Two Independent Objects",
+      "prompt": "Create a class called Person. Make two Person objects: person1 with name='Alice' and age=30, person2 with name='Bob' and age=25. Print each person's name and age on separate lines.",
+      "starter_code": "class Person:\n    pass\n\n# Create person1 and person2\n\n\n# Print both\n",
+      "solution": "class Person:\n    pass\n\nperson1 = Person()\nperson1.name = \"Alice\"\nperson1.age = 30\n\nperson2 = Person()\nperson2.name = \"Bob\"\nperson2.age = 25\n\nprint(person1.name, person1.age)\nprint(person2.name, person2.age)",
+      "hints": [
+        "Create two separate objects: person1 = Person()",
+        "Set attributes on each: person1.name = 'Alice'",
+        "Print using person1.name and person1.age"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Alice", "message": "Output contains: Alice"},
+        {"type": "stdout_contains", "value": "Bob", "message": "Output contains: Bob"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What naming convention should class names use?",
+      "options": ["snake_case (my_class)", "PascalCase (MyClass)", "ALL_CAPS (MYCLASS)", "camelCase (myClass)"],
+      "correct_index": 1,
+      "explanation": "Python convention (PEP 8) says class names should use PascalCase — each word starts with a capital letter. For example: BankAccount, ShoppingCart, UserProfile."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "If you create two objects from the same class and change an attribute on one, what happens to the other?",
+      "options": [
+        "The other object changes too",
+        "Nothing — each object has its own separate attributes",
+        "Both objects are deleted",
+        "An error is raised"
+      ],
+      "correct_index": 1,
+      "explanation": "Each object is independent. Setting dog1.name = 'Rex' does not change dog2.name. Every object has its own copy of its attributes."
+    }
+  ],
+  "completion_message": "Excellent! You can now define classes and create objects. Next up: the powerful __init__ method!"
+}

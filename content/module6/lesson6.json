@@ -1,0 +1,126 @@
+{
+  "id": "module6_lesson6",
+  "module_id": "module6",
+  "module_title": "Strings and Files",
+  "module_number": 6,
+  "lesson_number": 6,
+  "title": "File Context Managers and JSON",
+  "subtitle": "Auto-close files safely and work with JSON data",
+  "estimated_minutes": 18,
+  "prerequisites": ["module5_lesson8"],
+  "learning_objectives": [
+    "Use a with statement as a context manager to open and auto-close files",
+    "Iterate over lines in a file using a for loop inside a with block",
+    "Import the json module",
+    "Convert a Python dictionary to a JSON string with json.dumps()",
+    "Parse a JSON string back into a Python dictionary with json.loads()"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "The with Statement for Files",
+        "content": "In the last lesson you always had to remember to call <code>.close()</code>. Python provides a cleaner solution: the <code>with</code> statement (also called a <em>context manager</em>). When the indented block under <code>with</code> finishes — even if an error occurs — Python automatically closes the file for you.<br><br>The pattern is:<br><pre><code>with open(\"file.txt\", \"r\") as f:\n    content = f.read()</code></pre><br>After the block, <code>f</code> is already closed. You never need to call <code>f.close()</code> manually.",
+        "code_example": "# Reading with a context manager\nwith open(\"sample.txt\", \"r\") as f:\n    content = f.read()\n\nprint(content)\n# f is now closed automatically\n\n# Iterating line by line\nwith open(\"names.txt\", \"r\") as f:\n    for line in f:\n        print(line.strip())",
+        "code_output": "Hello from sample.txt!\nThis is line two.\nThis is line three.\n\nAlice\nBob\nCarol",
+        "note": "Iterating directly over a file object (for line in f:) is memory-efficient because Python reads one line at a time instead of loading the whole file."
+      },
+      {
+        "heading": "Writing Files with a Context Manager",
+        "content": "The <code>with</code> statement works for writing too. Opening in <code>\"w\"</code> mode inside a <code>with</code> block is now the recommended style because it guarantees the data is flushed and the file is closed even if an exception occurs mid-write.",
+        "code_example": "lines_to_write = [\"Line one\", \"Line two\", \"Line three\"]\n\nwith open(\"output.txt\", \"w\") as f:\n    for line in lines_to_write:\n        f.write(line + \"\\n\")\n\n# Read it back to verify\nwith open(\"output.txt\", \"r\") as f:\n    print(f.read())",
+        "code_output": "Line one\nLine two\nLine three\n"
+      },
+      {
+        "heading": "Working with JSON",
+        "content": "JSON (JavaScript Object Notation) is the most common format for exchanging data on the web. Python's built-in <code>json</code> module converts between Python objects and JSON strings.<br><br><ul><li><code>json.dumps(obj)</code> — <em>dump to string</em> — converts a Python dict/list to a JSON-formatted string</li><li><code>json.loads(string)</code> — <em>load from string</em> — parses a JSON string and returns a Python dict/list</li></ul><br>The <code>s</code> in <code>dumps</code> and <code>loads</code> stands for <em>string</em>. There are also <code>json.dump()</code> and <code>json.load()</code> (without the s) that read/write directly to file objects.",
+        "code_example": "import json\n\n# Python dict -> JSON string\nperson = {\"name\": \"Alice\", \"age\": 30, \"active\": True}\njson_string = json.dumps(person)\nprint(json_string)\nprint(type(json_string))\n\n# JSON string -> Python dict\ndata = json.loads(json_string)\nprint(data[\"name\"])\nprint(type(data))",
+        "code_output": "{\"name\": \"Alice\", \"age\": 30, \"active\": true}\n<class 'str'>\nAlice\n<class 'dict'>",
+        "note": "Notice that Python's True becomes JSON's true (lowercase). JSON uses lowercase true/false/null while Python uses True/False/None."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Read with Context Manager",
+      "prompt": "Use a <code>with</code> statement to open <code>sample.txt</code> and print each line stripped of its trailing whitespace and newline. Do not call <code>.close()</code> manually.",
+      "starter_code": "# Use a with block to open sample.txt\n# Iterate line by line and print each line stripped of trailing whitespace\n",
+      "solution": "with open(\"sample.txt\", \"r\") as f:\n    for line in f:\n        print(line.strip())",
+      "hints": [
+        "Iterate directly over f: for line in f:",
+        "Use line.strip() inside the print() to remove the trailing newline."
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Your code should run without errors."},
+        {"type": "stdout_contains", "value": "Hello", "message": "The contents of sample.txt should be printed."}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Write with Context Manager",
+      "prompt": "Use a <code>with</code> statement to write a file called <code>cities.txt</code> containing three lines: <code>\"London\"</code>, <code>\"Tokyo\"</code>, and <code>\"Cairo\"</code>. Then open it again with another <code>with</code> block and print all its contents.",
+      "starter_code": "# Write London, Tokyo, Cairo to cities.txt using a with block\n# Then open it again with a with block and print all contents\n",
+      "solution": "with open(\"cities.txt\", \"w\") as f:\n    f.write(\"London\\n\")\n    f.write(\"Tokyo\\n\")\n    f.write(\"Cairo\\n\")\n\nwith open(\"cities.txt\", \"r\") as f:\n    print(f.read())",
+      "hints": [
+        "Call f.write() three times, each with \\n at the end.",
+        "No need for f.close() — the with block handles it."
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Your code should run without errors."},
+        {"type": "stdout_contains", "value": "London", "message": "London should appear in the output."},
+        {"type": "stdout_contains", "value": "Tokyo", "message": "Tokyo should appear in the output."},
+        {"type": "stdout_contains", "value": "Cairo", "message": "Cairo should appear in the output."}
+      ]
+    },
+    {
+      "id": "ex3",
+      "order": 3,
+      "type": "code_run",
+      "title": "Parse a JSON String",
+      "prompt": "Import the <code>json</code> module. The variable <code>json_str</code> is a JSON string. Use <code>json.loads()</code> to parse it into a Python dictionary called <code>data</code>, then print the value associated with the key <code>\"city\"</code>.",
+      "starter_code": "import json\n\njson_str = '{\"city\": \"Paris\", \"population\": 2161000}'\n# Create a variable called data by parsing json_str with json.loads()\n# Print the value of the \"city\" key\n",
+      "solution": "import json\n\njson_str = '{\"city\": \"Paris\", \"population\": 2161000}'\ndata = json.loads(json_str)\nprint(data[\"city\"])",
+      "hints": [
+        "Use json.loads(json_str) to convert the string to a dict.",
+        "Then access data[\"city\"] just like any dictionary."
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Your code should run without errors."},
+        {"type": "stdout_contains", "value": "Paris", "message": "The city value 'Paris' should be printed."}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What is the main advantage of using 'with open(...) as f:' over manually calling f.close()?",
+      "options": [
+        "It reads files faster",
+        "It automatically closes the file even if an exception occurs inside the block",
+        "It allows reading binary files",
+        "It is required for writing files"
+      ],
+      "correct_index": 1,
+      "explanation": "The with statement guarantees the file is closed when the block exits, whether normally or due to an exception. Forgetting f.close() can leave files locked or cause data loss."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What does json.dumps({\"x\": 1}) return?",
+      "options": [
+        "The dictionary {\"x\": 1} written to a file",
+        "The integer 1",
+        "The string '{\"x\": 1}'",
+        "A list [\"x\", 1]"
+      ],
+      "correct_index": 2,
+      "explanation": "json.dumps() converts a Python object to a JSON-formatted string. The result is a string, not a file and not the original dict."
+    }
+  ],
+  "completion_message": "Outstanding! Using with for file handling is the modern Python standard, and JSON is the language of the web. You now have the core file and data skills used in countless real projects."
+}

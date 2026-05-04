@@ -1,0 +1,101 @@
+{
+  "id": "module7_lesson4",
+  "module_id": "module7",
+  "module_title": "Error Handling",
+  "module_number": 7,
+  "lesson_number": 4,
+  "title": "else and finally",
+  "subtitle": "Run code when things go right, and always clean up",
+  "estimated_minutes": 12,
+  "prerequisites": ["module7_lesson3"],
+  "learning_objectives": [
+    "Use the else clause to run code only when no exception occurred",
+    "Use finally to run cleanup code that always executes",
+    "Understand the full try/except/else/finally pattern",
+    "Apply finally to ensure files are always closed"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "The else Clause",
+        "content": "A <code>try</code> block can have an <code>else</code> clause. The <code>else</code> block runs <strong>only if no exception occurred</strong>. It is the success path. This is cleaner than putting success code inside the try block, because it keeps the try block small.",
+        "code_example": "try:\n    number = int(\"42\")\nexcept ValueError:\n    print(\"That was not a number\")\nelse:\n    print(\"Conversion succeeded! Value:\", number)\n\nprint(\"Done\")",
+        "code_output": "Conversion succeeded! Value: 42\nDone"
+      },
+      {
+        "heading": "The finally Clause",
+        "content": "The <code>finally</code> block <strong>always runs</strong> — whether an exception occurred or not. It is used for cleanup tasks: closing files, releasing resources, printing a summary. You cannot skip a <code>finally</code> block.",
+        "code_example": "try:\n    result = 10 / 2\nexcept ZeroDivisionError:\n    print(\"Division error!\")\nelse:\n    print(\"Result:\", result)\nfinally:\n    print(\"This always runs, no matter what.\")\n\nprint(\"---\")\n\ntry:\n    result = 10 / 0\nexcept ZeroDivisionError:\n    print(\"Division error!\")\nfinally:\n    print(\"Cleanup complete.\")",
+        "code_output": "Result: 5.0\nThis always runs, no matter what.\n---\nDivision error!\nCleanup complete."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Use else for Success",
+      "prompt": "Write code that tries to convert \"100\" to an integer. If it fails (ValueError), print 'Conversion failed'. If it succeeds (else), print 'Got the number: 100'.",
+      "starter_code": "try:\n    value = int(\"100\")\nexcept ValueError:\n    print(\"Conversion failed\")\n# Add an else block for success\n",
+      "solution": "try:\n    value = int(\"100\")\nexcept ValueError:\n    print(\"Conversion failed\")\nelse:\n    print(\"Got the number:\", value)",
+      "hints": [
+        "Add an else: block after the except block",
+        "The else block runs only when no exception occurred",
+        "Print 'Got the number:' followed by value"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Got the number: 100", "message": "Output contains: Got the number: 100"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Always Run Cleanup with finally",
+      "prompt": "Write a try/except/finally block. In try: do 10 / 0. In except ZeroDivisionError: print 'Caught division error'. In finally: print 'Finished.'.",
+      "starter_code": "# Write try/except/finally here\n",
+      "solution": "try:\n    result = 10 / 0\nexcept ZeroDivisionError:\n    print(\"Caught division error\")\nfinally:\n    print(\"Finished.\")",
+      "hints": [
+        "Start with: try: result = 10 / 0",
+        "Add: except ZeroDivisionError: print(\"Caught division error\")",
+        "Add: finally: print(\"Finished.\")"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Caught division error", "message": "Output contains: Caught division error"},
+        {"type": "stdout_contains", "value": "Finished.", "message": "Output contains: Finished."}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "When does the 'else' block in a try/except/else run?",
+      "options": [
+        "Always, just like finally",
+        "Only when an exception was raised",
+        "Only when NO exception was raised",
+        "When the except block finishes"
+      ],
+      "correct_index": 2,
+      "explanation": "The else block is the 'success' path — it only runs when the try block completed without raising any exception."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "When does the 'finally' block run?",
+      "options": [
+        "Only when an exception was raised",
+        "Only when no exception was raised",
+        "Always, whether or not an exception occurred",
+        "Only when the else block also runs"
+      ],
+      "correct_index": 2,
+      "explanation": "finally always runs — it is the cleanup block. Whether the try succeeded, failed, or the except block ran, finally will always execute. This is perfect for closing files or releasing resources."
+    }
+  ],
+  "completion_message": "Excellent! You now know the full try/except/else/finally pattern!"
+}

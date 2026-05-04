@@ -1,0 +1,120 @@
+{
+  "id": "module3_lesson2",
+  "module_id": "module3",
+  "module_title": "Control Flow",
+  "module_number": 3,
+  "lesson_number": 2,
+  "title": "else and elif",
+  "subtitle": "Handle multiple outcomes with else and elif",
+  "estimated_minutes": 15,
+  "prerequisites": ["module3_lesson1"],
+  "learning_objectives": [
+    "Use else to run code when an if condition is False",
+    "Use elif to test multiple conditions in sequence",
+    "Explain why the order of elif conditions matters"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "The else Clause",
+        "content": "An <code>else</code> clause runs its block whenever the <code>if</code> condition is <code>False</code>. You can think of it as the \"otherwise\" branch. <code>else</code> never has a condition of its own — it simply catches everything that the <code>if</code> did not.",
+        "code_example": "temperature = 15\n\nif temperature >= 20:\n    print(\"It's warm outside.\")\nelse:\n    print(\"Bring a jacket!\")",
+        "code_output": "Bring a jacket!"
+      },
+      {
+        "heading": "elif: Testing Multiple Conditions",
+        "content": "<code>elif</code> (short for \"else if\") lets you test additional conditions after the first <code>if</code>. Python checks each condition in order and runs the <strong>first</strong> block whose condition is <code>True</code>. Once a match is found, all remaining <code>elif</code> and <code>else</code> branches are skipped.<br><br>You can have as many <code>elif</code> clauses as you need. An optional <code>else</code> at the end handles any case not caught above.",
+        "code_example": "score = 82\n\nif score >= 90:\n    grade = \"A\"\nelif score >= 80:\n    grade = \"B\"\nelif score >= 70:\n    grade = \"C\"\nelif score >= 60:\n    grade = \"D\"\nelse:\n    grade = \"F\"\n\nprint(\"Grade:\", grade)",
+        "code_output": "Grade: B"
+      },
+      {
+        "heading": "Order Matters in elif Chains",
+        "content": "Because Python evaluates conditions top-to-bottom and stops at the first match, the <strong>order of your elif branches is critical</strong>. If you put a broad condition before a narrow one, the narrow one may never be reached.<br><br>In the grade example above, placing <code>score >= 60</code> first would incorrectly give every passing score a 'D', because 82 >= 60 is True and Python would stop there.",
+        "code_example": "# WRONG order — any score >= 60 gets 'D'\nscore = 95\nif score >= 60:\n    grade = \"D\"   # matches first, even for 95!\nelif score >= 90:\n    grade = \"A\"   # never reached\n\nprint(grade)",
+        "code_output": "D"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Pass or Fail",
+      "prompt": "Set <code>score = 55</code>. Use <code>if</code> and <code>else</code> to print <code>\"Pass\"</code> if the score is 60 or above, and <code>\"Fail\"</code> otherwise.\n\nNote: Both the if block and the else block need their print() lines indented by 4 spaces.",
+      "starter_code": "score = 55\n\n# Write your if/else below\n",
+      "solution": "score = 55\n\nif score >= 60:\n    print(\"Pass\")\nelse:\n    print(\"Fail\")",
+      "hints": [
+        "Use >= 60 as the condition",
+        "The else clause has no condition — just else:"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Fail", "message": "A score of 55 should print 'Fail'"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Day Type",
+      "prompt": "Set <code>day = 6</code> (where 1=Monday, 7=Sunday). Print <code>\"Weekend\"</code> if the day is 6 or 7, and <code>\"Weekday\"</code> otherwise. Use <code>if</code>/<code>else</code>.",
+      "starter_code": "day = 6\n\n# Write your if/else below\n",
+      "solution": "day = 6\n\nif day >= 6:\n    print(\"Weekend\")\nelse:\n    print(\"Weekday\")",
+      "hints": [
+        "Saturday is 6 and Sunday is 7, so check if day >= 6",
+        "Alternatively you can use: if day == 6 or day == 7"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Weekend", "message": "Day 6 should print 'Weekend'"}
+      ]
+    },
+    {
+      "id": "ex3",
+      "order": 3,
+      "type": "code_run",
+      "title": "Grade Calculator",
+      "prompt": "Set <code>score = 73</code>. Use <code>if</code>, <code>elif</code>, and <code>else</code> to assign and print a letter grade: A (90+), B (80-89), C (70-79), D (60-69), F (below 60).\n\nNote: Each elif and else line starts at the same indentation level as if — not indented inside it.",
+      "starter_code": "score = 73\n\n# Write your if/elif/else chain below\n",
+      "solution": "score = 73\n\nif score >= 90:\n    grade = \"A\"\nelif score >= 80:\n    grade = \"B\"\nelif score >= 70:\n    grade = \"C\"\nelif score >= 60:\n    grade = \"D\"\nelse:\n    grade = \"F\"\n\nprint(grade)",
+      "hints": [
+        "Start with the highest grade first (A at 90+)",
+        "Make sure to print the grade variable at the end"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "C", "message": "A score of 73 should produce grade C"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does elif stand for?",
+      "options": [
+        "else if",
+        "equal if",
+        "evaluate if",
+        "end if"
+      ],
+      "correct_index": 0,
+      "explanation": "elif is shorthand for 'else if'. It lets you chain additional conditions after an initial if statement."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "In an if/elif/else chain, how many branches will execute at most?",
+      "options": [
+        "All branches that have a True condition",
+        "Exactly one branch",
+        "Only the else branch",
+        "All branches always execute"
+      ],
+      "correct_index": 1,
+      "explanation": "Python evaluates conditions from top to bottom and executes only the first matching branch, then skips the rest. At most one branch runs."
+    }
+  ],
+  "completion_message": "Well done! You can now handle multiple outcomes using else and elif. Remember: order matters — put the most specific conditions first. Next, you'll learn about nesting conditionals inside each other."
+}

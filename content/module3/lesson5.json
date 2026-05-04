@@ -1,0 +1,108 @@
+{
+  "id": "module3_lesson5",
+  "module_id": "module3",
+  "module_title": "Control Flow",
+  "module_number": 3,
+  "lesson_number": 5,
+  "title": "while Loops",
+  "subtitle": "Repeat code as long as a condition stays True",
+  "estimated_minutes": 18,
+  "prerequisites": ["module3_lesson4"],
+  "learning_objectives": [
+    "Write a while loop that repeats until a condition becomes False",
+    "Use a counter variable to control how many times a loop runs",
+    "Explain why infinite loops are dangerous and how to avoid them",
+    "Use while True with break to exit a loop from inside"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "while Loop Syntax",
+        "content": "A <code>while</code> loop checks its condition before each iteration. As long as the condition is <code>True</code>, the indented block runs again. When the condition becomes <code>False</code>, the loop stops and execution continues after the loop.<br><br>The most common pattern is to use a <strong>counter variable</strong> that you update inside the loop so the condition eventually becomes <code>False</code>.",
+        "code_example": "count = 1\n\nwhile count <= 5:\n    print(\"Count:\", count)\n    count = count + 1\n\nprint(\"Loop finished!\")",
+        "code_output": "Count: 1\nCount: 2\nCount: 3\nCount: 4\nCount: 5\nLoop finished!"
+      },
+      {
+        "heading": "Infinite Loops: A Dangerous Mistake",
+        "content": "An <strong>infinite loop</strong> runs forever because its condition never becomes <code>False</code>. This will freeze your browser tab and force you to refresh the page, losing any unsaved work.<br><br>The most common cause is forgetting to update the loop variable inside the loop. Always ask yourself: <em>what will make this condition False eventually?</em>",
+        "warning": "Infinite loops will freeze your browser! Always make sure your loop condition will eventually become False.",
+        "code_example": "# DANGER: This loop never ends — do NOT run this!\n# count = 1\n# while count <= 5:\n#     print(count)\n#     # Forgot to update count! count stays 1 forever.\n\n# SAFE version: always update the counter\ncount = 1\nwhile count <= 3:\n    print(count)\n    count += 1   # += 1 is shorthand for count = count + 1",
+        "code_output": "1\n2\n3"
+      },
+      {
+        "heading": "while True and break",
+        "content": "Sometimes you want to keep looping until a specific event happens inside the loop. The pattern <code>while True:</code> creates a loop that would run forever on its own, but a <code>break</code> statement immediately exits the loop when you're ready.<br><br>This is useful when you don't know in advance how many iterations you need.",
+        "code_example": "number = 1\n\nwhile True:\n    print(\"Number:\", number)\n    number += 1\n    if number > 4:\n        break\n\nprint(\"Done.\")",
+        "code_output": "Number: 1\nNumber: 2\nNumber: 3\nNumber: 4\nDone."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Countdown",
+      "prompt": "Write a <code>while</code> loop that counts down from 5 to 1, printing each number. After the loop, print <code>\"Blast off!\"</code>\n\nNote: Don't forget to decrease count inside the loop (e.g. count -= 1), otherwise the loop will run forever and freeze the page.",
+      "starter_code": "count = 5\n\n# Write your while loop below\n",
+      "solution": "count = 5\n\nwhile count >= 1:\n    print(count)\n    count -= 1\n\nprint(\"Blast off!\")",
+      "hints": [
+        "The loop should run while count >= 1",
+        "Use count -= 1 to decrease the counter each iteration"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "5", "message": "Output should contain 5"},
+        {"type": "stdout_contains", "value": "1", "message": "Output should contain 1"},
+        {"type": "stdout_contains", "value": "Blast off!", "message": "Output should end with 'Blast off!'"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Sum Accumulator",
+      "prompt": "Use a <code>while</code> loop to calculate the sum of numbers from 1 to 10. Start with <code>total = 0</code> and <code>n = 1</code>. Add <code>n</code> to <code>total</code> in each iteration. Print the final total after the loop.\n\nNote: Remember to increment n (n += 1) inside the loop, or it will run forever.",
+      "starter_code": "total = 0\nn = 1\n\n# Write your while loop below\n\n# Print the total after the loop\n",
+      "solution": "total = 0\nn = 1\n\nwhile n <= 10:\n    total += n\n    n += 1\n\nprint(\"Total:\", total)",
+      "hints": [
+        "The loop runs while n <= 10",
+        "Inside the loop: total += n, then n += 1",
+        "The sum of 1 through 10 is 55"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "55", "message": "The sum of 1 to 10 should be 55"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What causes an infinite loop in a while statement?",
+      "options": [
+        "Using a counter variable",
+        "The condition never becomes False",
+        "Using break inside the loop",
+        "Having too many print statements"
+      ],
+      "correct_index": 1,
+      "explanation": "An infinite loop occurs when the while condition never evaluates to False. This usually happens when the loop variable is never updated, so the condition remains True forever."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What does count += 1 mean?",
+      "options": [
+        "Set count to 1",
+        "Add count and 1 without saving the result",
+        "Increase count by 1 (same as count = count + 1)",
+        "Check if count equals 1"
+      ],
+      "correct_index": 2,
+      "explanation": "The += operator is shorthand for addition-assignment. count += 1 is exactly the same as count = count + 1 — it increases count by 1 and stores the result back in count."
+    }
+  ],
+  "completion_message": "Fantastic! You now know how to use while loops to repeat code, manage counter variables, and avoid the danger of infinite loops. Next up: the for loop, which is even more common in Python!"
+}

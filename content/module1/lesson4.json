@@ -1,0 +1,138 @@
+{
+  "id": "module1_lesson4",
+  "module_id": "module1",
+  "module_title": "Getting Started with Python",
+  "module_number": 1,
+  "lesson_number": 4,
+  "title": "Variables — Storing Information",
+  "subtitle": "Learn to save and reuse values with named variables",
+  "estimated_minutes": 15,
+  "prerequisites": ["module1_lesson1", "module1_lesson2", "module1_lesson3"],
+  "learning_objectives": [
+    "Explain what a variable is and why it is useful",
+    "Create a variable using the = assignment operator",
+    "Follow Python's rules for naming variables correctly",
+    "Reassign a variable to a new value",
+    "Print variables and combine them with text in print()"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "What is a Variable? A Named Box for Storing Values",
+        "content": "Imagine you have a physical box with a label on it. You can put something inside the box, look at what's in it later, swap it out for something else, and refer to it by its label. That is exactly what a <strong>variable</strong> is in programming.<br><br>A variable is a <strong>named storage location</strong> in your computer's memory. You give it a name, assign it a value, and then use that name any time you need that value. This is incredibly useful because:<ul><li>You can store a value once and use it many times</li><li>You can change the stored value and every place that uses it automatically gets the new value</li><li>Your code becomes much easier to read — <code>player_score</code> is far clearer than a random number floating around your code</li></ul>",
+        "code_example": "# Storing values in variables\nplayer_name = \"Alex\"\nplayer_score = 100\nis_playing = True\n\n# Using them later\nprint(player_name)\nprint(player_score)",
+        "code_output": "Alex\n100",
+        "note": "Once you store a value in a variable, you can use that variable's name anywhere in your program to access that value."
+      },
+      {
+        "heading": "The Assignment Operator = and Naming Rules",
+        "content": "To create a variable, you write its name, then an <strong>equals sign</strong> <code>=</code>, then the value you want to store. This is called <strong>assignment</strong>.<br><br><strong>Important:</strong> The <code>=</code> in Python does NOT mean \"equals\" the way it does in math. It means <em>\"take the value on the right and store it in the name on the left.\"</em><br><br>Python has rules for what you can name a variable:<ul><li>Names can contain letters, numbers, and underscores <code>_</code></li><li>Names <strong>cannot start with a number</strong> (so <code>1score</code> is invalid, but <code>score1</code> is fine)</li><li>Names <strong>cannot have spaces</strong> — use underscores instead: <code>player_name</code></li><li>Names are <strong>case-sensitive</strong>: <code>Score</code> and <code>score</code> are two completely different variables</li><li>By convention, Python variable names use <strong>snake_case</strong>: all lowercase with underscores between words</li></ul>",
+        "code_example": "# Good variable names (snake_case style)\nfirst_name = \"Maria\"\nage = 30\nhigh_score = 9999\n\n# Case sensitivity demo\nScore = 50\nscore = 75\nprint(Score)  # prints 50\nprint(score)  # prints 75 (different variable!)",
+        "code_output": "50\n75",
+        "warning": "Avoid naming your variables the same as Python's built-in names like print, input, or list. Doing so will overwrite them and cause confusing errors."
+      },
+      {
+        "heading": "Reassigning Variables and Using Them in print()",
+        "content": "Variables are not fixed forever — you can change the value stored in a variable at any time simply by assigning a new value to it. The old value is replaced.<br><br>You can also use variables directly inside <code>print()</code>. Just pass the variable name — no quotes needed around it. You can combine variables with text strings by separating them with commas.",
+        "code_example": "# Start with one value\nfavorite_color = \"blue\"\nprint(\"My favorite color is\", favorite_color)\n\n# Reassign to a new value\nfavorite_color = \"green\"\nprint(\"Actually, I changed my mind:\", favorite_color)\n\n# Combining multiple variables\nfirst_name = \"Jordan\"\nlast_name = \"Smith\"\nprint(\"Full name:\", first_name, last_name)",
+        "code_output": "My favorite color is blue\nActually, I changed my mind: green\nFull name: Jordan Smith",
+        "note": "When you reassign a variable, Python completely forgets the old value. Only the most recently assigned value is stored."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Create Your First Variables",
+      "prompt": "Create two variables:\n1. A variable called city that stores the name of a city (any city you like)\n2. A variable called country that stores a country name\n\nThen print both of them on separate lines.",
+      "starter_code": "# Create a variable called city and store a city name in it\n\n# Create a variable called country and store a country name in it\n\n# Print both variables\n",
+      "solution": "city = \"Paris\"\ncountry = \"France\"\nprint(city)\nprint(country)",
+      "hints": [
+        "Assign a text value to each variable using = and put the text in quotes.",
+        "Example: city = \"Tokyo\"",
+        "Use two print() calls to display each variable on its own line."
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "variable_exists", "variable_name": "city", "message": "A variable called city is used"},
+        {"type": "variable_exists", "variable_name": "country", "message": "A variable called country is used"},
+        {"type": "stdout_lines_gte", "value": 2, "message": "Both variables are printed"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Reassign a Variable",
+      "prompt": "Variables can change! Do the following:\n1. Create a variable called temperature and set it to 20\n2. Print: The temperature is 20\n3. Reassign temperature to 35\n4. Print: Now the temperature is 35",
+      "starter_code": "# Create a variable called temperature and set it to 20\n\n# Print: The temperature is 20\n\n# Reassign temperature to 35\n\n# Print: Now the temperature is 35\n",
+      "solution": "temperature = 20\nprint(\"The temperature is\", temperature)\ntemperature = 35\nprint(\"Now the temperature is\", temperature)",
+      "hints": [
+        "To reassign, just write the variable name = new value again.",
+        "After reassigning, the variable holds the new value only.",
+        "Try: temperature = 35 then print(\"Now the temperature is\", temperature)"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "temperature", "message": "Output mentions temperature"},
+        {"type": "stdout_contains", "value": "20", "message": "Output contains the value 20"},
+        {"type": "stdout_contains", "value": "35", "message": "Output contains the reassigned value 35"}
+      ]
+    },
+    {
+      "id": "ex3",
+      "order": 3,
+      "type": "code_run",
+      "title": "Build a Mini Profile",
+      "prompt": "Create a mini personal profile using variables. Create three variables:\n- name (a person's name as a string)\n- age (a number)\n- hobby (something they enjoy as a string)\n\nThen print all three on a single line using one print() call with commas:\nprint(\"Name:\", name, \"Age:\", age, \"Hobby:\", hobby)\n\nNote: print() with commas adds a space between each value, so your output will look like 'Name: Sam Age: 28 Hobby: reading' — the spaces are normal and expected.",
+      "starter_code": "# Create a variable called name and assign a person's name to it\n# Create a variable called age and assign a number to it\n# Create a variable called hobby and assign something they enjoy to it\n\n# Print all three on one line using print() with commas\n",
+      "solution": "name = \"Sam\"\nage = 28\nhobby = \"reading\"\nprint(\"Name:\", name, \"Age:\", age, \"Hobby:\", hobby)",
+      "hints": [
+        "Assign a real value to each variable, e.g. name = \"Sam\"",
+        "print() can take many values separated by commas — it prints them all on one line with spaces between",
+        "Try: print(\"Name:\", name, \"Age:\", age, \"Hobby:\", hobby)"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "variable_exists", "variable_name": "name", "message": "A variable called name is defined"},
+        {"type": "variable_exists", "variable_name": "age", "message": "A variable called age is defined"},
+        {"type": "variable_exists", "variable_name": "hobby", "message": "A variable called hobby is defined"},
+        {"type": "stdout_contains", "value": "Name:", "message": "Output contains: Name:"},
+        {"type": "stdout_contains", "value": "Age:", "message": "Output contains: Age:"},
+        {"type": "stdout_contains", "value": "Hobby:", "message": "Output contains: Hobby:"},
+        {"type": "stdout_lines_gte", "value": 1, "message": "Output is printed"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "Which of the following is a valid Python variable name?",
+      "options": [
+        "1st_place",
+        "first place",
+        "first_place",
+        "first-place"
+      ],
+      "correct_index": 2,
+      "explanation": "Variable names cannot start with a number (rules out 1st_place), cannot contain spaces (rules out first place), and cannot use hyphens (rules out first-place). The correct answer is first_place, which follows Python's snake_case convention."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What does the = sign mean in Python when you write: score = 100",
+      "options": [
+        "Check if score is equal to 100",
+        "Store the value 100 in a variable named score",
+        "Display the number 100",
+        "Calculate what score multiplied by 100 equals"
+      ],
+      "correct_index": 1,
+      "explanation": "In Python, = is the assignment operator. It means: take the value on the right (100) and store it in the variable on the left (score). It does NOT check whether they are equal — that's what == is for."
+    }
+  ],
+  "completion_message": "Wonderful work! Variables are one of the most fundamental building blocks of all programming. Now that you know how to store and reuse information, your programs can start doing much more interesting things. Keep going — you're building real skills!"
+}

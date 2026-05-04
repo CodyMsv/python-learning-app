@@ -1,0 +1,101 @@
+{
+  "id": "module3_lesson8",
+  "module_id": "module3",
+  "module_title": "Control Flow",
+  "module_number": 3,
+  "lesson_number": 8,
+  "title": "Loop Control: break and continue",
+  "subtitle": "Take precise control of your loops mid-execution",
+  "estimated_minutes": 15,
+  "prerequisites": ["module3_lesson7"],
+  "learning_objectives": [
+    "Use break to immediately exit a loop when a condition is met",
+    "Use continue to skip the rest of the current iteration and proceed to the next",
+    "Use pass as a placeholder when a block is required but no action is needed"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "break and continue: Steering Mid-Loop",
+        "content": "<code>break</code> immediately exits the entire loop — no more iterations run. It is often used to stop searching once a result has been found.<br><br><code>continue</code> skips only the rest of the <em>current</em> iteration and jumps straight to the next one. The loop itself keeps going. Use it to skip items that don't meet a condition without nesting all your logic inside an <code>if</code> block.",
+        "code_example": "# break: find the first even number and stop\nfor n in range(1, 10):\n    if n % 2 == 0:\n        print(\"First even number:\", n)\n        break\n\nprint(\"---\")\n\n# continue: print only odd numbers\nfor n in range(1, 8):\n    if n % 2 == 0:\n        continue          # skip even numbers\n    print(n)",
+        "code_output": "First even number: 2\n---\n1\n3\n5\n7"
+      },
+      {
+        "heading": "pass: The Do-Nothing Placeholder",
+        "content": "<code>pass</code> does absolutely nothing — it is a valid Python statement that simply takes up space. It is useful as a <strong>placeholder</strong> when a block is syntactically required but you haven't written the code yet, or when you intentionally want to handle a case by doing nothing.<br><br>You'll also see <code>pass</code> in empty function and class definitions during early development.",
+        "code_example": "# pass as a placeholder in a conditional\nfor n in range(1, 6):\n    if n == 3:\n        pass    # TODO: handle the special case later\n    else:\n        print(n)\n\nprint(\"---\")\n\n# Contrast with continue: skip silently\nfor n in range(1, 6):\n    if n == 3:\n        continue\n    print(n)",
+        "code_output": "1\n2\n4\n5\n---\n1\n2\n4\n5"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Search and Stop",
+      "prompt": "Use a <code>for</code> loop with <code>range(1, 25)</code> to find the first number divisible by both 3 and 7. Print <code>\"Found: \"</code> followed by that number, then <code>break</code> out of the loop.\n\nNote: the answer is 21 (3×7=21), so make sure your range goes past 21.",
+      "starter_code": "for n in range(1, 25):\n    # Check if n is divisible by both 3 and 7\n    pass  # replace this with your code\n",
+      "solution": "for n in range(1, 25):\n    if n % 3 == 0 and n % 7 == 0:\n        print(\"Found:\", n)\n        break",
+      "hints": [
+        "Use the modulo operator %: n % 3 == 0 means n is divisible by 3",
+        "Combine both conditions with 'and'",
+        "Put break right after the print statement inside the if block"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Found: 21", "message": "The first number divisible by both 3 and 7 is 21 — but wait, 21 > 20! Try range(1, 25) if needed. The answer is 21."},
+        {"type": "stdout_contains", "value": "Found:", "message": "Output should start with 'Found:'"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Skip the Vowels",
+      "prompt": "Loop over the string <code>\"programming\"</code>. Use <code>continue</code> to skip any vowels (<code>a, e, i, o, u</code>) and print only the consonants, each on its own line.",
+      "starter_code": "word = \"programming\"\nvowels = \"aeiou\"\n\nfor char in word:\n    # Use continue to skip vowels\n    pass  # replace this\n",
+      "solution": "word = \"programming\"\nvowels = \"aeiou\"\n\nfor char in word:\n    if char in vowels:\n        continue\n    print(char)",
+      "hints": [
+        "Use 'if char in vowels:' to check whether the character is a vowel",
+        "After the continue, any code below it in the loop body is skipped for that iteration",
+        "The print should be outside (after) the if block, not inside it"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "p", "message": "Output should contain consonants like 'p'"},
+        {"type": "stdout_contains", "value": "g", "message": "Output should contain consonants like 'g'"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What is the difference between break and continue?",
+      "options": [
+        "break skips one iteration; continue exits the entire loop",
+        "break exits the entire loop; continue skips to the next iteration",
+        "They are identical — both exit the loop",
+        "break only works in while loops; continue only works in for loops"
+      ],
+      "correct_index": 1,
+      "explanation": "break exits the entire loop immediately — no more iterations run. continue only skips the rest of the current iteration and moves on to the next one. The loop itself keeps going with continue."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What is the purpose of pass?",
+      "options": [
+        "It skips the current loop iteration",
+        "It immediately exits the loop",
+        "It does nothing and acts as a placeholder where a statement is required",
+        "It passes a value to the next iteration"
+      ],
+      "correct_index": 2,
+      "explanation": "pass is a no-op statement. Python requires at least one statement in every indented block (like an if, for, or function body). pass satisfies that requirement without doing anything, making it perfect as a placeholder."
+    }
+  ],
+  "completion_message": "Congratulations — you've completed Module 3: Control Flow! You can now write if/elif/else chains, use logical operators, loop with while and for, harness range(), and control loops precisely with break, continue, and pass. You're ready for Module 4: Functions!"
+}

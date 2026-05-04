@@ -1,0 +1,158 @@
+{
+  "id": "module4_lesson3",
+  "module_id": "module4",
+  "module_title": "Collections",
+  "module_number": 4,
+  "lesson_number": 3,
+  "title": "List Slicing and Iteration",
+  "subtitle": "Extract sublists, reverse, sort, and loop over lists",
+  "estimated_minutes": 18,
+  "prerequisites": ["module3_lesson8"],
+  "learning_objectives": [
+    "Extract sublists using slice notation list[start:stop]",
+    "Use step slicing to skip elements or reverse a list",
+    "Iterate over a list with a for loop",
+    "Sort a list with sorted() and .sort()",
+    "Use enumerate() to access both index and value during iteration"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Slicing Lists",
+        "content": "A <strong>slice</strong> extracts a portion of a list using the syntax <code>list[start:stop]</code>, where <code>start</code> is inclusive and <code>stop</code> is exclusive. Omitting <code>start</code> defaults to the beginning; omitting <code>stop</code> defaults to the end. Adding a third value <code>list[start:stop:step]</code> controls the step size — <code>list[::2]</code> takes every other element, and <code>list[::-1]</code> reverses the list.",
+        "code_example": "nums = [0, 1, 2, 3, 4, 5, 6, 7]\n\nprint(nums[2:5])    # elements at index 2, 3, 4\nprint(nums[:3])     # first three elements\nprint(nums[5:])     # from index 5 to the end\nprint(nums[::2])    # every other element\nprint(nums[::-1])   # reversed",
+        "code_output": "[2, 3, 4]\n[0, 1, 2]\n[5, 6, 7]\n[0, 2, 4, 6]\n[7, 6, 5, 4, 3, 2, 1, 0]"
+      },
+      {
+        "heading": "Iterating and Sorting",
+        "content": "Use <code>for item in list:</code> to loop over every element. <code>sorted(list)</code> returns a <strong>new</strong> sorted list, leaving the original unchanged. <code>list.sort()</code> sorts the list <strong>in place</strong>. Both accept an optional <code>reverse=True</code> argument for descending order.",
+        "code_example": "fruits = [\"banana\", \"apple\", \"cherry\"]\n\n# Iterating\nfor fruit in fruits:\n    print(fruit)\n\n# sorted() returns a new list\nprint(sorted(fruits))\nprint(fruits)          # unchanged\n\n# .sort() modifies in place\nfruits.sort()\nprint(fruits)          # now sorted",
+        "code_output": "banana\napple\ncherry\n['apple', 'banana', 'cherry']\n['banana', 'apple', 'cherry']\n['apple', 'banana', 'cherry']"
+      },
+      {
+        "heading": "Using enumerate()",
+        "content": "<code>enumerate(list)</code> returns pairs of <code>(index, value)</code> as you iterate. This is the idiomatic Python way to access both the position and the value inside a loop, avoiding manual index tracking with a counter variable.",
+        "code_example": "colors = [\"red\", \"green\", \"blue\"]\n\nfor index, color in enumerate(colors):\n    print(index, color)\n\n# enumerate can start from a custom number\nfor index, color in enumerate(colors, start=1):\n    print(index, color)",
+        "code_output": "0 red\n1 green\n2 blue\n1 red\n2 green\n3 blue"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Slice It Up",
+      "prompt": "Given <code>letters = [\"a\", \"b\", \"c\", \"d\", \"e\", \"f\"]</code>, print the first three elements using a slice, then print the list in reverse order using a slice.",
+      "starter_code": "letters = [\"a\", \"b\", \"c\", \"d\", \"e\", \"f\"]\n\n# Print the first three elements\n\n# Print the list reversed\n",
+      "solution": "letters = [\"a\", \"b\", \"c\", \"d\", \"e\", \"f\"]\nprint(letters[:3])\nprint(letters[::-1])",
+      "hints": [
+        "letters[:3] gives elements at index 0, 1, 2",
+        "letters[::-1] uses a step of -1 to walk backward through the whole list"
+      ],
+      "tests": [
+        {
+          "type": "runs_without_error",
+          "message": "Your code should run without any errors"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "'a', 'b', 'c'",
+          "message": "The first slice should contain a, b, c"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "'f', 'e', 'd'",
+          "message": "The reversed slice should start with f, e, d"
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Sort a List",
+      "prompt": "Given <code>scores = [55, 90, 72, 88, 61]</code>, use <code>sorted()</code> to print a sorted copy of the list (the original must stay unchanged), then print the original to confirm it is unchanged.",
+      "starter_code": "scores = [55, 90, 72, 88, 61]\n\n# Print a sorted copy\n\n# Print the original (should be unchanged)\n",
+      "solution": "scores = [55, 90, 72, 88, 61]\nprint(sorted(scores))\nprint(scores)",
+      "hints": [
+        "sorted(scores) returns a new list — assign it or print it directly",
+        "Do NOT call scores.sort() — that would modify the original"
+      ],
+      "tests": [
+        {
+          "type": "runs_without_error",
+          "message": "Your code should run without any errors"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "55, 61, 72, 88, 90",
+          "message": "The sorted output should be in ascending order"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "55, 90, 72, 88, 61",
+          "message": "The original list should be printed unchanged"
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "order": 3,
+      "type": "code_run",
+      "title": "Numbered List with enumerate()",
+      "prompt": "Given <code>items = [\"pen\", \"notebook\", \"ruler\"]</code>, use <code>enumerate()</code> starting at <code>1</code> to print each item with its number in the format: <code>1. pen</code>",
+      "starter_code": "items = [\"pen\", \"notebook\", \"ruler\"]\n\n# Use enumerate starting at 1\nfor num, item in enumerate(items, start=1):\n    pass  # replace this line\n",
+      "solution": "items = [\"pen\", \"notebook\", \"ruler\"]\nfor num, item in enumerate(items, start=1):\n    print(str(num) + \". \" + item)",
+      "hints": [
+        "enumerate(items, start=1) gives (1, 'pen'), (2, 'notebook'), etc.",
+        "Use print(str(num) + \". \" + item) or an f-string: print(f\"{num}. {item}\")"
+      ],
+      "tests": [
+        {
+          "type": "runs_without_error",
+          "message": "Your code should run without any errors"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "1.",
+          "message": "The output should contain '1.' for the first item"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "notebook",
+          "message": "The output should contain 'notebook'"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does <code>[10, 20, 30, 40, 50][1:4]</code> evaluate to?",
+      "options": [
+        "[10, 20, 30]",
+        "[20, 30, 40]",
+        "[20, 30, 40, 50]",
+        "[10, 20, 30, 40]"
+      ],
+      "correct_index": 1,
+      "explanation": "Slice [1:4] starts at index 1 (inclusive) and stops at index 4 (exclusive), giving elements at indexes 1, 2, and 3: 20, 30, 40."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What is the key difference between <code>sorted(my_list)</code> and <code>my_list.sort()</code>?",
+      "options": [
+        "sorted() only works on numbers; .sort() works on any type",
+        "sorted() returns a new list; .sort() modifies the list in place and returns None",
+        "sorted() sorts descending; .sort() sorts ascending",
+        "There is no difference"
+      ],
+      "correct_index": 1,
+      "explanation": "sorted() is a built-in function that returns a new sorted list, leaving the original untouched. .sort() is a list method that sorts the list in place and returns None."
+    }
+  ],
+  "completion_message": "Well done! Slicing, sorting, and enumerate() are patterns you will use constantly in real Python code. You are building a strong collection toolkit."
+}

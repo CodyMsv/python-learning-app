@@ -1,0 +1,128 @@
+{
+  "id": "module4_lesson4",
+  "module_id": "module4",
+  "module_title": "Collections",
+  "module_number": 4,
+  "lesson_number": 4,
+  "title": "Tuples",
+  "subtitle": "Immutable sequences for fixed collections of data",
+  "estimated_minutes": 12,
+  "prerequisites": ["module3_lesson8"],
+  "learning_objectives": [
+    "Create tuples using parentheses and understand their immutability",
+    "Explain why immutability makes tuples safer for constants",
+    "Pack multiple values into a tuple",
+    "Unpack a tuple into individual variables",
+    "Create a single-element tuple with the required trailing comma"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "What Is a Tuple and Why Use It?",
+        "content": "A <strong>tuple</strong> is an ordered, <strong>immutable</strong> sequence enclosed in parentheses <code>()</code>. Immutable means you cannot add, remove, or change elements after creation — Python will raise a <code>TypeError</code> if you try. This makes tuples ideal for data that should never change: coordinates, RGB colors, database records, or function return values. Tuples are also slightly faster than lists and can be used as dictionary keys (lists cannot).<br><br>To create a <strong>single-element tuple</strong>, you must include a trailing comma: <code>(42,)</code>. Without the comma, Python treats the parentheses as grouping, not a tuple.",
+        "code_example": "# Creating tuples\ncoords = (10, 20)\nrgb = (255, 128, 0)\none = (42,)          # single-element — comma required!\n\nprint(coords)        # (10, 20)\nprint(type(one))     # <class 'tuple'>\nprint(type((42)))    # <class 'int'>  — no comma, not a tuple!\n\n# Tuples support indexing and len like lists\nprint(coords[0])     # 10\nprint(len(rgb))      # 3",
+        "code_output": "(10, 20)\n<class 'tuple'>\n<class 'int'>\n10\n3"
+      },
+      {
+        "heading": "Packing and Unpacking",
+        "content": "<strong>Tuple packing</strong> assigns multiple values to one tuple variable. <strong>Tuple unpacking</strong> does the reverse: it assigns each element of a tuple to a separate variable in a single statement. The number of variables on the left must match the number of elements in the tuple. Unpacking makes code readable and is widely used — for example, with <code>enumerate()</code> and <code>dict.items()</code>.",
+        "code_example": "# Packing\npoint = (3, 7)\n\n# Unpacking\nx, y = point\nprint(x)   # 3\nprint(y)   # 7\n\n# Swap two variables with tuple unpacking\na = 10\nb = 20\na, b = b, a\nprint(a, b)   # 20 10\n\n# Unpacking a 3-element tuple\nname, age, city = (\"Alice\", 30, \"Paris\")\nprint(name, age, city)",
+        "code_output": "3\n7\n20 10\nAlice 30 Paris"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Create and Inspect a Tuple",
+      "prompt": "Create a tuple called <code>dimensions</code> with three values: <code>1920</code>, <code>1080</code>, and <code>32</code>. Print the tuple, its length, and the first element.",
+      "starter_code": "# Create a tuple called dimensions with the values 1920, 1080, and 32\n\n# Print the tuple\n\n# Print the length\n\n# Print the first element\n",
+      "solution": "dimensions = (1920, 1080, 32)\nprint(dimensions)\nprint(len(dimensions))\nprint(dimensions[0])",
+      "hints": [
+        "Use parentheses: dimensions = (1920, 1080, 32)",
+        "len() and indexing work exactly the same as with lists"
+      ],
+      "tests": [
+        {
+          "type": "runs_without_error",
+          "message": "Your code should run without any errors"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "1920",
+          "message": "The output should contain 1920"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "3",
+          "message": "The length of the tuple should be 3"
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Unpack a Tuple",
+      "prompt": "Given the tuple <code>person = (\"Bob\", 25, \"Engineer\")</code>, unpack it into three variables: <code>name</code>, <code>age</code>, and <code>job</code>. Then print each variable on its own line.",
+      "starter_code": "person = (\"Bob\", 25, \"Engineer\")\n\n# Unpack the tuple\n\n# Print each variable\n",
+      "solution": "person = (\"Bob\", 25, \"Engineer\")\nname, age, job = person\nprint(name)\nprint(age)\nprint(job)",
+      "hints": [
+        "Unpacking syntax: name, age, job = person",
+        "There must be exactly three variables on the left to match the three tuple elements"
+      ],
+      "tests": [
+        {
+          "type": "runs_without_error",
+          "message": "Your code should run without any errors"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "Bob",
+          "message": "The output should contain 'Bob'"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "25",
+          "message": "The output should contain '25'"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "Engineer",
+          "message": "The output should contain 'Engineer'"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What is the type of <code>(99)</code> in Python?",
+      "options": [
+        "tuple",
+        "list",
+        "int",
+        "set"
+      ],
+      "correct_index": 2,
+      "explanation": "Parentheses without a trailing comma are just grouping operators. (99) is simply the integer 99. To create a single-element tuple you need (99,) with the trailing comma."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "Which statement about tuples is true?",
+      "options": [
+        "Tuples can be modified after creation",
+        "Tuples use curly braces {}",
+        "Tuples are immutable — elements cannot be changed after creation",
+        "Tuples cannot be indexed"
+      ],
+      "correct_index": 2,
+      "explanation": "Tuples are immutable sequences. Once created, you cannot add, remove, or reassign elements. This is the key difference from lists."
+    }
+  ],
+  "completion_message": "Solid understanding of tuples! Knowing when to use an immutable tuple versus a mutable list is a mark of good Python style. Next up: dictionaries."
+}

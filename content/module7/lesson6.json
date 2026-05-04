@@ -1,0 +1,103 @@
+{
+  "id": "module7_lesson6",
+  "module_id": "module7",
+  "module_title": "Error Handling",
+  "module_number": 7,
+  "lesson_number": 6,
+  "title": "Custom Exceptions",
+  "subtitle": "Create your own exception types for clearer error handling",
+  "estimated_minutes": 12,
+  "prerequisites": ["module7_lesson5"],
+  "learning_objectives": [
+    "Define a custom exception class by inheriting from Exception",
+    "Add a custom message to your exception",
+    "Understand when custom exceptions improve code clarity",
+    "Catch custom exceptions the same way as built-in ones"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Defining a Custom Exception",
+        "content": "You can create your own exception type by defining a class that inherits from <code>Exception</code>. This lets you give errors descriptive names that explain exactly what went wrong in your specific application.",
+        "code_example": "class InsufficientFundsError(Exception):\n    pass\n\ndef withdraw(balance, amount):\n    if amount > balance:\n        raise InsufficientFundsError(\"Not enough money in account\")\n    return balance - amount\n\ntry:\n    new_balance = withdraw(100, 150)\nexcept InsufficientFundsError as e:\n    print(\"Transaction failed:\", e)",
+        "code_output": "Transaction failed: Not enough money in account"
+      },
+      {
+        "heading": "Custom Exceptions with Extra Information",
+        "content": "You can make custom exceptions carry extra information by defining an <code>__init__</code> method. This is useful when the error handler needs more than just a text message to know what to do.",
+        "code_example": "class AgeError(ValueError):\n    def __init__(self, age):\n        self.age = age\n        super().__init__(f\"Invalid age: {age}. Must be between 0 and 120.\")\n\ntry:\n    raise AgeError(-5)\nexcept AgeError as e:\n    print(e)\n    print(\"Bad value was:\", e.age)",
+        "code_output": "Invalid age: -5. Must be between 0 and 120.\nBad value was: -5",
+        "note": "Custom exceptions are especially helpful in larger programs where you want to distinguish between different kinds of failures in your own code."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Create a Custom Exception",
+      "prompt": "Create a custom exception class called TooYoungError that inherits from Exception. Write a function check_age(age) that raises TooYoungError(\"Must be 18 or older\") if age < 18. Test it with ages 16 and 21.",
+      "starter_code": "# Define TooYoungError exception\n\n\ndef check_age(age):\n    # Raise TooYoungError if age < 18\n    pass\n\ntry:\n    check_age(16)\nexcept TooYoungError as e:\n    print(\"Error:\", e)\n\ncheck_age(21)\nprint(\"Age 21 is fine\")\n",
+      "solution": "class TooYoungError(Exception):\n    pass\n\ndef check_age(age):\n    if age < 18:\n        raise TooYoungError(\"Must be 18 or older\")\n\ntry:\n    check_age(16)\nexcept TooYoungError as e:\n    print(\"Error:\", e)\n\ncheck_age(21)\nprint(\"Age 21 is fine\")",
+      "hints": [
+        "class TooYoungError(Exception): followed by pass",
+        "In check_age, if age < 18: raise TooYoungError(\"Must be 18 or older\")",
+        "Catch it with except TooYoungError as e:"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Error: Must be 18 or older", "message": "Output contains: Error: Must be 18 or older"},
+        {"type": "stdout_contains", "value": "Age 21 is fine", "message": "Output contains: Age 21 is fine"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Exception with Extra Data",
+      "prompt": "Create a class NegativeValueError(ValueError) with __init__(self, value) that sets self.value = value and calls super().__init__(f'Value cannot be negative: {value}'). Raise it if someone calls square_root(-9). Catch it and print both the error message and e.value.",
+      "starter_code": "class NegativeValueError(ValueError):\n    def __init__(self, value):\n        # Store value on self, then call super().__init__ with the message\n        pass\n\ndef square_root(n):\n    # Raise NegativeValueError if n < 0\n    pass\n\ntry:\n    square_root(-9)\nexcept NegativeValueError as e:\n    print(e)\n    print(\"Bad value was:\", e.value)\n",
+      "solution": "class NegativeValueError(ValueError):\n    def __init__(self, value):\n        self.value = value\n        super().__init__(f\"Value cannot be negative: {value}\")\n\ndef square_root(n):\n    if n < 0:\n        raise NegativeValueError(n)\n    return n ** 0.5\n\ntry:\n    square_root(-9)\nexcept NegativeValueError as e:\n    print(e)\n    print(\"Bad value was:\", e.value)",
+      "hints": [
+        "In __init__: self.value = value then super().__init__(f'Value cannot be negative: {value}')",
+        "In square_root: if n < 0: raise NegativeValueError(n)",
+        "In the except block: print(e) prints the message, e.value is the number"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Value cannot be negative: -9", "message": "Output contains the error message"},
+        {"type": "stdout_contains", "value": "Bad value was: -9", "message": "Output contains: Bad value was: -9"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "How do you create a custom exception called OutOfStockError?",
+      "options": [
+        "exception OutOfStockError:",
+        "class OutOfStockError(Exception): pass",
+        "def OutOfStockError(Exception):",
+        "raise new OutOfStockError"
+      ],
+      "correct_index": 1,
+      "explanation": "Custom exceptions are Python classes that inherit from Exception (or any built-in exception). The simplest version is just: class MyError(Exception): pass"
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What is the main benefit of creating custom exception classes?",
+      "options": [
+        "They run faster than built-in exceptions",
+        "They can only be used once",
+        "They give errors meaningful, app-specific names that make code easier to understand",
+        "They prevent the program from crashing"
+      ],
+      "correct_index": 2,
+      "explanation": "Custom exceptions like InsufficientFundsError or TooYoungError are much more descriptive than a generic ValueError. They make code self-documenting — a developer reading except InsufficientFundsError immediately knows what situation is being handled."
+    }
+  ],
+  "completion_message": "Excellent! You have completed the Error Handling module! Your programs can now handle failures gracefully and communicate errors clearly."
+}

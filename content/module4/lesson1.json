@@ -1,0 +1,162 @@
+{
+  "id": "module4_lesson1",
+  "module_id": "module4",
+  "module_title": "Collections",
+  "module_number": 4,
+  "lesson_number": 1,
+  "title": "Lists — Creating and Accessing",
+  "subtitle": "Build and read your first Python lists",
+  "estimated_minutes": 18,
+  "prerequisites": ["module3_lesson8"],
+  "learning_objectives": [
+    "Create a list using square bracket syntax",
+    "Access list elements by positive and negative index",
+    "Use len() to count elements in a list",
+    "Check whether a value exists in a list with the in operator"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Creating a List",
+        "content": "A list is an ordered, mutable collection of items enclosed in square brackets <code>[]</code>. Items are separated by commas. Lists can hold any type — strings, integers, floats, booleans, or even a mix of types in the same list.",
+        "code_example": "# A list of strings\nfruits = [\"apple\", \"banana\", \"cherry\"]\n\n# A list of integers\nscores = [95, 88, 72, 100]\n\n# A mixed-type list\nmixed = [\"Alice\", 30, True, 3.14]\n\nprint(fruits)\nprint(scores)\nprint(mixed)",
+        "code_output": "['apple', 'banana', 'cherry']\n[95, 88, 72, 100]\n['Alice', 30, True, 3.14]"
+      },
+      {
+        "heading": "Accessing Elements by Index",
+        "content": "Every item in a list has a numeric position called an <strong>index</strong>, starting at <code>0</code>. Use <code>list[index]</code> to retrieve an element. Python also supports <strong>negative indexing</strong>: <code>-1</code> refers to the last element, <code>-2</code> to the second-to-last, and so on.",
+        "code_example": "fruits = [\"apple\", \"banana\", \"cherry\"]\n\n# Positive indexing\nprint(fruits[0])   # first element\nprint(fruits[1])   # second element\nprint(fruits[2])   # third element\n\n# Negative indexing\nprint(fruits[-1])  # last element\nprint(fruits[-2])  # second to last",
+        "code_output": "apple\nbanana\ncherry\ncherry\nbanana"
+      },
+      {
+        "heading": "List Length and Membership",
+        "content": "Use the built-in <code>len()</code> function to find how many items a list contains. Use the <code>in</code> operator to check whether a specific value is present in the list — this returns <code>True</code> or <code>False</code>.",
+        "code_example": "fruits = [\"apple\", \"banana\", \"cherry\"]\n\n# Count elements\nprint(len(fruits))          # 3\n\n# Membership check\nprint(\"apple\" in fruits)    # True\nprint(\"mango\" in fruits)    # False\nprint(\"mango\" not in fruits) # True",
+        "code_output": "3\nTrue\nFalse\nTrue"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Build a Grocery List",
+      "prompt": "Create a list called <code>grocery</code> that contains exactly three items: \"milk\", \"eggs\", and \"bread\" (in that order). Print the entire list.",
+      "starter_code": "# Create a list called grocery containing \"milk\", \"eggs\", and \"bread\"\n\n# Print the list\n",
+      "solution": "grocery = [\"milk\", \"eggs\", \"bread\"]\nprint(grocery)",
+      "hints": [
+        "Use square brackets: grocery = [\"item1\", \"item2\", \"item3\"]",
+        "Make sure the items are strings wrapped in double or single quotes"
+      ],
+      "tests": [
+        {
+          "type": "runs_without_error",
+          "message": "Your code should run without any errors"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "milk",
+          "message": "The output should contain 'milk'"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "eggs",
+          "message": "The output should contain 'eggs'"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "bread",
+          "message": "The output should contain 'bread'"
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "First and Last",
+      "prompt": "Given the list <code>colors = [\"red\", \"green\", \"blue\", \"yellow\"]</code>, print the first element using index <code>0</code> and the last element using index <code>-1</code>.",
+      "starter_code": "colors = [\"red\", \"green\", \"blue\", \"yellow\"]\n\n# Print the first element\n\n# Print the last element\n",
+      "solution": "colors = [\"red\", \"green\", \"blue\", \"yellow\"]\nprint(colors[0])\nprint(colors[-1])",
+      "hints": [
+        "Use colors[0] for the first item",
+        "Use colors[-1] for the last item — negative indexes count from the end"
+      ],
+      "tests": [
+        {
+          "type": "runs_without_error",
+          "message": "Your code should run without any errors"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "red",
+          "message": "The output should contain 'red' (the first element)"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "yellow",
+          "message": "The output should contain 'yellow' (the last element)"
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "order": 3,
+      "type": "code_run",
+      "title": "Membership and Length",
+      "prompt": "Given <code>animals = [\"cat\", \"dog\", \"rabbit\"]</code>, print the number of animals using <code>len()</code>, then print whether <code>\"dog\"</code> is in the list and whether <code>\"fish\"</code> is in the list.",
+      "starter_code": "animals = [\"cat\", \"dog\", \"rabbit\"]\n\n# Print the number of animals\n\n# Check if \"dog\" is in the list\n\n# Check if \"fish\" is in the list\n",
+      "solution": "animals = [\"cat\", \"dog\", \"rabbit\"]\nprint(len(animals))\nprint(\"dog\" in animals)\nprint(\"fish\" in animals)",
+      "hints": [
+        "len(animals) returns the count as an integer",
+        "Use the 'in' keyword: \"dog\" in animals returns True or False"
+      ],
+      "tests": [
+        {
+          "type": "runs_without_error",
+          "message": "Your code should run without any errors"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "3",
+          "message": "The output should contain '3' (the length of the list)"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "True",
+          "message": "The output should contain 'True' for 'dog' in animals"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "False",
+          "message": "The output should contain 'False' for 'fish' in animals"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "Given the list <code>nums = [10, 20, 30, 40]</code>, what does <code>nums[-1]</code> return?",
+      "options": ["10", "20", "30", "40"],
+      "correct_index": 3,
+      "explanation": "Negative index -1 always refers to the last element of the list. Here that is 40."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "Which of the following creates a valid Python list containing three strings?",
+      "options": [
+        "(\"a\", \"b\", \"c\")",
+        "[\"a\", \"b\", \"c\"]",
+        "{\"a\", \"b\", \"c\"}",
+        "\"a\", \"b\", \"c\""
+      ],
+      "correct_index": 1,
+      "explanation": "Lists use square brackets []. Parentheses create a tuple, curly braces create a set or dict, and a bare comma-separated sequence is just a tuple without parentheses."
+    }
+  ],
+  "completion_message": "Great work! You can now create lists, access elements by index (including negative indexes), measure their length, and test for membership. These are the building blocks for every list operation ahead."
+}

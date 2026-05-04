@@ -1,0 +1,125 @@
+{
+  "id": "module6_lesson1",
+  "module_id": "module6",
+  "module_title": "Strings and Files",
+  "module_number": 6,
+  "lesson_number": 1,
+  "title": "Advanced String Methods",
+  "subtitle": "Join, split, strip, check, and align your strings like a pro",
+  "estimated_minutes": 18,
+  "prerequisites": ["module5_lesson8"],
+  "learning_objectives": [
+    "Use .join() to combine a list of strings into one",
+    "Use .split() to break a string apart by a separator",
+    "Remove whitespace with .strip(), .lstrip(), and .rstrip()",
+    "Check string contents with .isdigit(), .isalpha(), and .isalnum()",
+    "Align text using .center(), .ljust(), and .rjust()",
+    "Convert strings to title case with .title()"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Joining and Splitting Strings",
+        "content": "Two of the most useful string methods are <code>.join()</code> and <code>.split()</code>. They are opposites of each other.<br><br><code>.join(list)</code> is called on a <em>separator string</em> and takes a list of strings, gluing them together with that separator between each item.<br><br><code>.split(sep)</code> is called on a string and splits it into a list wherever the separator appears. If you call it with no argument it splits on any whitespace.",
+        "code_example": "words = [\"apple\", \"banana\", \"cherry\"]\nresult = \", \".join(words)\nprint(result)\n\nsentence = \"one,two,three\"\nparts = sentence.split(\",\")\nprint(parts)\n\nphrase = \"hello world foo\"\nprint(phrase.split())",
+        "code_output": "apple, banana, cherry\n['one', 'two', 'three']\n['hello', 'world', 'foo']"
+      },
+      {
+        "heading": "Stripping Whitespace and Checking Contents",
+        "content": "<code>.strip()</code> removes leading and trailing whitespace (spaces, tabs, newlines) from a string. <code>.lstrip()</code> removes only from the left side and <code>.rstrip()</code> only from the right side. These are extremely handy when processing user input or file data.<br><br>Python also has boolean methods that inspect what a string contains:<br><ul><li><code>.isdigit()</code> — <code>True</code> if every character is a digit</li><li><code>.isalpha()</code> — <code>True</code> if every character is a letter</li><li><code>.isalnum()</code> — <code>True</code> if every character is a letter or digit (no spaces or symbols)</li></ul>",
+        "code_example": "raw = \"   hello   \"\nprint(raw.strip())\nprint(raw.lstrip())\nprint(raw.rstrip())\n\nprint(\"12345\".isdigit())\nprint(\"hello\".isalpha())\nprint(\"abc123\".isalnum())\nprint(\"abc 123\".isalnum())",
+        "code_output": "hello\nhello   \n   hello\nTrue\nTrue\nTrue\nFalse",
+        "note": ".strip() does NOT modify the original string — it returns a new one. Strings are immutable in Python."
+      },
+      {
+        "heading": "Alignment and Title Case",
+        "content": "Python lets you pad strings to a fixed width for neat output. All three methods take a <code>width</code> argument and optionally a fill character (default is a space):<br><ul><li><code>.center(width)</code> — centres the text</li><li><code>.ljust(width)</code> — left-justifies (pads on the right)</li><li><code>.rjust(width)</code> — right-justifies (pads on the left)</li></ul><br><code>.title()</code> capitalises the first letter of every word, which is great for formatting names or headings.",
+        "code_example": "name = \"Python\"\nprint(name.center(20))\nprint(name.ljust(20, \"-\"))\nprint(name.rjust(20, \".\"))\n\ntitle = \"the quick brown fox\"\nprint(title.title())",
+        "code_output": "       Python       \nPython--------------\n..............Python\nThe Quick Brown Fox"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Build a CSV Line",
+      "prompt": "You have a list called <code>fruits</code> containing <code>\"mango\"</code>, <code>\"kiwi\"</code>, and <code>\"grape\"</code>. Use <code>.join()</code> to create a single comma-separated string called <code>csv_line</code> and print it. The output should be: <code>mango,kiwi,grape</code>",
+      "starter_code": "fruits = [\"mango\", \"kiwi\", \"grape\"]\n# Create a variable called csv_line by joining fruits with a comma separator\n# Print csv_line",
+      "solution": "fruits = [\"mango\", \"kiwi\", \"grape\"]\ncsv_line = \",\".join(fruits)\nprint(csv_line)",
+      "hints": [
+        "Call .join() on the separator string, not on the list. Example: \"SEP\".join(my_list)",
+        "The separator here is a comma with no spaces: \",\""
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Your code should run without errors."},
+        {"type": "stdout_contains", "value": "mango,kiwi,grape", "message": "Output should be 'mango,kiwi,grape'."}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Clean and Validate Input",
+      "prompt": "The variable <code>user_input</code> is set to <code>\"  42  \"</code>. Strip the whitespace, then check whether the stripped value is all digits using <code>.isdigit()</code>. Print the stripped value and then print the result of the digit check on separate lines.",
+      "starter_code": "user_input = \"  42  \"\n# Create a variable called cleaned by stripping whitespace from user_input\n# Print the cleaned value\n# Check if cleaned is all digits and print the result\n",
+      "solution": "user_input = \"  42  \"\ncleaned = user_input.strip()\nprint(cleaned)\nprint(cleaned.isdigit())",
+      "hints": [
+        "Use user_input.strip() to remove whitespace from both sides.",
+        "Then call .isdigit() on the cleaned string."
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Your code should run without errors."},
+        {"type": "stdout_contains", "value": "42", "message": "The stripped value '42' should be printed."},
+        {"type": "stdout_contains", "value": "True", "message": "'True' should be printed because '42' is all digits."}
+      ]
+    },
+    {
+      "id": "ex3",
+      "order": 3,
+      "type": "code_run",
+      "title": "Format a Name Tag",
+      "prompt": "The variable <code>name</code> is set to <code>\"alice smith\"</code>. Convert it to title case and then print it centred in a field of width 30 using dashes (<code>-</code>) as the fill character.",
+      "starter_code": "name = \"alice smith\"\n# Create a variable called titled by converting name to title case\n# Print titled centred in a field of width 30 using '-' as fill\n",
+      "solution": "name = \"alice smith\"\ntitled = name.title()\nprint(titled.center(30, \"-\"))",
+      "hints": [
+        "Use .title() to capitalise each word.",
+        "Then call .center(30, \"-\") on the result."
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Your code should run without errors."},
+        {"type": "stdout_contains", "value": "Alice Smith", "message": "The name should be in title case."}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does \"-\".join([\"a\", \"b\", \"c\"]) return?",
+      "options": [
+        "\"a-b-c\"",
+        "[\"a\", \"-\", \"b\", \"-\", \"c\"]",
+        "\"abc\"",
+        "\"-a-b-c-\""
+      ],
+      "correct_index": 0,
+      "explanation": ".join() places the separator string between each list item, so \"-\".join([\"a\",\"b\",\"c\"]) gives \"a-b-c\"."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "Which method returns True only when every character in the string is a letter (no digits or spaces)?",
+      "options": [
+        ".isalnum()",
+        ".isdigit()",
+        ".isalpha()",
+        ".isspace()"
+      ],
+      "correct_index": 2,
+      "explanation": ".isalpha() returns True only when every character is an alphabetic letter. .isalnum() allows digits too, and .isdigit() requires all digits."
+    }
+  ],
+  "completion_message": "Excellent work! You now have a solid toolkit of advanced string methods. These come up constantly in real Python programs whenever you process text, clean data, or format output."
+}

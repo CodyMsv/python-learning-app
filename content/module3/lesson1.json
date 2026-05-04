@@ -1,0 +1,98 @@
+{
+  "id": "module3_lesson1",
+  "module_id": "module3",
+  "module_title": "Control Flow",
+  "module_number": 3,
+  "lesson_number": 1,
+  "title": "if Statements",
+  "subtitle": "Make decisions in your code based on conditions",
+  "estimated_minutes": 15,
+  "prerequisites": ["module2_lesson6"],
+  "learning_objectives": [
+    "Write a basic if statement with the correct syntax",
+    "Understand why the colon and indentation are required",
+    "Predict whether a block of code will execute based on a condition"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "The if Statement: Syntax and Structure",
+        "content": "An <code>if</code> statement lets your program make a decision. If the condition is <code>True</code>, the indented block runs. If it is <code>False</code>, Python skips the block entirely.<br><br>Two things are <strong>required</strong>: a colon <code>:</code> at the end of the <code>if</code> line, and <strong>indentation</strong> (4 spaces) for every line inside the block. Python uses indentation — not curly braces — to know which lines belong to the <code>if</code>.",
+        "code_example": "age = 20\n\nif age >= 18:\n    print(\"You are an adult.\")\n    print(\"You may vote.\")\n\nprint(\"This line always runs.\")",
+        "code_output": "You are an adult.\nYou may vote.\nThis line always runs."
+      },
+      {
+        "heading": "True vs False: What Happens Each Way",
+        "content": "The condition inside an <code>if</code> statement must evaluate to either <code>True</code> or <code>False</code>. Common comparisons use operators like <code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, and <code>&lt;=</code>.<br><br>When the condition is <code>True</code>, the indented block executes. When it is <code>False</code>, the indented block is completely skipped and execution continues with the next unindented line.",
+        "code_example": "score = 45\n\nif score >= 50:\n    print(\"You passed!\")\n\nprint(\"Quiz complete.\")",
+        "code_output": "Quiz complete."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Age Check",
+      "prompt": "Write an <code>if</code> statement that checks whether a person is old enough to drive. Set <code>age = 16</code>, then print <code>\"You can drive!\"</code> if <code>age</code> is greater than or equal to 16.\n\nNote: Remember the colon after the condition (if age >= 16:) and indent the print() line by 4 spaces.",
+      "starter_code": "age = 16\n\n# Write your if statement below\n",
+      "solution": "age = 16\n\nif age >= 16:\n    print(\"You can drive!\")",
+      "hints": [
+        "Use >= to check 'greater than or equal to'",
+        "Don't forget the colon after the condition: if age >= 16:"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "You can drive!", "message": "Output should contain 'You can drive!'"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Score Check",
+      "prompt": "Set <code>score = 75</code>. Write an <code>if</code> statement that prints <code>\"Great job!\"</code> when the score is above 70, and also always prints <code>\"Thanks for taking the quiz.\"</code> after the <code>if</code> block.\n\nNote: The second print() should NOT be indented — it lives outside the if block and always runs.",
+      "starter_code": "score = 75\n\n# Write your if statement here\n\n# Always print this line\n",
+      "solution": "score = 75\n\nif score > 70:\n    print(\"Great job!\")\n\nprint(\"Thanks for taking the quiz.\")",
+      "hints": [
+        "The second print should be at the same indentation level as the if keyword, not inside the block",
+        "Use > 70 as your condition"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Great job!", "message": "Output should contain 'Great job!'"},
+        {"type": "stdout_contains", "value": "Thanks for taking the quiz.", "message": "Output should always contain the closing message"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What are the two things required after the condition in an if statement?",
+      "options": [
+        "A colon and indented code below",
+        "Parentheses and curly braces",
+        "A semicolon and a new line",
+        "Quotes and a print statement"
+      ],
+      "correct_index": 0,
+      "explanation": "Python requires a colon at the end of the if line and 4-space indentation for every line in the block. Without either one, you get a SyntaxError."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "Given x = 3, what does the following code print?\n\nif x > 5:\n    print(\"big\")\nprint(\"done\")",
+      "options": [
+        "big",
+        "done",
+        "big\ndone",
+        "Nothing — it raises an error"
+      ],
+      "correct_index": 1,
+      "explanation": "Because x = 3 is not greater than 5, the indented block is skipped. The unindented print(\"done\") always runs, so only 'done' is printed."
+    }
+  ],
+  "completion_message": "Excellent work! You now know how to write an if statement, use the colon, and indent your code correctly. Next up: handling the False case with else and elif."
+}

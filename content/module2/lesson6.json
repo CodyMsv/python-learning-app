@@ -1,0 +1,90 @@
+{
+  "id": "module2_lesson6",
+  "module_id": "module2",
+  "module_title": "Working with Data Types",
+  "module_number": 2,
+  "lesson_number": 6,
+  "title": "Booleans and Comparisons",
+  "subtitle": "Work with True and False values and understand what Python considers truthy or falsy",
+  "estimated_minutes": 12,
+  "prerequisites": ["module2_lesson5"],
+  "learning_objectives": [
+    "Use the Boolean values True and False in your code",
+    "Compare values using ==, !=, <, >, <=, and >= operators",
+    "Compare strings and understand alphabetical ordering",
+    "Identify which values Python treats as falsy and which as truthy"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Booleans and Comparison Operators",
+        "content": "A <strong>Boolean</strong> is a data type with exactly two possible values: <code>True</code> and <code>False</code> (note the capital first letter — Python is case-sensitive here). Booleans are the result of any comparison or condition check.<br><br>Python has six <strong>comparison operators</strong>. Each one returns either <code>True</code> or <code>False</code>:<br><br><code><strong>==</strong></code> — equal to (two equals signs; a single <code>=</code> is assignment, not comparison)<br><code><strong>!=</strong></code> — not equal to<br><code><strong>&lt;</strong></code> — less than<br><code><strong>&gt;</strong></code> — greater than<br><code><strong>&lt;=</strong></code> — less than or equal to<br><code><strong>&gt;=</strong></code> — greater than or equal to<br><br>You can compare strings too. Python compares them <strong>alphabetically</strong> (technically by Unicode code point), so <code>\"apple\" &lt; \"banana\"</code> is <code>True</code> because 'a' comes before 'b'. Uppercase letters have lower code points than lowercase, so <code>\"Z\" &lt; \"a\"</code> is <code>True</code>.",
+        "code_example": "# Number comparisons\nprint(5 == 5)    # True\nprint(5 == 6)    # False\nprint(5 != 6)    # True\nprint(10 > 3)    # True\nprint(10 < 3)    # False\nprint(5 >= 5)    # True\nprint(4 >= 5)    # False\n\n# String comparisons (alphabetical)\nprint(\"apple\" == \"apple\")   # True\nprint(\"apple\" == \"Apple\")   # False (case-sensitive!)\nprint(\"apple\" < \"banana\")   # True ('a' before 'b')\nprint(\"cat\" > \"car\")        # True ('t' after 'r')\n\n# Store a comparison result in a variable\nis_adult = 20 >= 18\nprint(is_adult)",
+        "code_output": "True\nFalse\nTrue\nTrue\nFalse\nTrue\nFalse\nTrue\nFalse\nTrue\nTrue\nTrue"
+      },
+      {
+        "heading": "Truthiness: Truthy and Falsy Values",
+        "content": "In Python, <em>every</em> value has a Boolean interpretation — you can use any value anywhere a <code>True</code> or <code>False</code> is expected. Values that behave like <code>False</code> are called <strong>falsy</strong>; values that behave like <code>True</code> are called <strong>truthy</strong>.<br><br>The <strong>falsy</strong> values in Python are: <code>False</code>, <code>0</code>, <code>0.0</code>, <code>\"\"</code> (empty string), <code>[]</code> (empty list), <code>{}</code> (empty dict), <code>()</code> (empty tuple), and <code>None</code>.<br><br>Everything else is <strong>truthy</strong> — any non-zero number, any non-empty string, any non-empty collection.<br><br>You can check a value's Boolean interpretation with the <code>bool()</code> function. This concept is used heavily with <code>if</code> statements, which you will learn soon.",
+        "code_example": "# Falsy values\nprint(bool(False))  # False\nprint(bool(0))      # False\nprint(bool(0.0))    # False\nprint(bool(\"\"))     # False  (empty string)\nprint(bool([]))     # False  (empty list)\n\nprint()  # blank line\n\n# Truthy values\nprint(bool(True))   # True\nprint(bool(1))      # True\nprint(bool(-5))     # True  (any non-zero number)\nprint(bool(\"hi\"))   # True  (non-empty string)\nprint(bool([1, 2])) # True  (non-empty list)\n\n# Practical: checking if a name was provided\nusername = \"\"\nprint(bool(username))   # False — no username entered\n\nusername = \"Alice\"\nprint(bool(username))   # True — username was entered",
+        "code_output": "False\nFalse\nFalse\nFalse\nFalse\n\nTrue\nTrue\nTrue\nTrue\nTrue\nFalse\nTrue"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Comparison Checks",
+      "prompt": "Given `x = 42`, write three comparison expressions and print each result: check if `x` equals `42`, check if `x` is greater than `100`, and check if `x` is not equal to `0`.",
+      "starter_code": "x = 42\n\n# Is x equal to 42?\n\n# Is x greater than 100?\n\n# Is x not equal to 0?\n",
+      "solution": "x = 42\nprint(x == 42)\nprint(x > 100)\nprint(x != 0)",
+      "hints": [
+        "Use == to check equality: x == 42",
+        "Use > for greater than and != for not equal"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "True", "message": "Output contains True (x == 42 and x != 0 are both True)"},
+        {"type": "stdout_contains", "value": "False", "message": "Output contains False (x > 100 is False)"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Testing Truthiness",
+      "prompt": "Use `bool()` to check the truthiness of four values: `0`, `99`, `\"\"` (empty string), and `\"hello\"`. Print all four results.",
+      "starter_code": "# Check and print the truthiness of: 0, 99, \"\" (empty string), and \"hello\"\n",
+      "solution": "print(bool(0))\nprint(bool(99))\nprint(bool(\"\"))\nprint(bool(\"hello\"))",
+      "hints": [
+        "Zero and empty string are falsy — bool() will return False for them",
+        "Any non-zero number and non-empty string are truthy — bool() returns True"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "False", "message": "Output contains False for falsy values (0 and empty string)"},
+        {"type": "stdout_contains", "value": "True", "message": "Output contains True for truthy values (99 and 'hello')"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does `\"banana\" < \"cherry\"` evaluate to?",
+      "options": ["True", "False", "None", "Error"],
+      "correct_index": 0,
+      "explanation": "Python compares strings alphabetically by their characters. 'b' comes before 'c' in the alphabet, so \"banana\" is considered less than \"cherry\" and the result is True."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "Which of the following is a falsy value in Python?",
+      "options": ["\"False\"", "1", "[]", "0.1"],
+      "correct_index": 2,
+      "explanation": "An empty list [] is falsy. \"False\" is a non-empty string (truthy), 1 is a non-zero number (truthy), and 0.1 is a non-zero float (truthy). Only [], {}, (), \"\", 0, 0.0, None, and False itself are falsy."
+    }
+  ],
+  "completion_message": "Great job! You now understand True and False, all six comparison operators, how Python compares strings alphabetically, and the important concept of truthiness. These ideas are at the heart of every decision your programs will make — they power all the if/else logic you will write next."
+}

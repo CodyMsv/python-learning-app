@@ -1,0 +1,98 @@
+{
+  "id": "module9_lesson1",
+  "module_id": "module9",
+  "module_title": "Modules and Libraries",
+  "module_number": 9,
+  "lesson_number": 1,
+  "title": "The import Statement",
+  "subtitle": "Use Python's vast standard library to avoid reinventing the wheel",
+  "estimated_minutes": 15,
+  "prerequisites": ["module8_lesson8"],
+  "learning_objectives": [
+    "Use 'import module' to load a module",
+    "Use 'from module import name' to import specific items",
+    "Create an alias with 'import module as alias'",
+    "Understand what the Python Standard Library is"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "What is a Module?",
+        "content": "A <strong>module</strong> is a file containing Python code that you can reuse. Python comes with a huge collection of built-in modules called the <strong>Standard Library</strong> — tools for maths, random numbers, dates, file handling, and much more. You load a module with the <code>import</code> statement.",
+        "code_example": "import math\n\n# Now use things from math with dot notation\nprint(math.pi)\nprint(math.sqrt(16))\nprint(math.ceil(3.2))\nprint(math.floor(3.8))",
+        "code_output": "3.141592653589793\n4.0\n4\n3"
+      },
+      {
+        "heading": "from ... import and Aliases",
+        "content": "You can import specific items from a module so you don't need to type the module name every time. You can also create a shorter alias with <code>as</code>.",
+        "code_example": "# Import just what you need\nfrom math import pi, sqrt\nprint(pi)       # no need to write math.pi\nprint(sqrt(25)) # no need to write math.sqrt\n\n# Create an alias\nimport math as m\nprint(m.factorial(5))  # 120\n\n# from ... import with alias\nfrom math import factorial as fact\nprint(fact(6))  # 720",
+        "code_output": "3.141592653589793\n5.0\n120\n720",
+        "note": "Avoid 'from module import *' — it imports everything and can cause confusing name clashes."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Import and Use math",
+      "prompt": "Import the math module. Print math.pi rounded to 2 decimal places, and the square root of 144.",
+      "starter_code": "import math\n\n# Print pi rounded to 2 decimal places\n# Print sqrt of 144\n",
+      "solution": "import math\n\nprint(round(math.pi, 2))\nprint(math.sqrt(144))",
+      "hints": [
+        "round(math.pi, 2) rounds pi to 2 decimal places",
+        "math.sqrt(144) gives the square root of 144",
+        "Print both values"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "3.14", "message": "Output contains: 3.14"},
+        {"type": "stdout_contains", "value": "12.0", "message": "sqrt(144) = 12.0"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "from import",
+      "prompt": "Use 'from math import factorial, pow'. Print factorial(5) and pow(2, 10) (2 to the power of 10).",
+      "starter_code": "from math import factorial, pow\n\n# Print factorial of 5\n# Print 2 to the power of 10\n",
+      "solution": "from math import factorial, pow\n\nprint(factorial(5))\nprint(pow(2, 10))",
+      "hints": [
+        "factorial(5) = 5 x 4 x 3 x 2 x 1 = 120",
+        "pow(2, 10) = 2^10 = 1024",
+        "After 'from math import', use the names directly"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "120", "message": "factorial(5) = 120"},
+        {"type": "stdout_contains", "value": "1024", "message": "pow(2, 10) = 1024"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "After 'import math', how do you call the sqrt function?",
+      "options": ["sqrt(16)", "math->sqrt(16)", "math.sqrt(16)", "import sqrt(16)"],
+      "correct_index": 2,
+      "explanation": "After 'import math', you access functions using dot notation: math.sqrt(16). The module name comes first, then a dot, then the function name."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What does 'from math import pi' do differently from 'import math'?",
+      "options": [
+        "It imports a different version of math",
+        "It lets you use pi directly without writing math.pi",
+        "It is slower",
+        "It prevents other math functions from working"
+      ],
+      "correct_index": 1,
+      "explanation": "from math import pi brings pi directly into your namespace so you can use it as just 'pi' instead of 'math.pi'. The trade-off is that it can cause name clashes if you have your own variable called 'pi'."
+    }
+  ],
+  "completion_message": "Great! You can now tap into Python's enormous Standard Library!"
+}

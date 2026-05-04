@@ -1,0 +1,123 @@
+{
+  "id": "module4_lesson7",
+  "module_id": "module4",
+  "module_title": "Collections",
+  "module_number": 4,
+  "lesson_number": 7,
+  "title": "Sets",
+  "subtitle": "Unordered collections that guarantee uniqueness",
+  "estimated_minutes": 12,
+  "prerequisites": ["module3_lesson8"],
+  "learning_objectives": [
+    "Create a set and understand that it stores only unique values",
+    "Add and remove items with .add(), .remove(), and .discard()",
+    "Perform set operations: union, intersection, and difference",
+    "Use sets to remove duplicates from a list"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "What Is a Set?",
+        "content": "A <strong>set</strong> is an unordered collection that stores only <strong>unique</strong> values — duplicates are automatically discarded. Sets are created with curly braces <code>{}</code> (but note that <code>{}</code> alone creates an empty <em>dict</em>, not a set — use <code>set()</code> for an empty set). Because sets are unordered, you cannot access elements by index.<br><br>Use <code>.add(item)</code> to add a value. Use <code>.remove(item)</code> to delete a value — it raises a <code>KeyError</code> if the item is not present. Use <code>.discard(item)</code> to silently do nothing if the item is missing.",
+        "code_example": "# Creating a set\ntags = {\"python\", \"code\", \"python\", \"tutorial\"}\nprint(tags)       # duplicate 'python' removed\n\n# add and remove\ntags.add(\"beginner\")\nprint(tags)\n\ntags.remove(\"tutorial\")\nprint(tags)\n\n# discard does not raise an error if missing\ntags.discard(\"missing_tag\")\nprint(len(tags))\n\n# Empty set\nempty = set()\nprint(type(empty))",
+        "code_output": "{'python', 'code', 'tutorial'}\n{'python', 'code', 'tutorial', 'beginner'}\n{'python', 'code', 'beginner'}\n3\n<class 'set'>",
+        "warning": "Sets are unordered — when you print a set, the items may appear in a different order every time you run the code. That is normal and expected. Don't be surprised if your output order differs from the example."
+      },
+      {
+        "heading": "Set Operations and Removing Duplicates",
+        "content": "Sets support mathematical set operations with intuitive operators. <code>|</code> (union) combines both sets. <code>&</code> (intersection) returns only items in <em>both</em> sets. <code>-</code> (difference) returns items in the left set that are <em>not</em> in the right set.<br><br>A very practical use case: convert a list to a set and back to remove all duplicate values quickly: <code>list(set(my_list))</code>.",
+        "code_example": "a = {1, 2, 3, 4}\nb = {3, 4, 5, 6}\n\nprint(a | b)   # union\nprint(a & b)   # intersection\nprint(a - b)   # difference (in a but not b)\n\n# Remove duplicates from a list\nnums = [1, 2, 2, 3, 3, 3, 4]\nunique = list(set(nums))\nprint(unique)",
+        "code_output": "{1, 2, 3, 4, 5, 6}\n{3, 4}\n{1, 2}\n[1, 2, 3, 4]"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Build a Set of Tags",
+      "prompt": "Create a set called <code>skills</code> containing <code>\"python\"</code>, <code>\"sql\"</code>, and <code>\"excel\"</code>. Add <code>\"python\"</code> again and add <code>\"tableau\"</code>. Print the set and its length to verify no duplicates.",
+      "starter_code": "# Create a set called skills containing \"python\", \"sql\", and \"excel\"\n\n# Add \"python\" again (it should not create a duplicate)\n# Add \"tableau\"\n\n# Print the set\n\n# Print the length\n",
+      "solution": "skills = {\"python\", \"sql\", \"excel\"}\nskills.add(\"python\")\nskills.add(\"tableau\")\nprint(skills)\nprint(len(skills))",
+      "hints": [
+        "Create the set with {\"python\", \"sql\", \"excel\"} and then call .add() for the extra items",
+        "Adding 'python' a second time has no effect — the set already contains it"
+      ],
+      "tests": [
+        {
+          "type": "runs_without_error",
+          "message": "Your code should run without any errors"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "4",
+          "message": "The length should be 4 (python, sql, excel, tableau — no duplicates)"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "tableau",
+          "message": "The output should contain 'tableau'"
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Deduplicate a List",
+      "prompt": "Given <code>votes = [\"yes\", \"no\", \"yes\", \"yes\", \"no\", \"maybe\"]</code>, convert it to a set to get the unique options, then convert it back to a list called <code>options</code>. Print <code>options</code> and its length.",
+      "starter_code": "votes = [\"yes\", \"no\", \"yes\", \"yes\", \"no\", \"maybe\"]\n\n# Deduplicate using set and convert back to list\n\n# Print the unique options\n\n# Print the length\n",
+      "solution": "votes = [\"yes\", \"no\", \"yes\", \"yes\", \"no\", \"maybe\"]\noptions = list(set(votes))\nprint(options)\nprint(len(options))",
+      "hints": [
+        "set(votes) removes duplicates; wrap it in list() to convert back",
+        "The result should have 3 unique values: 'yes', 'no', 'maybe'"
+      ],
+      "tests": [
+        {
+          "type": "runs_without_error",
+          "message": "Your code should run without any errors"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "3",
+          "message": "There should be 3 unique options"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "maybe",
+          "message": "The output should contain 'maybe'"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What is the result of <code>{1, 2, 3} & {2, 3, 4}</code>?",
+      "options": [
+        "{1, 2, 3, 4}",
+        "{1, 4}",
+        "{2, 3}",
+        "{1, 2, 3}"
+      ],
+      "correct_index": 2,
+      "explanation": "The & operator returns the intersection — only elements present in both sets. 2 and 3 appear in both sets, so the result is {2, 3}."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What is the difference between <code>.remove()</code> and <code>.discard()</code> on a set?",
+      "options": [
+        "remove() works on lists; discard() works on sets",
+        "They are identical",
+        "remove() raises a KeyError if the item is missing; discard() does not",
+        "discard() returns the removed item; remove() returns None"
+      ],
+      "correct_index": 2,
+      "explanation": "Both methods delete an item from a set, but .remove() raises a KeyError if the item is not present, while .discard() silently does nothing. Use .discard() when you are not sure the item is in the set."
+    }
+  ],
+  "completion_message": "Excellent! Sets are a surprisingly powerful tool — fast membership testing, automatic deduplication, and intuitive math operations. You have now covered lists, tuples, dicts, and sets!"
+}

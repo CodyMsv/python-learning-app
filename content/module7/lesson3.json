@@ -1,0 +1,110 @@
+{
+  "id": "module7_lesson3",
+  "module_id": "module7",
+  "module_title": "Error Handling",
+  "module_number": 7,
+  "lesson_number": 3,
+  "title": "Multiple Exception Types",
+  "subtitle": "Handle different errors in different ways",
+  "estimated_minutes": 15,
+  "prerequisites": ["module7_lesson2"],
+  "learning_objectives": [
+    "Write multiple except blocks for different error types",
+    "Catch multiple exceptions in one except clause",
+    "Understand the importance of ordering except blocks correctly",
+    "Use the Exception base class as a catch-all"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Multiple except Blocks",
+        "content": "One <code>try</code> block can have <strong>multiple</strong> <code>except</code> blocks — one for each type of error you want to handle differently. Python checks them in order from top to bottom and runs only the first matching one.",
+        "code_example": "def divide(a, b):\n    try:\n        result = a / b\n        print(\"Result:\", result)\n    except ZeroDivisionError:\n        print(\"Error: Cannot divide by zero!\")\n    except TypeError:\n        print(\"Error: Both values must be numbers!\")\n\ndivide(10, 2)\ndivide(10, 0)\ndivide(10, \"two\")",
+        "code_output": "Result: 5.0\nError: Cannot divide by zero!\nError: Both values must be numbers!"
+      },
+      {
+        "heading": "Catching Multiple Exceptions at Once",
+        "content": "If you want to handle several exception types the <strong>same way</strong>, put them together in a tuple inside one <code>except</code> clause.",
+        "code_example": "def parse_input(text):\n    try:\n        return int(text)\n    except (ValueError, TypeError):\n        print(\"Could not parse:\", text)\n        return 0\n\nprint(parse_input(\"42\"))\nprint(parse_input(\"hello\"))\nprint(parse_input(None))",
+        "code_output": "42\nCould not parse: hello\nCould not parse: None\n0"
+      },
+      {
+        "heading": "The Exception Base Class",
+        "content": "All exceptions inherit from <code>Exception</code>. You can use <code>except Exception as e:</code> as a catch-all that handles any exception. Use it at the <strong>end</strong> of your except chain, after more specific handlers. This is better than a bare <code>except:</code> because it still lets system-level signals pass through.",
+        "code_example": "try:\n    x = int(\"oops\")\nexcept ValueError:\n    print(\"Not a valid number\")\nexcept Exception as e:\n    print(\"Unexpected error:\", type(e).__name__, e)",
+        "code_output": "Not a valid number",
+        "note": "More specific except blocks must come BEFORE more general ones. If you put 'except Exception' first, it will catch everything and the specific blocks below it will never run."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Handle Two Error Types",
+      "prompt": "Write a function lookup(data, key) that gets data[key] and converts it to an integer. Handle KeyError (print 'Key not found') and ValueError (print 'Not a number'). Test: lookup({\"score\": \"95\"}, \"score\"), lookup({\"score\": \"abc\"}, \"score\"), lookup({\"score\": \"95\"}, \"name\").",
+      "starter_code": "def lookup(data, key):\n    # Handle KeyError and ValueError separately\n    pass\n\nprint(lookup({\"score\": \"95\"}, \"score\"))\nlookup({\"score\": \"abc\"}, \"score\")\nlookup({\"score\": \"95\"}, \"name\")\n",
+      "solution": "def lookup(data, key):\n    try:\n        return int(data[key])\n    except KeyError:\n        print(\"Key not found\")\n        return None\n    except ValueError:\n        print(\"Not a number\")\n        return None\n\nprint(lookup({\"score\": \"95\"}, \"score\"))\nlookup({\"score\": \"abc\"}, \"score\")\nlookup({\"score\": \"95\"}, \"name\")",
+      "hints": [
+        "Put int(data[key]) in the try block",
+        "Add except KeyError: for missing keys",
+        "Add except ValueError: for non-numeric values"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "95", "message": "lookup with valid data returns 95"},
+        {"type": "stdout_contains", "value": "Not a number", "message": "Output contains: Not a number"},
+        {"type": "stdout_contains", "value": "Key not found", "message": "Output contains: Key not found"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Catch Multiple at Once",
+      "prompt": "Write a function safe_convert(value) that converts value to a float. If either a ValueError or TypeError occurs, return 0.0. Test: safe_convert(\"3.14\"), safe_convert(\"bad\"), safe_convert(None).",
+      "starter_code": "def safe_convert(value):\n    # Catch ValueError and TypeError together in one except\n    pass\n\nprint(safe_convert(\"3.14\"))\nprint(safe_convert(\"bad\"))\nprint(safe_convert(None))\n",
+      "solution": "def safe_convert(value):\n    try:\n        return float(value)\n    except (ValueError, TypeError):\n        return 0.0\n\nprint(safe_convert(\"3.14\"))\nprint(safe_convert(\"bad\"))\nprint(safe_convert(None))",
+      "hints": [
+        "Use float(value) in the try block",
+        "Use except (ValueError, TypeError): to catch both at once",
+        "Return 0.0 in the except block"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "3.14", "message": "Output contains: 3.14"},
+        {"type": "stdout_contains", "value": "0.0", "message": "Output contains 0.0 for invalid inputs"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "If you have multiple except blocks, which one runs?",
+      "options": [
+        "All of them run",
+        "The last one always runs",
+        "The first one that matches the exception type",
+        "A random one is chosen"
+      ],
+      "correct_index": 2,
+      "explanation": "Python checks except blocks from top to bottom and runs the first one whose exception type matches what was raised. After that, the rest are skipped."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "How do you catch both ValueError and TypeError with a single except clause?",
+      "options": [
+        "except ValueError + TypeError:",
+        "except ValueError or TypeError:",
+        "except (ValueError, TypeError):",
+        "except ValueError, TypeError:"
+      ],
+      "correct_index": 2,
+      "explanation": "Use a tuple of exception types inside parentheses: except (ValueError, TypeError):. This catches either type and runs the same handler for both."
+    }
+  ],
+  "completion_message": "Nice work! You can now write sophisticated error handlers that respond differently to different problems."
+}

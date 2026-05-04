@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Learn Python — Home{% endblock %}
+
+{% block content %}
+<div class="home-page">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Learn Python from Zero</h1>
+      <p class="hero-subtitle">A complete, interactive course — no experience needed. Write real Python code right in your browser.</p>
+      <div class="hero-stats">
+        <div class="stat-pill">📚 {{ total_lessons }} Lessons</div>
+        <div class="stat-pill">⭐ 10 Modules</div>
+        <div class="stat-pill">✅ {{ total_done }} Completed</div>
+        <div class="stat-pill">📈 {{ overall_pct }}% Done</div>
+      </div>
+      {% set first_lesson = curriculum.modules[0].lessons[0] %}
+      {% if total_done == 0 %}
+        <a href="/lesson/{{ first_lesson.id }}" class="btn btn-hero">Start Learning →</a>
+      {% else %}
+        {% set resume_id = namespace(id=first_lesson.id) %}
+        {% for mod in curriculum.modules %}
+          {% for l in mod.lessons %}
+            {% if l.status == 'in_progress' %}{% set resume_id.id = l.id %}{% endif %}
+          {% endfor %}
+        {% endfor %}
+        <a href="/lesson/{{ resume_id.id }}" class="btn btn-hero">Continue Learning →</a>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- Module Grid -->
+  <section class="modules-section">
+    <h2 class="section-title">Course Modules</h2>
+    <div class="module-grid">
+      {% for mod in curriculum.modules %}
+      <div class="module-card">
+        <div class="module-card-header">
+          <span class="module-number">{{ mod.number }}</span>
+          <span class="module-icon">{{ mod.icon }}</span>
+          <div class="module-card-title-wrap">
+            <h3 class="module-card-title">{{ mod.title }}</h3>
+            <p class="module-card-desc">{{ mod.description }}</p>
+          </div>
+        </div>
+        <div class="module-meta">
+          <span>{{ mod.lessons|length }} lessons</span>
+          <span>{{ mod.lessons_done }}/{{ mod.lessons|length }} done</span>
+        </div>
+        <div class="module-progress-bar">
+          <div class="module-progress-fill" style="width: {{ mod.progress_pct }}%"></div>
+        </div>
+        <div class="module-lessons" id="mod-lessons-{{ mod.id }}">
+          {% for lesson in mod.lessons %}
+          <a href="/lesson/{{ lesson.id }}" class="lesson-link lesson-link--{{ lesson.status }}">
+            <span class="lesson-status-icon">
+              {% if lesson.status == 'completed' %}✅
+              {% elif lesson.status == 'in_progress' %}▶️
+              {% else %}⬜{% endif %}
+            </span>
+            <span class="lesson-link-title">{{ lesson.title }}</span>
+            <span class="lesson-link-time">{{ lesson.estimated_minutes }}m</span>
+          </a>
+          {% endfor %}
+        </div>
+        <button class="module-toggle" onclick="toggleModule('{{ mod.id }}')">
+          <span id="toggle-text-{{ mod.id }}">Show lessons ▼</span>
+        </button>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+
+<script>
+function toggleModule(modId) {
+  const el = document.getElementById('mod-lessons-' + modId);
+  const btn = document.getElementById('toggle-text-' + modId);
+  if (el.style.display === 'none' || el.style.display === '') {
+    el.style.display = 'flex';
+    btn.textContent = 'Hide lessons ▲';
+  } else {
+    el.style.display = 'none';
+    btn.textContent = 'Show lessons ▼';
+  }
+}
+// Hide all lesson lists by default
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.module-lessons').forEach(el => { el.style.display = 'none'; });
+});
+</script>
+{% endblock %}

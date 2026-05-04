@@ -1,0 +1,149 @@
+{
+  "id": "module5_lesson2",
+  "module_id": "module5",
+  "module_title": "Functions",
+  "module_number": 5,
+  "lesson_number": 2,
+  "title": "Parameters and Arguments",
+  "subtitle": "Pass data into your functions to make them flexible and reusable",
+  "estimated_minutes": 15,
+  "prerequisites": ["module4_lesson8"],
+  "learning_objectives": [
+    "Distinguish between parameters and arguments",
+    "Define a function that accepts one or more parameters",
+    "Call a function with the correct number of arguments",
+    "Understand that parameters are local variables inside the function",
+    "Define and call a function with multiple parameters"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Parameters vs Arguments",
+        "content": "<strong>Parameters</strong> are the variable names listed inside the parentheses of a <code>def</code> statement. They act as placeholders for values that will be supplied later.<br><br><strong>Arguments</strong> are the actual values you pass to the function when you call it. Python assigns each argument to the matching parameter in order.",
+        "code_example": "# 'name' is a PARAMETER — a placeholder in the definition\ndef greet(name):\n    print(\"Hello, \" + name + \"!\")\n\n# \"Alice\" is an ARGUMENT — the actual value passed in\ngreet(\"Alice\")\ngreet(\"Bob\")",
+        "code_output": "Hello, Alice!\nHello, Bob!"
+      },
+      {
+        "heading": "Multiple Parameters",
+        "content": "A function can accept more than one parameter. Separate them with commas inside the parentheses. When you call the function, supply one argument for each parameter in the same order.",
+        "code_example": "def add(a, b):\n    print(a + b)\n\nadd(3, 5)\nadd(10, 20)",
+        "code_output": "8\n30"
+      },
+      {
+        "heading": "Parameters Are Local to the Function",
+        "content": "A parameter is a <em>local variable</em> — it exists only inside the function. Once the function finishes, the parameter is gone. This means you can use the same parameter name in different functions without any conflict.",
+        "code_example": "def double(number):\n    result = number * 2\n    print(result)\n\ndef triple(number):\n    result = number * 3\n    print(result)\n\ndouble(4)\ntriple(4)\n# 'number' and 'result' from each function don't interfere with each other",
+        "code_output": "8\n12"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Greet by Name",
+      "prompt": "Define a function called <code>greet_person</code> that takes one parameter <code>name</code> and prints <code>Hello, [name]!</code>. Call it with your own name.",
+      "starter_code": "# Define greet_person(name) and call it\n",
+      "solution": "def greet_person(name):\n    print(\"Hello, \" + name + \"!\")\n\ngreet_person(\"Alice\")",
+      "hints": [
+        "def greet_person(name): — name is the parameter",
+        "Inside the function use print(\"Hello, \" + name + \"!\")",
+        "Call it like: greet_person(\"Alice\")"
+      ],
+      "tests": [
+        {
+          "type": "function_exists",
+          "function_name": "greet_person",
+          "message": "Function greet_person is defined"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "Hello,",
+          "message": "Output contains Hello,"
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Multiply Two Numbers",
+      "prompt": "Define a function called <code>multiply</code> that takes two parameters <code>a</code> and <code>b</code>, and prints their product. Call it with the arguments <code>6</code> and <code>7</code>.",
+      "starter_code": "# Define multiply(a, b) and call it with 6 and 7\n",
+      "solution": "def multiply(a, b):\n    print(a * b)\n\nmultiply(6, 7)",
+      "hints": [
+        "def multiply(a, b): — two parameters separated by a comma",
+        "Inside the function: print(a * b)",
+        "Call it: multiply(6, 7)"
+      ],
+      "tests": [
+        {
+          "type": "function_exists",
+          "function_name": "multiply",
+          "message": "Function multiply is defined"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "42",
+          "message": "Output contains 42"
+        }
+      ]
+    },
+    {
+      "id": "ex3",
+      "order": 3,
+      "type": "code_run",
+      "title": "Introduce a Person",
+      "prompt": "Define a function called <code>introduce</code> that takes two parameters <code>name</code> and <code>age</code>, and prints: <code>My name is [name] and I am [age] years old.</code> Call it with any name and age.",
+      "starter_code": "# Define introduce(name, age) and call it\n",
+      "solution": "def introduce(name, age):\n    print(\"My name is \" + name + \" and I am \" + str(age) + \" years old.\")\n\nintroduce(\"Alice\", 30)",
+      "hints": [
+        "def introduce(name, age):",
+        "Remember to convert age to a string with str(age) when joining with +",
+        "Or use an f-string: print(f\"My name is {name} and I am {age} years old.\")"
+      ],
+      "tests": [
+        {
+          "type": "function_exists",
+          "function_name": "introduce",
+          "message": "Function introduce is defined"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "My name is",
+          "message": "Output contains My name is"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What is the difference between a parameter and an argument?",
+      "options": [
+        "A parameter is the variable in the function definition; an argument is the value passed when calling the function",
+        "They are exactly the same thing",
+        "An argument is the variable in the definition; a parameter is the value passed when calling",
+        "Parameters are only used in built-in functions"
+      ],
+      "correct_index": 0,
+      "explanation": "Parameters are placeholders defined in the function signature. Arguments are the concrete values supplied at call time. Python maps each argument to the corresponding parameter in order."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What will the following code print?\n\ndef show(x, y):\n    print(x - y)\n\nshow(10, 3)",
+      "options": [
+        "7",
+        "13",
+        "30",
+        "Error"
+      ],
+      "correct_index": 0,
+      "explanation": "x is assigned 10 and y is assigned 3. 10 - 3 equals 7, so 7 is printed."
+    }
+  ],
+  "completion_message": "Excellent! You can now write functions that accept data through parameters, making them flexible enough to work with any values you pass in."
+}

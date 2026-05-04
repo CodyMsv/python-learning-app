@@ -1,0 +1,90 @@
+{
+  "id": "module2_lesson2",
+  "module_id": "module2",
+  "module_title": "Working with Data Types",
+  "module_number": 2,
+  "lesson_number": 2,
+  "title": "String Operations",
+  "subtitle": "Combine, repeat, and search inside strings using Python operators",
+  "estimated_minutes": 15,
+  "prerequisites": ["module2_lesson1"],
+  "learning_objectives": [
+    "Combine strings together using the + concatenation operator",
+    "Repeat strings using the * repetition operator",
+    "Check whether a substring exists inside a string using the in operator",
+    "Understand why string comparisons are case-sensitive"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Concatenation and Repetition",
+        "content": "Python lets you use familiar math operators directly on strings — but they do something different with text.<br><br>The <strong>+ operator</strong> <em>concatenates</em> (joins) two strings end-to-end. You can chain as many <code>+</code> operations as you like in one expression. Remember: Python will not add spaces for you — if you want a space between words, you must include it as its own string (<code>\" \"</code>).<br><br>The <strong>* operator</strong> <em>repeats</em> a string a given number of times. Write the string on the left and an integer on the right. This is great for building separators, banners, or fun patterns without typing the same text over and over.<br><br>Neither <code>+</code> nor <code>*</code> modify the original string — they always create a <em>new</em> string.",
+        "code_example": "# Concatenation with +\nfirst = \"Hello\"\nsecond = \"World\"\nresult = first + \" \" + second\nprint(result)\n\n# Building a sentence piece by piece\nname = \"Alice\"\ngreeting = \"Hi, \" + name + \"! Welcome.\"\nprint(greeting)\n\n# Repetition with *\nlaugh = \"ha\" * 3\nprint(laugh)\n\nseparator = \"-\" * 20\nprint(separator)\n\n# Combine both operators\nline = (\"=-\" * 5) + \"=\"\nprint(line)",
+        "code_output": "Hello World\nHi, Alice! Welcome.\nhahaha\n--------------------\n=-=-=-=-=-="
+      },
+      {
+        "heading": "Membership Testing and Case Sensitivity",
+        "content": "The <strong><code>in</code> operator</strong> checks whether a smaller string (called a <em>substring</em>) appears anywhere inside a larger string. It returns <code>True</code> if found, and <code>False</code> if not. You can also use <code>not in</code> to check the opposite.<br><br>One very important detail: <strong>string comparisons in Python are case-sensitive</strong>. Python treats uppercase and lowercase letters as completely different characters. The string <code>\"Hello\"</code> is not equal to <code>\"hello\"</code>, and <code>\"ell\"</code> is not found inside <code>\"HELLO\"</code>.<br><br>This applies to <code>in</code>, <code>==</code>, and every other comparison you do with strings. A common fix is to convert both strings to the same case before comparing — you will learn the methods for that in the next lesson.",
+        "code_example": "sentence = \"The quick brown fox\"\n\n# Check if a word is in the sentence\nprint(\"quick\" in sentence)    # True\nprint(\"slow\" in sentence)     # False\nprint(\"slow\" not in sentence) # True\n\n# Case sensitivity matters!\nprint(\"the\" in sentence)   # False — 'T' is uppercase\nprint(\"The\" in sentence)   # True\n\n# Comparing whole strings\npassword = \"Python123\"\nprint(password == \"python123\")  # False — different case\nprint(password == \"Python123\")  # True",
+        "code_output": "True\nFalse\nTrue\nFalse\nTrue\nFalse\nTrue"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Build a Full Name",
+      "prompt": "Create two variables: `first_name = \"Ada\"` and `last_name = \"Lovelace\"`. Use concatenation to create a `full_name` variable that equals `\"Ada Lovelace\"` (with a space in between), then print it.",
+      "starter_code": "first_name = \"Ada\"\nlast_name = \"Lovelace\"\n\n# Create a variable called full_name by concatenating first_name, a space, and last_name\n\n# Print full_name\n",
+      "solution": "first_name = \"Ada\"\nlast_name = \"Lovelace\"\nfull_name = first_name + \" \" + last_name\nprint(full_name)",
+      "hints": [
+        "Use + to join strings: first_name + \" \" + last_name",
+        "Don't forget to include a space as its own string between the two names"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Ada Lovelace", "message": "Output contains 'Ada Lovelace'"},
+        {"type": "variable_equals", "variable": "full_name", "value": "Ada Lovelace", "message": "Variable full_name equals 'Ada Lovelace'"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Repeat and Search",
+      "prompt": "Create a variable `divider` by repeating the string `\"*-\"` exactly 8 times. Then check if the substring `\"on\"` is in the string `\"Python\"` and print the result.",
+      "starter_code": "# Create a variable called divider by repeating \"*-\" 8 times\n# Print divider\n\n# Check if \"on\" is in \"Python\"\nword = \"Python\"\n# Create a variable called result that stores whether \"on\" is in word\n# Print result\n",
+      "solution": "divider = \"*-\" * 8\nprint(divider)\n\nword = \"Python\"\nresult = \"on\" in word\nprint(result)",
+      "hints": [
+        "Use the * operator: \"*-\" * 8",
+        "Use the in operator: \"on\" in word — this gives True or False"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "*-*-*-*-*-*-*-*-", "message": "Output contains the repeated divider"},
+        {"type": "stdout_contains", "value": "True", "message": "Output contains True for the membership check"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does `\"ab\" * 3` produce?",
+      "options": ["\"ab3\"", "\"ababab\"", "\"aabbbb\"", "\"ab ab ab\""],
+      "correct_index": 1,
+      "explanation": "The * operator repeats the entire string the given number of times. \"ab\" repeated 3 times gives \"ababab\"."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What does `\"hello\" in \"Hello World\"` evaluate to?",
+      "options": ["True", "False", "None", "Error"],
+      "correct_index": 1,
+      "explanation": "String comparisons are case-sensitive. \"hello\" (all lowercase) does not match \"Hello\" (capital H) inside \"Hello World\", so the result is False."
+    }
+  ],
+  "completion_message": "Excellent! You can now join strings with +, repeat them with *, and search inside them with in. You also know that Python always cares about uppercase vs lowercase — a detail that trips up many beginners. Keep that in mind as you work with real-world data!"
+}

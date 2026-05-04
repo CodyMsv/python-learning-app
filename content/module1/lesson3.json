@@ -1,0 +1,105 @@
+{
+  "id": "module1_lesson3",
+  "module_id": "module1",
+  "module_title": "Getting Started with Python",
+  "module_number": 1,
+  "lesson_number": 3,
+  "title": "How Python Runs Code",
+  "subtitle": "Understand the interpreter and learn to read error messages",
+  "estimated_minutes": 12,
+  "prerequisites": ["module1_lesson1", "module1_lesson2"],
+  "learning_objectives": [
+    "Explain how Python reads and runs code line by line using an interpreter",
+    "Understand what a SyntaxError is and what causes one",
+    "Understand what a NameError is and what causes one",
+    "Read a Python error message to find the type, line number, and description"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Python Reads Your Code One Line at a Time",
+        "content": "When you run a Python program, Python doesn't read the whole thing at once and then run it. Instead, it uses an <strong>interpreter</strong> — a program that reads your code <em>one line at a time</em>, from top to bottom, and runs each line immediately before moving to the next one.<br><br>This is different from some other languages that require a separate <em>compilation</em> step first. With Python, you write code and run it instantly — no waiting.<br><br>Because Python runs line by line, if it hits a problem on line 3, it will have already successfully run lines 1 and 2. It will stop at line 3 and report an error. This makes it a little easier to find where things went wrong.",
+        "code_example": "print(\"Line 1: Python runs this first\")\nprint(\"Line 2: Then this\")\nprint(\"Line 3: Then this\")\nprint(\"Line 4: And finally this\")",
+        "code_output": "Line 1: Python runs this first\nLine 2: Then this\nLine 3: Then this\nLine 4: And finally this",
+        "note": "The order of your code matters! Python always starts at the top and works its way down, line by line."
+      },
+      {
+        "heading": "When Things Go Wrong: Reading Error Messages",
+        "content": "Every programmer — even experienced ones — makes mistakes. When Python encounters a problem, it stops and shows you an <strong>error message</strong> (also called a <strong>traceback</strong>). Learning to read these messages is one of the most important skills you can develop.<br><br>An error message tells you three key things:<ol><li><strong>The line number</strong> — where in your code the problem was found</li><li><strong>The error type</strong> — what kind of mistake it is</li><li><strong>A description</strong> — a short explanation of what went wrong</li></ol><br><strong>SyntaxError</strong> — This means you made a typo in the structure of the code itself. For example, forgetting a closing parenthesis or a quotation mark. Python can't even understand what you meant to write.<br><br><strong>NameError</strong> — This means you used a name (like a variable or function) that Python doesn't recognize. This usually happens when you misspell a name or try to use something before it has been defined.",
+        "code_example": "# Example of a SyntaxError (missing closing quote and parenthesis):\n# print(\"Hello)\n# Python would say: SyntaxError: EOL while scanning string literal\n\n# Example of a NameError (using a name that doesn't exist):\n# print(mesage)  # 'mesage' was never defined\n# Python would say: NameError: name 'mesage' is not defined\n\n# Correct version:\nprint(\"Hello\")\nmessage = \"Everything is fine!\"\nprint(message)",
+        "code_output": "Hello\nEverything is fine!",
+        "note": "Error messages are your friends! They tell you exactly what went wrong and where to look. Don't be scared of them — use them as clues.",
+        "warning": "When you see an error, always check the line number Python mentions first. Sometimes the real mistake is on the line just above the one reported — especially with SyntaxErrors."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Line-by-Line Output",
+      "prompt": "Write a program with exactly 3 print() statements that run one after another. Print these three lines in order:\n1. Python reads top to bottom.\n2. Each line runs in order.\n3. That is how the interpreter works!",
+      "starter_code": "# Write 3 print statements in order\n",
+      "solution": "print(\"Python reads top to bottom.\")\nprint(\"Each line runs in order.\")\nprint(\"That is how the interpreter works!\")",
+      "hints": [
+        "You need three separate print() calls, one per line.",
+        "The order you write them is the order they will appear in the output.",
+        "Example first line: print(\"Python reads top to bottom.\")"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Python reads top to bottom.", "message": "Output contains: Python reads top to bottom."},
+        {"type": "stdout_contains", "value": "Each line runs in order.", "message": "Output contains: Each line runs in order."},
+        {"type": "stdout_contains", "value": "That is how the interpreter works!", "message": "Output contains: That is how the interpreter works!"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Fix the Broken Code",
+      "prompt": "The code below has two mistakes — a NameError waiting to happen and a variable used correctly. Your job is to fix it so it runs without errors and prints: My favorite language is Python!\n\nHere is the broken code to fix:\n\nprint(favoriteLanguage)",
+      "starter_code": "# Fix this code so it prints: My favorite language is Python!\n# Hint: the variable favoriteLanguage is used but never defined!\n# You need to define it first, then print it.\n\n# Create a variable called favoriteLanguage and assign \"Python!\" to it\n# Print the message using the variable\n",
+      "solution": "favoriteLanguage = \"Python!\"\nprint(\"My favorite language is\", favoriteLanguage)",
+      "hints": [
+        "A NameError means you are using a name that Python doesn't know yet.",
+        "You need to give favoriteLanguage a value before you use it.",
+        "Try: favoriteLanguage = \"Python!\" on the line before the print statement."
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Python!", "message": "Output contains: Python!"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What kind of error does Python show when you misspell the structure of the code itself — for example, forgetting a closing quote?",
+      "options": [
+        "NameError",
+        "TypeError",
+        "SyntaxError",
+        "RunError"
+      ],
+      "correct_index": 2,
+      "explanation": "A SyntaxError means Python cannot understand the structure of what you wrote — like a grammar mistake in human language. Forgetting a closing quote, parenthesis, or colon are common causes."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "You see this error: NameError: name 'colour' is not defined. What most likely caused it?",
+      "options": [
+        "Python does not support color-related code",
+        "You used the name 'colour' before defining it, or you misspelled it",
+        "You forgot a closing parenthesis somewhere",
+        "The number on that line is too large"
+      ],
+      "correct_index": 1,
+      "explanation": "A NameError means you used a name that Python doesn't recognize. Either the variable was never created, or it was misspelled. For example, if you defined 'color' (without a 'u') but then tried to use 'colour', Python would report a NameError."
+    }
+  ],
+  "completion_message": "Excellent! Understanding how Python runs code — and how to read error messages — is a superpower that will save you countless hours as you keep learning. Errors are not failures, they are helpful clues. You are well on your way!"
+}

@@ -1,0 +1,102 @@
+{
+  "id": "module1_lesson1",
+  "module_id": "module1",
+  "module_title": "Getting Started with Python",
+  "module_number": 1,
+  "lesson_number": 1,
+  "title": "What is Python?",
+  "subtitle": "Meet the programming language that powers the modern world",
+  "estimated_minutes": 10,
+  "prerequisites": [],
+  "learning_objectives": [
+    "Understand what a programming language is and why we need one",
+    "Know what Python is and where it came from",
+    "Be able to name several things you can build with Python",
+    "Explain why Python is a great first language to learn"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "What is a Programming Language?",
+        "content": "Computers are incredibly powerful — but they only do exactly what you tell them to do. The problem is that computers don't understand plain English. They speak in a very precise language of electrical signals. A <strong>programming language</strong> is a special tool that lets us write instructions that are close to human language, and then translates those instructions into something the computer can understand and execute.<br><br>Think of it like a translator: you write your ideas in a programming language, and the computer figures out how to carry them out. Without programming languages, we would have to talk to the computer in extremely complicated low-level code — which would be nearly impossible for most people.",
+        "code_example": "# This is a simple Python instruction.\n# It tells the computer to display a message.\nprint(\"Hello, computer!\")",
+        "code_output": "Hello, computer!",
+        "note": "Even this tiny example is a complete, working Python program. You just told a computer what to do!"
+      },
+      {
+        "heading": "What is Python — and What Can You Build with It?",
+        "content": "<strong>Python</strong> is a programming language created by <strong>Guido van Rossum</strong> and first released in 1991. Fun fact: it wasn't named after the snake — Guido named it after the British comedy group <em>Monty Python's Flying Circus</em> because he wanted the language to be fun to use!<br><br>Python is now one of the most popular programming languages in the world, and it's used for an enormous variety of things:<br><br><strong>Websites and web apps</strong> — Companies like Instagram and Pinterest were built using Python.<br><strong>Data science and analysis</strong> — Scientists and analysts use Python to crunch huge amounts of data.<br><strong>Artificial intelligence and machine learning</strong> — Many AI tools, including some that power chatbots and image recognition, are built in Python.<br><strong>Automation</strong> — Python can automate boring, repetitive tasks like renaming thousands of files or sending emails.<br><strong>Games</strong> — Simple 2D games can be built with Python using libraries like Pygame.<br><br>Python is especially loved by beginners because its syntax (the rules of how you write it) is designed to be <strong>clean and readable</strong> — it looks a lot like plain English. It also has a huge, friendly community of millions of developers around the world who share code, answer questions, and build tools that everyone can use for free.",
+        "code_example": "# Python reads almost like plain English.\n# Here we check if a number is even:\nnumber = 8\nif number % 2 == 0:\n    print(\"The number is even!\")",
+        "code_output": "The number is even!",
+        "note": "Don't worry about understanding every detail of this code yet. Just notice how readable it looks — almost like an instruction you might write in English."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Say Hello to the World",
+      "prompt": "Every programmer starts here! Use the print() function to display the message \"Hello, Python!\" on the screen. Type it exactly as shown and run your code.",
+      "starter_code": "# Use print() to display a message\n",
+      "solution": "print(\"Hello, Python!\")",
+      "hints": [
+        "The print() function displays text on the screen.",
+        "Text (called a string) needs to be wrapped in quotes inside the parentheses.",
+        "Try: print(\"Hello, Python!\")"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Hello, Python!", "message": "Output contains: Hello, Python!"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Show What Python Can Do",
+      "prompt": "Use print() to display the text \"Python can build websites, games, and AI!\" to show off some of the things Python is used for.",
+      "starter_code": "# Print what Python can build\n",
+      "solution": "print(\"Python can build websites, games, and AI!\")",
+      "hints": [
+        "You already know how to use print() from the last exercise.",
+        "Put the text inside quotes inside the parentheses.",
+        "Try: print(\"Python can build websites, games, and AI!\")"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Python can build websites, games, and AI!", "message": "Output contains the right text"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "Why was the programming language called 'Python'?",
+      "options": [
+        "Because it is fast and moves like a snake",
+        "Because Guido van Rossum liked Monty Python's Flying Circus",
+        "Because the code looks like a coiled snake",
+        "Because it was invented in Australia, where pythons live"
+      ],
+      "correct_index": 1,
+      "explanation": "Guido van Rossum named Python after the British comedy group Monty Python's Flying Circus — he wanted the language to be fun and enjoyable to use!"
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "Which of the following is something you can build with Python?",
+      "options": [
+        "Only simple text programs — Python can't do much",
+        "Only websites — nothing else",
+        "Websites, data science tools, games, automation scripts, and AI",
+        "Only games and animations"
+      ],
+      "correct_index": 2,
+      "explanation": "Python is a very versatile language! It is used for websites, data science, machine learning, automation, games, and much more. That's one reason it's so popular."
+    }
+  ],
+  "completion_message": "Fantastic work finishing your very first lesson! You now know what Python is, where it came from, and all the amazing things you can build with it. You are officially on your way to becoming a Python programmer. Keep it up!"
+}

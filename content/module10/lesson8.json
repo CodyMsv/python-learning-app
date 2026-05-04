@@ -1,0 +1,97 @@
+{
+  "id": "module10_lesson8",
+  "module_id": "module10",
+  "module_title": "Practical Projects",
+  "module_number": 10,
+  "lesson_number": 8,
+  "title": "Review and Next Steps",
+  "subtitle": "Recap everything you have learned and plan your Python journey",
+  "estimated_minutes": 20,
+  "prerequisites": ["module10_lesson7"],
+  "learning_objectives": [
+    "Apply multiple Python concepts in one capstone program",
+    "Understand what you have achieved",
+    "Know what to learn next after this course",
+    "Feel confident continuing your Python journey"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Everything You Have Learned",
+        "content": "You have covered an enormous amount of ground. Here is a summary of what you now know:<br><br><strong>Module 1-2:</strong> Variables, strings, numbers, booleans, f-strings, type conversion<br><strong>Module 3:</strong> if/elif/else, while loops, for loops, range(), break, continue<br><strong>Module 4:</strong> Lists, tuples, dictionaries, sets, nested collections<br><strong>Module 5:</strong> Functions, parameters, return values, scope, lambda, recursion<br><strong>Module 6:</strong> String methods, comprehensions, file I/O, JSON<br><strong>Module 7:</strong> try/except, error types, raise, custom exceptions<br><strong>Module 8:</strong> Classes, objects, __init__, methods, inheritance, dunder methods<br><strong>Module 9:</strong> math, random, datetime, os modules, pip, PyPI<br><strong>Module 10:</strong> Real programs: games, calculators, text analysis, algorithms",
+        "code_example": "# A mini capstone: Student grade tracker\nclass Student:\n    def __init__(self, name):\n        self.name = name\n        self.grades = []\n\n    def add_grade(self, grade):\n        if not 0 <= grade <= 100:\n            raise ValueError(f\"Grade must be 0-100, got {grade}\")\n        self.grades.append(grade)\n\n    def average(self):\n        if not self.grades:\n            return 0\n        return sum(self.grades) / len(self.grades)\n\n    def letter_grade(self):\n        avg = self.average()\n        if avg >= 90: return 'A'\n        elif avg >= 80: return 'B'\n        elif avg >= 70: return 'C'\n        else: return 'F'\n\n    def __str__(self):\n        return f\"{self.name}: avg={self.average():.1f} ({self.letter_grade()})\"\n\nalice = Student(\"Alice\")\nfor g in [92, 88, 95, 79]:\n    alice.add_grade(g)\nprint(alice)",
+        "code_output": "Alice: avg=88.5 (B)"
+      },
+      {
+        "heading": "What to Learn Next",
+        "content": "You have a solid Python foundation. Here are excellent next steps depending on what interests you:<br><br><strong>Web Development:</strong> Learn <code>Flask</code> or <code>Django</code> to build websites and APIs<br><strong>Data Science:</strong> Learn <code>pandas</code>, <code>numpy</code>, and <code>matplotlib</code> for data analysis<br><strong>Automation:</strong> Use <code>os</code>, <code>shutil</code>, <code>pathlib</code> to automate repetitive tasks<br><strong>Machine Learning:</strong> Learn <code>scikit-learn</code> and <code>TensorFlow</code> / <code>PyTorch</code><br><strong>Games:</strong> Use <code>pygame</code> to build 2D games<br><br>The best way to keep learning is to <strong>build projects you care about</strong>. Every project teaches you something new.",
+        "code_example": "# Recommended resources:\n# - docs.python.org (official Python documentation)\n# - realpython.com (excellent tutorials)\n# - exercism.org/tracks/python (coding exercises)\n# - projecteuler.net (math + programming challenges)\n# - kaggle.com (data science projects and competitions)\n\nprint(\"You are now a Python programmer!\")\nprint(\"Keep building, keep learning.\")",
+        "code_output": "You are now a Python programmer!\nKeep building, keep learning."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Capstone: Grade Tracker",
+      "prompt": "Write a Student class with __init__(name), add_grade(grade) that appends to self.grades, average() that returns the mean, and __str__ returning 'Name: avg X'. Create a student, add grades [85, 92, 78, 96], and print them.",
+      "starter_code": "class Student:\n    def __init__(self, name):\n        self.name = name\n        self.grades = []\n\n    def add_grade(self, grade):\n        pass  # append grade to self.grades\n\n    def average(self):\n        pass  # return 0 if no grades, else return mean of self.grades\n\n    def __str__(self):\n        pass  # return \"{self.name}: avg {average:.1f}\"\n\nstudent = Student(\"Alice\")\nfor g in [85, 92, 78, 96]:\n    student.add_grade(g)\nprint(student)\n",
+      "solution": "class Student:\n    def __init__(self, name):\n        self.name = name\n        self.grades = []\n\n    def add_grade(self, grade):\n        self.grades.append(grade)\n\n    def average(self):\n        if not self.grades:\n            return 0\n        return sum(self.grades) / len(self.grades)\n\n    def __str__(self):\n        return f\"{self.name}: avg {self.average():.1f}\"\n\nstudent = Student(\"Alice\")\nfor g in [85, 92, 78, 96]:\n    student.add_grade(g)\nprint(student)",
+      "hints": [
+        "The starter code is complete — just run it!",
+        "It combines OOP, lists, functions, f-strings, and maths",
+        "The average is (85+92+78+96)/4 = 87.75, shown as 87.8"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Alice", "message": "Output contains student name"},
+        {"type": "stdout_contains", "value": "87.8", "message": "Average is 87.8"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Your Python Journey",
+      "prompt": "Write code that prints a personalised summary: your name, how many modules you completed (10), and one thing you want to build with Python.",
+      "starter_code": "# Create a variable called my_name and assign your name to it\n# Create a variable called modules_completed and set it to 10\n# Create a variable called what_i_want_to_build and assign what you want to build\n\n# Print three lines using f-strings:\n# \"My name is {my_name}.\"\n# \"I completed {modules_completed} Python modules.\"\n# \"Next, I want to build {what_i_want_to_build}!\"\n",
+      "solution": "my_name = \"Your Name\"\nmodules_completed = 10\nwhat_i_want_to_build = \"a web app\"\n\nprint(f\"My name is {my_name}.\")\nprint(f\"I completed {modules_completed} Python modules.\")\nprint(f\"Next, I want to build {what_i_want_to_build}!\")",
+      "hints": [
+        "Change my_name to your actual name",
+        "Change what_i_want_to_build to your goal",
+        "Then run the code and celebrate!"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "10", "message": "Output mentions 10 modules"},
+        {"type": "stdout_lines_gte", "value": 3, "message": "Three lines of output"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What is the best way to continue improving at Python after this course?",
+      "options": [
+        "Read more textbooks without writing any code",
+        "Build projects you are personally interested in and look things up as you go",
+        "Memorise every Python keyword",
+        "Wait until you know everything before starting a project"
+      ],
+      "correct_index": 1,
+      "explanation": "The best way to learn programming is to build things. Projects give you real problems to solve, which forces you to look things up and learn. You don't need to know everything first — programmers look things up constantly."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "Which of the following is a good next step if you are interested in building websites?",
+      "options": ["numpy", "pandas", "Flask or Django", "pygame"],
+      "correct_index": 2,
+      "explanation": "Flask is a lightweight framework for building web applications with Python. Django is more feature-complete and powers many large websites. Both are excellent starting points for web development."
+    }
+  ],
+  "completion_message": "CONGRATULATIONS! You have completed the entire Learn Python course! You are now a Python programmer. Go build something amazing!"
+}

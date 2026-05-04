@@ -1,0 +1,100 @@
+{
+  "id": "module10_lesson1",
+  "module_id": "module10",
+  "module_title": "Practical Projects",
+  "module_number": 10,
+  "lesson_number": 1,
+  "title": "Number Guessing Game",
+  "subtitle": "Build a complete game using loops, conditionals, and random numbers",
+  "estimated_minutes": 25,
+  "prerequisites": ["module9_lesson7"],
+  "learning_objectives": [
+    "Combine random, loops, conditionals, and functions into one program",
+    "Track game state across multiple guesses",
+    "Give the player useful hints (too high / too low)",
+    "Count attempts and give a score"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Planning the Game",
+        "content": "Before writing code, it helps to think through what the program needs to do:<br><ol><li>Pick a random number between 1 and 100</li><li>Ask the player to guess (in this browser, we use a prompt dialog)</li><li>Tell them if their guess is too high, too low, or correct</li><li>Keep track of how many guesses they made</li><li>Congratulate them when they get it right</li></ol><br>Breaking a problem into steps like this is called <strong>decomposition</strong> — a key programming skill.",
+        "code_example": "# Step 1: Pick the secret number\nimport random\nsecret = random.randint(1, 100)\nprint(f\"(Secret: {secret})\")\n\n# Step 2: Simulate a guess\nguess = 42\n\n# Step 3: Check the guess\nif guess < secret:\n    print(\"Too low!\")\nelif guess > secret:\n    print(\"Too high!\")\nelse:\n    print(\"Correct!\")",
+        "code_output": "(Secret: varies)\nToo low! (or Too high! or Correct!)"
+      },
+      {
+        "heading": "The Full Game",
+        "content": "Here is the complete game. It uses a <code>while</code> loop to keep asking for guesses, and counts the attempts. In the browser, <code>input()</code> will pop up a dialog box asking for your guess.",
+        "code_example": "import random\n\ndef play_game():\n    secret = random.randint(1, 100)\n    attempts = 0\n    print(\"I picked a number between 1 and 100!\")\n\n    while True:\n        guess_str = input(\"Your guess: \")\n        try:\n            guess = int(guess_str)\n        except ValueError:\n            print(\"Please enter a number!\")\n            continue\n\n        attempts += 1\n\n        if guess < secret:\n            print(\"Too low! Try higher.\")\n        elif guess > secret:\n            print(\"Too high! Try lower.\")\n        else:\n            print(f\"Correct! You got it in {attempts} guesses!\")\n            break\n\nplay_game()",
+        "code_output": "I picked a number between 1 and 100!\n(A dialog appears asking for your guess)\nToo low! Try higher.\n...\nCorrect! You got it in 5 guesses!",
+        "note": "In this browser, input() shows a popup dialog. Type your guess in the dialog box that appears."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Check a Guess (No Input Needed)",
+      "prompt": "Write a function check_guess(secret, guess) that returns 'too low' if guess < secret, 'too high' if guess > secret, and 'correct' if equal. Test it with check_guess(50, 30), check_guess(50, 70), check_guess(50, 50).",
+      "starter_code": "def check_guess(secret, guess):\n    # Return 'too low', 'too high', or 'correct'\n    pass\n\nprint(check_guess(50, 30))\nprint(check_guess(50, 70))\nprint(check_guess(50, 50))\n",
+      "solution": "def check_guess(secret, guess):\n    if guess < secret:\n        return \"too low\"\n    elif guess > secret:\n        return \"too high\"\n    else:\n        return \"correct\"\n\nprint(check_guess(50, 30))\nprint(check_guess(50, 70))\nprint(check_guess(50, 50))",
+      "hints": [
+        "if guess < secret: return 'too low'",
+        "elif guess > secret: return 'too high'",
+        "else: return 'correct'"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "too low", "message": "Output contains: too low"},
+        {"type": "stdout_contains", "value": "too high", "message": "Output contains: too high"},
+        {"type": "stdout_contains", "value": "correct", "message": "Output contains: correct"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Score Calculator",
+      "prompt": "Write a function calculate_score(attempts) that returns a score: 100 points for 1 attempt, 80 for 2-3, 60 for 4-6, 40 for 7+. Print the score for 1, 3, 5, and 9 attempts.",
+      "starter_code": "def calculate_score(attempts):\n    # Return score based on number of attempts\n    pass\n\nprint(calculate_score(1))\nprint(calculate_score(3))\nprint(calculate_score(5))\nprint(calculate_score(9))\n",
+      "solution": "def calculate_score(attempts):\n    if attempts == 1:\n        return 100\n    elif attempts <= 3:\n        return 80\n    elif attempts <= 6:\n        return 60\n    else:\n        return 40\n\nprint(calculate_score(1))\nprint(calculate_score(3))\nprint(calculate_score(5))\nprint(calculate_score(9))",
+      "hints": [
+        "Use if/elif/else to check the attempts value",
+        "if attempts == 1: return 100",
+        "elif attempts <= 3: return 80"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "100", "message": "1 attempt = 100 points"},
+        {"type": "stdout_contains", "value": "80", "message": "3 attempts = 80 points"},
+        {"type": "stdout_contains", "value": "40", "message": "9 attempts = 40 points"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What technique helps plan a program by breaking it into smaller steps?",
+      "options": ["Recursion", "Inheritance", "Decomposition", "Polymorphism"],
+      "correct_index": 2,
+      "explanation": "Decomposition means breaking a problem into smaller, manageable pieces. Good programmers plan their code before writing it — listing the steps the program needs to perform makes coding much easier."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "In a guessing game loop, what should 'break' do when the player guesses correctly?",
+      "options": [
+        "Continue to the next iteration",
+        "Restart the game",
+        "Exit the while loop",
+        "Skip to the else clause"
+      ],
+      "correct_index": 2,
+      "explanation": "break exits the while loop immediately. In a guessing game, once the player guesses correctly, we use break to stop asking for more guesses and end the game."
+    }
+  ],
+  "completion_message": "You built a complete interactive game! That is a real Python program!"
+}

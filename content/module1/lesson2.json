@@ -1,0 +1,128 @@
+{
+  "id": "module1_lesson2",
+  "module_id": "module1",
+  "module_title": "Getting Started with Python",
+  "module_number": 1,
+  "lesson_number": 2,
+  "title": "Your First Python Program",
+  "subtitle": "Learn to display text, use strings, and write comments",
+  "estimated_minutes": 15,
+  "prerequisites": ["module1_lesson1"],
+  "learning_objectives": [
+    "Use the print() function to display text and numbers on screen",
+    "Understand the difference between single and double quotes for strings",
+    "Print multiple items in a single print() call",
+    "Write comments in your code using the # symbol"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "The print() Function — Your Main Way to Show Output",
+        "content": "The most important tool you will use in your early Python journey is the <code>print()</code> function. It tells Python: <em>\"Display this on the screen.\"</em><br><br>To use it, write <code>print</code>, then open parentheses <code>(</code>, put what you want to show, and close with <code>)</code>.<br><br>Text that you want to display must be wrapped in <strong>quotation marks</strong> — this tells Python that you are giving it a piece of text (called a <strong>string</strong>). You can use either single quotes <code>'like this'</code> or double quotes <code>\"like this\"</code> — both work exactly the same way. Choose whichever you prefer, but be consistent!<br><br>You can also print <strong>numbers</strong> directly without any quotes — Python understands numbers natively.",
+        "code_example": "print(\"Hello, World!\")\nprint('This uses single quotes')\nprint(42)\nprint(3.14)",
+        "code_output": "Hello, World!\nThis uses single quotes\n42\n3.14",
+        "note": "Single quotes and double quotes are interchangeable in Python for creating strings. Most style guides prefer double quotes, but either is perfectly fine."
+      },
+      {
+        "heading": "Printing Multiple Things at Once",
+        "content": "You can print more than one item in a single <code>print()</code> call by separating them with <strong>commas</strong>. Python will display them with a space between each one automatically.<br><br>This is really handy when you want to combine text and numbers or show several pieces of information on the same line.",
+        "code_example": "print(\"My name is\", \"Alex\")\nprint(\"I am\", 25, \"years old\")\nprint(\"Pi is approximately\", 3.14159)",
+        "code_output": "My name is Alex\nI am 25 years old\nPi is approximately 3.14159",
+        "note": "Notice that Python automatically adds a space between items separated by commas. You don't need to add spaces yourself!"
+      },
+      {
+        "heading": "Comments — Notes for Humans, Ignored by Python",
+        "content": "As your programs grow, it becomes important to explain <em>what</em> your code is doing and <em>why</em>. That's where <strong>comments</strong> come in.<br><br>A comment starts with a <code>#</code> (hash symbol). Everything after the <code>#</code> on that line is completely ignored by Python — it is only there for you (and other humans) to read.<br><br>Comments are incredibly useful for:<ul><li>Explaining what a piece of code does</li><li>Leaving yourself reminders</li><li>Temporarily disabling a line of code</li></ul>Good programmers write comments regularly. It makes code much easier to understand later!",
+        "code_example": "# This program greets the user\n# Written by a Python beginner\n\nprint(\"Welcome to my program!\")  # This prints a greeting\nprint(\"Let's learn Python together!\")\n# print(\"This line won't run because it is commented out\")",
+        "code_output": "Welcome to my program!\nLet's learn Python together!",
+        "note": "You can put a comment at the end of a line of code (called an inline comment), or on its own line. Both are perfectly valid."
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "The Classic Hello, World!",
+      "prompt": "Every programming course starts with the same tradition: printing \"Hello, World!\" to the screen. Use print() to display exactly: Hello, World!",
+      "starter_code": "# Print Hello, World!\n",
+      "solution": "print(\"Hello, World!\")",
+      "hints": [
+        "Use the print() function.",
+        "Put the text inside quotation marks inside the parentheses.",
+        "Make sure you include the comma and exclamation mark: Hello, World!"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Hello, World!", "message": "Output contains: Hello, World!"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Introduce Yourself",
+      "prompt": "Use print() to display your name on the screen. For example, if your name is Sam, print: My name is Sam\n\nYou can use your own name or any name you like!",
+      "starter_code": "# Print your name\n",
+      "solution": "print(\"My name is Sam\")",
+      "hints": [
+        "Use print() with your text inside quotes.",
+        "Start your message with: My name is",
+        "Example: print(\"My name is Sam\")"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "My name is", "message": "Output contains: My name is"}
+      ]
+    },
+    {
+      "id": "ex3",
+      "order": 3,
+      "type": "code_run",
+      "title": "Comments and Two Lines",
+      "prompt": "Write a small program that does the following:\n1. Add a comment at the top explaining what the program does (start the line with #)\n2. Print: Learning Python is fun!\n3. Print: I wrote my first program!",
+      "starter_code": "# Your comment here\n\n# Print two lines below\n",
+      "solution": "# This program prints two encouraging messages\nprint(\"Learning Python is fun!\")\nprint(\"I wrote my first program!\")",
+      "hints": [
+        "A comment starts with # and Python ignores it completely.",
+        "You need two separate print() calls for two lines of output.",
+        "Make sure your output matches exactly: Learning Python is fun! and I wrote my first program!"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Learning Python is fun!", "message": "Output contains: Learning Python is fun!"},
+        {"type": "stdout_contains", "value": "I wrote my first program!", "message": "Output contains: I wrote my first program!"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does Python do with a line that starts with #?",
+      "options": [
+        "It runs it as a special system command",
+        "It displays it on the screen in bold",
+        "It completely ignores it — it is a comment for humans only",
+        "It causes an error because # is not allowed"
+      ],
+      "correct_index": 2,
+      "explanation": "Lines starting with # are comments. Python completely ignores them when running the code. Comments are only there to help humans read and understand the code."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What will this code print?\nprint(\"I am\", 10, \"years old\")",
+      "options": [
+        "I am10years old",
+        "I am, 10, years old",
+        "I am 10 years old",
+        "Error — you cannot mix text and numbers in print()"
+      ],
+      "correct_index": 2,
+      "explanation": "When you separate items with commas in print(), Python automatically adds a single space between each one. So print(\"I am\", 10, \"years old\") outputs: I am 10 years old"
+    }
+  ],
+  "completion_message": "You just wrote your first real Python programs — and you're already using print(), strings, numbers, and comments like a pro! These are skills you will use in every single program you ever write. Brilliant work — on to the next lesson!"
+}

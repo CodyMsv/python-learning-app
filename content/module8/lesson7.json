@@ -1,0 +1,101 @@
+{
+  "id": "module8_lesson7",
+  "module_id": "module8",
+  "module_title": "Object-Oriented Programming",
+  "module_number": 8,
+  "lesson_number": 7,
+  "title": "Special Dunder Methods",
+  "subtitle": "Make your objects behave like built-in Python types",
+  "estimated_minutes": 15,
+  "prerequisites": ["module8_lesson6"],
+  "learning_objectives": [
+    "Understand what dunder (double underscore) methods are",
+    "Implement __str__ for a human-readable string representation",
+    "Implement __len__ so len() works on your object",
+    "Implement __eq__ so == compares two objects meaningfully"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "What Are Dunder Methods?",
+        "content": "<strong>Dunder methods</strong> (short for 'double underscore') are special methods with names like <code>__str__</code>, <code>__len__</code>, <code>__eq__</code>. They let your objects work with Python's built-in operators and functions. For example, implementing <code>__str__</code> controls what <code>print(your_object)</code> shows.",
+        "code_example": "class Dog:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\nrex = Dog(\"Rex\", 3)\nprint(rex)  # Without __str__: ugly memory address",
+        "code_output": "<__main__.Dog object at 0x...>"
+      },
+      {
+        "heading": "__str__ and __repr__",
+        "content": "<code>__str__</code> controls what you see when you <code>print()</code> an object — it should be human-friendly. <code>__repr__</code> is for developers and debugging — it should show how to recreate the object.",
+        "code_example": "class Dog:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\n    def __str__(self):\n        return f\"{self.name} (age {self.age})\"\n\n    def __repr__(self):\n        return f\"Dog('{self.name}', {self.age})\"\n\nrex = Dog(\"Rex\", 3)\nprint(rex)     # uses __str__\nprint(repr(rex)) # uses __repr__",
+        "code_output": "Rex (age 3)\nDog('Rex', 3)"
+      },
+      {
+        "heading": "__len__ and __eq__",
+        "content": "<code>__len__</code> lets <code>len()</code> work on your object. <code>__eq__</code> controls what <code>==</code> does.",
+        "code_example": "class Playlist:\n    def __init__(self, name):\n        self.name = name\n        self.songs = []\n\n    def add(self, song):\n        self.songs.append(song)\n\n    def __len__(self):\n        return len(self.songs)\n\n    def __eq__(self, other):\n        return self.name == other.name\n\np1 = Playlist(\"Chill\")\np1.add(\"Song A\")\np1.add(\"Song B\")\nprint(len(p1))  # uses __len__\n\np2 = Playlist(\"Chill\")\nprint(p1 == p2)  # uses __eq__ — True (same name)",
+        "code_output": "2\nTrue"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Add __str__ to a Class",
+      "prompt": "Add a __str__ method to the Book class so print(book) shows: 'Python Basics by Alice (250 pages)'. Create book = Book('Python Basics', 'Alice', 250) and print it.",
+      "starter_code": "class Book:\n    def __init__(self, title, author, pages):\n        self.title = title\n        self.author = author\n        self.pages = pages\n\n    def __str__(self):\n        # Return: 'TITLE by AUTHOR (PAGES pages)'\n        pass\n\nbook = Book(\"Python Basics\", \"Alice\", 250)\nprint(book)\n",
+      "solution": "class Book:\n    def __init__(self, title, author, pages):\n        self.title = title\n        self.author = author\n        self.pages = pages\n\n    def __str__(self):\n        return f\"{self.title} by {self.author} ({self.pages} pages)\"\n\nbook = Book(\"Python Basics\", \"Alice\", 250)\nprint(book)",
+      "hints": [
+        "__str__ must return a string (not print)",
+        "Use an f-string: f\"{self.title} by {self.author} ({self.pages} pages)\"",
+        "When you print(book), Python calls book.__str__() automatically"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Python Basics by Alice (250 pages)", "message": "Output: Python Basics by Alice (250 pages)"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Implement __len__",
+      "prompt": "Add a __len__ method to the ShoppingCart class that returns the number of items. Create cart = ShoppingCart(), add 3 items, then print len(cart).",
+      "starter_code": "class ShoppingCart:\n    def __init__(self):\n        self.items = []\n\n    def add_item(self, item):\n        self.items.append(item)\n\n    def __len__(self):\n        # Return the number of items\n        pass\n\ncart = ShoppingCart()\ncart.add_item(\"apple\")\ncart.add_item(\"bread\")\ncart.add_item(\"milk\")\nprint(len(cart))\n",
+      "solution": "class ShoppingCart:\n    def __init__(self):\n        self.items = []\n\n    def add_item(self, item):\n        self.items.append(item)\n\n    def __len__(self):\n        return len(self.items)\n\ncart = ShoppingCart()\ncart.add_item(\"apple\")\ncart.add_item(\"bread\")\ncart.add_item(\"milk\")\nprint(len(cart))",
+      "hints": [
+        "__len__ must return an integer",
+        "return len(self.items) — the length of the items list",
+        "Then len(cart) will automatically call your __len__ method"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "3", "message": "len(cart) returns 3"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does __str__ control?",
+      "options": [
+        "How the object is stored in memory",
+        "What print(object) displays",
+        "How the object is compared with ==",
+        "How many items the object contains"
+      ],
+      "correct_index": 1,
+      "explanation": "__str__ returns a human-readable string representation of the object. When you call print(obj), Python automatically calls obj.__str__() and displays the result."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "After implementing __len__, what built-in Python function will work on your object?",
+      "options": ["str()", "print()", "len()", "type()"],
+      "correct_index": 2,
+      "explanation": "Implementing __len__ allows the built-in len() function to work on your objects. Python calls your_object.__len__() whenever you write len(your_object)."
+    }
+  ],
+  "completion_message": "Fantastic! Dunder methods make your classes feel like native Python — very professional!"
+}

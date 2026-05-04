@@ -1,0 +1,123 @@
+{
+  "id": "module5_lesson6",
+  "module_id": "module5",
+  "module_title": "Functions",
+  "module_number": 5,
+  "lesson_number": 6,
+  "title": "Variable Scope",
+  "subtitle": "Understand where variables live and how Python finds them",
+  "estimated_minutes": 15,
+  "prerequisites": ["module4_lesson8"],
+  "learning_objectives": [
+    "Define local and global variables and explain the difference",
+    "Understand that local variables only exist inside their function",
+    "Explain that functions can read global variables but cannot reassign them without the global keyword",
+    "Use the global keyword correctly and understand why to use it sparingly",
+    "Describe the LEGB rule for name lookup: Local, Enclosing, Global, Built-in"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Local and Global Variables",
+        "content": "A variable created <em>inside</em> a function is <strong>local</strong> to that function — it cannot be seen from outside. A variable created <em>outside</em> all functions is <strong>global</strong> and can be read from anywhere in the module.<br><br>If you try to use a local variable outside its function, Python raises a <code>NameError</code>.",
+        "code_example": "message = \"I am global\"\n\ndef show_local():\n    local_var = \"I am local\"\n    print(local_var)    # works fine inside\n    print(message)      # reading a global is OK\n\nshow_local()\nprint(message)          # global still accessible\n# print(local_var)      # NameError — local_var doesn't exist here",
+        "code_output": "I am local\nI am global\nI am global"
+      },
+      {
+        "heading": "The global Keyword",
+        "content": "Inside a function, assigning to a name (e.g., <code>count = count + 1</code>) creates a <em>new local</em> variable rather than modifying the global one. To tell Python you want to modify the global variable, declare it with the <code>global</code> keyword first.<br><br>Use <code>global</code> sparingly — it makes code harder to understand and test. Prefer returning values from functions instead.",
+        "code_example": "count = 0\n\ndef increment():\n    global count\n    count += 1\n\nincrement()\nincrement()\nprint(count)   # 2",
+        "code_output": "2"
+      },
+      {
+        "heading": "The LEGB Rule",
+        "content": "When Python looks up a name it searches scopes in this order:<br><ol><li><strong>L</strong>ocal — inside the current function</li><li><strong>E</strong>nclosing — any enclosing function scopes (for nested functions)</li><li><strong>G</strong>lobal — the module level</li><li><strong>B</strong>uilt-in — Python's built-in names like <code>print</code>, <code>len</code>, <code>range</code></li></ol>Python stops at the first scope where the name is found.",
+        "code_example": "x = \"global\"\n\ndef outer():\n    x = \"enclosing\"\n    def inner():\n        # x = \"local\"  # uncomment to see local win\n        print(x)       # finds \"enclosing\" first\n    inner()\n\nouter()\nprint(x)   # still \"global\"",
+        "code_output": "enclosing\nglobal"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Spot the Scope",
+      "prompt": "Define a global variable <code>language</code> set to <code>\"Python\"</code>. Then define a function <code>show_language</code> that reads and prints <code>language</code>. Call the function. Afterward, print <code>language</code> again outside the function to confirm it is still accessible.",
+      "starter_code": "# Create a global variable language = \"Python\"\n# Define show_language() that prints it\n# Call the function and then print language outside\n",
+      "solution": "language = \"Python\"\n\ndef show_language():\n    print(language)\n\nshow_language()\nprint(language)",
+      "hints": [
+        "Define language = \"Python\" at the top level, outside any function",
+        "Inside show_language, just use print(language) — no global keyword needed for reading",
+        "Call show_language() and then print(language)"
+      ],
+      "tests": [
+        {
+          "type": "function_exists",
+          "function_name": "show_language",
+          "message": "Function show_language is defined"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "Python",
+          "message": "Output contains Python"
+        }
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Counter with global",
+      "prompt": "Create a global variable <code>score</code> set to <code>0</code>. Define a function <code>add_point</code> that uses the <code>global</code> keyword to increment <code>score</code> by <code>1</code>. Call <code>add_point</code> three times, then print <code>score</code>.",
+      "starter_code": "# Global variable score = 0\n# Define add_point() using the global keyword\n# Call it 3 times and print score\n",
+      "solution": "score = 0\n\ndef add_point():\n    global score\n    score += 1\n\nadd_point()\nadd_point()\nadd_point()\nprint(score)",
+      "hints": [
+        "At the very start of add_point(), write: global score",
+        "Then: score += 1",
+        "Call add_point() three times before printing"
+      ],
+      "tests": [
+        {
+          "type": "function_exists",
+          "function_name": "add_point",
+          "message": "Function add_point is defined"
+        },
+        {
+          "type": "stdout_contains",
+          "value": "3",
+          "message": "Output contains 3"
+        }
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What happens when you assign a value to a variable inside a function without using the global keyword?",
+      "options": [
+        "A new local variable is created; the global variable is unchanged",
+        "The global variable is modified",
+        "Python raises a NameError",
+        "Python raises a SyntaxError"
+      ],
+      "correct_index": 0,
+      "explanation": "Without the global keyword, assignment inside a function creates a brand new local variable. The global variable with the same name is unaffected."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "In what order does Python search for a name according to the LEGB rule?",
+      "options": [
+        "Local, Enclosing, Global, Built-in",
+        "Global, Local, Built-in, Enclosing",
+        "Built-in, Global, Enclosing, Local",
+        "Local, Global, Enclosing, Built-in"
+      ],
+      "correct_index": 0,
+      "explanation": "LEGB stands for Local, Enclosing, Global, Built-in — the order Python searches scopes when resolving a name. It stops at the first scope where the name is found."
+    }
+  ],
+  "completion_message": "Superb! Understanding variable scope prevents subtle bugs. Keep the LEGB rule in mind whenever you wonder which value a variable holds, and prefer returning values over using global."
+}

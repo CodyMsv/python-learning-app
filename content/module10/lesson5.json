@@ -1,0 +1,97 @@
+{
+  "id": "module10_lesson5",
+  "module_id": "module10",
+  "module_title": "Practical Projects",
+  "module_number": 10,
+  "lesson_number": 5,
+  "title": "Word Counter and Text Analyzer",
+  "subtitle": "Analyse text to count words, find common words, and more",
+  "estimated_minutes": 20,
+  "prerequisites": ["module10_lesson4"],
+  "learning_objectives": [
+    "Count words and characters in a text",
+    "Find the most common words using a dictionary",
+    "Check if a word is a palindrome",
+    "Combine string methods, loops, and dictionaries"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Counting Words and Characters",
+        "content": "Python makes text analysis easy with string methods. Split on whitespace to count words, then dig deeper with loops and dicts.",
+        "code_example": "text = \"the quick brown fox jumps over the lazy dog\"\n\n# Basic counts\nwords = text.split()\nprint(\"Words:\", len(words))\nprint(\"Characters (no spaces):\", len(text.replace(\" \", \"\")))\nprint(\"Characters (with spaces):\", len(text))\n\n# Unique words\nunique = set(words)\nprint(\"Unique words:\", len(unique))",
+        "code_output": "Words: 9\nCharacters (no spaces): 35\nCharacters (with spaces): 43\nUnique words: 8"
+      },
+      {
+        "heading": "Finding the Most Common Words",
+        "content": "Use a dictionary to count how many times each word appears, then sort to find the most frequent.",
+        "code_example": "text = \"to be or not to be that is the question to be\"\nwords = text.lower().split()\n\n# Count each word\nword_count = {}\nfor word in words:\n    word_count[word] = word_count.get(word, 0) + 1\n\n# Sort by count (most frequent first)\nsorted_words = sorted(word_count.items(),\n                      key=lambda x: x[1],\n                      reverse=True)\n\nfor word, count in sorted_words[:3]:\n    print(f\"{word}: {count} times\")",
+        "code_output": "to: 3 times\nbe: 3 times\nor: 1 times"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Word Counter",
+      "prompt": "Write word_count(text) that returns a dict of each word and its count. Test with 'hello world hello python world hello' and print the dict.",
+      "starter_code": "def word_count(text):\n    # Create an empty dict for counts\n    # Split text into lowercase words\n    # Loop over words and count each one\n    pass\n\nresult = word_count(\"hello world hello python world hello\")\nprint(result)\n",
+      "solution": "def word_count(text):\n    counts = {}\n    words = text.lower().split()\n    for word in words:\n        counts[word] = counts.get(word, 0) + 1\n    return counts\n\nresult = word_count(\"hello world hello python world hello\")\nprint(result)",
+      "hints": [
+        "counts[word] = counts.get(word, 0) + 1",
+        ".get(word, 0) returns 0 if word is not yet in dict",
+        "Then we add 1 to the current count"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "hello", "message": "Output contains word counts"},
+        {"type": "function_exists", "function_name": "word_count", "message": "word_count function is defined"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Palindrome Checker",
+      "prompt": "Write is_palindrome(word) that returns True if the word reads the same forwards and backwards (case-insensitive). Test: 'racecar', 'hello', 'Madam', 'Python'.",
+      "starter_code": "def is_palindrome(word):\n    # Compare word to its reverse, case-insensitive\n    pass\n\nprint(is_palindrome(\"racecar\"))\nprint(is_palindrome(\"hello\"))\nprint(is_palindrome(\"Madam\"))\nprint(is_palindrome(\"Python\"))\n",
+      "solution": "def is_palindrome(word):\n    w = word.lower()\n    return w == w[::-1]\n\nprint(is_palindrome(\"racecar\"))\nprint(is_palindrome(\"hello\"))\nprint(is_palindrome(\"Madam\"))\nprint(is_palindrome(\"Python\"))",
+      "hints": [
+        "Convert to lowercase: w = word.lower()",
+        "Reverse a string: w[::-1]",
+        "Compare: return w == w[::-1]"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "True", "message": "'racecar' and 'Madam' are palindromes"},
+        {"type": "stdout_contains", "value": "False", "message": "'hello' and 'Python' are not palindromes"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does 'hello world'.split() return?",
+      "options": ["'hello', 'world'", "['hello', 'world']", "['h','e','l','l','o',' ','w','o','r','l','d']", "11"],
+      "correct_index": 1,
+      "explanation": "str.split() (with no arguments) splits on whitespace and returns a list of words. 'hello world'.split() returns ['hello', 'world']."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What does d.get('key', 0) do if 'key' is not in the dictionary d?",
+      "options": [
+        "Raises a KeyError",
+        "Returns None",
+        "Returns 0 (the default value)",
+        "Creates the key with value 0"
+      ],
+      "correct_index": 2,
+      "explanation": "dict.get(key, default) returns the value for key if it exists, otherwise returns the default. This is perfect for counting — if the word is new, start at 0, then add 1."
+    }
+  ],
+  "completion_message": "Impressive! You can now analyse text programmatically — this is the foundation of data science and NLP!"
+}

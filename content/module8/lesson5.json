@@ -1,0 +1,103 @@
+{
+  "id": "module8_lesson5",
+  "module_id": "module8",
+  "module_title": "Object-Oriented Programming",
+  "module_number": 8,
+  "lesson_number": 5,
+  "title": "Inheritance Basics",
+  "subtitle": "Build new classes on top of existing ones",
+  "estimated_minutes": 18,
+  "prerequisites": ["module8_lesson4"],
+  "learning_objectives": [
+    "Create a child class that inherits from a parent class",
+    "Use super().__init__() to call the parent initialiser",
+    "Add new attributes and methods in the child class",
+    "Use isinstance() to check an object's class"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "What is Inheritance?",
+        "content": "<strong>Inheritance</strong> lets you create a new class based on an existing one. The new class (child) automatically gets all the attributes and methods of the existing class (parent). You only need to add or change what is different.<br><br>Think of it like this: a <code>Dog</code> IS AN <code>Animal</code>. A <code>Cat</code> IS AN <code>Animal</code>. Both share common animal traits (eat, sleep, breathe) but have their own specific behaviours.",
+        "code_example": "class Animal:\n    def __init__(self, name):\n        self.name = name\n\n    def eat(self):\n        print(self.name, \"is eating.\")\n\n# Dog inherits from Animal\nclass Dog(Animal):\n    def bark(self):\n        print(self.name, \"says: Woof!\")\n\nrex = Dog(\"Rex\")\nrex.eat()   # inherited from Animal\nrex.bark()  # defined in Dog",
+        "code_output": "Rex is eating.\nRex says: Woof!"
+      },
+      {
+        "heading": "Calling super().__init__()",
+        "content": "When a child class has its own <code>__init__</code>, you usually call <code>super().__init__()</code> to run the parent's <code>__init__</code> first. This sets up all the parent's attributes before you add the child's own.",
+        "code_example": "class Animal:\n    def __init__(self, name, sound):\n        self.name = name\n        self.sound = sound\n\n    def speak(self):\n        print(self.name, \"says:\", self.sound)\n\nclass Dog(Animal):\n    def __init__(self, name, breed):\n        super().__init__(name, \"Woof\")  # call Animal's __init__\n        self.breed = breed              # Dog's own attribute\n\nrex = Dog(\"Rex\", \"Labrador\")\nrex.speak()         # inherited + works with Dog's name\nprint(rex.breed)    # Dog's own attribute",
+        "code_output": "Rex says: Woof\nLabrador"
+      },
+      {
+        "heading": "isinstance() Check",
+        "content": "Use <code>isinstance(obj, ClassName)</code> to check if an object is an instance of a class. A child object is also an instance of the parent class.",
+        "code_example": "class Animal:\n    pass\n\nclass Dog(Animal):\n    pass\n\nrex = Dog()\nprint(isinstance(rex, Dog))    # True\nprint(isinstance(rex, Animal)) # True  — Dog IS AN Animal",
+        "code_output": "True\nTrue"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Create a Child Class",
+      "prompt": "Define a Vehicle class with __init__(make, speed) and a describe() method that prints 'Make: X, Speed: Y'. Then define a Car class that inherits from Vehicle and adds a doors attribute (default 4). Create car = Car('Toyota', 120) and call car.describe(), then print car.doors.",
+      "starter_code": "class Vehicle:\n    def __init__(self, make, speed):\n        self.make = make\n        self.speed = speed\n\n    def describe(self):\n        print(f\"Make: {self.make}, Speed: {self.speed}\")\n\n# Define Car inheriting from Vehicle\nclass Car(Vehicle):\n    def __init__(self, make, speed):\n        pass  # Call super().__init__ and add self.doors = 4\n\ncar = Car(\"Toyota\", 120)\ncar.describe()\nprint(car.doors)\n",
+      "solution": "class Vehicle:\n    def __init__(self, make, speed):\n        self.make = make\n        self.speed = speed\n\n    def describe(self):\n        print(f\"Make: {self.make}, Speed: {self.speed}\")\n\nclass Car(Vehicle):\n    def __init__(self, make, speed):\n        super().__init__(make, speed)\n        self.doors = 4\n\ncar = Car(\"Toyota\", 120)\ncar.describe()\nprint(car.doors)",
+      "hints": [
+        "class Car(Vehicle): — Vehicle in parentheses means inherit",
+        "Call super().__init__(make, speed) in Car's __init__",
+        "Then self.doors = 4"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Make: Toyota, Speed: 120", "message": "describe() output is correct"},
+        {"type": "stdout_contains", "value": "4", "message": "Output contains: 4"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Animal Hierarchy",
+      "prompt": "Create an Animal class with __init__(name) and a describe() method that prints 'I am an animal named X'. Create a Cat class inheriting Animal, with a purr() method that prints 'X says: Purrr'. Create cat = Cat('Whiskers'), call describe() and purr().",
+      "starter_code": "class Animal:\n    def __init__(self, name):\n        self.name = name\n\n    def describe(self):\n        print(f\"I am an animal named {self.name}\")\n\nclass Cat(Animal):\n    def purr(self):\n        pass  # Print: self.name says: Purrr\n\ncat = Cat(\"Whiskers\")\ncat.describe()\ncat.purr()\n",
+      "solution": "class Animal:\n    def __init__(self, name):\n        self.name = name\n\n    def describe(self):\n        print(f\"I am an animal named {self.name}\")\n\nclass Cat(Animal):\n    def purr(self):\n        print(f\"{self.name} says: Purrr\")\n\ncat = Cat(\"Whiskers\")\ncat.describe()\ncat.purr()",
+      "hints": [
+        "The starter code is correct — just run it!",
+        "Cat inherits __init__ from Animal so it works without its own",
+        "self.name inside purr() works because Cat inherited it from Animal"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "I am an animal named Whiskers", "message": "describe() works correctly"},
+        {"type": "stdout_contains", "value": "Whiskers says: Purrr", "message": "purr() works correctly"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "How do you make a class Dog inherit from Animal?",
+      "options": ["class Dog extends Animal:", "class Dog inherits Animal:", "class Dog(Animal):", "class Dog -> Animal:"],
+      "correct_index": 2,
+      "explanation": "In Python, you specify the parent class in parentheses after the child class name: class Dog(Animal):. This is the inheritance syntax."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What does super().__init__() do inside a child class's __init__?",
+      "options": [
+        "Creates a new parent object",
+        "Deletes the parent class",
+        "Calls the parent class's __init__ to set up inherited attributes",
+        "Overrides all parent methods"
+      ],
+      "correct_index": 2,
+      "explanation": "super().__init__() calls the parent class's __init__ method, which sets up all the attributes defined there. Without this call, the parent's attributes would never be created."
+    }
+  ],
+  "completion_message": "Great work! Inheritance is a powerful tool — you can now build class hierarchies!"
+}

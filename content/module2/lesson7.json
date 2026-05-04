@@ -1,0 +1,95 @@
+{
+  "id": "module2_lesson7",
+  "module_id": "module2",
+  "module_title": "Working with Data Types",
+  "module_number": 2,
+  "lesson_number": 7,
+  "title": "Type Conversion",
+  "subtitle": "Convert values between strings, integers, floats, and booleans",
+  "estimated_minutes": 12,
+  "prerequisites": ["module2_lesson6"],
+  "learning_objectives": [
+    "Convert strings to numbers using int() and float()",
+    "Convert numbers and other values to strings using str()",
+    "Check what Boolean value a conversion produces using bool()",
+    "Handle invalid conversions that raise a ValueError"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Converting Between Types",
+        "content": "Python keeps each value as a specific type — a string like <code>\"42\"</code> is <em>not</em> the same as the integer <code>42</code>. You cannot do arithmetic on strings or concatenate numbers directly into sentences. <strong>Type conversion</strong> (also called <em>casting</em>) is how you switch a value from one type to another.<br><br><code><strong>int(x)</strong></code> converts <code>x</code> to an integer. If <code>x</code> is a string containing a whole number (<code>\"42\"</code>), it works perfectly. If it is a float like <code>3.9</code>, it <em>truncates</em> (drops the decimal, does NOT round) to give <code>3</code>.<br><br><code><strong>float(x)</strong></code> converts <code>x</code> to a float. Works with integers (<code>float(5)</code> gives <code>5.0</code>) and strings that look like numbers (<code>float(\"3.14\")</code>).<br><br><code><strong>str(x)</strong></code> converts anything to its string representation. This is what you need when you want to concatenate a number into a string using <code>+</code> (since Python won't do it automatically).",
+        "code_example": "# String to int\nage_str = \"25\"\nage = int(age_str)\nprint(age)          # 25\nprint(type(age))    # <class 'int'>\n\n# String to float\npi_str = \"3.14\"\npi = float(pi_str)\nprint(pi)           # 3.14\n\n# int truncates floats (does NOT round)\nprint(int(3.9))     # 3  (not 4!)\nprint(int(-2.7))    # -2 (not -3!)\n\n# Number to string\nyear = 2024\nmessage = \"The year is \" + str(year)\nprint(message)\n\n# float to int and back\nprint(float(7))     # 7.0\nprint(int(7.0))     # 7",
+        "code_output": "25\n<class 'int'>\n3.14\n3\n-2\nThe year is 2024\n7.0\n7"
+      },
+      {
+        "heading": "Boolean Conversion and Handling Errors",
+        "content": "<code><strong>bool(x)</strong></code> converts any value to <code>True</code> or <code>False</code> following the truthiness rules you learned in the previous lesson. <code>0</code>, <code>0.0</code>, <code>\"\"</code>, and <code>None</code> all become <code>False</code>; everything else becomes <code>True</code>.<br><br>Not every conversion is valid. If you try <code>int(\"hello\")</code> or <code>float(\"abc\")</code>, Python cannot figure out what number to produce, so it raises a <strong><code>ValueError</code></strong>. Similarly, <code>int(\"3.14\")</code> raises a <code>ValueError</code> because the string contains a decimal point — you must convert to float first, then to int.<br><br>You will learn how to catch and handle these errors gracefully using <code>try/except</code> in a later module. For now, just remember: always make sure the value <em>looks like</em> the type you are converting to before you convert.",
+        "code_example": "# bool() conversion\nprint(bool(0))      # False\nprint(bool(\"\"))     # False\nprint(bool(\"hello\"))# True\nprint(bool(42))     # True\n\n# Converting user input (input() always returns a string)\nuser_input = \"100\"          # simulate input()\nnumber = int(user_input)\nprint(number * 2)           # 200\n\n# int() cannot parse a decimal string directly\n# int(\"3.14\") would cause a ValueError\n# Correct approach: convert to float first, then to int\ndecimal_str = \"3.14\"\nas_float = float(decimal_str)   # 3.14\nas_int = int(as_float)          # 3\nprint(as_int)\n\n# These would raise ValueError — shown as comments\n# int(\"hello\")    -> ValueError: invalid literal for int()\n# float(\"abc\")    -> ValueError: could not convert string to float\nprint(\"Conversion complete\")",
+        "code_output": "False\nFalse\nTrue\nTrue\n200\n3\nConversion complete"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Convert and Calculate",
+      "prompt": "You have two string variables: `a = \"15\"` and `b = \"4\"`. Convert both to integers and print their sum and their product.",
+      "starter_code": "a = \"15\"\nb = \"4\"\n\n# Convert a to an integer and store it in num_a\n# Convert b to an integer and store it in num_b\n\n# Print their sum\n# Print their product\n",
+      "solution": "a = \"15\"\nb = \"4\"\nnum_a = int(a)\nnum_b = int(b)\nprint(num_a + num_b)\nprint(num_a * num_b)",
+      "hints": [
+        "Use int() to convert each string: int(a) and int(b)",
+        "Once converted, use + for sum and * for product"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "19", "message": "Output contains the sum: 19"},
+        {"type": "stdout_contains", "value": "60", "message": "Output contains the product: 60"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Build a Message with str()",
+      "prompt": "Given `items = 7` and `price = 2.5`, use `str()` and concatenation (not an f-string) to print the message: `You have 7 items at $2.5 each.`",
+      "starter_code": "items = 7\nprice = 2.5\n\n# Build a variable called message using str() and + to combine the parts\n# Print message\n",
+      "solution": "items = 7\nprice = 2.5\nmessage = \"You have \" + str(items) + \" items at $\" + str(price) + \" each.\"\nprint(message)",
+      "hints": [
+        "Use str(items) and str(price) to convert the numbers to strings",
+        "Join all the parts with +: \"You have \" + str(items) + \" items at $\" + str(price) + \" each.\""
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "You have 7 items", "message": "Output contains 'You have 7 items'"},
+        {"type": "stdout_contains", "value": "2.5 each", "message": "Output contains '2.5 each'"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "What does `int(9.99)` return?",
+      "options": ["10", "9", "9.99", "Error"],
+      "correct_index": 1,
+      "explanation": "int() truncates the decimal part — it does not round. So int(9.99) drops the .99 and returns 9, not 10."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What happens when you run `int(\"hello\")`?",
+      "options": [
+        "Returns 0",
+        "Returns None",
+        "Raises a ValueError",
+        "Returns the string unchanged"
+      ],
+      "correct_index": 2,
+      "explanation": "int() can only convert strings that look like whole numbers (e.g. \"42\"). When given a string like \"hello\" that cannot be interpreted as a number, Python raises a ValueError with the message \"invalid literal for int()\"."
+    }
+  ],
+  "completion_message": "You have completed Module 2! You now know how to move values between types using int(), float(), str(), and bool(). This is a critical skill — real programs constantly receive data as strings (from user input, files, or the web) and need to convert it before doing calculations. Well done on finishing the entire Working with Data Types module!"
+}

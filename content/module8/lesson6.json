@@ -1,0 +1,106 @@
+{
+  "id": "module8_lesson6",
+  "module_id": "module8",
+  "module_title": "Object-Oriented Programming",
+  "module_number": 8,
+  "lesson_number": 6,
+  "title": "Method Overriding",
+  "subtitle": "Customise inherited behaviour in child classes",
+  "estimated_minutes": 15,
+  "prerequisites": ["module8_lesson5"],
+  "learning_objectives": [
+    "Override a parent method in a child class",
+    "Use super().method() to extend (not replace) parent behaviour",
+    "Understand polymorphism — same method name, different behaviour",
+    "Call the correct method when working with a list of mixed objects"
+  ],
+  "theory": {
+    "sections": [
+      {
+        "heading": "Overriding Methods",
+        "content": "If a child class defines a method with the <strong>same name</strong> as a parent method, the child's version replaces (overrides) the parent's version. Python always calls the most specific version.",
+        "code_example": "class Animal:\n    def speak(self):\n        print(\"...\")\n\nclass Dog(Animal):\n    def speak(self):       # overrides Animal.speak\n        print(\"Woof!\")\n\nclass Cat(Animal):\n    def speak(self):       # overrides Animal.speak\n        print(\"Meow!\")\n\ndog = Dog()\ncat = Cat()\ndog.speak()   # Woof!\ncat.speak()   # Meow!",
+        "code_output": "Woof!\nMeow!"
+      },
+      {
+        "heading": "Using super() to Extend Behaviour",
+        "content": "Instead of completely replacing the parent method, you can call <code>super().method()</code> to run the parent's version first, then add extra behaviour.",
+        "code_example": "class Animal:\n    def __init__(self, name):\n        self.name = name\n\n    def describe(self):\n        print(f\"I am {self.name}.\")\n\nclass Dog(Animal):\n    def __init__(self, name, breed):\n        super().__init__(name)     # run Animal's __init__\n        self.breed = breed\n\n    def describe(self):            # extend Animal's describe\n        super().describe()         # run parent version first\n        print(f\"I am a {self.breed}.\")\n\nrex = Dog(\"Rex\", \"Labrador\")\nrex.describe()",
+        "code_output": "I am Rex.\nI am a Labrador."
+      },
+      {
+        "heading": "Polymorphism",
+        "content": "<strong>Polymorphism</strong> means 'many forms'. When different classes implement the same method name, you can call that method on any object without caring which specific class it is. This makes code much more flexible.",
+        "code_example": "class Dog:\n    def speak(self): return \"Woof!\"\n\nclass Cat:\n    def speak(self): return \"Meow!\"\n\nclass Duck:\n    def speak(self): return \"Quack!\"\n\nanimals = [Dog(), Cat(), Duck()]\nfor animal in animals:\n    print(animal.speak())  # same call, different result",
+        "code_output": "Woof!\nMeow!\nQuack!"
+      }
+    ]
+  },
+  "exercises": [
+    {
+      "id": "ex1",
+      "order": 1,
+      "type": "code_run",
+      "title": "Override a Method",
+      "prompt": "Create a Shape class with area() that returns 0. Create a Circle class inheriting Shape with __init__(radius) and override area() to return 3.14159 * radius * radius. Print Circle(5).area().",
+      "starter_code": "class Shape:\n    def area(self):\n        return 0\n\nclass Circle(Shape):\n    def __init__(self, radius):\n        self.radius = radius\n\n    def area(self):\n        # Return pi * radius * radius\n        pass\n\nprint(Circle(5).area())\n",
+      "solution": "class Shape:\n    def area(self):\n        return 0\n\nclass Circle(Shape):\n    def __init__(self, radius):\n        self.radius = radius\n\n    def area(self):\n        return 3.14159 * self.radius * self.radius\n\nprint(Circle(5).area())",
+      "hints": [
+        "In area(): return 3.14159 * self.radius * self.radius",
+        "self.radius is set in __init__",
+        "Circle(5).area() creates a circle of radius 5 and immediately calls area()"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "78.53", "message": "Circle area is approximately 78.53"}
+      ]
+    },
+    {
+      "id": "ex2",
+      "order": 2,
+      "type": "code_run",
+      "title": "Polymorphism in Action",
+      "prompt": "Create Dog and Cat classes each with a speak() method returning 'Woof!' and 'Meow!' respectively. Put them in a list and print the result of calling speak() on each.",
+      "starter_code": "class Dog:\n    def speak(self):\n        pass  # return \"Woof!\"\n\nclass Cat:\n    def speak(self):\n        pass  # return \"Meow!\"\n\nanimals = [Dog(), Cat(), Dog()]\nfor animal in animals:\n    print(animal.speak())\n",
+      "solution": "class Dog:\n    def speak(self):\n        return \"Woof!\"\n\nclass Cat:\n    def speak(self):\n        return \"Meow!\"\n\nanimals = [Dog(), Cat(), Dog()]\nfor animal in animals:\n    print(animal.speak())",
+      "hints": [
+        "The starter code is complete — just run it!",
+        "Each class has speak() — Python calls the right version based on the object type"
+      ],
+      "tests": [
+        {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "stdout_contains", "value": "Woof!", "message": "Output contains: Woof!"},
+        {"type": "stdout_contains", "value": "Meow!", "message": "Output contains: Meow!"}
+      ]
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "order": 1,
+      "question": "If a child class defines a method with the same name as the parent, what happens when you call it?",
+      "options": [
+        "Both the parent and child versions run",
+        "The parent version runs (parent takes priority)",
+        "The child version runs (child overrides the parent)",
+        "An error is raised"
+      ],
+      "correct_index": 2,
+      "explanation": "The child class's version overrides the parent's. Python always uses the most specific version available. To also run the parent version, you can call super().method_name() inside the child's method."
+    },
+    {
+      "id": "q2",
+      "order": 2,
+      "question": "What is polymorphism in OOP?",
+      "options": [
+        "When a class has many attributes",
+        "When the same method name works differently on different objects",
+        "When two objects are identical",
+        "When a function has default parameters"
+      ],
+      "correct_index": 1,
+      "explanation": "Polymorphism means 'many forms'. Different classes can implement the same method name, and the correct version is called automatically based on the object's type. This allows you to write flexible code that works with many different types of objects."
+    }
+  ],
+  "completion_message": "Excellent! You understand method overriding and polymorphism — key OOP concepts!"
+}
