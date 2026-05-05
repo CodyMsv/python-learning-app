@@ -129,7 +129,7 @@ async function evaluateTests(exercise, serverTestResults) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ lesson_id: LESSON_ID, status: 'in_progress', xp: 0 })
     });
-    checkLessonComplete();
+    checkLessonComplete(true);
   } else {
     showToast('Not quite — check the failed tests and try again.', 'warning');
   }
@@ -177,7 +177,7 @@ function submitQuiz(questionId, selectedIndex, correctIndex, explanation) {
 // ---------------------------------------------------------------------------
 // Lesson completion
 // ---------------------------------------------------------------------------
-function checkLessonComplete() {
+function checkLessonComplete(silent = false) {
   const exercises = LESSON_DATA.exercises || [];
   const quizQuestions = LESSON_DATA.quiz || [];
 
@@ -192,6 +192,8 @@ function checkLessonComplete() {
     markLessonComplete();
     return;
   }
+
+  if (silent) return;
 
   // Tell the user exactly what is still missing
   const missing = [];
@@ -307,14 +309,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (row) row.style.display = 'block';
     }
   }
-
-  // Keyboard shortcut: Ctrl+Enter to run
-  document.addEventListener('keydown', e => {
-    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-      e.preventDefault();
-      runCode();
-    }
-  });
 
   // Close modal on overlay click
   const modal = document.getElementById('completion-modal');

@@ -63,6 +63,8 @@
       ],
       "tests": [
         {"type": "runs_without_error", "message": "Code runs without errors"},
+        {"type": "variable_equals", "variable": "divider", "value": "*-*-*-*-*-*-*-*-", "message": "Variable divider equals \"*-\" repeated 8 times"},
+        {"type": "variable_equals", "variable": "result", "value": "True", "message": "Variable result stores whether 'on' is in word"},
         {"type": "stdout_contains", "value": "*-*-*-*-*-*-*-*-", "message": "Output contains the repeated divider"},
         {"type": "stdout_contains", "value": "True", "message": "Output contains True for the membership check"}
       ]

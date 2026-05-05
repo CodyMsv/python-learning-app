@@ -65,13 +65,15 @@
       "solution": "address = \"123 Main St\\nSpringfield\\nUSA\"\nprint(address)",
       "hints": [
         "Put \\n between each line inside the string: \"line1\\nline2\\nline3\"",
-        "Make sure all three parts are in one string separated by \\n"
+        "Make sure all three parts are in one string separated by \\n",
+        "Common mistake: /n does nothing — it must be a backslash \\n, not a forward slash /n",
+        "Also make sure address is one single string, not a tuple: address = \"line1\\nline2\\nline3\""
       ],
       "tests": [
         {"type": "runs_without_error", "message": "Code runs without errors"},
         {"type": "stdout_contains", "value": "123 Main St", "message": "Output contains '123 Main St'"},
-        {"type": "stdout_contains", "value": "Springfield", "message": "Output contains 'Springfield'"},
-        {"type": "stdout_contains", "value": "USA", "message": "Output contains 'USA'"}
+        {"type": "stdout_contains", "value": "\nSpringfield", "message": "Springfield appears on its own line (use \\n, not /n)"},
+        {"type": "stdout_contains", "value": "\nUSA", "message": "USA appears on its own line (use \\n, not /n)"}
       ]
     },
     {
