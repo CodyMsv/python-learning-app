@@ -122,6 +122,45 @@
       ],
       "correct_index": 2,
       "explanation": "When you separate items with commas in print(), Python automatically adds a single space between each one. So print(\"I am\", 10, \"years old\") outputs: I am 10 years old"
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "Which of the following correctly prints the number 42?",
+      "options": [
+        "print(\"42\")",
+        "print(42)",
+        "Both work — both print 42 on the screen",
+        "Neither works — you need to use display() instead"
+      ],
+      "correct_index": 2,
+      "explanation": "Both print(\"42\") and print(42) display 42 on the screen. The difference is the type: \"42\" is a string (text) and 42 is an integer (number). For just displaying it, the result looks the same."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "What is a comment in Python?",
+      "options": [
+        "A line of code that runs a special hidden command",
+        "A line starting with # that Python completely ignores — it's for humans to read",
+        "A message that gets printed to the screen automatically",
+        "A type of error message"
+      ],
+      "correct_index": 1,
+      "explanation": "A comment starts with # and is completely ignored by Python when it runs. Comments are notes for you and other humans reading the code — they have no effect on what the program does."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "Can you use both single quotes and double quotes to create a string in Python?",
+      "options": [
+        "No — you must always use double quotes",
+        "No — you must always use single quotes",
+        "Yes — both work exactly the same way",
+        "Only double quotes work for strings with numbers inside"
+      ],
+      "correct_index": 2,
+      "explanation": "In Python, single quotes and double quotes are completely interchangeable for creating strings. 'Hello' and \"Hello\" are identical. The main reason to choose one over the other is when your text itself contains a quote character."
     }
   ],
   "completion_message": "You just wrote your first real Python programs — and you're already using print(), strings, numbers, and comments like a pro! These are skills you will use in every single program you ever write. Brilliant work — on to the next lesson!"

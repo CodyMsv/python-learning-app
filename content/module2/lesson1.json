@@ -113,6 +113,40 @@
       "options": ["P", "t", "o", "n"],
       "correct_index": 2,
       "explanation": "Negative indexing counts from the right. Index -1 is 'n', so index -2 is the character before it, which is 'o'."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "When would you use triple quotes (\"\"\"...\"\"\") instead of regular quotes?",
+      "options": [
+        "When the string contains numbers",
+        "When you want the string to be printed in bold",
+        "When you need a string that spans multiple lines",
+        "When the string is longer than 10 characters"
+      ],
+      "correct_index": 2,
+      "explanation": "Triple quotes let you write a string across multiple lines. Everything between the opening and closing triple quotes is included in the string, including line breaks. Regular single or double quotes do not allow this."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "What index is the first character of any string in Python?",
+      "options": ["1", "0", "-1", "It depends on the string"],
+      "correct_index": 1,
+      "explanation": "Python always starts counting from 0. So the first character of any string is always at index 0, the second at index 1, and so on. This is called zero-based indexing."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "What happens if you try to access an index that doesn't exist in a string, like `\"hi\"[10]`?",
+      "options": [
+        "Python returns an empty string",
+        "Python returns None",
+        "Python raises an IndexError",
+        "Python returns the last character instead"
+      ],
+      "correct_index": 2,
+      "explanation": "If you use an index that is out of range for the string, Python raises an IndexError. For example, \"hi\" only has indexes 0 and 1, so \"hi\"[10] would cause an IndexError."
     }
   ],
   "completion_message": "Great work! You now know how to create strings with different quote styles, use \\n for line breaks, measure strings with len(), and access any character by its index. These skills are the foundation for everything else you will do with text in Python."

@@ -132,6 +132,45 @@
       ],
       "correct_index": 1,
       "explanation": "In Python, = is the assignment operator. It means: take the value on the right (100) and store it in the variable on the left (score). It does NOT check whether they are equal — that's what == is for."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "You define `color = \"blue\"` then later write `color = \"green\"`. What is the value of color after both lines run?",
+      "options": [
+        "\"blue\" — the original value is kept",
+        "\"green\" — the variable now holds the new value",
+        "\"blue green\" — both values are stored",
+        "An error — you cannot reuse the same variable name"
+      ],
+      "correct_index": 1,
+      "explanation": "Variables can be reassigned at any time. When you write color = \"green\", the old value \"blue\" is completely replaced. After both lines run, color holds \"green\"."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "Python variable names are case-sensitive. What does that mean?",
+      "options": [
+        "Variable names must always be written in uppercase",
+        "Variable names must always be written in lowercase",
+        "Score and score are two completely different variables",
+        "You cannot use uppercase letters in variable names"
+      ],
+      "correct_index": 2,
+      "explanation": "Python treats uppercase and lowercase letters as different. So Score, score, and SCORE are three completely separate variables. This is a common source of bugs — always check your capitalization!"
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "Which of the following is the correct Python style for naming a variable with two words?",
+      "options": [
+        "playerName (camelCase)",
+        "player-name (with a hyphen)",
+        "player name (with a space)",
+        "player_name (snake_case)"
+      ],
+      "correct_index": 3,
+      "explanation": "Python convention is to use snake_case for variable names — all lowercase letters with underscores between words. Hyphens cause a SyntaxError and spaces are not allowed in variable names."
     }
   ],
   "completion_message": "Wonderful work! Variables are one of the most fundamental building blocks of all programming. Now that you know how to store and reuse information, your programs can start doing much more interesting things. Keep going — you're building real skills!"

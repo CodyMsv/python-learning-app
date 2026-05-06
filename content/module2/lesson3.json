@@ -25,7 +25,7 @@
       },
       {
         "heading": "Splitting, Checking, Counting, and Finding",
-        "content": "<code><strong>.split(\"separator\")</strong></code> — chops a string into pieces and gives you back a <strong>list</strong> of those pieces. You tell it what character to chop at. For example, splitting <code>\"Alice,30,London\"</code> by <code>\",\"</code> gives you three separate pieces: <code>['Alice', '30', 'London']</code>. If you don't pass anything, it splits on spaces.<br><br><code><strong>.startswith(\"text\")</strong></code> — asks: does this string <em>begin</em> with that text? Returns <code>True</code> or <code>False</code>.<br><code><strong>.endswith(\"text\")</strong></code> — asks: does this string <em>end</em> with that text? Returns <code>True</code> or <code>False</code>.<br>Both are case-sensitive — <code>\"Report\"</code> and <code>\"report\"</code> are different.<br><br><code><strong>.count(\"text\")</strong></code> — counts how many times a word or letter appears inside the string and gives you back a number.<br><br><code><strong>.find(\"text\")</strong></code> — searches the string and tells you the <em>position</em> (index) where it first finds that text. Remember, positions start at 0. If the text is not found at all, it returns <code>-1</code> — that's Python's way of saying \"not found\".",
+        "content": "<strong>Imagine a string as a full sentence written on a piece of paper.</strong> These four methods let you cut it up, check it, count things inside it, and search through it.<br><br><hr><br><code><strong>.split(\"separator\")</strong></code> — <strong>cuts a string into pieces</strong> and gives you a list of those pieces.<br><br>Think of it like cutting a sentence at every comma (or every space, or whatever you choose). Each piece becomes its own item in a list.<br><br>Example: <code>\"Alice,30,London\".split(\",\")</code> → cuts at every comma → <code>['Alice', '30', 'London']</code><br><br>If you don't give it anything, it automatically cuts at every space:<br><code>\"hello world\".split()</code> → <code>['hello', 'world']</code><br><br><hr><br><code><strong>.startswith(\"text\")</strong></code> — <strong>checks if the string begins with something.</strong> Answers with <code>True</code> or <code>False</code>.<br><br>Like asking: <em>\"Does this filename start with 'report'?\"</em><br><code>\"report_2024.pdf\".startswith(\"report\")</code> → <code>True</code><br><br><code><strong>.endswith(\"text\")</strong></code> — <strong>checks if the string ends with something.</strong> Also answers <code>True</code> or <code>False</code>.<br><br>Like asking: <em>\"Is this file a PDF?\"</em><br><code>\"report_2024.pdf\".endswith(\".pdf\")</code> → <code>True</code><br><code>\"report_2024.pdf\".endswith(\".docx\")</code> → <code>False</code><br><br>⚠️ Both are case-sensitive — <code>\"Report\"</code> and <code>\"report\"</code> are treated as different.<br><br><hr><br><code><strong>.count(\"text\")</strong></code> — <strong>counts how many times something appears</strong> inside the string.<br><br>Like asking: <em>\"How many times does the letter 'a' appear in banana?\"</em><br><code>\"banana\".count(\"a\")</code> → <code>3</code><br><br><hr><br><code><strong>.find(\"text\")</strong></code> — <strong>searches for something and tells you where it is.</strong><br><br>It gives you back the <em>position number</em> (index) of where it first finds your text. Remember, Python starts counting from 0.<br><br>Like asking: <em>\"Where does the word 'world' start in this sentence?\"</em><br><code>\"hello world\".find(\"world\")</code> → <code>6</code> (it starts at position 6)<br><br>If it can't find what you're looking for, it returns <code>-1</code> — that's Python's way of saying <em>\"not found.\"</em><br><code>\"hello world\".find(\"python\")</code> → <code>-1</code>",
         "code_example": "# .split() — chop a string into a list of pieces\nsentence = \"the quick brown fox\"\nwords = sentence.split(\" \")  # split at every space\nprint(words)       # ['the', 'quick', 'brown', 'fox']\nprint(len(words))  # 4 pieces\n\ncsv_line = \"Alice,30,Engineer\"\nparts = csv_line.split(\",\")  # split at every comma\nprint(parts)       # ['Alice', '30', 'Engineer']\n\n# .startswith() and .endswith()\nfilename = \"report_2024.pdf\"\nprint(filename.startswith(\"report\"))  # True\nprint(filename.endswith(\".pdf\"))      # True\nprint(filename.endswith(\".docx\"))     # False\n\n# .count() and .find()\ntext = \"banana\"\nprint(text.count(\"a\"))  # 'a' appears 3 times\nprint(text.find(\"n\"))   # first 'n' is at position 2\nprint(text.find(\"z\"))   # 'z' not found, returns -1",
         "code_output": "['the', 'quick', 'brown', 'fox']\n4\n['Alice', '30', 'Engineer']\nTrue\nTrue\nFalse\n3\n2\n-1"
       },
@@ -114,6 +114,30 @@
       "options": ["0", "None", "-1", "Error"],
       "correct_index": 2,
       "explanation": ".find() returns -1 when the substring is not found in the string. It only raises an error if you use .index() instead of .find()."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "What does `\"  hello  \".strip()` return?",
+      "options": ["\"  hello  \"", "\"hello\"", "\"hello  \"", "\"  hello\""],
+      "correct_index": 1,
+      "explanation": ".strip() removes spaces (and other whitespace) from both the start and the end of a string. The spaces in the middle of a string are not touched."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "What does `\"I like cats\".replace(\"cats\", \"dogs\")` return?",
+      "options": ["\"I like cats\"", "\"I like dogs\"", "\"cats dogs\"", "Error"],
+      "correct_index": 1,
+      "explanation": ".replace(\"old\", \"new\") finds every occurrence of \"old\" in the string and replaces it with \"new\". The original string is not changed — a new string is returned."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "What does `\"hello\".upper()` return?",
+      "options": ["\"Hello\"", "\"HELLO\"", "\"hello\"", "\"hELLO\""],
+      "correct_index": 1,
+      "explanation": ".upper() converts every letter in the string to uppercase. So \"hello\".upper() returns \"HELLO\"."
     }
   ],
   "completion_message": "Fantastic! String methods are some of the most useful tools in Python. You can now clean text with .strip(), change case with .upper() and .lower(), swap content with .replace(), break strings apart with .split(), and search with .find() and .count(). Chaining these together makes your code concise and readable."

@@ -100,6 +100,45 @@
       ],
       "correct_index": 3,
       "explanation": "None is Python's way of saying \"no value here.\" It is not the same as 0, False, or an empty string (\"\"). None is its own special type (NoneType) and represents the complete absence of a value."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "What does the type() function do?",
+      "options": [
+        "It changes the type of a variable",
+        "It tells you what type a value or variable is",
+        "It converts a value to a string",
+        "It counts how many characters are in a value"
+      ],
+      "correct_index": 1,
+      "explanation": "type() is a built-in function that tells you what data type a value is. For example, type(3.14) returns <class 'float'> and type(\"hello\") returns <class 'str'>. It is very useful for debugging."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "Which of these values is a float?",
+      "options": [
+        "42",
+        "\"3.14\"",
+        "True",
+        "100.0"
+      ],
+      "correct_index": 3,
+      "explanation": "100.0 is a float because it has a decimal point. 42 is an int (no decimal point). \"3.14\" is a string (it has quotes). True is a boolean."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "What error does Python raise when you try to add a number directly to a string using +?",
+      "options": [
+        "NameError",
+        "SyntaxError",
+        "TypeError",
+        "ValueError"
+      ],
+      "correct_index": 2,
+      "explanation": "Python raises a TypeError when you mix incompatible types in an operation — like trying to add an integer to a string with +. Python doesn't know if you want math or text joining, so it raises an error instead of guessing."
     }
   ],
   "completion_message": "You have completed Module 1! You now understand the four basic data types that are the building blocks of all Python programs. Knowing the difference between strings, integers, floats, and booleans — and how to check and convert them — will serve you incredibly well as you continue. You should be very proud of how far you have come!"

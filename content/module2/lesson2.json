@@ -86,6 +86,35 @@
       "options": ["True", "False", "None", "Error"],
       "correct_index": 1,
       "explanation": "String comparisons are case-sensitive. \"hello\" (all lowercase) does not match \"Hello\" (capital H) inside \"Hello World\", so the result is False."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "What does `\"Go\" + \"!\" + \"!\"` produce?",
+      "options": ["\"Go!!\"", "\"Go ! !\"", "\"Go2!\"", "Error"],
+      "correct_index": 0,
+      "explanation": "The + operator joins strings end-to-end with no spaces added. So \"Go\" + \"!\" + \"!\" gives \"Go!!\"."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "What does `\"cat\" not in \"I love cats\"` evaluate to?",
+      "options": ["True", "False", "None", "Error"],
+      "correct_index": 1,
+      "explanation": "\"cat\" is found inside \"I love cats\", so `\"cat\" in \"I love cats\"` is True. Adding `not` flips it to False. Note: \"cat\" is found because \"cats\" contains the letters c-a-t."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "You want to join a first name and last name with a space between them. Which code is correct?",
+      "options": [
+        "first + last",
+        "first + last + \" \"",
+        "first + \" \" + last",
+        "first * last"
+      ],
+      "correct_index": 2,
+      "explanation": "Python does not add spaces automatically when you use +. You must include the space yourself as its own string: first + \" \" + last. Without it, the names would be joined with no gap."
     }
   ],
   "completion_message": "Excellent! You can now join strings with +, repeat them with *, and search inside them with in. You also know that Python always cares about uppercase vs lowercase — a detail that trips up many beginners. Keep that in mind as you work with real-world data!"

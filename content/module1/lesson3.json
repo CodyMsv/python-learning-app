@@ -99,6 +99,45 @@
       ],
       "correct_index": 1,
       "explanation": "A NameError means you used a name that Python doesn't recognize. Either the variable was never created, or it was misspelled. For example, if you defined 'color' (without a 'u') but then tried to use 'colour', Python would report a NameError."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "Python uses an interpreter. What does that mean?",
+      "options": [
+        "Python translates the whole program to another language before running it",
+        "Python reads and runs your code one line at a time, from top to bottom",
+        "Python requires a special app to be installed before code can run",
+        "Python checks all the code for errors before running any of it"
+      ],
+      "correct_index": 1,
+      "explanation": "Python's interpreter reads your code one line at a time and runs each line immediately before moving to the next. This means you can run code instantly without a separate compilation step."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "If Python encounters an error on line 5 of your program, what happens to lines 1 through 4?",
+      "options": [
+        "Python cancels everything, including lines 1 to 4",
+        "Python skips to line 6 and continues",
+        "Lines 1 to 4 have already run — Python stops at line 5",
+        "Python reruns the whole program from line 1"
+      ],
+      "correct_index": 2,
+      "explanation": "Because Python runs code line by line from top to bottom, lines 1 through 4 will have already executed before Python reaches the error on line 5. It stops at line 5 and reports the error."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "What three things does a Python error message tell you?",
+      "options": [
+        "The file size, the date, and the programmer's name",
+        "The line number, the error type, and a description of what went wrong",
+        "The correct code, the wrong code, and a suggested fix",
+        "The memory used, the time taken, and the output"
+      ],
+      "correct_index": 1,
+      "explanation": "A Python error message always tells you: (1) the line number where the problem was found, (2) the type of error (like SyntaxError or NameError), and (3) a short description of what went wrong. Use these three clues to fix your code."
     }
   ],
   "completion_message": "Excellent! Understanding how Python runs code — and how to read error messages — is a superpower that will save you countless hours as you keep learning. Errors are not failures, they are helpful clues. You are well on your way!"

@@ -30,6 +30,7 @@
               {% else %}○{% endif %}
             </span>
             <span class="sidebar-lesson-text">{{ l.title }}</span>
+            {% if l.id == last_lesson %}<span class="last-lesson-pin" title="You were here last time">📍</span>{% endif %}
           </a>
           {% endfor %}
         </div>

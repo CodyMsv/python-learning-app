@@ -14,7 +14,7 @@ function initEditor(initialCode) {
     indentUnit: 4,
     tabSize: 4,
     indentWithTabs: false,
-    lineWrapping: false,
+    lineWrapping: true,
     autofocus: false,
     extraKeys: {
       'Ctrl-Enter': () => runCode(),

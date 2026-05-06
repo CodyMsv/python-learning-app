@@ -77,6 +77,7 @@ def init_db():
         conn.execute("INSERT OR IGNORE INTO user_settings VALUES ('font_size', '14')")
         conn.execute("INSERT OR IGNORE INTO user_settings VALUES ('last_activity', '')")
         conn.execute("INSERT OR IGNORE INTO user_settings VALUES ('streak_days', '0')")
+        conn.execute("INSERT OR IGNORE INTO user_settings VALUES ('last_lesson', '')")
         conn.commit()
 
 
@@ -160,6 +161,8 @@ def index():
     curriculum = load_curriculum()
     with get_db() as conn:
         progress_map = get_progress_map(conn)
+        settings = {r['key']: r['value'] for r in conn.execute("SELECT key, value FROM user_settings").fetchall()}
+    last_lesson = settings.get('last_lesson', '')
     # Annotate modules with progress
     for mod in curriculum['modules']:
         total = len(mod['lessons'])
@@ -175,7 +178,8 @@ def index():
                            curriculum=curriculum,
                            total_lessons=total_lessons,
                            total_done=total_done,
-                           overall_pct=overall_pct)
+                           overall_pct=overall_pct,
+                           last_lesson=last_lesson)
 
 
 @app.route('/lesson/<lesson_id>')
@@ -188,6 +192,8 @@ def lesson_page(lesson_id):
     with get_db() as conn:
         progress_map = get_progress_map(conn)
         update_streak(conn)
+        conn.execute("INSERT OR REPLACE INTO user_settings VALUES ('last_lesson', ?)", (lesson_id,))
+        conn.commit()
         ex_rows = conn.execute(
             "SELECT exercise_id, passed FROM exercise_attempts WHERE lesson_id=? ORDER BY attempted_at DESC",
             (lesson_id,)
@@ -223,7 +229,8 @@ def lesson_page(lesson_id):
                            answered_quiz=answered_quiz,
                            current_status=current_status,
                            current_module_title=current_module_title,
-                           progress_map=progress_map)
+                           progress_map=progress_map,
+                           last_lesson=lesson_id)
 
 
 @app.route('/dashboard')

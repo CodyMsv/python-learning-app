@@ -9,24 +9,30 @@
   "estimated_minutes": 15,
   "prerequisites": ["module2_lesson3"],
   "learning_objectives": [
-    "Create f-strings using the f\"...\" syntax to embed variables in text",
-    "Place any valid Python expression inside the curly braces of an f-string",
-    "Format numbers to a fixed number of decimal places using f\"{value:.2f}\"",
-    "Use the !r and !s conversion flags to control how values are displayed"
+    "Create f-strings using the f\"...\" syntax to put variables inside text",
+    "Put math and method calls inside the curly braces {} of an f-string",
+    "Format numbers to show exactly 2 decimal places using :.2f",
+    "Add comma separators to large numbers using :,"
   ],
   "theory": {
     "sections": [
       {
-        "heading": "F-String Basics and Expressions",
-        "content": "An <strong>f-string</strong> (formatted string literal) lets you embed variables and expressions directly inside a string. Just put an <code>f</code> (or <code>F</code>) immediately before the opening quote, then place anything you want evaluated inside <strong>curly braces <code>{}</code></strong>.<br><br>Before f-strings were added in Python 3.6, developers had to use <code>%</code> formatting or <code>.format()</code>, which were harder to read. F-strings are now the recommended approach because the variable name sits right where it appears in the output.<br><br>You can put <em>any valid Python expression</em> inside the braces — not just variable names. Arithmetic, method calls, comparisons, function calls — all are fair game. Python evaluates the expression first and then converts the result to a string.",
-        "code_example": "# Basic variable embedding\nname = \"Alice\"\nage = 30\nprint(f\"Hello, {name}! You are {age} years old.\")\n\n# Expressions inside {}\nprint(f\"2 + 2 = {2 + 2}\")\nprint(f\"Name in uppercase: {name.upper()}\")\nprint(f\"Age in 10 years: {age + 10}\")\n\n# Multi-variable expression\nwidth = 5\nheight = 3\nprint(f\"A {width} by {height} rectangle has area {width * height}.\")",
-        "code_output": "Hello, Alice! You are 30 years old.\n2 + 2 = 4\nName in uppercase: ALICE\nAge in 10 years: 40\nA 5 by 3 rectangle has area 15."
+        "heading": "What is an F-String?",
+        "content": "So far, when you wanted to mix a variable with text, you had to use <code>+</code> to join them:<br><code>print(\"Hello, \" + name + \"!\")</code><br><br>This works, but it gets messy fast. An <strong>f-string</strong> is a much easier way. You put the variable <em>directly inside</em> the text — like filling in a blank in a sentence.<br><br><strong>How to make an f-string:</strong><br>1. Write <code>f</code> right before the opening quote — no space<br>2. Put curly braces <code>{}</code> wherever you want a variable to appear<br>3. Write the variable name inside the curly braces<br><br>That's it! Python will replace <code>{name}</code> with the actual value of <code>name</code> when it runs.<br><br>Think of it like a text message template: <em>\"Hi {name}, your order is ready!\"</em> — Python fills in the blank for you.",
+        "code_example": "name = \"Alice\"\nage = 30\n\n# The old way (messy)\nprint(\"Hello, \" + name + \"! You are \" + str(age) + \" years old.\")\n\n# The f-string way (much cleaner)\nprint(f\"Hello, {name}! You are {age} years old.\")\n\n# You can use as many {} as you need\ncity = \"Paris\"\nprint(f\"My name is {name} and I live in {city}.\")",
+        "code_output": "Hello, Alice! You are 30 years old.\nHello, Alice! You are 30 years old.\nMy name is Alice and I live in Paris."
       },
       {
-        "heading": "Number Formatting and Conversion Flags",
-        "content": "Inside the curly braces, you can add a <strong>format spec</strong> after a colon (<code>:</code>) to control exactly how a value is displayed — without changing the underlying variable.<br><br><code><strong>:.2f</strong></code> formats a number as a float with exactly 2 decimal places. The <code>f</code> stands for fixed-point. You can change <code>2</code> to any number of decimal places you need.<br><br><code><strong>:,</strong></code> adds a thousands separator (a comma) to large numbers, making them easier to read.<br><br>The <strong>conversion flags</strong> <code>!r</code> and <code>!s</code> go before the colon (or replace it). <code><strong>!r</strong></code> calls <code>repr()</code> on the value, which shows the programmer-facing representation — strings get their quote marks, escape characters are shown literally. <code><strong>!s</strong></code> calls <code>str()</code>, which is what you normally see. <code>!r</code> is especially useful for debugging because it makes invisible characters visible.",
-        "code_example": "price = 19.5\nprint(f\"Price: ${price:.2f}\")\nprint(f\"Pi is approximately {3.14159:.4f}\")\n\nbig_number = 1000000\nprint(f\"Population: {big_number:,}\")\n\n# !s and !r conversion flags\nvalue = \"hello\\nworld\"\nprint(f\"With !s: {value!s}\")   # normal str() — newline is printed\nprint(f\"With !r: {value!r}\")   # repr() — shows \\n literally\n\n# Useful for debugging\nuser_input = \"  Alice  \"\nprint(f\"Raw input is: {user_input!r}\")",
-        "code_output": "Price: $19.50\nPi is approximately 3.1416\nPopulation: 1,000,000\nWith !s: hello\nworld\nWith !r: 'hello\\nworld'\nRaw input is: '  Alice  '"
+        "heading": "You Can Do More Inside the {}",
+        "content": "The curly braces <code>{}</code> are not just for variable names. You can also put <strong>simple calculations</strong> and <strong>method calls</strong> inside them — Python will run them and put the result in the text.<br><br>For example:<br>- <code>{2 + 2}</code> — Python calculates it and puts <code>4</code> in the text<br>- <code>{name.upper()}</code> — Python runs <code>.upper()</code> and puts the result in the text<br>- <code>{age + 10}</code> — Python adds 10 to age and puts the result in the text<br><br>This saves you from creating extra variables just to display a value.",
+        "code_example": "name = \"Alice\"\nage = 30\nwidth = 5\nheight = 3\n\n# Math inside {}\nprint(f\"2 + 2 = {2 + 2}\")\nprint(f\"Age in 10 years: {age + 10}\")\n\n# Method call inside {}\nprint(f\"Name in uppercase: {name.upper()}\")\n\n# Multiple variables and math\nprint(f\"A {width} by {height} rectangle has area {width * height}.\")",
+        "code_output": "2 + 2 = 4\nAge in 10 years: 40\nName in uppercase: ALICE\nA 5 by 3 rectangle has area 15."
+      },
+      {
+        "heading": "Controlling How Numbers Look",
+        "content": "Sometimes a number doesn't look the way you want. For example, a price of <code>7.5</code> should show as <code>7.50</code>, not just <code>7.5</code>. You can control this inside the curly braces by adding a colon <code>:</code> after the variable name, followed by a formatting instruction.<br><br><strong>Show exactly 2 decimal places — <code>:.2f</code></strong><br>Write <code>{price:.2f}</code> — the <code>.2</code> means 2 digits after the dot, and <code>f</code> means it's a number. Python will always show exactly 2 decimal places, adding a zero if needed.<br><br><strong>Add commas to big numbers — <code>:,</code></strong><br>Write <code>{number:,}</code> — Python will add a comma every 3 digits to make large numbers easier to read. For example, <code>1000000</code> becomes <code>1,000,000</code>.<br><br>These only change how the number <em>looks</em> — the actual variable value stays the same.",
+        "code_example": "price = 7.5\nprint(f\"Price: ${price:.2f}\")       # always 2 decimal places\n\npi = 3.14159\nprint(f\"Pi is about {pi:.2f}\")     # rounded to 2 decimal places\nprint(f\"Pi is about {pi:.4f}\")     # rounded to 4 decimal places\n\npopulation = 1000000\nprint(f\"Population: {population:,}\")  # commas added\n\nbig = 9500000\nprint(f\"Budget: ${big:,}\")",
+        "code_output": "Price: $7.50\nPi is about 3.14\nPi is about 3.1416\nPopulation: 1,000,000\nBudget: $9,500,000"
       }
     ]
   },
@@ -89,6 +95,40 @@
       ],
       "correct_index": 2,
       "explanation": "The .2f format spec stands for fixed-point with 2 decimal places. It always shows exactly 2 digits after the decimal point, padding with zeros if needed (e.g. 7.5 becomes 7.50)."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "How do you start an f-string in Python?",
+      "options": [
+        "Put format before the opening quote: format\"...\"",
+        "Put f before the opening quote: f\"...\"",
+        "Put $ before the opening quote: $\"...\"",
+        "Use curly braces around the whole string: {\"...\"}"
+      ],
+      "correct_index": 1,
+      "explanation": "An f-string starts with the letter f immediately before the opening quote. For example: f\"Hello, {name}!\". The f tells Python this is a formatted string and to evaluate anything inside curly braces."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "What can you put inside the curly braces {} of an f-string?",
+      "options": [
+        "Only variable names",
+        "Only numbers",
+        "Any valid Python expression — variables, math, method calls, etc.",
+        "Only strings"
+      ],
+      "correct_index": 2,
+      "explanation": "You can put any valid Python expression inside the curly braces of an f-string. This includes variables, arithmetic like {2 + 2}, method calls like {name.upper()}, and more. Python evaluates the expression and inserts the result."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "What does `f\"{1000000:,}\"` produce?",
+      "options": ["\"1000000\"", "\"1,000,000\"", "\"1.000.000\"", "Error"],
+      "correct_index": 1,
+      "explanation": "Adding :, inside the curly braces tells Python to add a comma every 3 digits. This makes large numbers easier to read — 1000000 becomes 1,000,000."
     }
   ],
   "completion_message": "Well done! F-strings are the cleanest way to build strings in Python. You can now embed variables, compute expressions on the fly, and format numbers beautifully — all inside a single readable string. You will use f-strings constantly in real Python code."

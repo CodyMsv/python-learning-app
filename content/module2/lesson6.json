@@ -84,6 +84,35 @@
       "options": ["\"False\"", "1", "[]", "0.1"],
       "correct_index": 2,
       "explanation": "An empty list [] is falsy. \"False\" is a non-empty string (truthy), 1 is a non-zero number (truthy), and 0.1 is a non-zero float (truthy). Only [], {}, (), \"\", 0, 0.0, None, and False itself are falsy."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "What is the difference between = and == in Python?",
+      "options": [
+        "They are exactly the same thing",
+        "= checks if two values are equal; == stores a value in a variable",
+        "= stores a value in a variable; == checks if two values are equal",
+        "== is used for numbers only; = is used for strings only"
+      ],
+      "correct_index": 2,
+      "explanation": "= is the assignment operator — it stores a value in a variable (e.g. score = 10). == is the comparison operator — it checks whether two values are equal and returns True or False (e.g. score == 10). Mixing them up is one of the most common beginner mistakes."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "What does `10 != 10` evaluate to?",
+      "options": ["True", "False", "0", "Error"],
+      "correct_index": 1,
+      "explanation": "!= means 'not equal to'. Since 10 is equal to 10, they are NOT unequal, so 10 != 10 is False."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "What does `bool(\"False\")` return?",
+      "options": ["False", "True", "None", "Error"],
+      "correct_index": 1,
+      "explanation": "This is a common trick question! \"False\" is a non-empty string, and any non-empty string is truthy. So bool(\"False\") returns True. Only the actual Boolean value False (without quotes) is falsy."
     }
   ],
   "completion_message": "Great job! You now understand True and False, all six comparison operators, how Python compares strings alphabetically, and the important concept of truthiness. These ideas are at the heart of every decision your programs will make — they power all the if/else logic you will write next."

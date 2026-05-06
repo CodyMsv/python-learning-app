@@ -96,6 +96,45 @@
       ],
       "correct_index": 2,
       "explanation": "Python is a very versatile language! It is used for websites, data science, machine learning, automation, games, and much more. That's one reason it's so popular."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "Who created Python?",
+      "options": [
+        "Bill Gates",
+        "Guido van Rossum",
+        "Linus Torvalds",
+        "Steve Jobs"
+      ],
+      "correct_index": 1,
+      "explanation": "Python was created by Guido van Rossum and first released in 1991. He named it after Monty Python's Flying Circus, not the snake!"
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "What is a programming language?",
+      "options": [
+        "A foreign human language like French or Spanish",
+        "A way to communicate directly with computer hardware using electricity",
+        "A tool that lets us write instructions close to human language that the computer can understand",
+        "A type of software only used by professional engineers"
+      ],
+      "correct_index": 2,
+      "explanation": "A programming language is a translator between human ideas and computer instructions. You write in something close to human language, and the language takes care of converting it into something the computer can execute."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "Why is Python considered a great first programming language?",
+      "options": [
+        "Because it runs faster than all other languages",
+        "Because it only works on Windows",
+        "Because its syntax is clean and readable, almost like plain English",
+        "Because it was invented specifically for beginners"
+      ],
+      "correct_index": 2,
+      "explanation": "Python's syntax is designed to be clean and readable — code often reads almost like English sentences. This makes it much easier to learn compared to languages with complex or cryptic rules."
     }
   ],
   "completion_message": "Fantastic work finishing your very first lesson! You now know what Python is, where it came from, and all the amazing things you can build with it. You are officially on your way to becoming a Python programmer. Keep it up!"

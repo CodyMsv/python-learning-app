@@ -58,7 +58,7 @@
               {% elif lesson.status == 'in_progress' %}▶️
               {% else %}⬜{% endif %}
             </span>
-            <span class="lesson-link-title">{{ lesson.title }}</span>
+            <span class="lesson-link-title">{{ lesson.title }}{% if lesson.id == last_lesson %} <span class="last-lesson-pin" title="You were here last time">📍</span>{% endif %}</span>
             <span class="lesson-link-time">{{ lesson.estimated_minutes }}m</span>
           </a>
           {% endfor %}

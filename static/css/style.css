@@ -813,3 +813,5 @@ ul, ol { padding-left: 1.4em; }
   .module-grid { grid-template-columns: 1fr; }
   .header-center { display: none; }
 }
+
+.last-lesson-pin { font-size: 0.8em; opacity: 0.85; margin-left: 4px; }

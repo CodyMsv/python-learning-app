@@ -89,6 +89,35 @@
       ],
       "correct_index": 2,
       "explanation": "int() can only convert strings that look like whole numbers (e.g. \"42\"). When given a string like \"hello\" that cannot be interpreted as a number, Python raises a ValueError with the message \"invalid literal for int()\"."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "What does `float(\"42\")` return?",
+      "options": ["42", "42.0", "\"42.0\"", "Error"],
+      "correct_index": 1,
+      "explanation": "float() converts a value to a floating-point number. The string \"42\" looks like a whole number, so float(\"42\") successfully returns 42.0 — a float with a decimal point."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "What does `int(3.9)` return?",
+      "options": ["4", "3", "3.9", "Error"],
+      "correct_index": 1,
+      "explanation": "int() truncates (cuts off) the decimal part — it does NOT round. So int(3.9) drops the .9 and returns 3, not 4."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "You have the string `\"3.14\"` and want to convert it to the integer `3`. What is the correct approach?",
+      "options": [
+        "int(\"3.14\") — convert directly",
+        "str(3.14) — convert to string first",
+        "float(\"3.14\") then int() on the result",
+        "It is not possible to do this"
+      ],
+      "correct_index": 2,
+      "explanation": "int() cannot directly convert a string with a decimal point — it raises a ValueError. The correct approach is to convert to float first: float(\"3.14\") gives 3.14, then int(3.14) gives 3."
     }
   ],
   "completion_message": "You have completed Module 2! You now know how to move values between types using int(), float(), str(), and bool(). This is a critical skill — real programs constantly receive data as strings (from user input, files, or the web) and need to convert it before doing calculations. Well done on finishing the entire Working with Data Types module!"

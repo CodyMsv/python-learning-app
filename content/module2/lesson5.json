@@ -110,6 +110,30 @@
       "options": ["3", "2", "3.4", "5"],
       "correct_index": 1,
       "explanation": "The % operator returns the remainder after division. 17 divided by 5 is 3 with a remainder of 2, so 17 % 5 equals 2."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "What does `2 ** 8` return?",
+      "options": ["16", "256", "28", "Error"],
+      "correct_index": 1,
+      "explanation": "The ** operator means exponentiation (power). 2 ** 8 means 2 raised to the power of 8, which is 2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 = 256."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "What does `10 // 3` return?",
+      "options": ["3.33", "3", "4", "3.0"],
+      "correct_index": 1,
+      "explanation": "The // operator is floor division — it divides and rounds down to the nearest whole number. 10 divided by 3 is 3.33..., which rounds down to 3. The result is an integer, not a float."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "What does `0.1 + 0.2 == 0.3` evaluate to in Python?",
+      "options": ["True", "False", "None", "Error"],
+      "correct_index": 1,
+      "explanation": "This is the famous floating-point surprise! Due to how computers store decimal numbers in binary, 0.1 + 0.2 does not equal exactly 0.3 — it gives 0.30000000000000004. This is not a Python bug, it happens in nearly every programming language."
     }
   ],
   "completion_message": "Excellent work with numbers! You now understand all seven arithmetic operators, know why 0.1 + 0.2 is not exactly 0.3, and can use round(), abs(), min(), and max() confidently. Numbers are everywhere in programming, so these skills will serve you constantly."
