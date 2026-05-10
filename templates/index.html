@@ -18,13 +18,7 @@
       {% if total_done == 0 %}
         <a href="/lesson/{{ first_lesson.id }}" class="btn btn-hero">Start Learning →</a>
       {% else %}
-        {% set resume_id = namespace(id=first_lesson.id) %}
-        {% for mod in curriculum.modules %}
-          {% for l in mod.lessons %}
-            {% if l.status == 'in_progress' %}{% set resume_id.id = l.id %}{% endif %}
-          {% endfor %}
-        {% endfor %}
-        <a href="/lesson/{{ resume_id.id }}" class="btn btn-hero">Continue Learning →</a>
+        <a href="/lesson/{{ last_lesson if last_lesson else first_lesson.id }}" class="btn btn-hero">Continue Learning →</a>
       {% endif %}
     </div>
   </section>
