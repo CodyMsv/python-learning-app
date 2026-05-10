@@ -62,12 +62,12 @@
       "order": 2,
       "type": "code_run",
       "title": "Power and Rounding",
-      "prompt": "Calculate `2` to the power of `10` using `**`. Then calculate the square root of `144` (hint: `144 ** 0.5`). Print both results.",
-      "starter_code": "# Calculate and print 2 to the power of 10 (use **)\n\n# Calculate and print the square root of 144 (hint: 144 ** 0.5)\n",
+      "prompt": "Calculate `2` to the power of `10` using `**`. Then calculate the square root of `144`. Print both results.",
+      "starter_code": "# Calculate and print 2 to the power of 10 (use **)\n\n# Calculate and print the square root of 144\n",
       "solution": "power = 2 ** 10\nprint(power)\nsqrt = 144 ** 0.5\nprint(sqrt)",
       "hints": [
-        "Use ** for exponentiation: 2 ** 10",
-        "A square root is the same as raising to the power of 0.5: 144 ** 0.5"
+        "The ** operator means 'to the power of'. So 2 to the power of 10 is written as 2 ** 10.",
+        "A square root asks: what number multiplied by itself gives 144? You can find it using ** — think about what small fraction you could raise 144 to."
       ],
       "tests": [
         {"type": "runs_without_error", "message": "Code runs without errors"},
