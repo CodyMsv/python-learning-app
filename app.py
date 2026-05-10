@@ -161,10 +161,8 @@ def index():
     curriculum = load_curriculum()
     with get_db() as conn:
         progress_map = get_progress_map(conn)
-        row = conn.execute(
-            "SELECT lesson_id FROM progress WHERE status != 'not_started' ORDER BY COALESCE(completed_at, started_at) DESC LIMIT 1"
-        ).fetchone()
-    last_lesson = row['lesson_id'] if row else ''
+        row = conn.execute("SELECT value FROM user_settings WHERE key='last_lesson'").fetchone()
+    last_lesson = row['value'] if row else ''
     # Annotate modules with progress
     for mod in curriculum['modules']:
         total = len(mod['lessons'])
@@ -194,11 +192,9 @@ def lesson_page(lesson_id):
     with get_db() as conn:
         progress_map = get_progress_map(conn)
         update_streak(conn)
+        conn.execute("INSERT OR REPLACE INTO user_settings VALUES ('last_lesson', ?)", (lesson_id,))
         conn.commit()
-        last_row = conn.execute(
-            "SELECT lesson_id FROM progress WHERE status != 'not_started' ORDER BY COALESCE(completed_at, started_at) DESC LIMIT 1"
-        ).fetchone()
-        last_lesson = last_row['lesson_id'] if last_row else lesson_id
+        last_lesson = lesson_id
         ex_rows = conn.execute(
             "SELECT exercise_id, passed FROM exercise_attempts WHERE lesson_id=? ORDER BY attempted_at DESC",
             (lesson_id,)
