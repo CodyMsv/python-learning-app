@@ -220,6 +220,9 @@ def lesson_page(lesson_id):
         for l in mod['lessons']:
             if l['id'] == lesson_id:
                 current_module_title = mod['title']
+    total_lessons = sum(len(m['lessons']) for m in curriculum['modules'])
+    total_done = sum(1 for p in progress_map.values() if p['status'] == 'completed')
+    overall_pct = int(total_done / total_lessons * 100) if total_lessons else 0
     return render_template('lesson.html',
                            lesson=lesson,
                            curriculum=curriculum,
@@ -231,7 +234,8 @@ def lesson_page(lesson_id):
                            current_status=current_status,
                            current_module_title=current_module_title,
                            progress_map=progress_map,
-                           last_lesson=last_lesson)
+                           last_lesson=last_lesson,
+                           overall_pct=overall_pct)
 
 
 @app.route('/dashboard')
@@ -253,6 +257,7 @@ def dashboard():
         done = sum(1 for l in mod['lessons'] if progress_map.get(l['id'], {}).get('status') == 'completed')
         mod['progress_pct'] = int(done / total * 100) if total else 0
         mod['lessons_done'] = done
+    overall_pct = int(total_done / total_lessons * 100) if total_lessons else 0
     return render_template('dashboard.html',
                            curriculum=curriculum,
                            total_xp=total_xp,
@@ -262,7 +267,8 @@ def dashboard():
                            badges=badges,
                            settings=settings,
                            recent=list(recent),
-                           streak=int(settings.get('streak_days', 0)))
+                           streak=int(settings.get('streak_days', 0)),
+                           overall_pct=overall_pct)
 
 
 # ---------------------------------------------------------------------------
