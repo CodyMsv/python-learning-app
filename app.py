@@ -161,8 +161,10 @@ def index():
     curriculum = load_curriculum()
     with get_db() as conn:
         progress_map = get_progress_map(conn)
-        settings = {r['key']: r['value'] for r in conn.execute("SELECT key, value FROM user_settings").fetchall()}
-    last_lesson = settings.get('last_lesson', '')
+        row = conn.execute(
+            "SELECT lesson_id FROM progress WHERE status != 'not_started' ORDER BY COALESCE(completed_at, started_at) DESC LIMIT 1"
+        ).fetchone()
+    last_lesson = row['lesson_id'] if row else ''
     # Annotate modules with progress
     for mod in curriculum['modules']:
         total = len(mod['lessons'])
