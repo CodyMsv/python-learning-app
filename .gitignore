@@ -3,3 +3,5 @@ __pycache__/
 *.pyc
 data/progress.db
 launch.bat
+data/progress.db-shm
+data/progress.db-wal
