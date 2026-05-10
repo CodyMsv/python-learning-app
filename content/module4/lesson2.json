@@ -151,6 +151,45 @@
       ],
       "correct_index": 1,
       "explanation": "The + operator creates a new list and assigns it to c. The original lists a and b are not modified, so a remains [1, 2]."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "What does <code>.append(\"cherry\")</code> do to a list?",
+      "options": [
+        "Inserts 'cherry' at the beginning",
+        "Adds 'cherry' to the end of the list",
+        "Replaces the last item with 'cherry'",
+        "Returns a new list with 'cherry' added"
+      ],
+      "correct_index": 1,
+      "explanation": ".append() always adds the new item to the end of the list and modifies the list in place. It does not return a new list — it returns None."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "Given <code>nums = [10, 20, 30, 20]</code>, what does <code>nums.remove(20)</code> do?",
+      "options": [
+        "Removes all occurrences of 20",
+        "Removes the last 20 in the list",
+        "Removes only the first occurrence of 20",
+        "Raises an error because there are two 20s"
+      ],
+      "correct_index": 2,
+      "explanation": ".remove() finds and removes only the first occurrence of the value. The list becomes [10, 30, 20] — the second 20 is left untouched."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "What does <code>my_list.insert(0, \"x\")</code> do?",
+      "options": [
+        "Adds 'x' to the end of the list",
+        "Replaces the first element with 'x'",
+        "Inserts 'x' at the very beginning (index 0)",
+        "Inserts 'x' at index 1"
+      ],
+      "correct_index": 2,
+      "explanation": ".insert(index, item) places the item at the given index, shifting everything else to the right. .insert(0, \"x\") puts 'x' at the front of the list."
     }
   ],
   "completion_message": "Excellent! You can now add, remove, and combine list elements. These mutation methods are some of the most frequently used tools in Python programming."

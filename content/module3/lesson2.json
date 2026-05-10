@@ -114,6 +114,45 @@
       ],
       "correct_index": 1,
       "explanation": "Python evaluates conditions from top to bottom and executes only the first matching branch, then skips the rest. At most one branch runs."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "What is the purpose of the else branch?",
+      "options": [
+        "It runs when all conditions above it are False",
+        "It runs when all conditions above it are True",
+        "It is required in every if statement",
+        "It replaces the if statement"
+      ],
+      "correct_index": 0,
+      "explanation": "else is the catch-all — it runs only when none of the conditions above it (if or elif) were True. It is also optional; you don't have to include it."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "What does this code print when score = 60?\n\nif score >= 90:\n    print(\"A\")\nelif score >= 70:\n    print(\"B\")\nelse:\n    print(\"C\")",
+      "options": [
+        "A",
+        "B",
+        "C",
+        "A and C"
+      ],
+      "correct_index": 2,
+      "explanation": "60 is not >= 90 (skip A), not >= 70 (skip B), so the else runs and prints C."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "Can you have more than one elif in the same if statement?",
+      "options": [
+        "No — only one elif is allowed",
+        "Yes — you can have as many elif branches as you need",
+        "Only if you also have an else at the end",
+        "No — use nested if statements instead"
+      ],
+      "correct_index": 1,
+      "explanation": "You can chain as many elif branches as you like. Python checks each one in order and runs the first one whose condition is True."
     }
   ],
   "completion_message": "Well done! You can now handle multiple outcomes using else and elif. Remember: order matters — put the most specific conditions first. Next, you'll learn about nesting conditionals inside each other."

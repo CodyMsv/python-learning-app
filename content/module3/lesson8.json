@@ -95,6 +95,45 @@
       ],
       "correct_index": 2,
       "explanation": "pass is a no-op statement. Python requires at least one statement in every indented block (like an if, for, or function body). pass satisfies that requirement without doing anything, making it perfect as a placeholder."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "What does 'continue' do in a loop?",
+      "options": [
+        "Stops the loop immediately",
+        "Skips the rest of the current iteration and goes back to the top of the loop",
+        "Pauses the loop for one second",
+        "Restarts the loop from the beginning"
+      ],
+      "correct_index": 1,
+      "explanation": "continue skips the remaining lines in the current iteration and jumps back to the loop condition check. The loop itself keeps going — only the current pass through is cut short."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "What does this code print?\n\nfor n in range(5):\n    if n == 3:\n        break\n    print(n)",
+      "options": [
+        "0 1 2 3 4",
+        "0 1 2",
+        "0 1 2 3",
+        "1 2 3 4"
+      ],
+      "correct_index": 1,
+      "explanation": "The loop prints 0, 1, 2. When n reaches 3, break exits the loop immediately before print(n) runs for that value."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "What does this code print?\n\nfor n in range(5):\n    if n == 3:\n        continue\n    print(n)",
+      "options": [
+        "0 1 2 4",
+        "0 1 2 3 4",
+        "0 1 2",
+        "3"
+      ],
+      "correct_index": 0,
+      "explanation": "continue skips the print when n is 3 but the loop keeps going. So it prints 0, 1, 2, then skips 3, then prints 4."
     }
   ],
   "completion_message": "Congratulations — you've completed Module 3: Control Flow! You can now write if/elif/else chains, use logical operators, loop with while and for, harness range(), and control loops precisely with break, continue, and pass. You're ready for Module 4: Functions!"

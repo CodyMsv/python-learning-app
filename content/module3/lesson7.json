@@ -119,6 +119,45 @@
       ],
       "correct_index": 1,
       "explanation": "range(2, 11, 2) starts at 2, steps by 2, and stops before 11 — giving 2, 4, 6, 8, 10. range(2, 10, 2) would stop at 8 because 10 is excluded."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "What does range(5) produce?",
+      "options": [
+        "1, 2, 3, 4, 5",
+        "0, 1, 2, 3, 4",
+        "0, 1, 2, 3, 4, 5",
+        "5"
+      ],
+      "correct_index": 1,
+      "explanation": "range(5) starts at 0 by default and goes up to but not including 5, giving: 0, 1, 2, 3, 4. That's 5 numbers total."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "What does the step argument in range() control?",
+      "options": [
+        "Where the range starts",
+        "Where the range ends",
+        "How much to add each time to move to the next number",
+        "How many times the loop runs in total"
+      ],
+      "correct_index": 2,
+      "explanation": "The step is the third argument in range(start, stop, step). It controls how much is added each time. A step of 2 skips every other number; a step of -1 counts backwards."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "How do you use range() to count backwards from 5 to 1?",
+      "options": [
+        "range(5, 0)",
+        "range(5, 1, -1)",
+        "range(5, 0, -1)",
+        "range(-5, -1)"
+      ],
+      "correct_index": 2,
+      "explanation": "range(5, 0, -1) starts at 5, stops before 0, and steps by -1 each time — giving 5, 4, 3, 2, 1."
     }
   ],
   "completion_message": "Excellent! range() is one of the most useful built-in functions in Python. Combined with for loops, it gives you precise control over how many times your code repeats and in what order. One more lesson to go: loop control with break, continue, and pass!"

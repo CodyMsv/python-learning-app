@@ -147,6 +147,45 @@
       ],
       "correct_index": 2,
       "explanation": "Dictionary key-value pairs are added or updated with simple assignment: dict[key] = value. Lists have .append() and .insert(), but dictionaries do not."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "What does <code>person.get(\"email\", \"N/A\")</code> return if <code>\"email\"</code> is not in the dictionary?",
+      "options": [
+        "It raises a KeyError",
+        "It returns None",
+        "It returns \"N/A\"",
+        "It adds the key \"email\" with value \"N/A\""
+      ],
+      "correct_index": 2,
+      "explanation": ".get(key, default) safely looks up a key. If the key does not exist, it returns the default value you provide — here that is \"N/A\". It does NOT raise an error or modify the dictionary."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "What does <code>\"name\" in person</code> check?",
+      "options": [
+        "Whether the value \"name\" is stored somewhere in the dictionary",
+        "Whether \"name\" is a key in the dictionary",
+        "Whether the dictionary has at least one entry",
+        "Whether the dictionary is named 'person'"
+      ],
+      "correct_index": 1,
+      "explanation": "The in operator on a dictionary checks keys, not values. \"name\" in person returns True if \"name\" is a key that exists in person."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "Which of the following creates a valid Python dictionary?",
+      "options": [
+        "[\"name\": \"Alice\", \"age\": 30]",
+        "{\"name\", \"Alice\", \"age\", 30}",
+        "{\"name\": \"Alice\", \"age\": 30}",
+        "(\"name\": \"Alice\", \"age\": 30)"
+      ],
+      "correct_index": 2,
+      "explanation": "Dictionaries use curly braces {} with key: value pairs separated by commas. Square brackets [] create lists, and parentheses () create tuples. Curly braces with no colons create a set."
     }
   ],
   "completion_message": "You now understand dictionary basics! Key-value storage is one of the most powerful patterns in programming. Next you will learn to iterate over and manipulate dictionaries."

@@ -122,6 +122,45 @@
       ],
       "correct_index": 2,
       "explanation": "Tuples are immutable sequences. Once created, you cannot add, remove, or reassign elements. This is the key difference from lists."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "How do you create a single-element tuple in Python?",
+      "options": [
+        "(42)",
+        "[42]",
+        "(42,)",
+        "{42}"
+      ],
+      "correct_index": 2,
+      "explanation": "You must include a trailing comma: (42,). Without the comma, Python treats the parentheses as simple grouping, so (42) is just the integer 42, not a tuple."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "What does this code print?\n\n<code>point = (5, 10)\nx, y = point\nprint(x)</code>",
+      "options": [
+        "(5, 10)",
+        "5",
+        "10",
+        "Error"
+      ],
+      "correct_index": 1,
+      "explanation": "Tuple unpacking assigns the first element to x and the second to y. So x = 5 and y = 10. print(x) prints 5."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "Can a tuple be used as a dictionary key?",
+      "options": [
+        "No — only strings can be dictionary keys",
+        "No — tuples are sequences, not scalars",
+        "Yes — because tuples are immutable",
+        "Yes — but only if the tuple contains numbers"
+      ],
+      "correct_index": 2,
+      "explanation": "Dictionary keys must be immutable (hashable). Tuples are immutable, so they can be used as keys. Lists cannot be used as keys because they are mutable."
     }
   ],
   "completion_message": "Solid understanding of tuples! Knowing when to use an immutable tuple versus a mutable list is a mark of good Python style. Next up: dictionaries."

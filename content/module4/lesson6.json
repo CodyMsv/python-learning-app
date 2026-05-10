@@ -152,6 +152,45 @@
       ],
       "correct_index": 2,
       "explanation": ".update() merges the given dictionary into d. The existing key 'a' is overwritten with 99, and the new key 'b' is added, giving {'a': 99, 'b': 2}."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "What does <code>d.pop(\"role\")</code> do?",
+      "options": [
+        "Returns the value of 'role' without removing it",
+        "Removes 'role' from the dictionary and returns its value",
+        "Removes the last item added to the dictionary",
+        "Raises a KeyError immediately"
+      ],
+      "correct_index": 1,
+      "explanation": ".pop(key) removes the specified key from the dictionary and returns its value. This is similar to list.pop() but targets a key instead of an index."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "What does <code>dict.keys()</code> return?",
+      "options": [
+        "A list of all values",
+        "The number of keys in the dictionary",
+        "A view of all the keys in the dictionary",
+        "The first key only"
+      ],
+      "correct_index": 2,
+      "explanation": ".keys() returns a view object containing all the keys. You can loop over it with a for loop. It stays in sync with the dictionary — if you add or remove keys, the view updates automatically."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "How do you access the city from this nested dictionary?\n\n<code>data = {\"address\": {\"city\": \"London\"}}</code>",
+      "options": [
+        "data[\"city\"]",
+        "data[\"address\", \"city\"]",
+        "data[\"address\"][\"city\"]",
+        "data.get(\"address\", \"city\")"
+      ],
+      "correct_index": 2,
+      "explanation": "To access a nested value, chain the square brackets: first data[\"address\"] retrieves the inner dictionary, then [\"city\"] retrieves the value from it."
     }
   ],
   "completion_message": "Great job mastering dictionary operations! You can now iterate, merge, remove, and navigate nested structures — skills that are essential for working with real-world data like JSON and APIs."

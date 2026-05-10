@@ -114,6 +114,45 @@
       ],
       "correct_index": 1,
       "explanation": "A list of dictionaries is perfect for table-like data: each dictionary is a row, and each key is a column name. This is how CSV files and database results are often represented in Python."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "Given <code>matrix = [[1, 2], [3, 4]]</code>, what does <code>matrix[1][0]</code> return?",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct_index": 2,
+      "explanation": "matrix[1] gets the second row [3, 4], then [0] gets the first element of that row: 3. Think of it as row first, then column."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "Given <code>inventory = {\"fruits\": [\"apple\", \"banana\", \"cherry\"]}</code>, how do you get <code>\"banana\"</code>?",
+      "options": [
+        "inventory[1]",
+        "inventory[\"fruits\", 1]",
+        "inventory[\"fruits\"][1]",
+        "inventory.get(\"banana\")"
+      ],
+      "correct_index": 2,
+      "explanation": "First, inventory[\"fruits\"] retrieves the list [\"apple\", \"banana\", \"cherry\"]. Then [1] picks the second element: \"banana\". Chaining brackets is how you navigate nested structures."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "What kind of data is a list of lists particularly good for?",
+      "options": [
+        "Storing key-value pairs",
+        "Representing a 2D grid or table of rows and columns",
+        "Removing duplicates automatically",
+        "Looking up values by name"
+      ],
+      "correct_index": 1,
+      "explanation": "A list of lists creates a 2D structure where the outer index selects the row and the inner index selects the column — perfect for grids, game boards, or tables of numbers."
     }
   ],
   "completion_message": "Excellent! You now understand how to work with nested data structures — a key skill for real-world Python programming!"

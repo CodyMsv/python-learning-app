@@ -115,6 +115,45 @@
       ],
       "correct_index": 1,
       "explanation": "With 'and', if the first condition is already False, the overall result must be False regardless of the second condition — so Python skips evaluating it. This is called short-circuit evaluation."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "What does 'not True' evaluate to?",
+      "options": [
+        "True",
+        "False",
+        "None",
+        "Error"
+      ],
+      "correct_index": 1,
+      "explanation": "The 'not' operator flips the boolean. not True becomes False, and not False becomes True."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "What does this evaluate to?\n\nage = 25\nhas_ticket = False\nage >= 18 and has_ticket",
+      "options": [
+        "True",
+        "False",
+        "25",
+        "Error"
+      ],
+      "correct_index": 1,
+      "explanation": "For 'and' to return True, both sides must be True. age >= 18 is True, but has_ticket is False — so the whole expression is False."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "When does an 'or' expression return True?",
+      "options": [
+        "Only when both sides are True",
+        "Only when both sides are False",
+        "When at least one side is True",
+        "When exactly one side is True"
+      ],
+      "correct_index": 2,
+      "explanation": "'or' returns True if at least one of the conditions is True. It only returns False when both sides are False."
     }
   ],
   "completion_message": "Excellent! You can now combine conditions using and, or, and not. These operators dramatically reduce the need for deeply nested conditionals. Up next: repeating code automatically with while loops!"

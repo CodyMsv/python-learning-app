@@ -91,6 +91,45 @@
       ],
       "correct_index": 0,
       "explanation": "Nested conditionals let you provide specific feedback about which condition failed. If you just need both conditions to be True and the response is the same either way, the 'and' operator is simpler."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "How much indentation does the inner if block need if the outer if block uses 4 spaces?",
+      "options": [
+        "4 spaces",
+        "8 spaces",
+        "2 spaces",
+        "No indentation needed"
+      ],
+      "correct_index": 1,
+      "explanation": "Each level of nesting adds another 4 spaces. The outer if block is at 4 spaces. The inner if block is inside that, so it needs 8 spaces (4 + 4)."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "What does this code print when x = 10 and y = 3?\n\nif x > 5:\n    if y > 5:\n        print(\"both big\")\n    else:\n        print(\"x big, y small\")\nelse:\n    print(\"x small\")",
+      "options": [
+        "both big",
+        "x big, y small",
+        "x small",
+        "Nothing"
+      ],
+      "correct_index": 1,
+      "explanation": "x = 10 is greater than 5 so we enter the outer if. y = 3 is not greater than 5 so the inner else runs, printing 'x big, y small'."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "Why should you avoid nesting too many levels deep?",
+      "options": [
+        "Python raises an error after 2 levels",
+        "It uses more memory",
+        "It becomes hard to read and understand",
+        "The inner conditions stop working"
+      ],
+      "correct_index": 2,
+      "explanation": "Deeply nested code is hard to follow. More than 2 levels of nesting is a sign you should simplify — perhaps using 'and'/'or' operators or breaking the logic into separate steps."
     }
   ],
   "completion_message": "Great work! Nested conditionals give you fine-grained control over complex decisions. Remember to keep nesting shallow — two levels is usually the maximum before you should look for a simpler approach. Next lesson: combining conditions with logical operators."

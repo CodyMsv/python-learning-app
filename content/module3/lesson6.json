@@ -118,6 +118,45 @@
       ],
       "correct_index": 1,
       "explanation": "enumerate() wraps an iterable and yields a (index, value) pair on each iteration. This lets you access both the position and the item without maintaining a separate counter variable."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "How many times does this loop run?\n\nfor letter in \"hello\":\n    print(letter)",
+      "options": [
+        "1 time",
+        "4 times",
+        "5 times",
+        "6 times"
+      ],
+      "correct_index": 2,
+      "explanation": "The string \"hello\" has 5 characters: h, e, l, l, o. The for loop visits each character once, so it runs 5 times."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "What is the loop variable in: for fruit in [\"apple\", \"banana\", \"cherry\"]?",
+      "options": [
+        "fruit",
+        "apple",
+        "the whole list",
+        "the index number"
+      ],
+      "correct_index": 0,
+      "explanation": "The loop variable is the word you write after 'for' — in this case 'fruit'. On each loop it takes the value of the next item in the list: first 'apple', then 'banana', then 'cherry'."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "What is the difference between a for loop and a while loop?",
+      "options": [
+        "for loops are faster than while loops",
+        "for loops go through each item in a sequence; while loops repeat as long as a condition is True",
+        "while loops can only count numbers; for loops work with text",
+        "There is no difference — they are interchangeable"
+      ],
+      "correct_index": 1,
+      "explanation": "A for loop steps through each item in a sequence (like a list or string) and stops automatically. A while loop keeps running as long as a condition stays True — you are responsible for making the condition become False."
     }
   ],
   "completion_message": "Great job! for loops are one of the most-used features in Python. You can iterate over strings, lists, and almost anything else. Next, you'll learn about range() — the perfect companion for for loops."

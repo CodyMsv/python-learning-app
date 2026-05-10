@@ -16,16 +16,17 @@
   "theory": {
     "sections": [
       {
-        "heading": "The if Statement: Syntax and Structure",
-        "content": "An <code>if</code> statement lets your program make a decision. If the condition is <code>True</code>, the indented block runs. If it is <code>False</code>, Python skips the block entirely.<br><br>Two things are <strong>required</strong>: a colon <code>:</code> at the end of the <code>if</code> line, and <strong>indentation</strong> (4 spaces) for every line inside the block. Python uses indentation — not curly braces — to know which lines belong to the <code>if</code>.",
-        "code_example": "age = 20\n\nif age >= 18:\n    print(\"You are an adult.\")\n    print(\"You may vote.\")\n\nprint(\"This line always runs.\")",
+        "heading": "What is an if Statement?",
+        "content": "So far your code has always run line by line from top to bottom, doing the same thing every time. An <code>if</code> statement changes that — it lets your program <strong>make a decision</strong> and only run certain lines when a specific thing is true.<br><br>Think of it like a real-life decision: <em>\"If it is raining, take an umbrella.\"</em> You only take the umbrella when the condition (raining) is true. If it's not raining, you skip that action entirely.<br><br>In Python it works the same way:<br><br><strong>Three things to know before you write one:</strong><br><br><strong>1. Condition</strong> — the question Python checks. It must be something that is either <code>True</code> or <code>False</code>. For example: <code>age >= 18</code> is a condition. Python checks it and gets either <code>True</code> or <code>False</code>.<br><br><strong>2. The colon <code>:</code></strong> — you must put a colon at the very end of the <code>if</code> line. This tells Python: <em>\"the instructions for this decision are coming up on the next lines.\"</em> Forgetting the colon is the most common mistake beginners make.<br><br><strong>3. The block</strong> — a <em>block</em> is a group of lines that belong together and run as a team. The lines inside an <code>if</code> statement form a block. Python knows which lines are in the block by looking at the <strong>indentation</strong>. <em>Indentation</em> simply means the empty space at the start of a line — the gap between the left edge of the screen and where the code begins. You create it by pressing the <strong>Tab key</strong> once (or pressing the spacebar 4 times) at the start of the line. Lines that have this gap are considered <em>inside</em> the block. Lines with no gap are <em>outside</em> it. Every line in the block must be indented by the same amount. Lines that are NOT indented are outside the block and always run, no matter what.",
+        "code_example": "age = 20\n\nif age >= 18:              # condition + colon\n    print(\"You are an adult.\")  # indented = inside the block\n    print(\"You may vote.\")      # also indented = also in the block\n\nprint(\"This line always runs.\")  # NOT indented = outside the block",
         "code_output": "You are an adult.\nYou may vote.\nThis line always runs."
       },
       {
-        "heading": "True vs False: What Happens Each Way",
-        "content": "The condition inside an <code>if</code> statement must evaluate to either <code>True</code> or <code>False</code>. Common comparisons use operators like <code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, and <code>&lt;=</code>.<br><br>When the condition is <code>True</code>, the indented block executes. When it is <code>False</code>, the indented block is completely skipped and execution continues with the next unindented line.",
-        "code_example": "score = 45\n\nif score >= 50:\n    print(\"You passed!\")\n\nprint(\"Quiz complete.\")",
-        "code_output": "Quiz complete."
+        "heading": "What Happens When the Condition is True or False",
+        "content": "When Python reaches an <code>if</code> statement, it checks the condition:<br><br><strong>If the condition is <code>True</code></strong> → Python runs every line in the block (the indented lines), then continues to the rest of the code.<br><br><strong>If the condition is <code>False</code></strong> → Python completely skips the block (the indented lines) and jumps straight to the first unindented line below.<br><br>In both cases, any code that is NOT indented (outside the block) always runs — Python never skips those.<br><br>Look at the two examples below. The only difference is the value of <code>score</code> — but that one change decides which lines run.",
+        "code_example": "# Example 1: condition is True — block runs\nscore = 75\n\nif score >= 50:\n    print(\"You passed!\")   # this runs because 75 >= 50 is True\n\nprint(\"Quiz complete.\")    # this always runs\n\n# ---\n\n# Example 2: condition is False — block is skipped\nscore = 45\n\nif score >= 50:\n    print(\"You passed!\")   # this is SKIPPED because 45 >= 50 is False\n\nprint(\"Quiz complete.\")    # this still runs",
+        "code_output": "You passed!\nQuiz complete.\nQuiz complete.",
+        "note": "A block is just lines of code that are pushed to the right with the Tab key. They belong to the if statement. If the condition is False, the whole block gets skipped."
       }
     ]
   },
@@ -92,6 +93,45 @@
       ],
       "correct_index": 1,
       "explanation": "Because x = 3 is not greater than 5, the indented block is skipped. The unindented print(\"done\") always runs, so only 'done' is printed."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "What happens if you forget the colon at the end of an if line?",
+      "options": [
+        "Python ignores it and runs fine",
+        "Python adds the colon automatically",
+        "You get a SyntaxError",
+        "The block runs regardless of the condition"
+      ],
+      "correct_index": 2,
+      "explanation": "The colon is required. If you leave it out, Python immediately raises a SyntaxError and your code won't run at all."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "Which of these is a valid condition inside an if statement?",
+      "options": [
+        "if score = 100:",
+        "if score == 100:",
+        "if score === 100:",
+        "if (score is 100)"
+      ],
+      "correct_index": 1,
+      "explanation": "== is the comparison operator that checks if two values are equal. A single = is assignment (storing a value), not comparison. Python has no === operator."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "How does Python know which lines belong inside an if block?",
+      "options": [
+        "They are wrapped in curly braces { }",
+        "They end with a semicolon ;",
+        "They are indented (pushed to the right) with spaces or a tab",
+        "They start with the word 'do'"
+      ],
+      "correct_index": 2,
+      "explanation": "Python uses indentation — the empty space at the start of a line — to group lines into a block. Lines at the same indentation level belong to the same block. This is unique to Python; many other languages use curly braces instead."
     }
   ],
   "completion_message": "Excellent work! You now know how to write an if statement, use the colon, and indent your code correctly. Next up: handling the False case with else and elif."

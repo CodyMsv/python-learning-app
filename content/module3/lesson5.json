@@ -102,6 +102,45 @@
       ],
       "correct_index": 2,
       "explanation": "The += operator is shorthand for addition-assignment. count += 1 is exactly the same as count = count + 1 — it increases count by 1 and stores the result back in count."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "How many times does this loop print?\n\nn = 0\nwhile n < 4:\n    print(n)\n    n += 1",
+      "options": [
+        "3 times",
+        "4 times",
+        "5 times",
+        "Forever"
+      ],
+      "correct_index": 1,
+      "explanation": "n starts at 0 and the loop runs while n < 4. It prints 0, 1, 2, 3 — four times in total. When n reaches 4 the condition is False and the loop stops."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "What is an infinite loop?",
+      "options": [
+        "A loop that runs exactly 100 times",
+        "A loop whose condition never becomes False, so it runs forever",
+        "A loop inside another loop",
+        "A loop that skips every other item"
+      ],
+      "correct_index": 1,
+      "explanation": "An infinite loop happens when the condition in a while statement never becomes False — so Python keeps looping forever. This usually means you forgot to update the variable being checked."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "What does -= do?",
+      "options": [
+        "Checks if a value is less than another",
+        "Subtracts a number and stores the result (e.g. x -= 2 means x = x - 2)",
+        "Makes a number negative",
+        "Divides a number by 2"
+      ],
+      "correct_index": 1,
+      "explanation": "Just like += adds and saves, -= subtracts and saves. x -= 2 is shorthand for x = x - 2."
     }
   ],
   "completion_message": "Fantastic! You now know how to use while loops to repeat code, manage counter variables, and avoid the danger of infinite loops. Next up: the for loop, which is even more common in Python!"

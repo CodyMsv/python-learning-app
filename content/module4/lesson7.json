@@ -117,6 +117,45 @@
       ],
       "correct_index": 2,
       "explanation": "Both methods delete an item from a set, but .remove() raises a KeyError if the item is not present, while .discard() silently does nothing. Use .discard() when you are not sure the item is in the set."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "How do you create an <strong>empty set</strong> in Python?",
+      "options": [
+        "{}",
+        "set()",
+        "[]",
+        "()"
+      ],
+      "correct_index": 1,
+      "explanation": "{} creates an empty dictionary, not a set. To create an empty set you must use set(). This is a common beginner mistake — always use set() when you need an empty set."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "What does the <code>|</code> operator do with two sets?",
+      "options": [
+        "Returns only elements in both sets (intersection)",
+        "Returns elements in the left set but not the right (difference)",
+        "Combines both sets into one, keeping all unique elements (union)",
+        "Multiplies the sets together"
+      ],
+      "correct_index": 2,
+      "explanation": "The | operator performs a union — it combines all elements from both sets into one set with no duplicates. Use & for intersection and - for difference."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "What is a practical reason to convert a list to a set and back to a list?",
+      "options": [
+        "To sort the list in reverse order",
+        "To remove all duplicate values",
+        "To convert strings to integers",
+        "To split the list in half"
+      ],
+      "correct_index": 1,
+      "explanation": "Sets only store unique values, so converting list → set automatically drops all duplicates. Converting back to a list with list(set(my_list)) gives you a clean list with no repeats."
     }
   ],
   "completion_message": "Excellent! Sets are a surprisingly powerful tool — fast membership testing, automatic deduplication, and intuitive math operations. You have now covered lists, tuples, dicts, and sets!"

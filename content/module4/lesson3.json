@@ -152,6 +152,45 @@
       ],
       "correct_index": 1,
       "explanation": "sorted() is a built-in function that returns a new sorted list, leaving the original untouched. .sort() is a list method that sorts the list in place and returns None."
+    },
+    {
+      "id": "q3",
+      "order": 3,
+      "question": "What does <code>nums[::-1]</code> do to a list?",
+      "options": [
+        "Returns the last element only",
+        "Removes all elements",
+        "Returns a reversed copy of the list",
+        "Returns every other element"
+      ],
+      "correct_index": 2,
+      "explanation": "The slice [::-1] starts from the end and steps backward by 1, effectively reversing the list. It returns a new list — the original is not changed."
+    },
+    {
+      "id": "q4",
+      "order": 4,
+      "question": "Given <code>nums = [0, 1, 2, 3, 4, 5]</code>, what does <code>nums[1:4]</code> return?",
+      "options": [
+        "[0, 1, 2, 3]",
+        "[1, 2, 3]",
+        "[1, 2, 3, 4]",
+        "[0, 1, 2]"
+      ],
+      "correct_index": 1,
+      "explanation": "Slicing [1:4] starts at index 1 (inclusive) and stops at index 4 (exclusive), giving the elements at indexes 1, 2, and 3: [1, 2, 3]."
+    },
+    {
+      "id": "q5",
+      "order": 5,
+      "question": "What does <code>enumerate()</code> give you that a plain <code>for</code> loop does not?",
+      "options": [
+        "It runs the loop faster",
+        "It gives you both the index and the value on each iteration",
+        "It converts every item to a string",
+        "It sorts the list before looping"
+      ],
+      "correct_index": 1,
+      "explanation": "enumerate() yields a (index, value) pair on each iteration. Without it, a for loop only gives you the value — you would need a separate counter variable to track the position."
     }
   ],
   "completion_message": "Well done! Slicing, sorting, and enumerate() are patterns you will use constantly in real Python code. You are building a strong collection toolkit."

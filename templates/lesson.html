@@ -123,7 +123,7 @@
             {% if passed_exercises.get(ex.id) %}✅ Passed{% else %}⬜ Not done{% endif %}
           </span>
         </div>
-        <p class="exercise-prompt">{{ ex.prompt }}</p>
+        <p class="exercise-prompt">{{ ex.prompt | safe }}</p>
         <div class="exercise-hints" id="hints-{{ ex.id }}">
           <button class="hint-btn" onclick="showHintById('{{ ex.id }}')">💡 Show Hint</button>
           <div class="hint-text" id="hint-text-{{ ex.id }}" style="display:none"></div>
